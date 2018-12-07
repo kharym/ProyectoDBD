@@ -21,7 +21,7 @@ class CreatePaqueteReservaVuelosTable extends Migration
 
             //llaves foraneas
             $table->foreign('paquete_id')->references('id')->on('paquetes')->onDelete('cascade');
-            $table->foreign('reservaVuelos_id')->references('id')->on('reserva_vuelos')->onDelete('cascade');
+            $table->foreign('reservaVuelo_id')->references('id')->on('reserva_vuelos')->onDelete('cascade');
         });
     }
 

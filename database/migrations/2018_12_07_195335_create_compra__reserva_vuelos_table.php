@@ -21,7 +21,7 @@ class CreateCompraReservaVuelosTable extends Migration
 
             //llaves foraneas
             $table->foreign('compra_id')->references('id')->on('compras')->onDelete('cascade');
-            $table->foreign('reservaVuelos_id')->references('id')->on('reserva_vuelos')->onDelete('cascade');
+            $table->foreign('reservaVuelo_id')->references('id')->on('reserva_vuelos')->onDelete('cascade');
         });
     }
 
