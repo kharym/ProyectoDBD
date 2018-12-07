@@ -19,7 +19,7 @@ class CreateReservaHabitacionsTable extends Migration
             $table->date('fecha_llegada');   
             $table->date('fecha_ida');  
             $table->smallInteger('numero_ninos');
-            $table->smallInteger('mumero_adulto');
+            $table->smallInteger('numero_adulto');
             $table->timestamps();
         });
     }
