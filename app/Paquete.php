@@ -25,4 +25,10 @@ class Paquete extends Model
         return $this->belongsTo('App\ReservaAuto');
     }
 
+    //relacion N-N con reservaVuelo
+    public function reservaVuelo()
+    {
+        return $this->belongsToMany('App\ReservaVuelo');
+    }
+
 }

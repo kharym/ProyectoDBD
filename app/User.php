@@ -51,4 +51,10 @@ class User extends Authenticatable
     {
       return $this->hasMany('App\Compra');
     }
+
+    //relacion N-N con medioDePago
+    public function medioDePago()
+    {
+        return $this->belongsToMany('App\MedioDePago');
+    }
 }

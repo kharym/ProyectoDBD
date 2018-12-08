@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class MedioDePago extends Model
 {
-    //
+    //relacion N-N con user
+    public function user()
+    {
+        return $this->belongsToMany('App\User');
+    }
 }

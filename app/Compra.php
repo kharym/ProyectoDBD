@@ -42,6 +42,12 @@ class Compra extends Model
         return $this->belongsTo('App\Paquete');
     }
 
+     //relacion N-N con reservaVuelo
+    public function reservaVuelo()
+    {
+        return $this->belongsToMany('App\ReservaVuelo');
+    }
+
 
     
 }

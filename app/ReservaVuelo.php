@@ -23,4 +23,16 @@ class ReservaVuelo extends Model
     {
         return $this->belongsTo('App\Asiento');
     }
+
+    //relacion N-N con compra
+    public function compra()
+    {
+        return $this->belongsToMany('App\Compra');
+    }
+
+    //relacion N-N con paquete
+    public function paquete()
+    {
+        return $this->belongsToMany('App\Paquete');
+    }
 }
