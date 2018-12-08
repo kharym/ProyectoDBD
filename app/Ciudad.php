@@ -23,4 +23,29 @@ class Ciudad extends Model
     {
       return $this->hasMany('App\Empresa');
     }
+
+    //relacion 1-N con  vueloVa
+    public function vueloVa()
+    {
+      return $this->hasMany('App\Vuelo');
+    }
+
+    //relacion 1-N con  vueloViene
+    public function vueloViene()
+    {
+      return $this->hasMany('App\Vuelo');
+    }
+
+    //Relacion 1-N con  pais
+    public function pais()
+    {
+        return $this->belongsTo('App\Pais');
+    }
+
+    //relacion 1-N con  ubicacion
+    public function ubicacion()
+    {
+      return $this->hasMany('App\Ubicacion');
+    }
+
 }
