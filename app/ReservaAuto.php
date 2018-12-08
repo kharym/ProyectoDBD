@@ -17,4 +17,10 @@ class ReservaAuto extends Model
 	{
 	    return $this->hasOne('App\Paquete');
 	}
+
+	//Relacion 1-1 con auto
+    public function auto()
+    {
+        return $this->belongsTo('App\Auto');
+    }
 }
