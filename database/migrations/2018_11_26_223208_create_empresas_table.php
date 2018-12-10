@@ -17,7 +17,7 @@ class CreateEmpresasTable extends Migration
             $table->increments('id');
             $table->integer('ciudad_id')->unsigned();
             $table->string('nombre_empresa',50);
-            $table->string('telefono_empresa',15);
+            $table->string('telefono_empresa');
             $table->string('correo_empresa',250);
             $table->timestamps();
 
