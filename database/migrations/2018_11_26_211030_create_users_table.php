@@ -25,8 +25,8 @@ class CreateUsersTable extends Migration
             $table->string('numero_documento',15);
             $table->string('pais',40);
             $table->date('fecha_nacimiento');
-            $table->string('telefono',15);
-            $table->string('password',16);
+            $table->string('telefono',18);
+            $table->string('password',60);
             $table->rememberToken();
             $table->timestamps();
 

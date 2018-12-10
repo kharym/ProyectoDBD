@@ -28,8 +28,10 @@ $factory->define(App\User::class, function (Faker $faker) {
         'numero_documento' => $faker->randomNumber,
         'pais' => $faker->country,
         'fecha_nacimiento' => $faker->date,
-        'telefono' => $faker->phoneNumber,
+        'telefono' => $faker->e164phoneNumber,
         'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
         'remember_token' => str_random(10),
+        'auditoria_id' => $id_auditoria,
+        'rol_id' => $id_user,
     ];
 });

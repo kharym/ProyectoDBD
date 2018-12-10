@@ -12,8 +12,8 @@ $factory->define(App\CuentaBancaria::class, function (Faker $faker) {
     	'saldo' => $faker->randomFloat,
     	'maximo_giro' => $faker->randomFloat,
         'nombre_banco' => $faker->bank,
-        'fecha_giro' => $faker->date('Y-m-d', '2018-12-14');
-        'hora_giro' => $faker->time('H:i:s', '12:50:32');
+        'fecha_giro' => $faker->date('Y-m-d', '2018-12-14'),
+        'hora_giro' => $faker->time('H:i:s', '12:50:32'),
         'usuario_id' => $id_user,
     ];
 });
