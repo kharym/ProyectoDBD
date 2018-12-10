@@ -18,7 +18,7 @@ class CreateCuentaBancariasTable extends Migration
             $table->integer('usuario_id')->unsigned();
             $table->float('saldo');
             $table->float('maximo_giro');
-            $table->string('nombre_banco',30);
+            $table->string('nombre_banco');
             $table->date('fecha_giro');   
             $table->time('hora_giro');
             $table->timestamps();

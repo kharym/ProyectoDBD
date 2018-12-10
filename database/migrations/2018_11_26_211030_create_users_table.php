@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->smallInteger('tipo_documento');
             $table->string('numero_documento',15);
-            $table->string('pais',40);
+            $table->string('pais');
             $table->date('fecha_nacimiento');
             $table->string('telefono',18);
             $table->string('password',60);
