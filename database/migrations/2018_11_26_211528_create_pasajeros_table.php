@@ -17,10 +17,10 @@ class CreatePasajerosTable extends Migration
             $table->increments('id');
             $table->string('name',50);
             $table->string('apellido',40);
-            $table->string('dni_pasaporte',15);
+            $table->string('dni_pasaporte');
             $table->string('pais',40);
             $table->boolean('menor_edad');
-            $table->string('telefono',15);
+            $table->string('telefono');
             $table->boolean('asistencia_especial');
             $table->boolean('movilidad_reducida');
             $table->timestamps();
