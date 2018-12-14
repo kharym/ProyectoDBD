@@ -14,6 +14,7 @@ $factory->define(App\Paquete::class, function (Faker $faker) {
         'descuento'=>$faker->randomFloat,
         'tipo_paquete'=>$faker->numberBetween(1,4),
         'disponibilidad'=>$faker->boolean,
-
+        'reserva_auto_id' => $id_reservaAuto,
+        'reserva_habitacion_id' => $id_reservaHabitacion, 
     ];
 });

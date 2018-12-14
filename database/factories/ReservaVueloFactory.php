@@ -18,11 +18,11 @@ $factory->define(App\ReservaVuelo::class, function (Faker $faker) {
     return [
         'ida_vuelta'=>$faker->boolean,
         'cantidad_pasajeros'=>$faker->randomDigitNotNull,
-        'tipo_cabina'=>$faker->numerBetween(0,2),
+        'tipo_cabina'=>$faker->numberBetween(0,2),
         'fecha_reserva'=>$faker->date('Y-m-d', '2018-12-14'),
         'hora_reserva'=>$faker->time('H:i:s', '12:50:32'),
         'precio_reserva_vuelo'=>$faker->randomFloat,
-        'cantidad_paradas'=>$faker->numerBetween(1,3),
+        'cantidad_paradas'=>$faker->numberBetween(1,3),
         'vuelo_id'=>$id_vuelo,
         'asiento_id'=>$id_asiento,
         'pasajero_id'=>$id_pasajero,

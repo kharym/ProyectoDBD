@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Asiento extends Model
 {
     //relacion 1-1 con reservaVuelo
-    public function reservaVuelo)
+    public function reservaVuelo()
 	{
 	    return $this->hasOne('App\ReservaVuelo');
 	}

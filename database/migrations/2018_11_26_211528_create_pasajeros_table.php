@@ -15,10 +15,10 @@ class CreatePasajerosTable extends Migration
     {
         Schema::create('pasajeros', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',50);
-            $table->string('apellido',40);
+            $table->string('name');
+            $table->string('apellido');
             $table->string('dni_pasaporte');
-            $table->string('pais',40);
+            $table->string('pais');
             $table->boolean('menor_edad');
             $table->string('telefono');
             $table->boolean('asistencia_especial');
