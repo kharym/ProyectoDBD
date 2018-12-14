@@ -12,9 +12,11 @@ class HabitacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //devuelve todo
     public function index()
     {
-        //
+        $habitacion = Habitacion::all();
+        return $habitacion;
     }
 
     /**
@@ -35,7 +37,9 @@ class HabitacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $habitacion = Habitacion::create($request->all());
+        $habitacion->save();
+        return "se agregó exitosamente";
     }
 
     /**
@@ -44,9 +48,10 @@ class HabitacionController extends Controller
      * @param  \App\Habitacion  $habitacion
      * @return \Illuminate\Http\Response
      */
-    public function show(Habitacion $habitacion)
+    public function show($id)
     {
-        //
+        $habitacion = Habitacion::find($id);
+        return $habitacion;
     }
 
     /**
@@ -78,8 +83,10 @@ class HabitacionController extends Controller
      * @param  \App\Habitacion  $habitacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Habitacion $habitacion)
+    public function destroy($id)
     {
-        //
+        $habitacion = Habitacion::find($id);
+        $habitacion->delete();
+        return "borrado :P";
     }
 }

@@ -21,5 +21,5 @@ function autoIncrement()
 {
     for ($i = 0; $i < 50; $i++) {
         yield $i;
-    }
+    }   
 }
