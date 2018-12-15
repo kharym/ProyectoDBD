@@ -14,7 +14,8 @@ class PaisController extends Controller
      */
     public function index()
     {
-        //
+        $pais = Pais::all();
+        return $pais;
     }
 
     /**
@@ -35,7 +36,9 @@ class PaisController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pais = Pais::create($request->all());
+        $pais->save();
+        return "";
     }
 
     /**
@@ -44,9 +47,10 @@ class PaisController extends Controller
      * @param  \App\Pais  $pais
      * @return \Illuminate\Http\Response
      */
-    public function show(Pais $pais)
+    public function show(Pais $id)
     {
-        //
+        $pais = Pais::find($id);
+        return $pais;
     }
 
     /**
@@ -78,8 +82,10 @@ class PaisController extends Controller
      * @param  \App\Pais  $pais
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pais $pais)
+    public function destroy(Pais $id)
     {
-        //
+        $pais = Pais::find($id);
+        $pais->delete();
+        return "";
     }
 }

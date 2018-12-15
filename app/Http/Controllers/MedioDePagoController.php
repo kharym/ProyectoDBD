@@ -14,7 +14,8 @@ class MedioDePagoController extends Controller
      */
     public function index()
     {
-        //
+        $medioDePago = MedioDePago::all();
+        return $medioDePago;
     }
 
     /**
@@ -35,7 +36,9 @@ class MedioDePagoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $medioDePago = MedioDePago::create($request->all());
+        $medioDePago->save();
+        return ""; 
     }
 
     /**
@@ -44,9 +47,10 @@ class MedioDePagoController extends Controller
      * @param  \App\MedioDePago  $medioDePago
      * @return \Illuminate\Http\Response
      */
-    public function show(MedioDePago $medioDePago)
+    public function show(MedioDePago $id)
     {
-        //
+        $medioDePago = MedioDePago::find($id);
+        return $medioDePago;
     }
 
     /**
@@ -78,8 +82,10 @@ class MedioDePagoController extends Controller
      * @param  \App\MedioDePago  $medioDePago
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MedioDePago $medioDePago)
+    public function destroy(MedioDePago $id)
     {
-        //
+        $medioDePago = MedioDePago::find($id);
+        $medioDePago->delete();
+        return "";
     }
 }

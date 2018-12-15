@@ -14,7 +14,8 @@ class SeguroController extends Controller
      */
     public function index()
     {
-        //
+        $seguro = Seguro::all();
+        return $seguro;
     }
 
     /**
@@ -35,7 +36,9 @@ class SeguroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $seguro = Seguro::create($request->all());
+        $seguro->save();
+        return "";  
     }
 
     /**
@@ -44,9 +47,10 @@ class SeguroController extends Controller
      * @param  \App\Seguro  $seguro
      * @return \Illuminate\Http\Response
      */
-    public function show(Seguro $seguro)
+    public function show(Seguro $id)
     {
-        //
+        $seguro = Seguro::find($id);
+        return $seguro;
     }
 
     /**
@@ -78,8 +82,10 @@ class SeguroController extends Controller
      * @param  \App\Seguro  $seguro
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Seguro $seguro)
+    public function destroy(Seguro $id)
     {
-        //
+        $seguro = Seguro::find($id);
+        $seguro->delete();
+        return "";
     }
 }

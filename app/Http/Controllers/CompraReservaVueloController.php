@@ -14,7 +14,8 @@ class CompraReservaVueloController extends Controller
      */
     public function index()
     {
-        //
+        $compra_reservaVuelo = Compra_ReservaVuelo::all();
+        return $compra_reservaVuelo;
     }
 
     /**
@@ -35,7 +36,9 @@ class CompraReservaVueloController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $compra_reservaVuelo = Compra_ReservaVuelo::create($request->all());
+        $compra_reservaVuelo->save();
+        return "";
     }
 
     /**
@@ -44,9 +47,10 @@ class CompraReservaVueloController extends Controller
      * @param  \App\Compra_ReservaVuelo  $compra_ReservaVuelo
      * @return \Illuminate\Http\Response
      */
-    public function show(Compra_ReservaVuelo $compra_ReservaVuelo)
+    public function show(Compra_ReservaVuelo $id)
     {
-        //
+        $compra_reservaVuelo = Compra_ReservaVuelo::find($id);
+        return $compra_reservaVuelo;
     }
 
     /**
@@ -78,8 +82,10 @@ class CompraReservaVueloController extends Controller
      * @param  \App\Compra_ReservaVuelo  $compra_ReservaVuelo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Compra_ReservaVuelo $compra_ReservaVuelo)
+    public function destroy(Compra_ReservaVuelo $id)
     {
-        //
+        $compra_reservaVuelo = Compra_ReservaVuelo::find($id);
+        $compra_reservaVuelo->delete();
+        return "";
     }
 }

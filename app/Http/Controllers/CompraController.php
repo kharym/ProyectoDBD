@@ -14,7 +14,8 @@ class CompraController extends Controller
      */
     public function index()
     {
-        //
+        $compra = Compra::all();
+        return $compra;
     }
 
     /**
@@ -35,8 +36,9 @@ class CompraController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $compra = Compra::create($request->all());
+        $compra->save();
+        return "";    }
 
     /**
      * Display the specified resource.
@@ -44,9 +46,10 @@ class CompraController extends Controller
      * @param  \App\Compra  $compra
      * @return \Illuminate\Http\Response
      */
-    public function show(Compra $compra)
+    public function show(Compra $id)
     {
-        //
+        $compra = Compra::find($id);
+        return $compra;
     }
 
     /**
@@ -78,8 +81,10 @@ class CompraController extends Controller
      * @param  \App\Compra  $compra
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Compra $compra)
+    public function destroy(Compra $id)
     {
-        //
+        $compra = Compra::find($id);
+        $compra->delete();
+        return "";
     }
 }

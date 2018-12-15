@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Paquete_ReservaVuelo;
 use Illuminate\Http\Request;
 
-class PaqueteReservaVueloController extends Controller
+class Paquete_ReservaVueloController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,8 @@ class PaqueteReservaVueloController extends Controller
      */
     public function index()
     {
-        //
+        $paquete_ReservaVuelo = Paquete_ReservaVuelo::all();
+        return $paquete_ReservaVuelo;
     }
 
     /**
@@ -35,7 +36,9 @@ class PaqueteReservaVueloController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $paquete_ReservaVuelo = Paquete_ReservaVuelo::create($request->all());
+        $paquete_ReservaVuelo->save();
+        return ""; 
     }
 
     /**
@@ -44,9 +47,10 @@ class PaqueteReservaVueloController extends Controller
      * @param  \App\Paquete_ReservaVuelo  $paquete_ReservaVuelo
      * @return \Illuminate\Http\Response
      */
-    public function show(Paquete_ReservaVuelo $paquete_ReservaVuelo)
+    public function show(Paquete_ReservaVuelo $id)
     {
-        //
+        $paquete_ReservaVuelo = Paquete_ReservaVuelo::find($id);
+        return $paquete_ReservaVuelo;
     }
 
     /**
@@ -78,8 +82,10 @@ class PaqueteReservaVueloController extends Controller
      * @param  \App\Paquete_ReservaVuelo  $paquete_ReservaVuelo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Paquete_ReservaVuelo $paquete_ReservaVuelo)
+    public function destroy(Paquete_ReservaVuelo $id)
     {
-        //
+        $paquete_ReservaVuelo = Paquete_ReservaVuelo::find($id);
+        $paquete_ReservaVuelo->delete();
+        return "";
     }
 }

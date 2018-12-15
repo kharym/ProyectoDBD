@@ -14,7 +14,8 @@ class ActividadController extends Controller
      */
     public function index()
     {
-        //
+        $actividad = Actividad::all();
+        return $actividad;
     }
 
     /**
@@ -35,7 +36,9 @@ class ActividadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $actividad = Actividad::create($request->all());
+        $actividad->save();
+        return "";    
     }
 
     /**
@@ -44,9 +47,10 @@ class ActividadController extends Controller
      * @param  \App\Actividad  $actividad
      * @return \Illuminate\Http\Response
      */
-    public function show(Actividad $actividad)
+    public function show(Actividad $id)
     {
-        //
+        $actividad = Actividad::find($id);
+        return $actividad;    
     }
 
     /**
@@ -78,8 +82,10 @@ class ActividadController extends Controller
      * @param  \App\Actividad  $actividad
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Actividad $actividad)
+    public function destroy(Actividad $id)
     {
-        //
+        $actividad = Actividad::find($id);
+        $actividad->delete();
+        return "";
     }
 }

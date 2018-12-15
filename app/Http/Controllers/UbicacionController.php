@@ -14,7 +14,8 @@ class UbicacionController extends Controller
      */
     public function index()
     {
-        //
+        $ubicacion = Ubicacion::all();
+        return $ubicacion;
     }
 
     /**
@@ -35,7 +36,9 @@ class UbicacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $ubicacion = Ubicacion::create($request->all());
+        $ubicacion->save();
+        return "";
     }
 
     /**
@@ -44,9 +47,10 @@ class UbicacionController extends Controller
      * @param  \App\Ubicacion  $ubicacion
      * @return \Illuminate\Http\Response
      */
-    public function show(Ubicacion $ubicacion)
+    public function show(Ubicacion $id)
     {
-        //
+        $ubicacion = Ubicacion::find($id);
+        return $ubicacion;
     }
 
     /**
@@ -78,8 +82,10 @@ class UbicacionController extends Controller
      * @param  \App\Ubicacion  $ubicacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ubicacion $ubicacion)
+    public function destroy(Ubicacion $id)
     {
-        //
+        $ubicacion = Ubicacion::find($id);
+        $ubicacion->delete();
+        return "";
     }
 }

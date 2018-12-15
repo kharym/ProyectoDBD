@@ -14,7 +14,9 @@ class PasajeroController extends Controller
      */
     public function index()
     {
-        //
+        $pasajero = Pasajero::all();
+        return $pasajero;
+
     }
 
     /**
@@ -35,7 +37,9 @@ class PasajeroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pasajero = Pasajero::create($request->all());
+        $pasajero->save();
+        return "";
     }
 
     /**
@@ -44,9 +48,10 @@ class PasajeroController extends Controller
      * @param  \App\Pasajero  $pasajero
      * @return \Illuminate\Http\Response
      */
-    public function show(Pasajero $pasajero)
+    public function show(Pasajero $id)
     {
-        //
+        $pasajero = Pasajero::find($id);
+        return $pasajero;
     }
 
     /**
@@ -78,8 +83,10 @@ class PasajeroController extends Controller
      * @param  \App\Pasajero  $pasajero
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pasajero $pasajero)
+    public function destroy(Pasajero $id)
     {
-        //
+        $pasajero = Pasajero::find($id);
+        $pasajero->delete();
+        return "";
     }
 }

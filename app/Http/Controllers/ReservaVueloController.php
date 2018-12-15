@@ -14,7 +14,8 @@ class ReservaVueloController extends Controller
      */
     public function index()
     {
-        //
+        $reservaVuelo = ReservaVuelo::all();
+        return $reservaVuelo;
     }
 
     /**
@@ -35,7 +36,9 @@ class ReservaVueloController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $reservaVuelo = ReservaVuelo::create($request->all());
+        $reservaVuelo->save();
+        return "";
     }
 
     /**
@@ -44,9 +47,10 @@ class ReservaVueloController extends Controller
      * @param  \App\ReservaVuelo  $reservaVuelo
      * @return \Illuminate\Http\Response
      */
-    public function show(ReservaVuelo $reservaVuelo)
+    public function show(ReservaVuelo $id)
     {
-        //
+        $reservaVuelo = ReservaVuelo::find($id);
+        return $reservaVuelo;
     }
 
     /**
@@ -78,8 +82,10 @@ class ReservaVueloController extends Controller
      * @param  \App\ReservaVuelo  $reservaVuelo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ReservaVuelo $reservaVuelo)
+    public function destroy(ReservaVuelo $id)
     {
-        //
+        $reservaVuelo = ReservaVuelo::find($id);
+        $reservaVuelo->delete();
+        return "";
     }
 }

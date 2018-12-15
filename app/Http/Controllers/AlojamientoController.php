@@ -12,9 +12,10 @@ class AlojamientoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() 
     {
-        //
+        $alojamiento = Alojamiento::all();
+        return $alojamiento;
     }
 
     /**
@@ -35,7 +36,9 @@ class AlojamientoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $alojamiento = Alojamiento::create($request->all());
+        $alojamiento->save();
+        return "";  
     }
 
     /**
@@ -44,9 +47,10 @@ class AlojamientoController extends Controller
      * @param  \App\Alojamiento  $alojamiento
      * @return \Illuminate\Http\Response
      */
-    public function show(Alojamiento $alojamiento)
+    public function show(Alojamiento $id)
     {
-        //
+        $alojamiento = Alojamiento::find($id);
+        return $alojamiento;
     }
 
     /**
@@ -78,8 +82,10 @@ class AlojamientoController extends Controller
      * @param  \App\Alojamiento  $alojamiento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Alojamiento $alojamiento)
+    public function destroy(Alojamiento $id)
     {
-        //
+        $alojamiento = Alojamiento::find($id);
+        $alojamiento->delete();
+        return "";
     }
 }

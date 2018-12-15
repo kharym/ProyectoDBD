@@ -14,7 +14,8 @@ class ReservaHabitacionController extends Controller
      */
     public function index()
     {
-        //
+        $reservaHabitacion = ReservaHabitacion::all();
+        return $reservaHabitacion;
     }
 
     /**
@@ -35,7 +36,9 @@ class ReservaHabitacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $reservaHabitacion = ReservaHabitacion::create($request->all());
+        $reservaHabitacion->save();
+        return ""; 
     }
 
     /**
@@ -44,9 +47,10 @@ class ReservaHabitacionController extends Controller
      * @param  \App\ReservaHabitacion  $reservaHabitacion
      * @return \Illuminate\Http\Response
      */
-    public function show(ReservaHabitacion $reservaHabitacion)
+    public function show(ReservaHabitacion $id)
     {
-        //
+        $reservaHabitacion = ReservaHabitacion::find($id);
+        return $reservaHabitacion;
     }
 
     /**
@@ -78,8 +82,10 @@ class ReservaHabitacionController extends Controller
      * @param  \App\ReservaHabitacion  $reservaHabitacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ReservaHabitacion $reservaHabitacion)
+    public function destroy(ReservaHabitacion $id)
     {
-        //
+        $reservaHabitacion = ReservaHabitacion::find($id);
+        $reservaHabitacion->delete();
+        return "";
     }
 }

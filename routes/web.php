@@ -19,7 +19,6 @@ Route::get('/', function () {
 
 Route::get('/Habitacion/all', 'HabitacionController@index'); 
 Route::get('/Habitacion/show/{id}', 'HabitacionController@show'); 
-
 Route::post('/Habitacion/destroy/{id}', 'HabitacionController@destroy');
 Route::get('/Habitacion/store', 'HabitacionController@store');  
 

@@ -14,7 +14,8 @@ class AuditoriaController extends Controller
      */
     public function index()
     {
-        //
+        $auditoria = Auditoria::all();
+        return $auditoria;
     }
 
     /**
@@ -35,7 +36,9 @@ class AuditoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $auditoria = Auditoria::create($request->all());
+        $auditoria->save();
+        return "";     
     }
 
     /**
@@ -44,9 +47,10 @@ class AuditoriaController extends Controller
      * @param  \App\Auditoria  $auditoria
      * @return \Illuminate\Http\Response
      */
-    public function show(Auditoria $auditoria)
+    public function show(Auditoria $id)
     {
-        //
+        $auditoria = Auditoria::find($id);
+        return $auditoria;
     }
 
     /**
@@ -78,8 +82,10 @@ class AuditoriaController extends Controller
      * @param  \App\Auditoria  $auditoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Auditoria $auditoria)
+    public function destroy(Auditoria $id)
     {
-        //
+        $auditoria = Auditoria::find($id);
+        $auditoria->delete();
+        return "";
     }
 }

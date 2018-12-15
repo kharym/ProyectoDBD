@@ -14,7 +14,8 @@ class ReservaAutoController extends Controller
      */
     public function index()
     {
-        //
+        $reservaAuto = ReservaAuto::all();
+        return $reservaAuto;
     }
 
     /**
@@ -24,7 +25,7 @@ class ReservaAutoController extends Controller
      */
     public function create()
     {
-        //
+         
     }
 
     /**
@@ -35,7 +36,9 @@ class ReservaAutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $reservaAuto = ReservaAuto::create($request->all());
+        $reservaAuto->save();
+        return ""; 
     }
 
     /**
@@ -44,9 +47,10 @@ class ReservaAutoController extends Controller
      * @param  \App\ReservaAuto  $reservaAuto
      * @return \Illuminate\Http\Response
      */
-    public function show(ReservaAuto $reservaAuto)
+    public function show(ReservaAuto $id)
     {
-        //
+        $reservaAuto = ReservaAuto::find($id);
+        return $reservaAuto;
     }
 
     /**
@@ -78,8 +82,10 @@ class ReservaAutoController extends Controller
      * @param  \App\ReservaAuto  $reservaAuto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ReservaAuto $reservaAuto)
+    public function destroy(ReservaAuto $id)
     {
-        //
+        $reservaAuto = ReservaAuto::find($id);
+        $reservaAuto->delete();
+        return "";
     }
 }

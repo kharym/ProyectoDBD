@@ -14,7 +14,8 @@ class AsientoController extends Controller
      */
     public function index()
     {
-        //
+        $asiento = Asiento::all();
+        return $asiento;
     }
 
     /**
@@ -35,7 +36,9 @@ class AsientoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $asiento = Asiento::create($request->all());
+        $asiento->save();
+        return "";  
     }
 
     /**
@@ -44,9 +47,10 @@ class AsientoController extends Controller
      * @param  \App\Asiento  $asiento
      * @return \Illuminate\Http\Response
      */
-    public function show(Asiento $asiento)
+    public function show(Asiento $id)
     {
-        //
+        $asiento = Asiento::find($id);
+        return $asiento;
     }
 
     /**
@@ -78,8 +82,10 @@ class AsientoController extends Controller
      * @param  \App\Asiento  $asiento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Asiento $asiento)
+    public function destroy(Asiento $id)
     {
-        //
+        $asiento = Asiento::find($id);
+        $asiento->delete();
+        return "";
     }
 }

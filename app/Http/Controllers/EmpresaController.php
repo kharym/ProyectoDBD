@@ -14,7 +14,8 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        //
+        $empresa = Empresa::all();
+        return $empresa;
     }
 
     /**
@@ -35,7 +36,9 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $empresa = Empresa::create($request->all());
+        $empresa->save();
+        return "";  
     }
 
     /**
@@ -44,9 +47,10 @@ class EmpresaController extends Controller
      * @param  \App\Empresa  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function show(Empresa $empresa)
+    public function show(Empresa $id)
     {
-        //
+        $empresa = Empresa::find($id);
+        return $empresa;
     }
 
     /**
@@ -78,8 +82,10 @@ class EmpresaController extends Controller
      * @param  \App\Empresa  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Empresa $empresa)
+    public function destroy(Empresa $id)
     {
-        //
+        $empresa = Empresa::find($id);
+        $empresa->delete();
+        return "";
     }
 }

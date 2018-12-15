@@ -14,7 +14,8 @@ class VueloController extends Controller
      */
     public function index()
     {
-        //
+        $vuelo = Vuelo::all();
+        return $vuelo;
     }
 
     /**
@@ -35,7 +36,9 @@ class VueloController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $vuelo = Vuelo::create($request->all());
+        $vuelo->save();
+        return "";
     }
 
     /**
@@ -44,9 +47,10 @@ class VueloController extends Controller
      * @param  \App\Vuelo  $vuelo
      * @return \Illuminate\Http\Response
      */
-    public function show(Vuelo $vuelo)
+    public function show(Vuelo $id)
     {
-        //
+        $vuelo = Vuelo::find($id);
+        return $vuelo;
     }
 
     /**
@@ -78,8 +82,10 @@ class VueloController extends Controller
      * @param  \App\Vuelo  $vuelo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Vuelo $vuelo)
+    public function destroy(Vuelo $id)
     {
-        //
+        $vuelo = Vuelo::find($id);
+        $vuelo->delete();
+        return "";
     }
 }

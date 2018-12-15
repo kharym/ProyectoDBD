@@ -39,7 +39,7 @@ class HabitacionController extends Controller
     {
         $habitacion = Habitacion::create($request->all());
         $habitacion->save();
-        return "se agregó exitosamente";
+        return "";
     }
 
     /**
@@ -87,6 +87,6 @@ class HabitacionController extends Controller
     {
         $habitacion = Habitacion::find($id);
         $habitacion->delete();
-        return "borrado :P";
+        return "";
     }
 }

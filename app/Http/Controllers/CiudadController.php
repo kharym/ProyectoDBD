@@ -14,7 +14,8 @@ class CiudadController extends Controller
      */
     public function index()
     {
-        //
+        $ciudad = Ciudad::all();
+        return $ciudad;
     }
 
     /**
@@ -35,7 +36,9 @@ class CiudadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $ciudad = Ciudad::create($request->all());
+        $ciudad->save();
+        return "";  
     }
 
     /**
@@ -44,9 +47,10 @@ class CiudadController extends Controller
      * @param  \App\Ciudad  $ciudad
      * @return \Illuminate\Http\Response
      */
-    public function show(Ciudad $ciudad)
+    public function show(Ciudad $id)
     {
-        //
+        $ciudad = Ciudad::find($id);
+        return $ciudad;
     }
 
     /**
@@ -78,8 +82,10 @@ class CiudadController extends Controller
      * @param  \App\Ciudad  $ciudad
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ciudad $ciudad)
+    public function destroy(Ciudad $id)
     {
-        //
+        $ciudad = Ciudad::find($id);
+        $ciudad->delete();
+        return "";
     }
 }

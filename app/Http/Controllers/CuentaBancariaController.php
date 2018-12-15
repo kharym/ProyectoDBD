@@ -14,7 +14,8 @@ class CuentaBancariaController extends Controller
      */
     public function index()
     {
-        //
+        $cuentaBancaria = CuentaBancaria::all();
+        return $cuentaBancaria;
     }
 
     /**
@@ -35,7 +36,9 @@ class CuentaBancariaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cuentaBancaria = CuentaBancaria::create($request->all());
+        $cuentaBancaria->save();
+        return "";  
     }
 
     /**
@@ -44,9 +47,10 @@ class CuentaBancariaController extends Controller
      * @param  \App\CuentaBancaria  $cuentaBancaria
      * @return \Illuminate\Http\Response
      */
-    public function show(CuentaBancaria $cuentaBancaria)
+    public function show(CuentaBancaria $id)
     {
-        //
+        $cuentaBancaria = CuentaBancaria::find($id);
+        return $cuentaBancaria;
     }
 
     /**
@@ -78,8 +82,10 @@ class CuentaBancariaController extends Controller
      * @param  \App\CuentaBancaria  $cuentaBancaria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CuentaBancaria $cuentaBancaria)
+    public function destroy(CuentaBancaria $id)
     {
-        //
+        $cuentaBancaria = CuentaBancaria::find($id);
+        $cuentaBancaria->delete();
+        return "";
     }
 }

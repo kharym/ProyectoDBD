@@ -14,7 +14,8 @@ class AutoController extends Controller
      */
     public function index()
     {
-        //
+        $auto = Auto::all();
+        return $auto;
     }
 
     /**
@@ -35,7 +36,9 @@ class AutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $auto = Auto::create($request->all());
+        $auto->save();
+        return "";
     }
 
     /**
@@ -44,9 +47,10 @@ class AutoController extends Controller
      * @param  \App\Auto  $auto
      * @return \Illuminate\Http\Response
      */
-    public function show(Auto $auto)
+    public function show(Auto $id)
     {
-        //
+        $auto = Auto::find($id);
+        return $auto;
     }
 
     /**
@@ -78,8 +82,10 @@ class AutoController extends Controller
      * @param  \App\Auto  $auto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Auto $auto)
+    public function destroy(Auto $id)
     {
-        //
+        $auto = Auto::find($id);
+        $auto->delete();
+        return "";
     }
 }

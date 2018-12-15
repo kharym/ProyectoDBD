@@ -14,7 +14,8 @@ class UsuarioMedioDePagoController extends Controller
      */
     public function index()
     {
-        //
+        $usuario_medioDePago = Usuario_MedioDePago::all();
+        return $usuario_medioDePago;
     }
 
     /**
@@ -35,7 +36,9 @@ class UsuarioMedioDePagoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $usuario_medioDePago = Usuario_MedioDePago::create($request->all());
+        $usuario_medioDePago->save();
+        return "";
     }
 
     /**
@@ -44,9 +47,10 @@ class UsuarioMedioDePagoController extends Controller
      * @param  \App\Usuario_MedioDePago  $usuario_MedioDePago
      * @return \Illuminate\Http\Response
      */
-    public function show(Usuario_MedioDePago $usuario_MedioDePago)
+    public function show(Usuario_MedioDePago $id)
     {
-        //
+        $usuario_medioDePago = Usuario_MedioDePago::find($id);
+        return $usuario_medioDePago;
     }
 
     /**
@@ -78,8 +82,10 @@ class UsuarioMedioDePagoController extends Controller
      * @param  \App\Usuario_MedioDePago  $usuario_MedioDePago
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Usuario_MedioDePago $usuario_MedioDePago)
+    public function destroy(Usuario_MedioDePago $id)
     {
-        //
+        $usuario_medioDePago = Usuario_MedioDePago::find($id);
+        $usuario_medioDePago->delete();
+        return "";
     }
 }

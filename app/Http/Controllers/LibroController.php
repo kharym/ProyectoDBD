@@ -13,7 +13,8 @@ class LibroController extends Controller
      */
     public function index()
     {
-        //
+        $libro = Libro::all();
+        return $libro;
     }
 
     /**
@@ -34,7 +35,9 @@ class LibroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $libro = Libro::create($request->all());
+        $libro->save();
+        return "";  
     }
 
     /**
@@ -45,7 +48,8 @@ class LibroController extends Controller
      */
     public function show($id)
     {
-        //
+        $libro = Libro::find($id);
+        return $libro;
     }
 
     /**
@@ -79,6 +83,8 @@ class LibroController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $libro = Libro::find($id);
+        $libro->delete();
+        return "";
     }
 }
