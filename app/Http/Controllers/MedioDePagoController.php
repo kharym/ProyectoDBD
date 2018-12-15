@@ -47,7 +47,7 @@ class MedioDePagoController extends Controller
      * @param  \App\MedioDePago  $medioDePago
      * @return \Illuminate\Http\Response
      */
-    public function show(MedioDePago $id)
+    public function show( $id)
     {
         $medioDePago = MedioDePago::find($id);
         return $medioDePago;
@@ -82,7 +82,7 @@ class MedioDePagoController extends Controller
      * @param  \App\MedioDePago  $medioDePago
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MedioDePago $id)
+    public function destroy( $id)
     {
         $medioDePago = MedioDePago::find($id);
         $medioDePago->delete();

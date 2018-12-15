@@ -47,7 +47,7 @@ class CuentaBancariaController extends Controller
      * @param  \App\CuentaBancaria  $cuentaBancaria
      * @return \Illuminate\Http\Response
      */
-    public function show(CuentaBancaria $id)
+    public function show( $id)
     {
         $cuentaBancaria = CuentaBancaria::find($id);
         return $cuentaBancaria;
@@ -82,7 +82,7 @@ class CuentaBancariaController extends Controller
      * @param  \App\CuentaBancaria  $cuentaBancaria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CuentaBancaria $id)
+    public function destroy( $id)
     {
         $cuentaBancaria = CuentaBancaria::find($id);
         $cuentaBancaria->delete();

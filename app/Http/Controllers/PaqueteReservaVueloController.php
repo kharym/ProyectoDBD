@@ -47,7 +47,7 @@ class Paquete_ReservaVueloController extends Controller
      * @param  \App\Paquete_ReservaVuelo  $paquete_ReservaVuelo
      * @return \Illuminate\Http\Response
      */
-    public function show(Paquete_ReservaVuelo $id)
+    public function show( $id)
     {
         $paquete_ReservaVuelo = Paquete_ReservaVuelo::find($id);
         return $paquete_ReservaVuelo;
@@ -82,7 +82,7 @@ class Paquete_ReservaVueloController extends Controller
      * @param  \App\Paquete_ReservaVuelo  $paquete_ReservaVuelo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Paquete_ReservaVuelo $id)
+    public function destroy( $id)
     {
         $paquete_ReservaVuelo = Paquete_ReservaVuelo::find($id);
         $paquete_ReservaVuelo->delete();

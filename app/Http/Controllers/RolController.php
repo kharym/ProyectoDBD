@@ -47,7 +47,7 @@ class RolController extends Controller
      * @param  \App\Rol  $rol
      * @return \Illuminate\Http\Response
      */
-    public function show(Rol $id)
+    public function show( $id)
     {
         $rol = Rol::find($id);
         return $rol;
@@ -82,7 +82,7 @@ class RolController extends Controller
      * @param  \App\Rol  $rol
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rol $id)
+    public function destroy( $id)
     {
         $rol = Rol::find($id);
         $rol->delete();

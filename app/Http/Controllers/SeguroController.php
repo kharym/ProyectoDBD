@@ -47,7 +47,7 @@ class SeguroController extends Controller
      * @param  \App\Seguro  $seguro
      * @return \Illuminate\Http\Response
      */
-    public function show(Seguro $id)
+    public function show( $id)
     {
         $seguro = Seguro::find($id);
         return $seguro;
@@ -82,7 +82,7 @@ class SeguroController extends Controller
      * @param  \App\Seguro  $seguro
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Seguro $id)
+    public function destroy( $id)
     {
         $seguro = Seguro::find($id);
         $seguro->delete();

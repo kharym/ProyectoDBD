@@ -48,7 +48,7 @@ class PasajeroController extends Controller
      * @param  \App\Pasajero  $pasajero
      * @return \Illuminate\Http\Response
      */
-    public function show(Pasajero $id)
+    public function show( $id)
     {
         $pasajero = Pasajero::find($id);
         return $pasajero;
@@ -83,7 +83,7 @@ class PasajeroController extends Controller
      * @param  \App\Pasajero  $pasajero
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pasajero $id)
+    public function destroy( $id)
     {
         $pasajero = Pasajero::find($id);
         $pasajero->delete();

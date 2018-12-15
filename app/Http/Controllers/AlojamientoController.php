@@ -47,7 +47,7 @@ class AlojamientoController extends Controller
      * @param  \App\Alojamiento  $alojamiento
      * @return \Illuminate\Http\Response
      */
-    public function show(Alojamiento $id)
+    public function show( $id)
     {
         $alojamiento = Alojamiento::find($id);
         return $alojamiento;
@@ -82,7 +82,7 @@ class AlojamientoController extends Controller
      * @param  \App\Alojamiento  $alojamiento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Alojamiento $id)
+    public function destroy( $id)
     {
         $alojamiento = Alojamiento::find($id);
         $alojamiento->delete();

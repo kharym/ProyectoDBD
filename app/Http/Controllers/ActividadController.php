@@ -47,7 +47,7 @@ class ActividadController extends Controller
      * @param  \App\Actividad  $actividad
      * @return \Illuminate\Http\Response
      */
-    public function show(Actividad $id)
+    public function show( $id)
     {
         $actividad = Actividad::find($id);
         return $actividad;    
@@ -82,7 +82,7 @@ class ActividadController extends Controller
      * @param  \App\Actividad  $actividad
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Actividad $id)
+    public function destroy($id)
     {
         $actividad = Actividad::find($id);
         $actividad->delete();

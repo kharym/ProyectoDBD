@@ -47,7 +47,7 @@ class AeropuertoController extends Controller
      * @param  \App\Aeropuerto  $aeropuerto
      * @return \Illuminate\Http\Response
      */
-    public function show(Aeropuerto $id)
+    public function show( $id)
     {
         $aeropuerto = Aeropuerto::find($id);
         return $aeropuerto;
@@ -82,7 +82,7 @@ class AeropuertoController extends Controller
      * @param  \App\Aeropuerto  $aeropuerto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Aeropuerto $id)
+    public function destroy( $id)
     {
         $aeropuerto = Aeropuerto::find($id);
         $aeropuerto->delete();

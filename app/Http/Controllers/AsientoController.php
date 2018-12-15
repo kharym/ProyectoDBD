@@ -47,7 +47,7 @@ class AsientoController extends Controller
      * @param  \App\Asiento  $asiento
      * @return \Illuminate\Http\Response
      */
-    public function show(Asiento $id)
+    public function show( $id)
     {
         $asiento = Asiento::find($id);
         return $asiento;
@@ -82,7 +82,7 @@ class AsientoController extends Controller
      * @param  \App\Asiento  $asiento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Asiento $id)
+    public function destroy( $id)
     {
         $asiento = Asiento::find($id);
         $asiento->delete();

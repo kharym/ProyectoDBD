@@ -46,7 +46,7 @@ class CompraController extends Controller
      * @param  \App\Compra  $compra
      * @return \Illuminate\Http\Response
      */
-    public function show(Compra $id)
+    public function show( $id)
     {
         $compra = Compra::find($id);
         return $compra;
@@ -81,7 +81,7 @@ class CompraController extends Controller
      * @param  \App\Compra  $compra
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Compra $id)
+    public function destroy( $id)
     {
         $compra = Compra::find($id);
         $compra->delete();

@@ -47,7 +47,7 @@ class EmpresaController extends Controller
      * @param  \App\Empresa  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function show(Empresa $id)
+    public function show( $id)
     {
         $empresa = Empresa::find($id);
         return $empresa;
@@ -82,7 +82,7 @@ class EmpresaController extends Controller
      * @param  \App\Empresa  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Empresa $id)
+    public function destroy( $id)
     {
         $empresa = Empresa::find($id);
         $empresa->delete();

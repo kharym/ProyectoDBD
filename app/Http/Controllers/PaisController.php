@@ -47,7 +47,7 @@ class PaisController extends Controller
      * @param  \App\Pais  $pais
      * @return \Illuminate\Http\Response
      */
-    public function show(Pais $id)
+    public function show( $id)
     {
         $pais = Pais::find($id);
         return $pais;
@@ -82,7 +82,7 @@ class PaisController extends Controller
      * @param  \App\Pais  $pais
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pais $id)
+    public function destroy( $id)
     {
         $pais = Pais::find($id);
         $pais->delete();

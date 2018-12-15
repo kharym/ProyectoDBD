@@ -47,7 +47,7 @@ class ReservaHabitacionController extends Controller
      * @param  \App\ReservaHabitacion  $reservaHabitacion
      * @return \Illuminate\Http\Response
      */
-    public function show(ReservaHabitacion $id)
+    public function show( $id)
     {
         $reservaHabitacion = ReservaHabitacion::find($id);
         return $reservaHabitacion;
@@ -82,7 +82,7 @@ class ReservaHabitacionController extends Controller
      * @param  \App\ReservaHabitacion  $reservaHabitacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ReservaHabitacion $id)
+    public function destroy( $id)
     {
         $reservaHabitacion = ReservaHabitacion::find($id);
         $reservaHabitacion->delete();

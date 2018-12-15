@@ -47,7 +47,7 @@ class VueloController extends Controller
      * @param  \App\Vuelo  $vuelo
      * @return \Illuminate\Http\Response
      */
-    public function show(Vuelo $id)
+    public function show( $id)
     {
         $vuelo = Vuelo::find($id);
         return $vuelo;
@@ -82,7 +82,7 @@ class VueloController extends Controller
      * @param  \App\Vuelo  $vuelo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Vuelo $id)
+    public function destroy( $id)
     {
         $vuelo = Vuelo::find($id);
         $vuelo->delete();

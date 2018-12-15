@@ -47,7 +47,7 @@ class UsuarioMedioDePagoController extends Controller
      * @param  \App\Usuario_MedioDePago  $usuario_MedioDePago
      * @return \Illuminate\Http\Response
      */
-    public function show(Usuario_MedioDePago $id)
+    public function show( $id)
     {
         $usuario_medioDePago = Usuario_MedioDePago::find($id);
         return $usuario_medioDePago;
@@ -82,7 +82,7 @@ class UsuarioMedioDePagoController extends Controller
      * @param  \App\Usuario_MedioDePago  $usuario_MedioDePago
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Usuario_MedioDePago $id)
+    public function destroy( $id)
     {
         $usuario_medioDePago = Usuario_MedioDePago::find($id);
         $usuario_medioDePago->delete();

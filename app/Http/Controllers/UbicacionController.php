@@ -47,7 +47,7 @@ class UbicacionController extends Controller
      * @param  \App\Ubicacion  $ubicacion
      * @return \Illuminate\Http\Response
      */
-    public function show(Ubicacion $id)
+    public function show( $id)
     {
         $ubicacion = Ubicacion::find($id);
         return $ubicacion;
@@ -82,7 +82,7 @@ class UbicacionController extends Controller
      * @param  \App\Ubicacion  $ubicacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ubicacion $id)
+    public function destroy( $id)
     {
         $ubicacion = Ubicacion::find($id);
         $ubicacion->delete();

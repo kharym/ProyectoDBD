@@ -47,7 +47,7 @@ class AuditoriaController extends Controller
      * @param  \App\Auditoria  $auditoria
      * @return \Illuminate\Http\Response
      */
-    public function show(Auditoria $id)
+    public function show( $id)
     {
         $auditoria = Auditoria::find($id);
         return $auditoria;
@@ -82,7 +82,7 @@ class AuditoriaController extends Controller
      * @param  \App\Auditoria  $auditoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Auditoria $id)
+    public function destroy( $id)
     {
         $auditoria = Auditoria::find($id);
         $auditoria->delete();

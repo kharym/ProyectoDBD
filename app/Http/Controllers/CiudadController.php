@@ -47,7 +47,7 @@ class CiudadController extends Controller
      * @param  \App\Ciudad  $ciudad
      * @return \Illuminate\Http\Response
      */
-    public function show(Ciudad $id)
+    public function show( $id)
     {
         $ciudad = Ciudad::find($id);
         return $ciudad;
@@ -82,7 +82,7 @@ class CiudadController extends Controller
      * @param  \App\Ciudad  $ciudad
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ciudad $id)
+    public function destroy( $id)
     {
         $ciudad = Ciudad::find($id);
         $ciudad->delete();

@@ -47,7 +47,7 @@ class PaqueteController extends Controller
      * @param  \App\Paquete  $paquete
      * @return \Illuminate\Http\Response
      */
-    public function show(Paquete $id)
+    public function show( $id)
     {
         $paquete = Paquete::find($id);
         return $paquete;
@@ -82,7 +82,7 @@ class PaqueteController extends Controller
      * @param  \App\Paquete  $paquete
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Paquete $id)
+    public function destroy( $id)
     {
         $paquete = Paquete::find($id);
         $paquete->delete();

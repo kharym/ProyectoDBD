@@ -47,7 +47,7 @@ class AutoController extends Controller
      * @param  \App\Auto  $auto
      * @return \Illuminate\Http\Response
      */
-    public function show(Auto $id)
+    public function show( $id)
     {
         $auto = Auto::find($id);
         return $auto;
@@ -82,7 +82,7 @@ class AutoController extends Controller
      * @param  \App\Auto  $auto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Auto $id)
+    public function destroy( $id)
     {
         $auto = Auto::find($id);
         $auto->delete();

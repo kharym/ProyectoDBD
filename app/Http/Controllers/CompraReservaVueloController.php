@@ -47,7 +47,7 @@ class CompraReservaVueloController extends Controller
      * @param  \App\Compra_ReservaVuelo  $compra_ReservaVuelo
      * @return \Illuminate\Http\Response
      */
-    public function show(Compra_ReservaVuelo $id)
+    public function show( $id)
     {
         $compra_reservaVuelo = Compra_ReservaVuelo::find($id);
         return $compra_reservaVuelo;
@@ -82,7 +82,7 @@ class CompraReservaVueloController extends Controller
      * @param  \App\Compra_ReservaVuelo  $compra_ReservaVuelo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Compra_ReservaVuelo $id)
+    public function destroy( $id)
     {
         $compra_reservaVuelo = Compra_ReservaVuelo::find($id);
         $compra_reservaVuelo->delete();

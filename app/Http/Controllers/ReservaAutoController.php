@@ -47,7 +47,7 @@ class ReservaAutoController extends Controller
      * @param  \App\ReservaAuto  $reservaAuto
      * @return \Illuminate\Http\Response
      */
-    public function show(ReservaAuto $id)
+    public function show( $id)
     {
         $reservaAuto = ReservaAuto::find($id);
         return $reservaAuto;
@@ -82,7 +82,7 @@ class ReservaAutoController extends Controller
      * @param  \App\ReservaAuto  $reservaAuto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ReservaAuto $id)
+    public function destroy( $id)
     {
         $reservaAuto = ReservaAuto::find($id);
         $reservaAuto->delete();
