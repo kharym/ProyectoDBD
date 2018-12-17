@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 class RolsTableSeeder extends Seeder
 {
     /**
@@ -11,6 +12,14 @@ class RolsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Rol::class, 5)->create();
+        DB::table('rols')->insert([
+        	'tipo_rol'=> 1,
+            'descripcion'=> "Administrador: Puede agregar y eliminar paquetes, vuelos entre otros servicios",
+        ]);
+
+        DB::table('rols')->insert([
+        	'tipo_rol'=> 2,
+        	'descripcion'=> "Usuario: Utiliza servicios que provee el servicio web",
+        ]);
     }
 }

@@ -4,7 +4,11 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Auto::class, function (Faker $faker) {
     $ids_empresa = \DB::table('empresas')->select('id')->get();
-	$id_empresa = $ids_empresa->random()->id;
+    $id_empresa = $ids_empresa->random()->id;
+    // $faker = (new \Faker\Factory())::create();
+    // $faker->addProvider(new \Faker\Provider\Fakecar($faker));
+    
+
     return [
         'numero_puertas' => $faker->randomDigit(2,4),
         'tipo_transmision' => $faker->numberBetween(0,1),

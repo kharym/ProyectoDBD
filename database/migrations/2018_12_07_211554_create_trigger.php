@@ -25,8 +25,8 @@ class CreateTrigger extends Migration
                 LOOP 
                     EXIT WHEN j = i;
                     j := j + 1;
-                    INSERT INTO asientos( vuelo_id, numero_asiento, disponibilidad,tipo_asiento,updated_at) VALUES 
-                    (valor, j, true, 1, null );
+                    INSERT INTO asientos( vuelo_id, numero_asiento, disponibilidad,tipo_asiento,created_at) VALUES 
+                    (valor, j, true, 1, NEW.created_at );
                 END LOOP ;
                 RETURN NEW;
             END
