@@ -20,7 +20,8 @@ Route::get('/', function () {
 Route::get('/Actividad/all', 'ActividadController@index'); 
 Route::get('/Actividad/show/{id}', 'ActividadController@show'); 
 Route::post('/Actividad/destroy/{id}', 'ActividadController@destroy');
-Route::get('/Actividad/store', 'Actividad	Controller@store');
+Route::post('/Actividad/store', 'ActividadController@store');
+Route::put('/Actividad/{actividad}', 'ActividadController@update');
 
 Route::get('/Aeropuerto/all', 'AeropuertoController@index'); 
 Route::get('/Aeropuerto/show/{id}', 'AeropuertoController@show'); 

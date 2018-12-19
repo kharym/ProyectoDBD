@@ -37,8 +37,15 @@ class ActividadController extends Controller
     public function store(Request $request)
     {
         $actividad = Actividad::create($request->all());
-        $actividad->save();
-        return "";    
+        if ($actividad) 
+        {
+            $response = ['success' => 'Actualizado con éxito!'];
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+        }
+        return $response; 
     }
 
     /**
@@ -73,7 +80,34 @@ class ActividadController extends Controller
      */
     public function update(Request $request, Actividad $actividad)
     {
-        //
+        $aux = $this->validate($request, [
+            'destino' => 'required',
+            'nombre_actividad' => 'required',
+            'precio' => 'required',
+            'cantidad_adulto' => 'required',
+            'cantidad_ninos' => 'required',
+            'fecha_ida' => 'required',
+            'fecha_vuelta' => 'required',
+        ]);
+        dd($aux);
+        dd($errors->all());
+        $actividad->destino = $request->get('destino');
+        $actividad->nombre_actividad = $request->get('nombre_actividad');
+        $actividad->precio = $request->get('precio');
+        $actividad->cantidad_adultos = $request->get('cantidad_adulto');
+        $actividad->cantidad_ninos = $request->get('cantidad_ninos');
+        $actividad->fecha_ida = $request->get('fecha_ida');
+        $actividad->fecha_vuelta = $request->get('fecha_vuelta');
+          
+        $dataUpdate = $actividad->save();
+        if ($dataUpdate) 
+        {
+            $response = ['success' => 'Actualizado con éxito!'];
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+        }
     }
 
     /**
