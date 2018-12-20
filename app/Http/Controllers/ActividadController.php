@@ -39,13 +39,13 @@ class ActividadController extends Controller
         $actividad = Actividad::create($request->all());
         if ($actividad) 
         {
-            $response = ['success' => 'Actualizado con éxito!'];
+            return $actividad; 
         } 
         else 
         {
             $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
         }
-        return $response; 
     }
 
     /**

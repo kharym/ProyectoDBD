@@ -36,9 +36,16 @@ class RolController extends Controller
      */
     public function store(Request $request)
     {
-        $rol = Rol::create($request->all());
-        $rol->save();
-        return "";
+        $rol = Rol::all();
+        if ($rol) 
+        {
+            return $rol; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }
     }
 
     /**

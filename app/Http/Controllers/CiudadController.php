@@ -37,8 +37,15 @@ class CiudadController extends Controller
     public function store(Request $request)
     {
         $ciudad = Ciudad::create($request->all());
-        $ciudad->save();
-        return "";  
+        if ($ciudad) 
+        {
+            return $ciudad; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }
     }
 
     /**

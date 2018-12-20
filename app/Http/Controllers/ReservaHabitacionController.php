@@ -36,9 +36,16 @@ class ReservaHabitacionController extends Controller
      */
     public function store(Request $request)
     {
-        $reservaHabitacion = ReservaHabitacion::create($request->all());
-        $reservaHabitacion->save();
-        return ""; 
+        $rH = ReservaHabitacion::all();
+        if ($rH) 
+        {
+            return $rH; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }
     }
 
     /**

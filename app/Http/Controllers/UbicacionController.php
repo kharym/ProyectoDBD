@@ -36,9 +36,16 @@ class UbicacionController extends Controller
      */
     public function store(Request $request)
     {
-        $ubicacion = Ubicacion::create($request->all());
-        $ubicacion->save();
-        return "";
+        $ubicacion = Ubicacion::all();
+        if ($ubicacion) 
+        {
+            return $ubicacion; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }
     }
 
     /**

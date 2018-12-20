@@ -37,8 +37,15 @@ class AutoController extends Controller
     public function store(Request $request)
     {
         $auto = Auto::create($request->all());
-        $auto->save();
-        return "";
+        if ($auto) 
+        {
+            return $auto; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }
     }
 
     /**

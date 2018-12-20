@@ -37,8 +37,15 @@ class AlojamientoController extends Controller
     public function store(Request $request)
     {
         $alojamiento = Alojamiento::create($request->all());
-        $alojamiento->save();
-        return "";  
+        if ($alojamiento) 
+        {
+            return $alojamiento; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }
     }
 
     /**

@@ -38,8 +38,15 @@ class HabitacionController extends Controller
     public function store(Request $request)
     {
         $habitacion = Habitacion::create($request->all());
-        $habitacion->save();
-        return "";
+        if ($habitacion) 
+        {
+            return $habitacion; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }
     }
 
     /**

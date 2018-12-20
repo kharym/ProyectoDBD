@@ -37,8 +37,15 @@ class AeropuertoController extends Controller
     public function store(Request $request)
     {
         $aeropuerto = Aeropuerto::create($request->all());
-        $aeropuerto->save();
-        return "";   
+        if ($aeropuerto) 
+        {
+            return $aeropuerto; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }
     }
 
     /**

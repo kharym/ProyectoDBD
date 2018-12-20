@@ -36,9 +36,16 @@ class SeguroController extends Controller
      */
     public function store(Request $request)
     {
-        $seguro = Seguro::create($request->all());
-        $seguro->save();
-        return "";  
+        $seguro = Seguro::all();
+        if ($seguro) 
+        {
+            return $seguro; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }
     }
 
     /**

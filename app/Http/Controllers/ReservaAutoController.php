@@ -36,9 +36,16 @@ class ReservaAutoController extends Controller
      */
     public function store(Request $request)
     {
-        $reservaAuto = ReservaAuto::create($request->all());
-        $reservaAuto->save();
-        return ""; 
+        $rA = ReservaAuto::all();
+        if ($rA) 
+        {
+            return $rA; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }
     }
 
     /**

@@ -36,9 +36,16 @@ class VueloController extends Controller
      */
     public function store(Request $request)
     {
-        $vuelo = Vuelo::create($request->all());
-        $vuelo->save();
-        return "";
+        $vuelo = Vuelo::all();
+        if ($vuelo) 
+        {
+            return $vuelo; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }
     }
 
     /**

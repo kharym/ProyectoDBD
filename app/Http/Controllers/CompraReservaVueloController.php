@@ -36,9 +36,16 @@ class CompraReservaVueloController extends Controller
      */
     public function store(Request $request)
     {
-        $compra_reservaVuelo = Compra_ReservaVuelo::create($request->all());
-        $compra_reservaVuelo->save();
-        return "";
+        $compraRV = Compra_ReservaVuelo::create($request->all());
+        if ($compraRV) 
+        {
+            return $compraRV; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }
     }
 
     /**

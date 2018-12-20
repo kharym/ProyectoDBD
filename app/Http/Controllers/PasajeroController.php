@@ -37,9 +37,16 @@ class PasajeroController extends Controller
      */
     public function store(Request $request)
     {
-        $pasajero = Pasajero::create($request->all());
-        $pasajero->save();
-        return "";
+        $pasajero = Pasajero::all();
+        if ($pasajero) 
+        {
+            return $pasajero; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }
     }
 
     /**

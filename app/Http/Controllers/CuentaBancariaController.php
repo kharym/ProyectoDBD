@@ -36,9 +36,16 @@ class CuentaBancariaController extends Controller
      */
     public function store(Request $request)
     {
-        $cuentaBancaria = CuentaBancaria::create($request->all());
-        $cuentaBancaria->save();
-        return "";  
+        $cb = CuentaBancaria::create($request->all());
+        if ($cb) 
+        {
+            return $cb; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }
     }
 
     /**

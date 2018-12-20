@@ -37,8 +37,15 @@ class AuditoriaController extends Controller
     public function store(Request $request)
     {
         $auditoria = Auditoria::create($request->all());
-        $auditoria->save();
-        return "";     
+        if ($auditoria) 
+        {
+            return $auditoria; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }
     }
 
     /**

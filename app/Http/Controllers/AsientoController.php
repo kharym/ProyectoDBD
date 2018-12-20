@@ -37,8 +37,15 @@ class AsientoController extends Controller
     public function store(Request $request)
     {
         $asiento = Asiento::create($request->all());
-        $asiento->save();
-        return "";  
+        if ($asiento) 
+        {
+            return $asiento; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }
     }
 
     /**

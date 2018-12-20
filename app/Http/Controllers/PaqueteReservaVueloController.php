@@ -36,9 +36,16 @@ class Paquete_ReservaVueloController extends Controller
      */
     public function store(Request $request)
     {
-        $paquete_ReservaVuelo = Paquete_ReservaVuelo::create($request->all());
-        $paquete_ReservaVuelo->save();
-        return ""; 
+        $paquete_ReservaVuelo = Paquete_ReservaVuelo::all();
+        if ($paquete_ReservaVuelo) 
+        {
+            return $paquete_ReservaVuelo; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }
     }
 
     /**

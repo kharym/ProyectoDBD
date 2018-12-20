@@ -36,9 +36,16 @@ class UsuarioMedioDePagoController extends Controller
      */
     public function store(Request $request)
     {
-        $usuario_medioDePago = Usuario_MedioDePago::create($request->all());
-        $usuario_medioDePago->save();
-        return "";
+        $uMdP = Usuario_MedioDePago::all();
+        if ($uMdP) 
+        {
+            return $uMdP; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }
     }
 
     /**

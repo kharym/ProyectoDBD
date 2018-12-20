@@ -37,8 +37,15 @@ class PaisController extends Controller
     public function store(Request $request)
     {
         $pais = Pais::create($request->all());
-        $pais->save();
-        return "";
+        if ($pais) 
+        {
+            return $pais; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }
     }
 
     /**

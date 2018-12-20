@@ -37,8 +37,16 @@ class CompraController extends Controller
     public function store(Request $request)
     {
         $compra = Compra::create($request->all());
-        $compra->save();
-        return "";    }
+        if ($compra) 
+        {
+            return $compra; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }    
+    }
 
     /**
      * Display the specified resource.

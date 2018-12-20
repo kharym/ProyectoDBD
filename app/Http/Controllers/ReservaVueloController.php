@@ -36,9 +36,16 @@ class ReservaVueloController extends Controller
      */
     public function store(Request $request)
     {
-        $reservaVuelo = ReservaVuelo::create($request->all());
-        $reservaVuelo->save();
-        return "";
+        $rV = ReservaVuelo::all();
+        if ($rV) 
+        {
+            return $rV; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }
     }
 
     /**

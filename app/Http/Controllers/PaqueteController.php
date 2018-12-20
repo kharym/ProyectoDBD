@@ -37,8 +37,15 @@ class PaqueteController extends Controller
     public function store(Request $request)
     {
         $paquete = Paquete::create($request->all());
-        $paquete->save();
-        return ""; 
+        if ($paquete) 
+        {
+            return $paquete; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }
     }
 
     /**

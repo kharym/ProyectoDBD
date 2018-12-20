@@ -37,8 +37,15 @@ class EmpresaController extends Controller
     public function store(Request $request)
     {
         $empresa = Empresa::create($request->all());
-        $empresa->save();
-        return "";  
+        if ($empresa) 
+        {
+            return $empresa; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }
     }
 
     /**

@@ -37,8 +37,15 @@ class MedioDePagoController extends Controller
     public function store(Request $request)
     {
         $medioDePago = MedioDePago::create($request->all());
-        $medioDePago->save();
-        return ""; 
+        if ($medioDePago) 
+        {
+            return $medioDePago; 
+        } 
+        else 
+        {
+            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
+            return $response;
+        }
     }
 
     /**
