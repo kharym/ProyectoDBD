@@ -36,6 +36,8 @@ class AlojamientoController extends Controller
      */
     public function store(Request $request)
     {
+        dd($aux);
+        dd($errors->all());
         $alojamiento = Alojamiento::create($request->all());
         if ($alojamiento) 
         {
