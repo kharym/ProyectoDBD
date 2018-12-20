@@ -12,4 +12,6 @@ class CuentaBancaria extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+     protected $fillable = ['saldo','maximo_giro','nombre_banco','fecha_giro','hora_giro'];
 }

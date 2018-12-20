@@ -17,4 +17,10 @@ class Alojamiento extends Model
     {
         return $this->belongsTo('App\Ciudad');
     }
+
+
+    protected $fillable = ['nombre_alojamiento','numero_estrellas','calle_alojamiento','numero_alojamiento'];
 }
+
+
+            

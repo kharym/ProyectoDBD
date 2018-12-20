@@ -11,4 +11,7 @@ class Rol extends Model
 	{
 	  return $this->hasMany('App\User');
 	}
+
+
+	protected $fillable = ['tipo_rol','descripcion'];
 }

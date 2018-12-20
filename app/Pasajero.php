@@ -11,4 +11,6 @@ class Pasajero extends Model
     {
       return $this->hasMany('App\ReservaVuelo');
     }
+
+    protected $fillable = ['name','apellido','dni_pasaporte','pais','menor_edad','telefono','asistencia_especial','movilidad_reducida'];
 }

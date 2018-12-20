@@ -49,5 +49,6 @@ class Compra extends Model
     }
 
 
+    protected $fillable = ['fecha_compra','hora_compra'];
     
 }

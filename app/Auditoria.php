@@ -12,4 +12,6 @@ class Auditoria extends Model
 	{
 	    return $this->hasOne('App\User');
 	}
+
+	protected $fillable = ['tipo_auditoria','descripcion'];
 }

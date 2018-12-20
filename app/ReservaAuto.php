@@ -23,4 +23,6 @@ class ReservaAuto extends Model
     {
         return $this->belongsTo('App\Auto');
     }
+
+    protected $fillable = ['precio_auto','fecha_recogido','fecha_devolucion','hora_recogido','hora_devolucion','tipo_auto'];
 }

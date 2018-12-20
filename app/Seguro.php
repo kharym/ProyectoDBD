@@ -12,4 +12,6 @@ class Seguro extends Model
     {
       return $this->hasMany('App\Compra');
     }
+
+    protected $fillable = ['edad_pasajero','ida_vuelta','cantidad_personas','fecha_ida','fecha_vuelta','destino','costo_pasaje'];
 }

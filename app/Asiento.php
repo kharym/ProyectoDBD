@@ -17,4 +17,6 @@ class Asiento extends Model
     {
         return $this->belongsTo('App\Vuelo');
     }
+
+    protected $fillable = ['numero_asiento','disponibilidad','tipo_asiento'];
 }

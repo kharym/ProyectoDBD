@@ -23,4 +23,6 @@ class ReservaHabitacion extends Model
     {
       return $this->hasMany('App\Habitacion');
     }
+
+    protected $fillable = ['precio_res_hab','fecha_llegada','fecha_ida','numero_ninos','numero_adulto'];
 }

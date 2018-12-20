@@ -11,4 +11,6 @@ class Pais extends Model
     {
       return $this->hasMany('App\Ciudad');
     }
+
+    protected $fillable = ['nombre_pais'];
 }

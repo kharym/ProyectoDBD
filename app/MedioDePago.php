@@ -11,4 +11,7 @@ class MedioDePago extends Model
     {
         return $this->belongsToMany('App\User');
     }
+
+
+     protected $fillable = ['tipo_medioPago','disponibilidad','monto'];
 }
