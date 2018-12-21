@@ -12,5 +12,5 @@ class Aeropuerto extends Model
         return $this->belongsTo('App\Ciudad');
     }
 
-    protected $fillable = ['nombre_aeropuerto','calle_aeropuerto','numero_aeropuerto'];
+    protected $fillable = ['ciudad_id','nombre_aeropuerto','calle_aeropuerto','numero_aeropuerto'];
 }

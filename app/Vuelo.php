@@ -30,5 +30,5 @@ class Vuelo extends Model
         return $this->belongsTo('App\Ciudad');
     }
 
-    protected $fillable = ['origen','destino','precio_vuelo','cantidad_asientos','fecha_ida','hora_ida','fecha_llegada','hora_llegada','duracion_viaje'];
+    protected $fillable = ['ciudad_va_id','ciudad_viene_id','origen','destino','precio_vuelo','cantidad_asientos','fecha_ida','hora_ida','fecha_llegada','hora_llegada','duracion_viaje'];
 }

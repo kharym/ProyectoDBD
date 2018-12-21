@@ -19,7 +19,7 @@ class Alojamiento extends Model
     }
 
 
-    protected $fillable = ['nombre_alojamiento','numero_estrellas','calle_alojamiento','numero_alojamiento','ciudad_id'];
+    protected $fillable = ['ciudad_id','nombre_alojamiento','numero_estrellas','calle_alojamiento','numero_alojamiento'];
 }
 
 

@@ -36,5 +36,6 @@ class ReservaVuelo extends Model
         return $this->belongsToMany('App\Paquete');
     }
 
-    protected $fillable = ['ida_vuelta','cantidad_pasajeros','tipo_cabina','fecha_reserva','hora_reserva','precio_reserva_vuelo','cantidad_paradas'];
+    protected $fillable = ['vuelo_id','asiento_id','pasajero_id','ida_vuelta','cantidad_pasajeros','tipo_cabina','fecha_reserva','hora_reserva','precio_reserva_vuelo','cantidad_paradas'];
 }
+

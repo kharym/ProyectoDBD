@@ -48,6 +48,6 @@ class Ciudad extends Model
       return $this->hasMany('App\Ubicacion');
     }
 
-    protected $fillable = ['nombre_ciudad'];
+    protected $fillable = ['pais_id','nombre_ciudad'];
 
 }

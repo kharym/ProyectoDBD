@@ -56,5 +56,5 @@ class User extends Authenticatable
         return $this->belongsToMany('App\MedioDePago');
     }
 
-     protected $fillable = ['name','apellido','email','tipo_documento','numero_documento','pais','fecha_nacimiento','telefono','password'];
+     protected $fillable = ['rol_id','auditoria_id','name','apellido','email','tipo_documento','numero_documento','pais','fecha_nacimiento','telefono','password'];
 }

@@ -31,6 +31,6 @@ class Paquete extends Model
         return $this->belongsToMany('App\ReservaVuelo');
     }
 
-    protected $fillable = ['precio','descuento','tipo_paquete','disponibilidad'];
+    protected $fillable = ['reserva_auto_id','reserva_habitacion_id','precio','descuento','tipo_paquete','disponibilidad'];
 
 }

@@ -12,5 +12,5 @@ class Ubicacion extends Model
         return $this->belongsTo('App\Ciudad');
     }
 
-    protected $fillable = ['latitud','longitud','codigo_postal'];
+    protected $fillable = ['ciudad_id','latitud','longitud','codigo_postal'];
 }

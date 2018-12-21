@@ -18,5 +18,5 @@ class Empresa extends Model
         return $this->belongsTo('App\Ciudad');
     }
 
-    protected $fillable = ['nombre_empresa','telefono_empresa','correo_empresa'];
+    protected $fillable = ['ciudad_id','nombre_empresa','telefono_empresa','correo_empresa'];
 }
