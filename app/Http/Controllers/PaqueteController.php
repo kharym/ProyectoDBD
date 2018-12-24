@@ -2,11 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Paquete;
 use Illuminate\Http\Request;
 
 class PaqueteController extends Controller
 {
+
+    public function rules(){
+        return[
+        'reserva_auto_id' =>  'required|numeric',
+        'reserva_habitacion_id' => 'required|numeric',
+        'precio' => 'required|numeric',
+        'descuento' => 'required|numeric',
+        'tipo_paquete' => 'required|numeric',
+        'disponibilidad' => 'required|boolean',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,16 +48,13 @@ class PaqueteController extends Controller
      */
     public function store(Request $request)
     {
-        $paquete = Paquete::create($request->all());
-        if ($paquete) 
-        {
-            return $paquete; 
-        } 
-        else 
-        {
-            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
-            return $response;
+        $validador = Validator::make($request->all(),$this->rules());
+        if($validador->fails()){
+            return $validador->messages();
         }
+        $paquete = Paquete::create($request->all());      
+        $paquete->save();
+        return $paquete;
     }
 
     /**

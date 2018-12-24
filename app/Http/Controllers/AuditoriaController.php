@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Auditoria;
 use Illuminate\Http\Request;
 
 class AuditoriaController extends Controller
 {
+
+    public function rules(){
+        return[
+        'tipo_auditoria' =>  'required|string',
+        'descripcion' => 'required|string',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,16 +44,13 @@ class AuditoriaController extends Controller
      */
     public function store(Request $request)
     {
-        $auditoria = Auditoria::create($request->all());
-        if ($auditoria) 
-        {
-            return $auditoria; 
-        } 
-        else 
-        {
-            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
-            return $response;
+        $validador = Validator::make($request->all(),$this->rules());
+        if($validador->fails()){
+            return $validador->messages();
         }
+        $auditoria = Auditoria::create($request->all());      
+        $auditoria->save();
+        return $auditoria;
     }
 
     /**

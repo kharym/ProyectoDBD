@@ -2,11 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Alojamiento;
 use Illuminate\Http\Request;
 
 class AlojamientoController extends Controller
 {
+
+    public function rules(){
+        return[
+        'ciudad_id' =>  'required|string',
+        'nombre_alojamiento' => 'required|string',
+        'numero_estrellas' => 'required|numeric',
+        'calle_alojamiento' => 'required|string',
+        'numero_alojamiento' => 'required|numeric',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,18 +47,13 @@ class AlojamientoController extends Controller
      */
     public function store(Request $request)
     {
-        dd($aux);
-        dd($errors->all());
-        $alojamiento = Alojamiento::create($request->all());
-        if ($alojamiento) 
-        {
-            return $alojamiento; 
-        } 
-        else 
-        {
-            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
-            return $response;
+        $validador = Validator::make($request->all(),$this->rules());
+        if($validador->fails()){
+            return $validador->messages();
         }
+        $alojamiento = Alojamiento::create($request->all());      
+        $alojamiento->save();
+        return $alojamiento;
     }
 
     /**

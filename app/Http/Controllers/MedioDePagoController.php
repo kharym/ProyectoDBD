@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\MedioDePago;
 use Illuminate\Http\Request;
 
 class MedioDePagoController extends Controller
 {
+
+    public function rules(){
+        return[
+        'tipo_medioPago' =>  'required|numeric',
+        'disponibilidad' =>  'required|boolean',
+        'monto' => 'required|numeric',
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,16 +46,13 @@ class MedioDePagoController extends Controller
      */
     public function store(Request $request)
     {
-        $medioDePago = MedioDePago::create($request->all());
-        if ($medioDePago) 
-        {
-            return $medioDePago; 
-        } 
-        else 
-        {
-            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
-            return $response;
+        $validador = Validator::make($request->all(),$this->rules());
+        if($validador->fails()){
+            return $validador->messages();
         }
+        $mp = MedioDePago::create($request->all());      
+        $mp->save();
+        return $mp;
     }
 
     /**

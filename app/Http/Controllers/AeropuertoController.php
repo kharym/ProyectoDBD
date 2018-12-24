@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Aeropuerto;
 use Illuminate\Http\Request;
 
 class AeropuertoController extends Controller
 {
+
+    public function rules(){
+        return[
+        'ciudad_id' => 'required|string',
+        'nombre_aeropuerto' => 'required|string',
+        'calle_aeropuerto' => 'required|string',
+        'numero_aeropuerto' => 'required|numeric',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,16 +46,13 @@ class AeropuertoController extends Controller
      */
     public function store(Request $request)
     {
-        $aeropuerto = Aeropuerto::create($request->all());
-        if ($aeropuerto) 
-        {
-            return $aeropuerto; 
-        } 
-        else 
-        {
-            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
-            return $response;
+        $validador = Validator::make($request->all(),$this->rules());
+        if($validador->fails()){
+            return $validador->messages();
         }
+        $aeropuerto = Aeropuerto::create($request->all());      
+        $aeropuerto->save();
+        return $aeropuerto;
     }
 
     /**

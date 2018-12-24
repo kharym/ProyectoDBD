@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Ciudad;
 use Illuminate\Http\Request;
 
 class CiudadController extends Controller
 {
+
+    public function rules(){
+        return[
+        'pais_id' =>  'required|numeric',
+        'nombre_ciudad' => 'required|string',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,16 +44,13 @@ class CiudadController extends Controller
      */
     public function store(Request $request)
     {
-        $ciudad = Ciudad::create($request->all());
-        if ($ciudad) 
-        {
-            return $ciudad; 
-        } 
-        else 
-        {
-            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
-            return $response;
+        $validador = Validator::make($request->all(),$this->rules());
+        if($validador->fails()){
+            return $validador->messages();
         }
+        $ciudad = Ciudad::create($request->all());      
+        $ciudad->save();
+        return $ciudad;
     }
 
     /**

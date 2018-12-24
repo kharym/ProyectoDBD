@@ -2,11 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\ReservaAuto;
 use Illuminate\Http\Request;
 
 class ReservaAutoController extends Controller
 {
+
+    public function rules(){
+        return[
+        'auto_id' =>  'required|numeric',
+        'precio_auto' => 'required|numeric',
+        'fecha_recogido' => 'required|date',
+        'fecha_devolucion' => 'required|date',
+        'hora_recogido' => 'required|string',
+        'hora_devolucion' => 'required|string',
+        'tipo_auto' => 'required|numeric',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,16 +49,13 @@ class ReservaAutoController extends Controller
      */
     public function store(Request $request)
     {
-        $rA = ReservaAuto::all();
-        if ($rA) 
-        {
-            return $rA; 
-        } 
-        else 
-        {
-            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
-            return $response;
+        $validador = Validator::make($request->all(),$this->rules());
+        if($validador->fails()){
+            return $validador->messages();
         }
+        $ra = ReservaAuto::create($request->all());      
+        $ra->save();
+        return $ra;
     }
 
     /**

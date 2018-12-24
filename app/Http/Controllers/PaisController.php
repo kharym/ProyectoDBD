@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Pais;
 use Illuminate\Http\Request;
 
 class PaisController extends Controller
 {
+
+    public function rules(){
+        return[
+        'nombre_pais' =>  'required|string',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,16 +43,13 @@ class PaisController extends Controller
      */
     public function store(Request $request)
     {
-        $pais = Pais::create($request->all());
-        if ($pais) 
-        {
-            return $pais; 
-        } 
-        else 
-        {
-            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
-            return $response;
+        $validador = Validator::make($request->all(),$this->rules());
+        if($validador->fails()){
+            return $validador->messages();
         }
+        $pais = Pais::create($request->all());      
+        $pais->save();
+        return $pais;
     }
 
     /**

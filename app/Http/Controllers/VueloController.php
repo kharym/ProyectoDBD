@@ -2,11 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Vuelo;
 use Illuminate\Http\Request;
 
 class VueloController extends Controller
 {
+ 
+    public function rules(){
+        return[
+        'ciudad_va_id' =>  'required|numeric',
+        'ciudad_viene_id' => 'required|numeric',
+        'origen' => 'required|string',
+        'destino' => 'required|string',
+        'precio_vuelo' => 'required|numeric',
+        'cantidad_asientos' => 'required|numeric',
+        'fecha_ida' => 'required|date',
+        'hora_ida' => 'required|string',
+        'fecha_llegada' => 'required|date',
+        'hora_llegada' => 'required|string',
+        'duracion_viaje' => 'required|string',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,16 +53,13 @@ class VueloController extends Controller
      */
     public function store(Request $request)
     {
-        $vuelo = Vuelo::all();
-        if ($vuelo) 
-        {
-            return $vuelo; 
-        } 
-        else 
-        {
-            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
-            return $response;
+        $validador = Validator::make($request->all(),$this->rules());
+        if($validador->fails()){
+            return $validador->messages();
         }
+        $vuelo = Vuelo::create($request->all());      
+        $vuelo->save();
+        return $vuelo;
     }
 
     /**

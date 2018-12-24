@@ -2,11 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Pasajero;
 use Illuminate\Http\Request;
 
 class PasajeroController extends Controller
 {
+
+    public function rules(){
+        return[
+        'name' =>  'required|string',
+        'apellido' => 'required|string',
+        'dni_pasaporte' => 'required|numeric',
+        'pais' => 'required|string',
+        'menor_edad' => 'required|boolean',
+        'telefono' => 'required|numeric',
+        'asistencia_especial' => 'required|boolean',
+        'movilidad_reducida' => 'required|boolean',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -37,16 +51,13 @@ class PasajeroController extends Controller
      */
     public function store(Request $request)
     {
-        $pasajero = Pasajero::all();
-        if ($pasajero) 
-        {
-            return $pasajero; 
-        } 
-        else 
-        {
-            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
-            return $response;
+        $validador = Validator::make($request->all(),$this->rules());
+        if($validador->fails()){
+            return $validador->messages();
         }
+        $pasajero = Pasajero::create($request->all());      
+        $pasajero->save();
+        return $pasajero;
     }
 
     /**

@@ -2,11 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\CuentaBancaria;
 use Illuminate\Http\Request;
 
 class CuentaBancariaController extends Controller
 {
+
+
+    public function rules(){
+        return[
+        'usuario_id' =>  'required|numeric',
+        'saldo' => 'required|numeric',
+        'max_giro' => 'required|numeric'
+        'nombre_banco' =>  'required|string',
+        'fecha_giro' => 'required|date',
+        'hora_giro' => 'required|string',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,16 +49,13 @@ class CuentaBancariaController extends Controller
      */
     public function store(Request $request)
     {
-        $cb = CuentaBancaria::create($request->all());
-        if ($cb) 
-        {
-            return $cb; 
-        } 
-        else 
-        {
-            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
-            return $response;
+        $validador = Validator::make($request->all(),$this->rules());
+        if($validador->fails()){
+            return $validador->messages();
         }
+        $cb = CuentaBancaria::create($request->all());      
+        $cb->save();
+        return $cb;
     }
 
     /**

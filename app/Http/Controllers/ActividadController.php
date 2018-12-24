@@ -2,11 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Actividad;
 use Illuminate\Http\Request;
 
 class ActividadController extends Controller
 {
+
+    public function rules(){
+        return[
+        'destino' =>  'required|string',
+        'nombre_actividad' => 'required|string',
+        'precio' => 'required|numeric',
+        'cantidad_adulto' => 'required|numeric',
+        'cantidad_ninos' => 'required|numeric',
+        'fecha_ida' => 'required|date',
+        'fecha_vuelta' => 'required|date',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,16 +49,13 @@ class ActividadController extends Controller
      */
     public function store(Request $request)
     {
-        $actividad = Actividad::create($request->all());
-        if ($actividad) 
-        {
-            return $actividad; 
-        } 
-        else 
-        {
-            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
-            return $response;
+        $validador = Validator::make($request->all(),$this->rules());
+        if($validador->fails()){
+            return $validador->messages();
         }
+        $actividad = Actividad::create($request->all());      
+        $actividad->save();
+        return $actividad;
     }
 
     /**
@@ -80,34 +90,20 @@ class ActividadController extends Controller
      */
     public function update(Request $request, Actividad $actividad)
     {
-        $aux = $this->validate($request, [
-            'destino' => 'required',
-            'nombre_actividad' => 'required',
-            'precio' => 'required',
-            'cantidad_adulto' => 'required',
-            'cantidad_ninos' => 'required',
-            'fecha_ida' => 'required',
-            'fecha_vuelta' => 'required',
-        ]);
-        dd($aux);
-        dd($errors->all());
+        $validador = Validator::make($request->all(),$this->rules());
+        if($validador->fails()){
+            return $validador->messages();
+        }
         $actividad->destino = $request->get('destino');
         $actividad->nombre_actividad = $request->get('nombre_actividad');
         $actividad->precio = $request->get('precio');
         $actividad->cantidad_adultos = $request->get('cantidad_adulto');
         $actividad->cantidad_ninos = $request->get('cantidad_ninos');
         $actividad->fecha_ida = $request->get('fecha_ida');
-        $actividad->fecha_vuelta = $request->get('fecha_vuelta');
-          
-        $dataUpdate = $actividad->save();
-        if ($dataUpdate) 
-        {
-            $response = ['success' => 'Actualizado con éxito!'];
-        } 
-        else 
-        {
-            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
-        }
+        $actividad->fecha_vuelta = $request->get('fecha_vuelta');      
+        $actividad->save();
+        return $actividad;
+    
     }
 
     /**

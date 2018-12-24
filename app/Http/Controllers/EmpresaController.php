@@ -2,11 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Empresa;
 use Illuminate\Http\Request;
 
 class EmpresaController extends Controller
 {
+
+    public function rules(){
+        return[
+        'ciudad_id' =>  'required|numeric',
+        'nombre_empresa' =>  'required|string',
+        'telefono_empresa' => 'required|numeric',
+        'correo_empresa' => 'required|email',
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,16 +47,13 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-        $empresa = Empresa::create($request->all());
-        if ($empresa) 
-        {
-            return $empresa; 
-        } 
-        else 
-        {
-            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
-            return $response;
+        $validador = Validator::make($request->all(),$this->rules());
+        if($validador->fails()){
+            return $validador->messages();
         }
+        $empresa = Empresa::create($request->all());      
+        $empresa->save();
+        return $empresa;
     }
 
     /**

@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Ubicacion;
 use Illuminate\Http\Request;
 
 class UbicacionController extends Controller
 {
+
+    public function rules(){
+        return[
+        'ciudad_id' =>  'required|numeric',
+        'latitud' => 'required|numeric',
+        'longitud' => 'required|numeric',
+        'codigo_postal' => 'required|numeric',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,16 +46,13 @@ class UbicacionController extends Controller
      */
     public function store(Request $request)
     {
-        $ubicacion = Ubicacion::all();
-        if ($ubicacion) 
-        {
-            return $ubicacion; 
-        } 
-        else 
-        {
-            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
-            return $response;
+        $validador = Validator::make($request->all(),$this->rules());
+        if($validador->fails()){
+            return $validador->messages();
         }
+        $ubicacion = Ubicacion::create($request->all());      
+        $ubicacion->save();
+        return $ubicacion;
     }
 
     /**

@@ -2,11 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\ReservaHabitacion;
 use Illuminate\Http\Request;
 
 class ReservaHabitacionController extends Controller
 {
+
+
+    public function rules(){
+        return[
+        'precio_res_hab' =>  'required|numeric',
+        'fecha_llegada' => 'required|date',
+        'fecha_ida' => 'required|date',
+        'numero_ninos' => 'required|numeric',
+        'numero_adulto' => 'required|numeric',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,16 +48,13 @@ class ReservaHabitacionController extends Controller
      */
     public function store(Request $request)
     {
-        $rH = ReservaHabitacion::all();
-        if ($rH) 
-        {
-            return $rH; 
-        } 
-        else 
-        {
-            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
-            return $response;
+        $validador = Validator::make($request->all(),$this->rules());
+        if($validador->fails()){
+            return $validador->messages();
         }
+        $rh = ReservaHabitacion::create($request->all());      
+        $rh->save();
+        return $rh;
     }
 
     /**

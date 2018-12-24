@@ -2,11 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Seguro;
 use Illuminate\Http\Request;
 
 class SeguroController extends Controller
 {
+
+    public function rules(){
+        return[
+        'edad_pasajero' =>  'required|numeric',
+        'ida_vuelta' => 'required|boolean',
+        'cantidad_personas' =>  'required|numeric',
+        'fecha_ida' => 'required|date',
+        'fecha_vuelta' => 'required|date',
+        'destino' => 'required|string',
+        'costo_pasaje' => 'required|numeric',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,16 +49,13 @@ class SeguroController extends Controller
      */
     public function store(Request $request)
     {
-        $seguro = Seguro::all();
-        if ($seguro) 
-        {
-            return $seguro; 
-        } 
-        else 
-        {
-            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
-            return $response;
+        $validador = Validator::make($request->all(),$this->rules());
+        if($validador->fails()){
+            return $validador->messages();
         }
+        $seguro = Seguro::create($request->all());      
+        $seguro->save();
+        return $seguro;
     }
 
     /**

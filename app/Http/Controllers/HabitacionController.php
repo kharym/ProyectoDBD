@@ -2,11 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Habitacion;
 use Illuminate\Http\Request;
 
 class HabitacionController extends Controller
 {
+
+    public function rules(){
+        return[
+        'reserva_habitacion_id' =>  'required|numeric',
+        'alojamiento_id' =>  'required|numeric',
+        'numero_habitacion' => 'required|numeric',
+        'tipo_habitacion' => 'required|numeric',
+        'numero_camas' =>  'required|numeric',
+        'numero_banos' => 'required|numeric',
+        'disponibilidad' => 'required|boolean',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -37,16 +50,13 @@ class HabitacionController extends Controller
      */
     public function store(Request $request)
     {
-        $habitacion = Habitacion::create($request->all());
-        if ($habitacion) 
-        {
-            return $habitacion; 
-        } 
-        else 
-        {
-            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
-            return $response;
+        $validador = Validator::make($request->all(),$this->rules());
+        if($validador->fails()){
+            return $validador->messages();
         }
+        $hab = Habitacion::create($request->all());      
+        $hab->save();
+        return $hab;
     }
 
     /**

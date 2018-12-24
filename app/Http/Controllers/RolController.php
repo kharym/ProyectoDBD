@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Rol;
 use Illuminate\Http\Request;
 
 class RolController extends Controller
 {
+    public function rules(){
+        return[
+        'tipo_rol' =>  'required|numeric',
+        'descripcion' => 'required|string',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,16 +43,13 @@ class RolController extends Controller
      */
     public function store(Request $request)
     {
-        $rol = Rol::all();
-        if ($rol) 
-        {
-            return $rol; 
-        } 
-        else 
-        {
-            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
-            return $response;
+        $validador = Validator::make($request->all(),$this->rules());
+        if($validador->fails()){
+            return $validador->messages();
         }
+        $rol = Rol::create($request->all());      
+        $rol->save();
+        return $rol;
     }
 
     /**

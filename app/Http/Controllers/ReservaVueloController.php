@@ -2,11 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\ReservaVuelo;
 use Illuminate\Http\Request;
 
 class ReservaVueloController extends Controller
 {
+
+    public function rules(){
+        return[
+        'vuelo_id' =>  'required|numeric',
+        'asiento_id' => 'required|numeric',
+        'pasajero_id' => 'required|numeric',
+        'ida_vuelta' => 'required|boolean',
+        'fecha_reserva' => 'required|date',
+        'hora_reserva' => 'required|string',
+        'precio_reserva_vuelo' => 'required|numeric',
+        'cantidad_paradas' => 'required|numeric',
+        'cantidad_pasajeros' => 'required|numeric',
+        'tipo_cabina' => 'required|numeric',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,16 +52,13 @@ class ReservaVueloController extends Controller
      */
     public function store(Request $request)
     {
-        $rV = ReservaVuelo::all();
-        if ($rV) 
-        {
-            return $rV; 
-        } 
-        else 
-        {
-            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
-            return $response;
+        $validador = Validator::make($request->all(),$this->rules());
+        if($validador->fails()){
+            return $validador->messages();
         }
+        $rv = ReservaVuelo::create($request->all());      
+        $rv->save();
+        return $rv;
     }
 
     /**

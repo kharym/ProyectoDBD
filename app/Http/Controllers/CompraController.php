@@ -2,11 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Compra;
 use Illuminate\Http\Request;
 
 class CompraController extends Controller
 {
+
+    public function rules(){
+        return[
+        'usuario_id' =>  'required|numeric',
+        'actividad_id' => 'required|numeric',
+        'seguro_id' => 'required|numeric'
+        'paquete_id' =>  'required|numeric',
+        'reserva_auto_id' => 'required|numeric',
+        'reserva_habitacion_id' => 'required|numeric'
+        'fecha_compra' => 'required|date',
+        'hora_compra' => 'required|string',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,16 +50,13 @@ class CompraController extends Controller
      */
     public function store(Request $request)
     {
-        $compra = Compra::create($request->all());
-        if ($compra) 
-        {
-            return $compra; 
-        } 
-        else 
-        {
-            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
-            return $response;
-        }    
+        $validador = Validator::make($request->all(),$this->rules());
+        if($validador->fails()){
+            return $validador->messages();
+        }
+        $compra = Compra::create($request->all());      
+        $compra->save();
+        return $compra;  
     }
 
     /**

@@ -2,11 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Auto;
 use Illuminate\Http\Request;
 
 class AutoController extends Controller
 {
+
+    public function rules(){
+        return[
+        'empresa_id' =>  'required|numeric',
+        'numero_puertas' => 'required|numeric',
+        'tipo_transmision' => 'required|numeric',
+        'numero_asientos' => 'requirdd|numeric',
+        'modelo' => 'required|string',
+        'marca' => 'required|string',
+        'disponibilidad' => 'required|boolean',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,16 +49,13 @@ class AutoController extends Controller
      */
     public function store(Request $request)
     {
-        $auto = Auto::create($request->all());
-        if ($auto) 
-        {
-            return $auto; 
-        } 
-        else 
-        {
-            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
-            return $response;
+        $validador = Validator::make($request->all(),$this->rules());
+        if($validador->fails()){
+            return $validador->messages();
         }
+        $auto = Auto::create($request->all());      
+        $auto->save();
+        return $auto;
     }
 
     /**

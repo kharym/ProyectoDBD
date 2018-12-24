@@ -7,6 +7,15 @@ use Illuminate\Http\Request;
 
 class AsientoController extends Controller
 {
+
+    public function rules(){
+        return[
+        'vuelo_id' =>  'required|numeric',
+        'numero_asiento' => 'required|numeric',
+        'disponibilidad' => 'required|boolean',
+        'tipo_asiento' => 'required|numeric',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,16 +45,13 @@ class AsientoController extends Controller
      */
     public function store(Request $request)
     {
-        $asiento = Asiento::create($request->all());
-        if ($asiento) 
-        {
-            return $asiento; 
-        } 
-        else 
-        {
-            $response = ['error' => 'Ha ocurrido un error en la Base de Datos al actualizar!'];
-            return $response;
+        $validador = Validator::make($request->all(),$this->rules());
+        if($validador->fails()){
+            return $validador->messages();
         }
+        $asiento = Asiento::create($request->all());      
+        $asiento->save();
+        return $asiento;
     }
 
     /**
