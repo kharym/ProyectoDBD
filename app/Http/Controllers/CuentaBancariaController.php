@@ -14,7 +14,7 @@ class CuentaBancariaController extends Controller
         return[
         'usuario_id' =>  'required|numeric',
         'saldo' => 'required|numeric',
-        'max_giro' => 'required|numeric'
+        'max_giro' => 'required|numeric',
         'nombre_banco' =>  'required|string',
         'fecha_giro' => 'required|date',
         'hora_giro' => 'required|string',
@@ -25,7 +25,7 @@ class CuentaBancariaController extends Controller
         return[
         'usuario_id' =>  'nullable|numeric',
         'saldo' => 'nullable|numeric',
-        'max_giro' => 'nullable|numeric'
+        'max_giro' => 'nullable|numeric',
         'nombre_banco' =>  'nullable|string',
         'fecha_giro' => 'nullable|date',
         'hora_giro' => 'nullable|string',

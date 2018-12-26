@@ -13,10 +13,10 @@ class CompraController extends Controller
         return[
         'usuario_id' =>  'required|numeric',
         'actividad_id' => 'required|numeric',
-        'seguro_id' => 'required|numeric'
+        'seguro_id' => 'required|numeric',
         'paquete_id' =>  'required|numeric',
         'reserva_auto_id' => 'required|numeric',
-        'reserva_habitacion_id' => 'required|numeric'
+        'reserva_habitacion_id' => 'required|numeric',
         'fecha_compra' => 'required|date',
         'hora_compra' => 'required|string',
         ];
@@ -26,10 +26,10 @@ class CompraController extends Controller
         return[
         'usuario_id' =>  'nullable|numeric',
         'actividad_id' => 'nullable|numeric',
-        'seguro_id' => 'nullable|numeric'
+        'seguro_id' => 'nullable|numeric',
         'paquete_id' =>  'nullable|numeric',
         'reserva_auto_id' => 'nullable|numeric',
-        'reserva_habitacion_id' => 'nullable|numeric'
+        'reserva_habitacion_id' => 'nullable|numeric',
         'fecha_compra' => 'nullable|date',
         'hora_compra' => 'nullable|string',
         ];
