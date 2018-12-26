@@ -20,6 +20,18 @@ class ActividadController extends Controller
         'fecha_vuelta' => 'required|date',
         ];
     }
+
+    public function rules2(){
+        return[
+        'destino' =>  'nullable|string',
+        'nombre_actividad' => 'nullable|string',
+        'precio' => 'nullable|numeric',
+        'cantidad_adulto' => 'nullable|numeric',
+        'cantidad_ninos' => 'nullable|numeric',
+        'fecha_ida' => 'nullable|date',
+        'fecha_vuelta' => 'nullable|date',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -88,20 +100,14 @@ class ActividadController extends Controller
      * @param  \App\Actividad  $actividad
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Actividad $actividad)
+    public function update(Request $request, $id)
     {
-        $validador = Validator::make($request->all(),$this->rules());
+        $validador = Validator::make($request->all(),$this->rules2());
         if($validador->fails()){
             return $validador->messages();
         }
-        $actividad->destino = $request->get('destino');
-        $actividad->nombre_actividad = $request->get('nombre_actividad');
-        $actividad->precio = $request->get('precio');
-        $actividad->cantidad_adultos = $request->get('cantidad_adulto');
-        $actividad->cantidad_ninos = $request->get('cantidad_ninos');
-        $actividad->fecha_ida = $request->get('fecha_ida');
-        $actividad->fecha_vuelta = $request->get('fecha_vuelta');      
-        $actividad->save();
+        $actividad = Actividad::where('id', '=', $id)->first();
+        $actividad->update($request->all());
         return $actividad;
     
     }
