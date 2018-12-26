@@ -21,6 +21,19 @@ class PasajeroController extends Controller
         'movilidad_reducida' => 'required|boolean',
         ];
     }
+
+    public function rules2(){
+        return[
+        'name' =>  'nullable|string',
+        'apellido' => 'nullable|string',
+        'dni_pasaporte' => 'nullable|numeric',
+        'pais' => 'nullable|string',
+        'menor_edad' => 'nullable|boolean',
+        'telefono' => 'nullable|numeric',
+        'asistencia_especial' => 'nullable|boolean',
+        'movilidad_reducida' => 'nullable|boolean',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -90,9 +103,15 @@ class PasajeroController extends Controller
      * @param  \App\Pasajero  $pasajero
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pasajero $pasajero)
+    public function update(Request $request, $id)
     {
-        //
+        $validador = Validator::make($request->all(),$this->rules2());
+        if($validador->fails()){
+            return $validador->messages();
+        }
+        $pasajero = Pasajero::where('id', '=', $id)->first();
+        $pasajero->update($request->all());
+        return $pasajero;
     }
 
     /**

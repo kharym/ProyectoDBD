@@ -20,6 +20,18 @@ class HabitacionController extends Controller
         'disponibilidad' => 'required|boolean',
         ];
     }
+
+    public function rules2(){
+        return[
+        'reserva_habitacion_id' =>  'nullable|numeric',
+        'alojamiento_id' =>  'nullable|numeric',
+        'numero_habitacion' => 'nullable|numeric',
+        'tipo_habitacion' => 'nullable|numeric',
+        'numero_camas' =>  'nullable|numeric',
+        'numero_banos' => 'nullable|numeric',
+        'disponibilidad' => 'nullable|boolean',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -89,9 +101,15 @@ class HabitacionController extends Controller
      * @param  \App\Habitacion  $habitacion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Habitacion $habitacion)
+    public function update(Request $request, $id)
     {
-        //
+        $validador = Validator::make($request->all(),$this->rules2());
+        if($validador->fails()){
+            return $validador->messages();
+        }
+        $hab = Habitacion::where('id', '=', $id)->first();
+        $hab->update($request->all());
+        return $hab;
     }
 
     /**

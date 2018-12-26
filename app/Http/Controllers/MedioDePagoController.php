@@ -17,6 +17,14 @@ class MedioDePagoController extends Controller
         ];
     }
 
+    public function rules2(){
+        return[
+        'tipo_medioPago' =>  'nullable|numeric',
+        'disponibilidad' =>  'nullable|boolean',
+        'monto' => 'nullable|numeric',
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -85,9 +93,15 @@ class MedioDePagoController extends Controller
      * @param  \App\MedioDePago  $medioDePago
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MedioDePago $medioDePago)
+    public function update(Request $request, $id)
     {
-        //
+        $validador = Validator::make($request->all(),$this->rules2());
+        if($validador->fails()){
+            return $validador->messages();
+        }
+        $mp = MedioDePago::where('id', '=', $id)->first();
+        $mp->update($request->all());
+        return $mp;
     }
 
     /**

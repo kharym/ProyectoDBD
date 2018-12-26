@@ -20,6 +20,18 @@ class SeguroController extends Controller
         'costo_pasaje' => 'required|numeric',
         ];
     }
+
+    public function rules2(){
+        return[
+        'edad_pasajero' =>  'nullable|numeric',
+        'ida_vuelta' => 'nullable|boolean',
+        'cantidad_personas' =>  'nullable|numeric',
+        'fecha_ida' => 'nullable|date',
+        'fecha_vuelta' => 'nullable|date',
+        'destino' => 'nullable|string',
+        'costo_pasaje' => 'nullable|numeric',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -88,9 +100,15 @@ class SeguroController extends Controller
      * @param  \App\Seguro  $seguro
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Seguro $seguro)
+    public function update(Request $request, $id)
     {
-        //
+        $validador = Validator::make($request->all(),$this->rules2());
+        if($validador->fails()){
+            return $validador->messages();
+        }
+        $seguro = Seguro::where('id', '=', $id)->first();
+        $seguro->update($request->all());
+        return $seguro;
     }
 
     /**

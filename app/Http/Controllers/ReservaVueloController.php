@@ -23,6 +23,21 @@ class ReservaVueloController extends Controller
         'tipo_cabina' => 'required|numeric',
         ];
     }
+
+    public function rules2(){
+        return[
+        'vuelo_id' =>  'nullable|numeric',
+        'asiento_id' => 'nullable|numeric',
+        'pasajero_id' => 'nullable|numeric',
+        'ida_vuelta' => 'nullable|boolean',
+        'fecha_reserva' => 'nullable|date',
+        'hora_reserva' => 'nullable|string',
+        'precio_reserva_vuelo' => 'nullable|numeric',
+        'cantidad_paradas' => 'nullable|numeric',
+        'cantidad_pasajeros' => 'nullable|numeric',
+        'tipo_cabina' => 'nullable|numeric',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -91,9 +106,15 @@ class ReservaVueloController extends Controller
      * @param  \App\ReservaVuelo  $reservaVuelo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ReservaVuelo $reservaVuelo)
+    public function update(Request $request, $id)
     {
-        //
+        $validador = Validator::make($request->all(),$this->rules2());
+        if($validador->fails()){
+            return $validador->messages();
+        }
+        $rV = ReservaAuto::where('id', '=', $id)->first();
+        $rV->update($request->all());
+        return $rV;
     }
 
     /**

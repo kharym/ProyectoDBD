@@ -14,6 +14,13 @@ class RolController extends Controller
         'descripcion' => 'required|string',
         ];
     }
+
+    public function rules2(){
+        return[
+        'tipo_rol' =>  'nullable|numeric',
+        'descripcion' => 'nullable|string',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -82,9 +89,15 @@ class RolController extends Controller
      * @param  \App\Rol  $rol
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rol $rol)
+    public function update(Request $request, $id)
     {
-        //
+        $validador = Validator::make($request->all(),$this->rules2());
+        if($validador->fails()){
+            return $validador->messages();
+        }
+        $rol = Rol::where('id', '=', $id)->first();
+        $rol->update($request->all());
+        return $rol;
     }
 
     /**

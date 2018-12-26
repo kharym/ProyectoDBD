@@ -17,6 +17,15 @@ class EmpresaController extends Controller
         'correo_empresa' => 'required|email',
         ];
     }
+    
+    public function rules2(){
+        return[
+        'ciudad_id' =>  'nullable|numeric',
+        'nombre_empresa' =>  'nullable|string',
+        'telefono_empresa' => 'nullable|numeric',
+        'correo_empresa' => 'nullable|email',
+        ];
+    }
 
     /**
      * Display a listing of the resource.
@@ -86,9 +95,15 @@ class EmpresaController extends Controller
      * @param  \App\Empresa  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empresa $empresa)
+    public function update(Request $request, $id)
     {
-        //
+        $validador = Validator::make($request->all(),$this->rules2());
+        if($validador->fails()){
+            return $validador->messages();
+        }
+        $empresa = Empresa::where('id', '=', $id)->first();
+        $empresa->update($request->all());
+        return $empresa;
     }
 
     /**

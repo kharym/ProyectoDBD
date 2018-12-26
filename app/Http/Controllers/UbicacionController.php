@@ -17,6 +17,15 @@ class UbicacionController extends Controller
         'codigo_postal' => 'required|numeric',
         ];
     }
+
+    public function rules2(){
+        return[
+        'ciudad_id' =>  'nullable|numeric',
+        'latitud' => 'nullable|numeric',
+        'longitud' => 'nullable|numeric',
+        'codigo_postal' => 'nullable|numeric',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -85,9 +94,15 @@ class UbicacionController extends Controller
      * @param  \App\Ubicacion  $ubicacion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ubicacion $ubicacion)
+    public function update(Request $request, $id)
     {
-        //
+        $validador = Validator::make($request->all(),$this->rules2());
+        if($validador->fails()){
+            return $validador->messages();
+        }
+        $ub = Ubicacion::where('id', '=', $id)->first();
+        $ub->update($request->all());
+        return $ub;
     }
 
     /**

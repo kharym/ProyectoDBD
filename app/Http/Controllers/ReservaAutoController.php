@@ -20,6 +20,18 @@ class ReservaAutoController extends Controller
         'tipo_auto' => 'required|numeric',
         ];
     }
+
+    public function rules2(){
+        return[
+        'auto_id' =>  'nullable|numeric',
+        'precio_auto' => 'nullable|numeric',
+        'fecha_recogido' => 'nullable|date',
+        'fecha_devolucion' => 'nullable|date',
+        'hora_recogido' => 'nullable|string',
+        'hora_devolucion' => 'nullable|string',
+        'tipo_auto' => 'nullable|numeric',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -88,9 +100,15 @@ class ReservaAutoController extends Controller
      * @param  \App\ReservaAuto  $reservaAuto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ReservaAuto $reservaAuto)
+    public function update(Request $request, $id)
     {
-        //
+        $validador = Validator::make($request->all(),$this->rules2());
+        if($validador->fails()){
+            return $validador->messages();
+        }
+        $rA = ReservaAuto::where('id', '=', $id)->first();
+        $rA->update($request->all());
+        return $rA;
     }
 
     /**

@@ -19,6 +19,17 @@ class PaqueteController extends Controller
         'disponibilidad' => 'required|boolean',
         ];
     }
+
+    public function rules2(){
+        return[
+        'reserva_auto_id' =>  'nullable|numeric',
+        'reserva_habitacion_id' => 'nullable|numeric',
+        'precio' => 'nullable|numeric',
+        'descuento' => 'nullable|numeric',
+        'tipo_paquete' => 'nullable|numeric',
+        'disponibilidad' => 'nullable|boolean',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -87,9 +98,15 @@ class PaqueteController extends Controller
      * @param  \App\Paquete  $paquete
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Paquete $paquete)
+    public function update(Request $request, $id)
     {
-        //
+        $validador = Validator::make($request->all(),$this->rules2());
+        if($validador->fails()){
+            return $validador->messages();
+        }
+        $paquete = Paquete::where('id', '=', $id)->first();
+        $paquete->update($request->all());
+        return $paquete;
     }
 
     /**

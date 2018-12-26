@@ -19,6 +19,16 @@ class ReservaHabitacionController extends Controller
         'numero_adulto' => 'required|numeric',
         ];
     }
+
+    public function rules2(){
+        return[
+        'precio_res_hab' =>  'nullable|numeric',
+        'fecha_llegada' => 'nullable|date',
+        'fecha_ida' => 'nullable|date',
+        'numero_ninos' => 'nullable|numeric',
+        'numero_adulto' => 'nullable|numeric',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -87,9 +97,15 @@ class ReservaHabitacionController extends Controller
      * @param  \App\ReservaHabitacion  $reservaHabitacion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ReservaHabitacion $reservaHabitacion)
+    public function update(Request $request, $id)
     {
-        //
+        $validador = Validator::make($request->all(),$this->rules2());
+        if($validador->fails()){
+            return $validador->messages();
+        }
+        $rH = ReservaHabitacion::where('id', '=', $id)->first();
+        $rH->update($request->all());
+        return $rH;
     }
 
     /**

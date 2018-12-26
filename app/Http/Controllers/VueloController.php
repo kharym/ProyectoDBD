@@ -24,6 +24,22 @@ class VueloController extends Controller
         'duracion_viaje' => 'required|string',
         ];
     }
+
+    public function rules2(){
+        return[
+        'ciudad_va_id' =>  'nullable|numeric',
+        'ciudad_viene_id' => 'nullable|numeric',
+        'origen' => 'nullable|string',
+        'destino' => 'nullable|string',
+        'precio_vuelo' => 'nullable|numeric',
+        'cantidad_asientos' => 'nullable|numeric',
+        'fecha_ida' => 'nullable|date',
+        'hora_ida' => 'nullable|string',
+        'fecha_llegada' => 'nullable|date',
+        'hora_llegada' => 'nullable|string',
+        'duracion_viaje' => 'nullable|string',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -92,9 +108,15 @@ class VueloController extends Controller
      * @param  \App\Vuelo  $vuelo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Vuelo $vuelo)
+    public function update(Request $request, $id)
     {
-        //
+        $validador = Validator::make($request->all(),$this->rules2());
+        if($validador->fails()){
+            return $validador->messages();
+        }
+        $vuelo = Vuelo::where('id', '=', $id)->first();
+        $vuelo->update($request->all());
+        return $vuelo;
     }
 
     /**
