@@ -17,6 +17,15 @@ class AeropuertoController extends Controller
         'numero_aeropuerto' => 'required|numeric',
         ];
     }
+
+    public function rules2(){
+        return[
+        'ciudad_id' => 'nullable|string',
+        'nombre_aeropuerto' => 'nullable|string',
+        'calle_aeropuerto' => 'nullable|string',
+        'numero_aeropuerto' => 'nullable|numeric',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -85,9 +94,15 @@ class AeropuertoController extends Controller
      * @param  \App\Aeropuerto  $aeropuerto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Aeropuerto $aeropuerto)
+    public function update(Request $request, $id)
     {
-        //
+        $validador = Validator::make($request->all(),$this->rules2());
+        if($validador->fails()){
+            return $validador->messages();
+        }
+        $aeropuerto = Aeropuerto::where('id', '=', $id)->first();
+        $aeropuerto->update($request->all());
+        return $aeropuerto;
     }
 
     /**

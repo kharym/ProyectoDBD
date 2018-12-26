@@ -15,6 +15,13 @@ class CiudadController extends Controller
         'nombre_ciudad' => 'required|string',
         ];
     }
+
+     public function rules2(){
+        return[
+        'pais_id' =>  'nullable|numeric',
+        'nombre_ciudad' => 'nullable|string',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -83,9 +90,15 @@ class CiudadController extends Controller
      * @param  \App\Ciudad  $ciudad
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ciudad $ciudad)
+    public function update(Request $request,$id)
     {
-        //
+        $validador = Validator::make($request->all(),$this->rules2());
+        if($validador->fails()){
+            return $validador->messages();
+        }
+        $ciudad = Ciudad::where('id', '=', $id)->first();
+        $ciudad->update($request->all());
+        return $ciudad;
     }
 
     /**

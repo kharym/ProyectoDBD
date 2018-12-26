@@ -21,6 +21,19 @@ class CompraController extends Controller
         'hora_compra' => 'required|string',
         ];
     }
+
+    public function rules2(){
+        return[
+        'usuario_id' =>  'nullable|numeric',
+        'actividad_id' => 'nullable|numeric',
+        'seguro_id' => 'nullable|numeric'
+        'paquete_id' =>  'nullable|numeric',
+        'reserva_auto_id' => 'nullable|numeric',
+        'reserva_habitacion_id' => 'nullable|numeric'
+        'fecha_compra' => 'nullable|date',
+        'hora_compra' => 'nullable|string',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -89,9 +102,15 @@ class CompraController extends Controller
      * @param  \App\Compra  $compra
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Compra $compra)
+    public function update(Request $request, $id))
     {
-        //
+         $validador = Validator::make($request->all(),$this->rules2());
+        if($validador->fails()){
+            return $validador->messages();
+        }
+        $compra = Compra::where('id', '=', $id)->first();
+        $compra->update($request->all());
+        return $compra;
     }
 
     /**

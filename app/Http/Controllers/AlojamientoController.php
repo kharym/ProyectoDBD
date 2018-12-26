@@ -18,6 +18,16 @@ class AlojamientoController extends Controller
         'numero_alojamiento' => 'required|numeric',
         ];
     }
+
+    public function rules2(){
+        return[
+        'ciudad_id' =>  'nullable|string',
+        'nombre_alojamiento' => 'nullable|string',
+        'numero_estrellas' => 'nullable|numeric',
+        'calle_alojamiento' => 'nullable|string',
+        'numero_alojamiento' => 'nullable|numeric',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -86,9 +96,15 @@ class AlojamientoController extends Controller
      * @param  \App\Alojamiento  $alojamiento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Alojamiento $alojamiento)
+    public function update(Request $request, $id)
     {
-        //
+        $validador = Validator::make($request->all(),$this->rules2());
+        if($validador->fails()){
+            return $validador->messages();
+        }
+        $alojamiento = Alojamiento::where('id', '=', $id)->first();
+        $alojamiento->update($request->all());
+        return $alojamiento;
     }
 
     /**

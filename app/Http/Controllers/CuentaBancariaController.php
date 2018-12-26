@@ -20,6 +20,17 @@ class CuentaBancariaController extends Controller
         'hora_giro' => 'required|string',
         ];
     }
+
+    public function rules2(){
+        return[
+        'usuario_id' =>  'nullable|numeric',
+        'saldo' => 'nullable|numeric',
+        'max_giro' => 'nullable|numeric'
+        'nombre_banco' =>  'nullable|string',
+        'fecha_giro' => 'nullable|date',
+        'hora_giro' => 'nullable|string',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -88,9 +99,15 @@ class CuentaBancariaController extends Controller
      * @param  \App\CuentaBancaria  $cuentaBancaria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CuentaBancaria $cuentaBancaria)
+    public function update(Request $request, $id)
     {
-        //
+        $validador = Validator::make($request->all(),$this->rules2());
+        if($validador->fails()){
+            return $validador->messages();
+        }
+        $cuentaBancaria = cuentaBancaria::where('id', '=', $id)->first();
+        $cuentaBancaria->update($request->all());
+        return $cuentaBancaria;
     }
 
     /**

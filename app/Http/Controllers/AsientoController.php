@@ -15,6 +15,14 @@ class AsientoController extends Controller
         'disponibilidad' => 'required|boolean',
         'tipo_asiento' => 'required|numeric',
         ];
+
+        public function rules2(){
+        return[
+        'vuelo_id' =>  'nullable|numeric',
+        'numero_asiento' => 'nullable|numeric',
+        'disponibilidad' => 'nullable|boolean',
+        'tipo_asiento' => 'nullable|numeric',
+        ];
     }
     /**
      * Display a listing of the resource.
@@ -84,9 +92,15 @@ class AsientoController extends Controller
      * @param  \App\Asiento  $asiento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Asiento $asiento)
+    public function update(Request $request,$id)
     {
-        //
+        $validador = Validator::make($request->all(),$this->rules2());
+        if($validador->fails()){
+            return $validador->messages();
+        }
+        $asiento = Asiento::where('id', '=', $id)->first();
+        $asiento->update($request->all());
+        return $asiento;
     }
 
     /**

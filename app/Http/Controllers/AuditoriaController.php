@@ -15,6 +15,13 @@ class AuditoriaController extends Controller
         'descripcion' => 'required|string',
         ];
     }
+
+    public function rules2(){
+        return[
+        'tipo_auditoria' =>  'nullable|string',
+        'descripcion' => 'nullable|string',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -83,9 +90,15 @@ class AuditoriaController extends Controller
      * @param  \App\Auditoria  $auditoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Auditoria $auditoria)
+    public function update(Request $request, $id)
     {
-        //
+        $validador = Validator::make($request->all(),$this->rules2());
+        if($validador->fails()){
+            return $validador->messages();
+        }
+        $auditoria = Auditoria::where('id', '=', $id)->first();
+        $auditoria->update($request->all());
+        return $auditoria;
     }
 
     /**

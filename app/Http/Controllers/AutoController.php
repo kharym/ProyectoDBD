@@ -14,10 +14,22 @@ class AutoController extends Controller
         'empresa_id' =>  'required|numeric',
         'numero_puertas' => 'required|numeric',
         'tipo_transmision' => 'required|numeric',
-        'numero_asientos' => 'requirdd|numeric',
+        'numero_asientos' => 'required|numeric',
         'modelo' => 'required|string',
         'marca' => 'required|string',
         'disponibilidad' => 'required|boolean',
+        ];
+    }
+
+    public function rules2(){
+        return[
+        'empresa_id' =>  'nullable|numeric',
+        'numero_puertas' => 'nullable|numeric',
+        'tipo_transmision' => 'nullable|numeric',
+        'numero_asientos' => 'nullable|numeric',
+        'modelo' => 'nullable|string',
+        'marca' => 'nullable|string',
+        'disponibilidad' => 'nullable|boolean',
         ];
     }
     /**
@@ -88,9 +100,15 @@ class AutoController extends Controller
      * @param  \App\Auto  $auto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Auto $auto)
+    public function update(Request $request,$id)
     {
-        //
+        $validador = Validator::make($request->all(),$this->rules2());
+        if($validador->fails()){
+            return $validador->messages();
+        }
+        $auto = Auto::where('id', '=', $id)->first();
+        $auto->update($request->all());
+        return $auto;
     }
 
     /**
