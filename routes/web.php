@@ -162,6 +162,12 @@ Route::post('/UsuarioMedioDePago/destroy/{id}', 'UsuarioMedioDePagoController@de
 Route::post('/UsuarioMedioDePago/store', 'UsuarioMedioDePagoController@store');
 Route::put('/UsuarioMedioDePago/{usuarioMedioDePago}', 'UsuarioMedioDePagoController@update');
 
+Route::get('/User/all', 'UserController@index'); 
+Route::get('/User/show/{id}', 'UserController@show'); 
+Route::post('/User/destroy/{id}', 'UserController@destroy');
+Route::post('/User/store', 'UserController@store');
+Route::put('/User/{usuarioMedioDePago}', 'UserController@update');
+
 Route::get('/Vuelo/all', 'VueloController@index'); 
 Route::get('/Vuelo/show/{id}', 'VueloController@show'); 
 Route::post('/Vuelo/destroy/{id}', 'VueloController@destroy');
