@@ -18,7 +18,7 @@ class CreateTrigger extends Migration
             RETURNS trigger AS
             $$
                 DECLARE
-                i INTEGER := 25;
+                i INTEGER := NEW.cantidad_asientos;
                 j INTEGER := 0;
                 valor INTEGER := NEW.id;
                 BEGIN           

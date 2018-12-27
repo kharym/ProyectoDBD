@@ -11,5 +11,6 @@ $factory->define(App\Alojamiento::class, function (Faker $faker) {
         'calle_alojamiento'=>$faker->streetName,
         'numero_alojamiento'=>$faker->buildingNumber,
         'ciudad_id'=>$id_ciudad,
+        'disponibilidad'=>$faker->boolean,
     ];
 });

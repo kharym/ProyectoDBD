@@ -20,6 +20,7 @@ class CreateAlojamientosTable extends Migration
             $table->smallInteger('numero_estrellas');
             $table->string('calle_alojamiento');
             $table->integer('numero_alojamiento');
+            $table->boolean('disponibilidad');
             $table->timestamps();
 
             //llaves foraneas
