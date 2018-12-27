@@ -16,12 +16,12 @@ class CreateUsuarioMedioDePagosTable extends Migration
         Schema::create('usuario__medio_de_pagos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('medioDePago_id')->unsigned();
+            $table->integer('medio_de_pago_id')->unsigned();
             $table->timestamps();
 
             //llaves foraneas
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('medioDePago_id')->references('id')->on('medio_de_pagos')->onDelete('cascade');
+            $table->foreign('medio_de_pago_id')->references('id')->on('medio_de_pagos')->onDelete('cascade');
         });
     }
 
