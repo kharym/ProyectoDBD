@@ -24,16 +24,16 @@ class ReservaVuelo extends Model
         return $this->belongsTo('App\Asiento');
     }
 
-    //relacion N-N con compra
-    public function compra()
+    //relacion 1-N con compra_ReservaVuelo
+    public function compra_reservaVuelo()
     {
-        return $this->belongsToMany('App\Compra');
+      return $this->hasMany('App\Compra_ReservaVuelo');
     }
 
-    //relacion N-N con paquete
-    public function paquete()
+    //relacion 1-N con paquete_ReservaVuelo
+    public function paquete_reservaVuelo()
     {
-        return $this->belongsToMany('App\Paquete');
+        return $this->hasMany('App\Paquete_ReservaVuelo');
     }
 
     protected $fillable = ['vuelo_id','asiento_id','pasajero_id','ida_vuelta','cantidad_pasajeros','tipo_cabina','fecha_reserva','hora_reserva','precio_reserva_vuelo','cantidad_paradas'];

@@ -50,10 +50,10 @@ class User extends Authenticatable
       return $this->hasMany('App\Compra');
     }
 
-    //relacion N-N con medioDePago
-    public function medioDePago()
+    //relacion 1-N con medioDePago
+    public function usuario_medioDePago()
     {
-        return $this->belongsToMany('App\MedioDePago');
+        return $this->hasMany('App\Usuario_MedioDePago');
     }
 
      protected $fillable = ['rol_id','auditoria_id','name','apellido','email','tipo_documento','numero_documento','pais','fecha_nacimiento','telefono','password'];

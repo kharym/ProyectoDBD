@@ -25,10 +25,10 @@ class Paquete extends Model
         return $this->belongsTo('App\ReservaAuto');
     }
 
-    //relacion N-N con reservaVuelo
-    public function reservaVuelo()
+    //relacion 1-N con paquete_reservaVuelo
+    public function paquete_reservaVuelo()
     {
-        return $this->belongsToMany('App\ReservaVuelo');
+        return $this->hasMany('App\Paquete_ReservaVuelo');
     }
 
     protected $fillable = ['reserva_auto_id','reserva_habitacion_id','precio','descuento','tipo_paquete','disponibilidad'];

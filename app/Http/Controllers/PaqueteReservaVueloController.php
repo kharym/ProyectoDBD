@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Paquete_ReservaVuelo;
 use Illuminate\Http\Request;
 
-class Paquete_ReservaVueloController extends Controller
+class PaqueteReservaVueloController extends Controller
 {
     /**
      * Display a listing of the resource.
