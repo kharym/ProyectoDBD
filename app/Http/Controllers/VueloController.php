@@ -37,7 +37,7 @@ class VueloController extends Controller
         'hora_ida' => 'nullable|string',
         'fecha_llegada' => 'nullable|date',
         'hora_llegada' => 'nullable|string',
-        'duracion_viaje' => 'nullable|numeric',
+        'duracion_viaje' => 'nullable|string',
         ];
     }
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Asiento;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class AsientoController extends Controller
         'disponibilidad' => 'required|boolean',
         'tipo_asiento' => 'required|numeric',
         ];
-
+}
         public function rules2(){
         return[
         'vuelo_id' =>  'nullable|numeric',
