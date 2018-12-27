@@ -16,12 +16,12 @@ class CreatePaqueteReservaVuelosTable extends Migration
         Schema::create('paquete__reserva_vuelos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('paquete_id')->unsigned();
-            $table->integer('reservaVuelo_id')->unsigned();
+            $table->integer('reserva_vuelo_id')->unsigned();
             $table->timestamps();
 
             //llaves foraneas
             $table->foreign('paquete_id')->references('id')->on('paquetes')->onDelete('cascade');
-            $table->foreign('reservaVuelo_id')->references('id')->on('reserva_vuelos')->onDelete('cascade');
+            $table->foreign('reserva_vuelo_id')->references('id')->on('reserva_vuelos')->onDelete('cascade');
         });
     }
 

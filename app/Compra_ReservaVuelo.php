@@ -18,5 +18,5 @@ class Compra_ReservaVuelo extends Model
         return $this->belongsTo('App\ReservaVuelo');
     }
 
-    protected $fillable = ['compra_id','reservaVuelo_id'];
+    protected $fillable = ['compra_id','reserva_vuelo_id'];
 }

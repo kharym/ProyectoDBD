@@ -18,5 +18,5 @@ class Paquete_ReservaVuelo extends Model
         return $this->belongsTo('App\ReservaVuelo');
     }
 
-    protected $fillable = ['paquete_id','reservaVuelo_id'];
+    protected $fillable = ['paquete_id','reserva_vuelo_id'];
 }

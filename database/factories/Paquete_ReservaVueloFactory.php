@@ -12,7 +12,7 @@ $factory->define(App\Paquete_ReservaVuelo::class, function (Faker $faker) {
     
     return [
         'paquete_id'=> $id_paquete,
-        'reservaVuelo_id'=>$id_reservaVuelo,
+        'reserva_vuelo_id'=>$id_reservaVuelo,
     ];
 });
 

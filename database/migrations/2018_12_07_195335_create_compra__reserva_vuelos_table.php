@@ -16,12 +16,12 @@ class CreateCompraReservaVuelosTable extends Migration
         Schema::create('compra__reserva_vuelos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('compra_id')->unsigned();
-            $table->integer('reservaVuelo_id')->unsigned();
+            $table->integer('reserva_vuelo_id')->unsigned();
             $table->timestamps();
 
             //llaves foraneas
             $table->foreign('compra_id')->references('id')->on('compras')->onDelete('cascade');
-            $table->foreign('reservaVuelo_id')->references('id')->on('reserva_vuelos')->onDelete('cascade');
+            $table->foreign('reserva_vuelo_id')->references('id')->on('reserva_vuelos')->onDelete('cascade');
         });
     }
 

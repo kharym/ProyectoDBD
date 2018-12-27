@@ -12,6 +12,6 @@ $factory->define(App\Compra_ReservaVuelo::class, function (Faker $faker) {
 
     return [
         'compra_id'=>$id_compra,
-        'reservaVuelo_id'=>$id_reservaVuelo,
+        'reserva_vuelo_id'=>$id_reservaVuelo,
     ];
 });
