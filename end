@@ -1,0 +1,165 @@
+[1mdiff --git a/composer.lock b/composer.lock[m
+[1mindex 2687e19..f4c02df 100644[m
+[1m--- a/composer.lock[m
+[1m+++ b/composer.lock[m
+[36m@@ -1058,7 +1058,7 @@[m
+                 {[m
+                     "name": "Luís Otávio Cobucci Oblonczyk",[m
+                     "email": "lcobucci@gmail.com",[m
+[31m-                    "role": "developer"[m
+[32m+[m[32m                    "role": "Developer"[m
+                 }[m
+             ],[m
+             "description": "A simple library to work with JSON Web Token and JSON Web Signature",[m
+[1mdiff --git a/routes/web.php b/routes/web.php[m
+[1mindex c1b5321..0a6df57 100644[m
+[1m--- a/routes/web.php[m
+[1m+++ b/routes/web.php[m
+[36m@@ -27,120 +27,143 @@[m [mRoute::get('/Aeropuerto/all', 'AeropuertoController@index');[m
+ Route::get('/Aeropuerto/show/{id}', 'AeropuertoController@show'); [m
+ Route::post('/Aeropuerto/destroy/{id}', 'AeropuertoController@destroy');[m
+ Route::post('/Aeropuerto/store', 'AeropuertoController@store');[m
+[32m+[m[32mRoute::put('/Aeropuerto/{aeropuerto}', 'AeropuertoController@update');[m
+ [m
+ [m
+ Route::get('/Alojamiento/all', 'AlojamientoController@index'); [m
+ Route::get('/Alojamiento/show/{id}', 'AlojamtienoController@show'); [m
+ Route::post('/Alojamiento/destroy/{id}', 'AlojamientoController@destroy');[m
+ Route::post('/Alojamiento/store', 'AlojamientoController@store');[m
+[32m+[m[32mRoute::put('/Alojamiento/{alojamiento}', 'AlojamientoController@update');[m
+ [m
+ Route::get('/Asiento/all', 'AsientoController@index'); [m
+ Route::get('/Asiento/show/{id}', 'AsientoController@show'); [m
+ Route::post('/Asiento/destroy/{id}', 'AsientoController@destroy');[m
+ Route::post('/Asiento/store', 'AsientoController@store');[m
+[32m+[m[32mRoute::put('/Asiento/{asiento}', 'AsientoController@update');[m
+ [m
+ Route::get('/Auditoria/all', 'AuditoriaController@index'); [m
+ Route::get('/Auditoria/show/{id}', 'AuditoriaController@show'); [m
+ Route::post('/Auditoria/destroy/{id}', 'AuditoriaController@destroy');[m
+ Route::post('/Auditoria/store', 'AuditoriaController@store');[m
+[32m+[m[32mRoute::put('/Auditoria/{auditoria}', 'auditoriaController@update');[m
+ [m
+ Route::get('/Auto/all', 'AutoController@index'); [m
+ Route::get('/Auto/show/{id}', 'AutoController@show'); [m
+ Route::post('/Auto/destroy/{id}', 'AutoController@destroy');[m
+ Route::post('/Auto/store', 'AutoController@store');[m
+[32m+[m[32mRoute::put('/Auto/{auto}', 'AutoController@update');[m
+ [m
+ Route::get('/Ciudad/all', 'CiudadController@index'); [m
+ Route::get('/Ciudad/show/{id}', 'CiudadController@show'); [m
+ Route::post('/Ciudad/destroy/{id}', 'CiudadController@destroy');[m
+ Route::post('/Ciudad/store', 'CiudadController@store');[m
+[32m+[m[32mRoute::put('/Ciudad/{ciudad}', 'CiudadController@update');[m
+ [m
+ Route::get('/Compra/all', 'CompraController@index'); [m
+ Route::get('/Compra/show/{id}', 'CompraController@show'); [m
+ Route::post('/Compra/destroy/{id}', 'CompraController@destroy');[m
+ Route::post('/Compra/store', 'CompraController@store');[m
+[32m+[m[32mRoute::put('/Compra/{compra}', 'CompraController@update');[m
+ [m
+ Route::get('/CompraReservaVuelo/all', 'CompraReservaVueloController@index'); [m
+ Route::get('/CompraReservaVuelo/show/{id}', 'CompraReservaVueloController@show'); [m
+ Route::post('/CompraReservaVuelo/destroy/{id}', 'CompraReservaVueloController@destroy');[m
+ Route::post('/CompraReservaVuelo/store', 'CompraReservaVueloController@store');[m
+[32m+[m[32mRoute::put('/CompraReservaVuelo/{compraReservaVuelo}', 'CompraReservaVueloController@update');[m
+ [m
+ Route::get('/CuentaBancaria/all', 'CuentaBancariaController@index'); [m
+ Route::get('/CuentaBancaria/show/{id}', 'CuentaBancariaController@show'); [m
+ Route::post('/CuentaBancaria/destroy/{id}', 'CuentaBancariaController@destroy');[m
+ Route::post('/CuentaBancaria/store', 'CuentaBancariaController@store');[m
+[32m+[m[32mRoute::put('/CuentaBancaria/{cuentaBancaria}', 'CuentaBancariaController@update');[m
+ [m
+ Route::get('/Empresa/all', 'EmpresaController@index'); [m
+ Route::get('/Empresa/show/{id}', 'EmpresaController@show'); [m
+ Route::post('/Empresa/destroy/{id}', 'EmpresaController@destroy');[m
+ Route::post('/Empresa/store', 'EmpresaController@store');[m
+[31m-[m
+[32m+[m[32mRoute::put('/Empresa/{empresa}', 'EmpresaController@update');[m
+ [m
+ Route::get('/Habitacion/all', 'HabitacionController@index'); [m
+ Route::get('/Habitacion/show/{id}', 'HabitacionController@show'); [m
+ Route::post('/Habitacion/destroy/{id}', 'HabitacionController@destroy');[m
+ Route::post('/Habitacion/store', 'HabitacionController@store'); [m
+[32m+[m[32mRoute::put('/Habitacion/{habitacion}', 'HabitacionController@update');[m
+ [m
+ Route::get('/MedioDePago/all', 'MedioDePagoController@index'); [m
+ Route::get('/MedioDePago/show/{id}', 'MedioDePagoController@show'); [m
+ Route::post('/MedioDePago/destroy/{id}', 'MedioDePagoController@destroy');[m
+ Route::post('/MedioDePago/store', 'MedioDePagoController@store');[m
+[32m+[m[32mRoute::put('/MedioDePago/{medioDePago}', 'MedioDePagoController@update');[m
+ [m
+ Route::get('/Pais/all', 'PaisController@index'); [m
+ Route::get('/Pais/show/{id}', 'PaisController@show'); [m
+ Route::post('/Pais/destroy/{id}', 'PaisController@destroy');[m
+ Route::post('/Pais/store', 'PaisController@store');[m
+[32m+[m[32mRoute::put('/Pais/{pais}', 'PaisController@update');[m
+ [m
+ Route::get('/Paquete/all', 'PaqueteController@index'); [m
+ Route::get('/Paquete/show/{id}', 'PaqueteController@show'); [m
+ Route::post('/Paquete/destroy/{id}', 'PaqueteController@destroy');[m
+ Route::post('/Paquete/store', 'PaqueteController@store');[m
+[32m+[m[32mRoute::put('/Paquete/{paquete}', 'PaqueteController@update');[m
+ [m
+ Route::get('/PaqueteReservaVuelo/all', 'PaqueteReservaVueloController@index'); [m
+ Route::get('/PaqueteReservaVuelo/show/{id}', 'PaqueteReservaVueloController@show'); [m
+ Route::post('/PaqueteReservaVuelo/destroy/{id}', 'PaqueteReservaVueloController@destroy');[m
+ Route::post('/PaqueteReservaVuelo/store', 'PaqueteReservaVueloController@store');[m
+[32m+[m[32mRoute::put('/PaqueteReservaVuelo/{paqueteReservaVuelo}', 'PaqueteReservaVueloController@update');[m
+ [m
+ Route::get('/Pasajero/all', 'PasajeroController@index'); [m
+ Route::get('/Pasajero/show/{id}', 'PasajeroController@show'); [m
+ Route::post('/Pasajero/destroy/{id}', 'PasajeroController@destroy');[m
+ Route::post('/Pasajero/store', 'PasajeroController@store');[m
+[32m+[m[32mRoute::put('/Pasajero/{pasajero}', 'PasajeroController@update');[m
+ [m
+ Route::get('/ReservaAuto/all', 'ReservaAutoController@index'); [m
+ Route::get('/ReservaAuto/show/{id}', 'ReservaAutoController@show'); [m
+ Route::post('/ReservaAuto/destroy/{id}', 'ReservaAutoController@destroy');[m
+ Route::post('/ReservaAuto/store', 'ReservaAutoController@store');[m
+[32m+[m[32mRoute::put('/ReservaAuto/{reservaAuto}', 'ReservaAutoController@update');[m
+ [m
+ Route::get('/ReservaHabitacion/all', 'ReservaHabitacionController@index'); [m
+ Route::get('/ReservaHabitacion/show/{id}', 'ReservaHabitacionController@show'); [m
+ Route::post('/ReservaHabitacion/destroy/{id}', 'ReservaHabitacionController@destroy');[m
+ Route::post('/ReservaHabitacion/store', 'ReservaHabitacionController@store');[m
+[32m+[m[32mRoute::put('/ReservaHabitacion/{reservaHabitacion}', 'ReservaHabitacionController@update');[m
+ [m
+ Route::get('/ReservaVuelo/all', 'ReservaVueloController@index'); [m
+ Route::get('/ReservaVuelo/show/{id}', 'ReservaVueloController@show'); [m
+ Route::post('/ReservaVuelo/destroy/{id}', 'ReservaVueloController@destroy');[m
+ Route::post('/ReservaVuelo/store', 'ReservaVueloController@store');[m
+[32m+[m[32mRoute::put('/ReservaVuelo/{reservaVuelo}', 'ReservaVueloController@update');[m
+ [m
+ Route::get('/Rol/all', 'RolController@index'); [m
+ Route::get('/Rol/show/{id}', 'RolController@show'); [m
+ Route::post('/Rol/destroy/{id}', 'RolController@destroy');[m
+ Route::post('/Rol/store', 'RolController@store');[m
+[32m+[m[32mRoute::put('/Rol/{rol}', 'RolController@update');[m
+ [m
+ Route::get('/Seguro/all', 'SeguroController@index'); [m
+ Route::get('/Seguro/show/{id}', 'SeguroController@show'); [m
+ Route::post('/Seguro/destroy/{id}', 'SeguroController@destroy');[m
+ Route::post('/Seguro/store', 'SeguroController@store');[m
+[32m+[m[32mRoute::put('/Seguro/{seguro}', 'SeguroController@update');[m
+ [m
+ Route::get('/Ubicacion/all', 'UbicacionController@index'); [m
+ Route::get('/Ubicacion/show/{id}', 'UbicacionController@show'); [m
+ Route::post('/Ubicacion/destroy/{id}', 'UbicacionController@destroy');[m
+ Route::post('/Ubicacion/store', 'UbicacionController@store');[m
+[32m+[m[32mRoute::put('/Ubicacion/{ubicacion}', 'UbicacionController@update');[m
+ [m
+ Route::get('/UsuarioMedioDePago/all', 'UsuarioMedioDePagoController@index'); [m
+ Route::get('/UsuarioMedioDePago/show/{id}', 'UsuarioMedioDePagoController@show'); [m
+ Route::post('/UsuarioMedioDePago/destroy/{id}', 'UsuarioMedioDePagoController@destroy');[m
+ Route::post('/UsuarioMedioDePago/store', 'UsuarioMedioDePagoController@store');[m
+[32m+[m[32mRoute::put('/UsuarioMedioDePago/{usuarioMedioDePago}', 'UsuarioMedioDePagoController@update');[m
+ [m
+ Route::get('/Vuelo/all', 'VueloController@index'); [m
+ Route::get('/Vuelo/show/{id}', 'VueloController@show'); [m
+ Route::post('/Vuelo/destroy/{id}', 'VueloController@destroy');[m
+[31m-Route::post('/Vuelo/store', 'VueloController@store');[m
+\ No newline at end of file[m
+[32m+[m[32mRoute::post('/Vuelo/store', 'VueloController@store');[m
+[32m+[m[32mRoute::put('/Vuelo/{vuelo}', 'VueloController@update');[m
+\ No newline at end of file[m
