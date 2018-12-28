@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Aerolineas Felipe Camiroaga xdXDxDXd!!!
+                    Aerolíneas.exe
                 </div>
 
                 <div class="links">
