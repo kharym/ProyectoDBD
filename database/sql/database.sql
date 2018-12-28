@@ -75,7 +75,7 @@ create table "actividads" (
 -- migration:2018_11_26_211248_create_medio_de_pagos_table --
 create table "medio_de_pagos" (
   "id" serial primary key not null, 
-  "tipo_medioPago" smallint not null, 
+  "tipo_mediopago" smallint not null, 
   "disponibilidad" boolean not null, 
   "monto" double precision not null, 
   "created_at" timestamp(0) without time zone null, 
@@ -506,3 +506,275 @@ CREATE TRIGGER usuario_rol
 AFTER 
 UPDATE 
   ON alojamientos FOR EACH ROW EXECUTE PROCEDURE deshabilitarHabitacion();;
+
+
+---------------------------------- INSERTS--------------------------------------------------------------------
+
+-- insert auditoria---
+
+
+insert into auditorias (tipo_auditoria, descripcion)
+values
+('1','descripcion de auditoria 1'), 
+('0','descripcion de auditoria 0'),
+('1','descripcion de auditoria 1'), 
+('0','descripcion de auditoria 0'),
+('1','descripcion de auditoria 1');
+
+-- insert rol---
+
+insert into rols (tipo_rol, descripcion)
+values
+('1','descripcion de rol 1'), 
+('0','descripcion de rol 0'),
+('1','descripcion de rol 1'), 
+('0','descripcion de rol 0'),
+('1','descripcion de rol 1');
+
+-- insert users---
+
+insert into users (rol_id, auditoria_id, name, apellido, email, tipo_documento, numero_documento, pais, fecha_nacimiento, telefono, password)
+values
+('1','1','Pedro','Gonzalez','pedro.gonzalez@gmail.com','1','2','Chile','1990-12-01','+5190244995984','wesdad'), 
+('2','2','Marco','Iturra','marco.iturra@gmail.com','1','2','Peru','1990-12-01','+5190244995984','sadas'),
+('3','3','Daniel','Perez','d.p@gmail.com','1','2','Peru','1990-12-01','+5190244995984','1231ssa'), 
+('4','4','Camilo','Fuentes','c.fa@gmail.com','1','2','Colombia','1990-12-01','+5190244995984','sad21'),
+('5','5','Nicolas','Sandoval','ni.sa@gmail.com','1','2','España','1990-12-01','+5190244995984','342asd');
+
+-- insert actividads---
+
+insert into actividads (destino, nombre_actividad, precio, cantidad_adulto, cantidad_ninos, fecha_ida, fecha_vuelta)
+values
+('Chile','trekking','10000','2','1','2019-10-01','2019-12-01'), 
+('Italia','piscina','5000','3','2','2019-11-01','2019-11-11'),
+('España','futbol','8500','4','0','2019-09-01','2019-10-01'), 
+('Peru','concierto','30000','2','1','2019-04-01','2019-05-01'),
+('Canada','zoologico','9000','2','3','2019-03-01','2019-06-01'); 
+
+-- insert medio de pagos---
+
+insert into medio_de_pagos (tipo_mediopago,disponibilidad, monto)
+values
+('0','true','300000'), 
+('1','false','150000'),
+('2','false','500000'), 
+('3','true','250000'),
+('2','true','800000'); 
+
+-- insert reserva habitacions---
+
+insert into reserva_habitacions (precio_res_hab,fecha_llegada, fecha_ida,numero_ninos,numero_adulto)
+values
+('100000','2019-10-01','2019-12-01','2','1'), 
+('250000','2019-11-01','2019-11-11','3','2'),
+('150000','2019-09-01','2019-10-01','4','0'), 
+('400000','2019-04-01','2019-05-01','2','1'),
+('350000','2019-03-01','2019-06-01','2','3'); 
+
+-- insert pasajeros---
+
+insert into pasajeros ( name, apellido, dni_pasaporte, pais, menor_edad, telefono, asistencia_especial,movilidad_reducida)
+values
+('Pedro','Gonzalez','2182181','Chile','true','+5190244995984','false','false'), 
+('Marco','Perez','212121','Peru','true','+5190244995984','false','false'), 
+('Antonio','Rosalez','243543','Italia','true','+5190244995984','true','false'), 
+('Juan','Alarcon','2234134','España','true','+5190244995984','false','true'), 
+('Pedro','Fuentes','215647','Francia','true','+5190244995984','false','false'); 
+
+-- insert seguros---
+
+insert into seguros (edad_pasajero, ida_vuelta, cantidad_personas, fecha_ida,fecha_vuelta, destino, costo_pasaje)
+values
+('32','true','2','2019-10-01','2019-12-01','Chile','350000'), 
+('23','true','3','2019-10-01','2019-12-01','Peru','350000'), 
+('25','false','1','2019-10-01','2019-12-01','Francia','350000'),
+('40','true','2','2019-10-01','2019-12-01','Chile','350000'),
+('55','false','1','2019-10-01','2019-12-01','Chile','350000');
+
+
+-- insert pais---
+
+insert into pais (nombre_pais)
+values
+('Chile'), 
+('Peru'), 
+('Francia'),
+('España'),
+('Chile');
+
+-- insert cuenta bancaria--
+
+insert into cuenta_bancarias (usuario_id, saldo, maximo_giro, nombre_banco,fecha_giro, hora_giro)
+values
+('1','1000000','500000','Bancop','2019-12-01','23:30:10'), 
+('2','800000','300000','Bancok','2019-12-01','23:30:10'), 
+('3','500000','150000','Bancoe','2019-12-01','23:30:10'),
+('4','765422','205000','Bancor','2019-12-01','23:30:10'),
+('5','985000','190000','Bancot','2019-12-01','23:30:10');
+
+
+-- insert ciudads---
+
+insert into ciudads (pais_id,nombre_ciudad)
+values
+('1','Santiago'), 
+('2','Lima'), 
+('3','Paris'),
+('4','Madrid'),
+('5','Temuco');
+
+-- insert ubicacions---
+
+insert into ubicacions (ciudad_id,latitud,longitud,codigo_postal)
+values
+('1','123131','123131','344325'), 
+('2','2323423','123123','234234'), 
+('3','12313','523442','345345'),
+('4','23423142','5675675','43534'),
+('5','123121','54645678','5675643');
+
+-- insert empresas---
+
+insert into empresas (ciudad_id,nombre_empresa,telefono_empresa,correo_empresa)
+values
+('1','empresaB','+5190244995984','pedro.gonzalez@gmail.com'), 
+('2','empresaK','+5190244995984','pedro.gonzalez@gmail.com'), 
+('3','empresaG','+5190244995984','pedro.gonzalez@gmail.com'),
+('4','empresaT','+5190244995984','pedro.gonzalez@gmail.com'),
+('5','empresaW','+5190244995984','pedro.gonzalez@gmail.com');
+
+-- insert autos---
+
+insert into autos (empresa_id,numero_puertas,tipo_transmision,numero_asientos,modelo,marca,disponibilidad)
+values
+('1','4','0','4','march','nissan','true'), 
+('2','5','1','6','morning','kia','true'), 
+('3','5','1','4','corsa','chevrolet','false'),
+('4','4','0','4','swift','susuki','true'),
+('5','4','0','4','march','nissan','false');
+
+-- insert reserva_autos--
+
+insert into reserva_autos (auto_id, precio_auto, fecha_recogido,fecha_devolucion,hora_recogido, hora_devolucion,tipo_auto)
+values
+('1','1000000','2019-10-01','2019-12-01','10:30:10','23:30:10','0'), 
+('2','800000','2019-10-01','2019-12-01','10:30:10','23:30:10','1'), 
+('3','500000','2019-10-01','2019-12-01','10:30:10','23:30:10','1'),
+('4','765422','2019-10-01','2019-12-01','10:30:10','23:30:10','0'),
+('5','985000','2019-10-01','2019-12-01','10:30:10','23:30:10','1');
+
+-- insert alojamientos--
+
+insert into alojamientos (ciudad_id, nombre_alojamiento,numero_estrellas,calle_alojamiento,numero_alojamiento, disponibilidad)
+values
+('1','HotelP','4','Av. Poniente','1221','true'),
+('2','HotelK','5','Av. chao','1221','false'), 
+('3','HotelL','2','Av. sol','1221','true'), 
+('4','HotelH','3','Av. piramide','1221','false'), 
+('5','HotelA','4','Av. caos','1221','true');
+
+-- insert habitacions--
+
+insert into habitacions (reserva_habitacion_id,alojamiento_id,numero_habitacion,tipo_habitacion,numero_camas, numero_banos,disponibilidad)
+values
+('1','1','32','0','1','1','true'),
+('2','2','3','1','2','2','false'), 
+('3','3','4','0','2','2','true'), 
+('4','4','10','1','1','2','false'), 
+('5','5','15','1','3','1','true');
+
+
+-- insert habitacions--
+
+insert into paquetes (reserva_auto_id,reserva_habitacion_id,precio,descuento,tipo_paquete, disponibilidad)
+values
+('1','1','320000','10000','1','true'),
+('2','2','300000','10000','0','false'), 
+('3','3','400000','20000','2','true'), 
+('4','4','100550','15000','1','false'), 
+('5','5','150000','19000','1','true');
+
+
+-- insert habitacions--
+
+insert into compras (usuario_id,actividad_id,seguro_id,paquete_id,reserva_auto_id, reserva_habitacion_id,fecha_compra,hora_compra)
+values
+('1','1','1','1','1','1','2019-12-01','10:30:10'),
+('2','2','2','2','2','2','2019-12-01','10:30:10'), 
+('3','3','3','3','3','3','2019-12-01','10:30:10'), 
+('4','4','4','4','4','4','2019-12-01','10:30:10'), 
+('5','5','5','5','5','5','2019-12-01','10:30:10');
+
+-- insert vuelos--
+
+insert into vuelos (ciudad_va_id,ciudad_viene_id,origen,destino,precio_vuelo, cantidad_asientos,fecha_ida,hora_ida,fecha_llegada,hora_llegada,duracion_viaje)
+values
+('1','1','Chile','Francia','320000','25','2019-10-01','10:30:10','2019-12-01','23:30:10','22:30:10'),
+('2','2','Peru','Brasil','320000','25','2019-10-01','10:30:10','2019-12-01','23:30:10','10:30:10'),
+('3','3','España','Canada','320000','25','2019-10-01','10:30:10','2019-12-01','23:30:10','08:30:10'),
+('4','4','Argentina','Australia','320000','25','2019-10-01','10:30:10','2019-12-01','23:30:10','15:00:10'),
+('5','5','Egipto','Mexico','320000','25','2019-10-01','10:30:10','2019-12-01','23:30:10','20:30:10');
+
+
+
+-- insert aeropuertos--
+
+insert into aeropuertos (ciudad_id,nombre_aeropuerto,calle_aeropuerto,numero_aeropuerto)
+values
+('1','Aeropuerto Nacional','Av. vuelo','1231'),
+('2','Aeropuerto Juan Perez','Av. avion','1231'),
+('3','Aeropuerto Metropolitano','Av. despegue','1231'),
+('4','Aeropuerto InterNacional','Av. piloto','1231'),
+('5','Aeropuerto 23','Av. peligro','1231');
+
+-- insert asientos--
+
+insert into asientos (vuelo_id,numero_asiento,disponibilidad,tipo_asiento)
+values
+('1','2','true','0'),
+('2','23','true','1'),
+('3','4','false','1'),
+('4','10','false','0'),
+('5','20','true','1');
+
+
+-- insert reserva_vuelos--
+
+insert into reserva_vuelos (vuelo_id,asiento_id,pasajero_id,ida_vuelta,cantidad_pasajeros,tipo_cabina,fecha_reserva,hora_reserva,precio_reserva_vuelo,cantidad_paradas)
+values
+('1','1','1','true','3','1','2019-12-01','10:30:10','320000','2'),
+('2','2','2','false','4','0','2019-12-01','10:30:10','320000','1'), 
+('3','3','3','true','2','2','2019-12-01','10:30:10','320000','0'), 
+('4','4','4','true','1','1','2019-12-01','10:30:10','320000','1'), 
+('5','5','5','false','3','1','2019-12-01','10:30:10','320000','2');
+
+
+-- insert usuario__medio_de_pagos--
+
+insert into usuario__medio_de_pagos (user_id,medio_de_pago_id)
+values
+('1','1'),
+('2','2'),
+('3','3'),
+('4','4'),
+('5','5');
+
+-- insert paquete__reserva_vuelos--
+
+insert into paquete__reserva_vuelos (paquete_id,reserva_vuelo_id)
+values
+('1','1'),
+('2','2'),
+('3','3'),
+('4','4'),
+('5','5');
+
+-- insert compra__reserva_vuelos--
+
+insert into compra__reserva_vuelos (compra_id,reserva_vuelo_id)
+values
+('1','1'),
+('2','2'),
+('3','3'),
+('4','4'),
+('5','5');
