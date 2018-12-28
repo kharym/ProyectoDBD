@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class UbicacionesTableSeeder extends Seeder
+class Compra_ReservaVueloSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class UbicacionesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Ubicacion::class, 5)->create();
+        factory(App\Compra_ReservaVuelo::class, 5)->create();
     }
 }

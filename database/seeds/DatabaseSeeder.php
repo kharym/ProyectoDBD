@@ -36,5 +36,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UbicacionesTableSeeder::class);
         $this->call(Paquete_ReservaVueloSeeder::class);
         $this->call(UsuarioMedioPagoSeeder::class);
+        $this->call(Compra_ReservaVueloSeeder::class);
     }
 }
