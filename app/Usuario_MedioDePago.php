@@ -18,5 +18,5 @@ class Usuario_MedioDePago extends Model
         return $this->belongsTo('App\MedioDePago');
     }
 
-    protected $fillable = ['usuario_id','medio_de_pago_id'];
+    protected $fillable = ['user_id','medio_de_pago_id'];
 }

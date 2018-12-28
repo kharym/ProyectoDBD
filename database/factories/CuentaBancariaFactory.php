@@ -13,6 +13,6 @@ $factory->define(App\CuentaBancaria::class, function (Faker $faker) {
         'nombre_banco' => $faker->company, //Cambiar a bank
         'fecha_giro' => $faker->date('Y-m-d', '2018-12-14'),
         'hora_giro' => $faker->time('H:i:s', '12:50:32'),
-        'usuario_id' => $id_user,
+        'user_id' => $id_user,
     ];
 });

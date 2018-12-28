@@ -15,7 +15,7 @@ class CreateComprasTable extends Migration
     {
         Schema::create('compras', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('usuario_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->integer('actividad_id')->unsigned();
             $table->integer('seguro_id')->unsigned();
             $table->integer('paquete_id')->unsigned();
@@ -26,7 +26,7 @@ class CreateComprasTable extends Migration
             $table->timestamps();
 
             //llaves foraneas
-            $table->foreign('usuario_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('actividad_id')->references('id')->on('actividads')->onDelete('cascade');
             $table->foreign('seguro_id')->references('id')->on('seguros')->onDelete('cascade');
             $table->foreign('paquete_id')->references('id')->on('paquetes')->onDelete('cascade');

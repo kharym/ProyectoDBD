@@ -49,6 +49,6 @@ class Compra extends Model
     }
 
 
-    protected $fillable = ['usuario_id','actividad_id','seguro_id','paquete_id','reserva_auto_id','reserva_habitacion_id','fecha_compra','hora_compra'];
+    protected $fillable = ['user_id','actividad_id','seguro_id','paquete_id','reserva_auto_id','reserva_habitacion_id','fecha_compra','hora_compra'];
     
 }

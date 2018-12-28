@@ -25,7 +25,7 @@ $factory->define(App\Compra::class, function (Faker $faker) {
     return [
         'fecha_compra'=>$faker->date('Y-m-d', '2018-12-14'),
         'hora_compra'=>$faker->time('H:i:s', '12:50:32'),
-        'usuario_id'=>$id_user,
+        'user_id'=>$id_user,
         'actividad_id'=>$id_actividad,
         'seguro_id'=>$id_seguro,
         'paquete_id'=>$id_paquete,

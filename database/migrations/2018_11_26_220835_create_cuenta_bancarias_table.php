@@ -15,7 +15,7 @@ class CreateCuentaBancariasTable extends Migration
     {
         Schema::create('cuenta_bancarias', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('usuario_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->float('saldo');
             $table->float('maximo_giro');
             $table->string('nombre_banco');
@@ -24,7 +24,7 @@ class CreateCuentaBancariasTable extends Migration
             $table->timestamps();
 
             //llaves foraneas
-            $table->foreign('usuario_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
