@@ -134,7 +134,7 @@ create table "pais" (
 -- migration:2018_11_26_220835_create_cuenta_bancarias_table --
 create table "cuenta_bancarias" (
   "id" serial primary key not null, 
-  "usuario_id" integer not null, 
+  "user_id" integer not null, 
   "saldo" double precision not null, 
   "maximo_giro" double precision not null, 
   "nombre_banco" varchar(255) not null, 
@@ -146,7 +146,7 @@ create table "cuenta_bancarias" (
 alter table 
   "cuenta_bancarias" 
 add 
-  constraint "cuenta_bancarias_usuario_id_foreign" foreign key ("usuario_id") references "users" ("id") on delete cascade;
+  constraint "cuenta_bancarias_user_id_foreign" foreign key ("user_id") references "users" ("id") on delete cascade;
 
 -- migration:2018_11_26_221731_create_ciudads_table --
 create table "ciudads" (
@@ -290,7 +290,7 @@ add
 -- migration:2018_11_26_231153_create_compras_table --
 create table "compras" (
   "id" serial primary key not null, 
-  "usuario_id" integer not null, 
+  "user_id" integer not null, 
   "actividad_id" integer not null, 
   "seguro_id" integer not null, 
   "paquete_id" integer not null, 
@@ -304,7 +304,7 @@ create table "compras" (
 alter table 
   "compras" 
 add 
-  constraint "compras_usuario_id_foreign" foreign key ("usuario_id") references "users" ("id") on delete cascade;
+  constraint "compras_user_id_foreign" foreign key ("user_id") references "users" ("id") on delete cascade;
 alter table 
   "compras" 
 add 
@@ -604,7 +604,7 @@ values
 
 -- insert cuenta bancaria--
 
-insert into cuenta_bancarias (usuario_id, saldo, maximo_giro, nombre_banco,fecha_giro, hora_giro)
+insert into cuenta_bancarias (user_id, saldo, maximo_giro, nombre_banco,fecha_giro, hora_giro)
 values
 ('1','1000000','500000','Bancop','2019-12-01','23:30:10'), 
 ('2','800000','300000','Bancok','2019-12-01','23:30:10'), 
@@ -697,7 +697,7 @@ values
 
 -- insert habitacions--
 
-insert into compras (usuario_id,actividad_id,seguro_id,paquete_id,reserva_auto_id, reserva_habitacion_id,fecha_compra,hora_compra)
+insert into compras (user_id,actividad_id,seguro_id,paquete_id,reserva_auto_id, reserva_habitacion_id,fecha_compra,hora_compra)
 values
 ('1','1','1','1','1','1','2019-12-01','10:30:10'),
 ('2','2','2','2','2','2','2019-12-01','10:30:10'), 
