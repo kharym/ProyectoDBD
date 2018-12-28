@@ -14,20 +14,20 @@ class EliminarHabitacionTrigger extends Migration
     public function up()
     {
         DB::statement('
-        CREATE OR REPLACE FUNCTION eliminarAsientos()
+        CREATE OR REPLACE FUNCTION eliminarHabitacion()
         RETURNS trigger AS
         $$
         BEGIN           
-        DELETE FROM asientos
-        WHERE OLD.id = asientos.vuelo_id;
+        DELETE FROM habitacions
+        WHERE OLD.id = habitacions.alojamiento_id;
         RETURN OLD;
         END
         $$ LANGUAGE plpgsql;
         ');
 
         DB::unprepared('
-        CREATE TRIGGER usuario_rol BEFORE DELETE ON vuelos FOR EACH ROW
-        EXECUTE PROCEDURE eliminarAsientos();
+        CREATE TRIGGER eliminarHabitacion BEFORE DELETE ON alojamientos FOR EACH ROW
+        EXECUTE PROCEDURE eliminarHabitacion();
         ');
     }
 
