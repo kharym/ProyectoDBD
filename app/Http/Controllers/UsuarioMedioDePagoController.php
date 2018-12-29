@@ -80,7 +80,14 @@ class UsuarioMedioDePagoController extends Controller
      */
     public function update(Request $request, Usuario_MedioDePago $usuario_MedioDePago)
     {
-        //
+        $validador = Validator::make($request->all(),$this->rules2());
+        if($validador->fails()){
+            return $validador->messages();
+        }
+        $mp = Usuario_MedioDePago::where('id', '=', $id)->first();
+        $mp->update($request->all());
+        return $mp;
+    }
     }
 
     /**

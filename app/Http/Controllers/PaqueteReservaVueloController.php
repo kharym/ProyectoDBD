@@ -80,7 +80,14 @@ class PaqueteReservaVueloController extends Controller
      */
     public function update(Request $request, Paquete_ReservaVuelo $paquete_ReservaVuelo)
     {
-        //
+        $validador = Validator::make($request->all(),$this->rules2());
+        if($validador->fails()){
+            return $validador->messages();
+        }
+        $mp = Paquete_ReservaVuelo::where('id', '=', $id)->first();
+        $mp->update($request->all());
+        return $mp;
+    }
     }
 
     /**
