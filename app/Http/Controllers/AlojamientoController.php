@@ -119,4 +119,10 @@ class AlojamientoController extends Controller
         $alojamiento->delete();
         return "";
     }
+
+    public function habitaciones( $id)
+    {
+        $habitaciones = Alojamiento::with('habitacion')->find($id);
+        return $habitaciones;
+    }
 }

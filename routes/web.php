@@ -35,6 +35,9 @@ Route::get('/Alojamiento/show/{id}', 'AlojamtienoController@show');
 Route::post('/Alojamiento/destroy/{id}', 'AlojamientoController@destroy');
 Route::post('/Alojamiento/store', 'AlojamientoController@store');
 Route::put('/Alojamiento/{alojamiento}', 'AlojamientoController@update');
+//Anidados de alojamiento
+Route::get('/Alojamiento/{id}/all/Habitacion', 'AlojamientoController@habitaciones'); 
+
 
 Route::get('/Asiento/all', 'AsientoController@index'); 
 Route::get('/Asiento/show/{id}', 'AsientoController@show'); 
@@ -137,6 +140,7 @@ Route::get('/ReservaVuelo/show/{id}', 'ReservaVueloController@show');
 Route::post('/ReservaVuelo/destroy/{id}', 'ReservaVueloController@destroy');
 Route::post('/ReservaVuelo/store', 'ReservaVueloController@store');
 Route::put('/ReservaVuelo/{reservaVuelo}', 'ReservaVueloController@update');
+//ANIDADOS
 
 Route::get('/Rol/all', 'RolController@index'); 
 Route::get('/Rol/show/{id}', 'RolController@show'); 
@@ -173,3 +177,5 @@ Route::get('/Vuelo/show/{id}', 'VueloController@show');
 Route::post('/Vuelo/destroy/{id}', 'VueloController@destroy');
 Route::post('/Vuelo/store', 'VueloController@store');
 Route::put('/Vuelo/{vuelo}', 'VueloController@update');
+//Anidados
+Route::get('/Vuelo/{id}/all/Asiento', 'VueloController@asientos'); 

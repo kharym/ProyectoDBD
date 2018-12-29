@@ -131,4 +131,10 @@ class VueloController extends Controller
         $vuelo->delete();
         return "";
     }
+
+    public function asientos( $id)
+    {
+        $asientos = Vuelo::with('asiento')->find($id);
+        return $asientos;
+    }
 }

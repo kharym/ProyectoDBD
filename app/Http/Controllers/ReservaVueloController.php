@@ -72,8 +72,10 @@ class ReservaVueloController extends Controller
             return $validador->messages();
         }
         $rv = ReservaVuelo::create($request->all());      
-        $rv->save();
-        return $rv;
+        $asiento = \App\Asiento::find($rv->asiento_id);
+        $asiento->disponibilidad = false;
+        $asiento->save();
+        return "Reserva realizada con éxito";
     }
 
     /**
@@ -129,4 +131,5 @@ class ReservaVueloController extends Controller
         $reservaVuelo->delete();
         return "";
     }
+
 }
