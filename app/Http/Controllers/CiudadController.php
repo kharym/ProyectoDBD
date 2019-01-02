@@ -113,4 +113,6 @@ class CiudadController extends Controller
         $ciudad->delete();
         return "";
     }
+
+   
 }

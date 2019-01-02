@@ -147,6 +147,8 @@ Route::get('/Rol/show/{id}', 'RolController@show');
 Route::post('/Rol/destroy/{id}', 'RolController@destroy');
 Route::post('/Rol/store', 'RolController@store');
 Route::put('/Rol/{rol}', 'RolController@update');
+//Anidados
+Route::get('/Rol/{id}/all/User', 'RolController@rols'); 
 
 Route::get('/Seguro/all', 'SeguroController@index'); 
 Route::get('/Seguro/show/{id}', 'SeguroController@show'); 
@@ -179,3 +181,4 @@ Route::post('/Vuelo/store', 'VueloController@store');
 Route::put('/Vuelo/{vuelo}', 'VueloController@update');
 //Anidados
 Route::get('/Vuelo/{id}/all/Asiento', 'VueloController@asientos'); 
+//Route::get('/Vuelo/{id}/all/Asiento/disponibilidad', 'VueloController@asientosDisponibles'); 

@@ -112,4 +112,10 @@ class RolController extends Controller
         $rol->delete();
         return "";
     }
+
+     public function rols( $id)
+    {
+        $users = Rol::with('user')->find($id);
+        return $users;
+    }
 }

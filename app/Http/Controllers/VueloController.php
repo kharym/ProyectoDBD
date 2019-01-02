@@ -137,4 +137,12 @@ class VueloController extends Controller
         $asientos = Vuelo::with('asiento')->find($id);
         return $asientos;
     }
+
+  
+
+   /* public function asientosDisponibles( $id)
+    {
+        $asientos = Vuelo::with('asiento')->find($id)->where(" disponibilidad = "'true'" );
+        return $asientos;
+    }*/
 }
