@@ -114,5 +114,11 @@ class CiudadController extends Controller
         return "";
     }
 
+    public function aeropuertos( $id)
+    {
+        $aeropuertos = Ciudad::with('aeropuerto')->find($id);
+        return $aeropuertos;
+    }
+
    
 }

@@ -62,6 +62,8 @@ Route::get('/Ciudad/show/{id}', 'CiudadController@show');
 Route::post('/Ciudad/destroy/{id}', 'CiudadController@destroy');
 Route::post('/Ciudad/store', 'CiudadController@store');
 Route::put('/Ciudad/{ciudad}', 'CiudadController@update');
+//Anidados de Ciudad
+Route::get('/Ciudad/{id}/all/Aeropuerto', 'CiudadController@aeropuertos'); 
 
 Route::get('/Compra/all', 'CompraController@index'); 
 Route::get('/Compra/show/{id}', 'CompraController@show'); 
@@ -181,4 +183,4 @@ Route::post('/Vuelo/store', 'VueloController@store');
 Route::put('/Vuelo/{vuelo}', 'VueloController@update');
 //Anidados
 Route::get('/Vuelo/{id}/all/Asiento', 'VueloController@asientos'); 
-//Route::get('/Vuelo/{id}/all/Asiento/disponibilidad', 'VueloController@asientosDisponibles'); 
+Route::get('/Vuelo/{id}/all/Asiento/disponibilidad', 'VueloController@asientosDisponibles'); 
