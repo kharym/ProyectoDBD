@@ -1,0 +1,35 @@
+#paisOrigen{
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px
+}
+
+#paisDestino{
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px
+}
+
+#botonVuelo{
+    position: relative;
+    left: 15px;
+}
+
+#botonAloj{
+    position: relative;
+    left: 15px;
+}
+
+form{
+    float: left;
+    
+}
+
+#formularioAloj{
+    clear:right;
+    
+}

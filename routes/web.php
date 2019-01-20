@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('buscar');
 });
 
 //si doy todo, a pesar de guardar, se hace get.
@@ -37,7 +37,7 @@ Route::post('/Alojamiento/store', 'AlojamientoController@store');
 Route::put('/Alojamiento/{alojamiento}', 'AlojamientoController@update');
 //Anidados de alojamiento
 Route::get('/Alojamiento/{id}/all/Habitacion', 'AlojamientoController@habitaciones'); 
-
+Route::get('Alojamiento', 'AlojamientoController@alojamientoPais');
 
 Route::get('/Asiento/all', 'AsientoController@index'); 
 Route::get('/Asiento/show/{id}', 'AsientoController@show'); 
@@ -184,3 +184,9 @@ Route::put('/Vuelo/{vuelo}', 'VueloController@update');
 //Anidados
 Route::get('/Vuelo/{id}/all/Asiento', 'VueloController@asientos'); 
 Route::get('/Vuelo/{id}/all/Asiento/disponibilidad', 'VueloController@asientosDisponibles'); 
+Route::get('Vuelo', 'VueloController@vuelosOrigenDestino');
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

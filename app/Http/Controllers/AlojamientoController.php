@@ -120,9 +120,26 @@ class AlojamientoController extends Controller
         return "";
     }
 
-    public function habitaciones( $id)
+    public function habitaciones($id)
     {
         $habitaciones = Alojamiento::with('habitacion')->find($id);
         return $habitaciones;
+    }
+
+    public function alojamientoPais(){
+        //return request()->all();
+        $pais = \App\Pais::where('nombre_pais','=',request()->pais)->first();
+        $ciudades = \App\Ciudad::where('pais_id','=',$pais->id)->get();
+        $alojamientos = [];
+        foreach($ciudades as $c){
+            $aux =  Alojamiento::where('ciudad_id',$c->id)->get();
+                if(!empty($aux)){
+                    foreach($aux as $a){
+                        array_push($alojamientos,$a);
+                }
+            }
+        }
+        //$vuelos = App\Vuelo::where([['ciudad_va_id',$ciudadesD->id],['ciudad_viene_id',$ciudadesO->id]])->get();
+        return $alojamientos;
     }
 }

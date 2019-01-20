@@ -48,7 +48,7 @@ class VueloController extends Controller
     public function index()
     {
         $vuelo = Vuelo::all();
-        return $vuelo;
+        return view('vuelos',content('vuelo'));
     }
 
     /**
@@ -152,6 +152,27 @@ class VueloController extends Controller
             $disponibles.add($disponibilidad);            
         }*/
         return $diponibles;
+    }
+
+    public function vuelosOrigenDestino(){
+        //return request()->all();
+        $paisO = \App\Pais::where('nombre_pais','=',request()->paisOrigen)->first();
+        $paisD = \App\Pais::where('nombre_pais','=',request()->paisDestino)->first();
+        $ciudadesO = \App\Ciudad::where('pais_id','=',$paisO->id)->get();
+        $ciudadesD = \App\Ciudad::where('pais_id','=',$paisD->id)->get();
+        $vuelos = [];
+        foreach($ciudadesO as $co){
+            foreach($ciudadesD as $cd){
+                $aux =  \App\Vuelo::where([['ciudad_va_id',$cd->id],['ciudad_viene_id',$co->id]])->get();
+                if(!empty($aux)){
+                    foreach($aux as $a){
+                        array_push($vuelos,$a);
+                    }
+                }
+            }
+        }
+       //$vuelos = App\Vuelo::where([['ciudad_va_id',$ciudadesD->id],['ciudad_viene_id',$ciudadesO->id]])->get();
+        return $vuelos;
     }
 
 }
