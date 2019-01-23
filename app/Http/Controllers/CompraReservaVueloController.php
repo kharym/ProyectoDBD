@@ -89,7 +89,7 @@ class CompraReservaVueloController extends Controller
         $mp->update($request->all());
         return $mp;
     }
-    }
+    
 
     /**
      * Remove the specified resource from storage.

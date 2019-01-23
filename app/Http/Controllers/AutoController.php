@@ -123,4 +123,29 @@ class AutoController extends Controller
         $auto->delete();
         return "";
     }
+
+    public function autosPais()
+    {
+        $pais = \App\Pais::where('nombre_pais','=',request()->pais)->first();
+        if(empty($pais)){
+            $autos = [];
+            return view('autos', compact('autos'));
+        }
+        $ciudades = \App\Ciudad::where('pais_id','=',$pais->id)->get();
+        $empresas = [];
+        foreach($ciudades as $ciudad){
+            $empresa = \App\Empresa::where('ciudad_id','=',$ciudad->id)->get();
+            foreach($empresa as $e){
+                array_push($empresas,$e);
+            }
+        }
+        $autos = [];
+        foreach($empresas as $e){
+            $auto = Auto::where([['empresa_id','=',$e->id],['marca','=',request()->marca]])->get();
+            foreach($auto as $a){
+                array_push($autos,$a);
+            }
+        }
+        return view('autos',compact('autos'));
+    }
 }

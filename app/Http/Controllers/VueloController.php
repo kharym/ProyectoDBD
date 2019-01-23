@@ -163,6 +163,8 @@ class VueloController extends Controller
         $vuelos = [];
         foreach($ciudadesO as $co){
             foreach($ciudadesD as $cd){
+                //$aux =  \App\Vuelo::where([['ciudad_va_id',$cd->id],['ciudad_viene_id',$co->id],
+                //['fecha_ida',request()->ida]])->get();
                 $aux =  \App\Vuelo::where([['ciudad_va_id',$cd->id],['ciudad_viene_id',$co->id]])->get();
                 if(!empty($aux)){
                     foreach($aux as $a){
@@ -172,7 +174,7 @@ class VueloController extends Controller
             }
         }
        //$vuelos = App\Vuelo::where([['ciudad_va_id',$ciudadesD->id],['ciudad_viene_id',$ciudadesO->id]])->get();
-        return $vuelos;
+        return view('vuelos',compact('vuelos'));
     }
 
 }

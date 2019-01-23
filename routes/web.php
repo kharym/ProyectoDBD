@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('buscar');
+    return view('index');
 });
 
 //si doy todo, a pesar de guardar, se hace get.
@@ -56,6 +56,8 @@ Route::get('/Auto/show/{id}', 'AutoController@show');
 Route::post('/Auto/destroy/{id}', 'AutoController@destroy');
 Route::post('/Auto/store', 'AutoController@store');
 Route::put('/Auto/{auto}', 'AutoController@update');
+//Anidado
+Route::get('Auto','AutoController@autosPais');
 
 Route::get('/Ciudad/all', 'CiudadController@index'); 
 Route::get('/Ciudad/show/{id}', 'CiudadController@show'); 

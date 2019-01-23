@@ -102,7 +102,7 @@ class CompraController extends Controller
      * @param  \App\Compra  $compra
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id))
+    public function update(Request $request, $id)
     {
          $validador = Validator::make($request->all(),$this->rules2());
         if($validador->fails()){

@@ -140,6 +140,6 @@ class AlojamientoController extends Controller
             }
         }
         //$vuelos = App\Vuelo::where([['ciudad_va_id',$ciudadesD->id],['ciudad_viene_id',$ciudadesO->id]])->get();
-        return $alojamientos;
+        return view('alojamientos',compact('alojamientos'));
     }
 }

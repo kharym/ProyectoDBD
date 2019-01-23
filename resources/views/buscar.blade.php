@@ -3,7 +3,6 @@
 @section('content')
 <link rel="stylesheet" type="text/css" href="{{ url('/css/buscar.css') }}" />
 <!--Formulario busqueda vuelo -->
-
 <form  class="form-horizontal" method="get" action="Vuelo">
 <label>VUELOS</label>
 <div class="form-group">
