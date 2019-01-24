@@ -146,6 +146,6 @@ class AutoController extends Controller
                 array_push($autos,$a);
             }
         }
-        return view('autos',compact('autos'));
+        return view('vehiculos.autos',compact('autos'));
     }
 }

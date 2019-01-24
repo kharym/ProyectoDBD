@@ -174,7 +174,7 @@ class VueloController extends Controller
             }
         }
        //$vuelos = App\Vuelo::where([['ciudad_va_id',$ciudadesD->id],['ciudad_viene_id',$ciudadesO->id]])->get();
-        return view('vuelos',compact('vuelos'));
+        return view('vuelos.vuelos',compact('vuelos'));
     }
 
 }

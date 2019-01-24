@@ -30,8 +30,8 @@
 			<link rel="stylesheet" href="css/owl.carousel.css">				
 			<link rel="stylesheet" href="css/main.css">
 		</head>
-		<body>	
-			<header id="header">
+		<body style="background: url(../img/hero-bg.jpg) center no-repeat; background-size: cover; min-height:100vh">	
+			<header id="header" style="position:initial!important">
 				<div class="header-top">
 					<div class="container">
 			  		<div class="row align-items-center">
@@ -81,27 +81,14 @@
 						          </li>					                		
 				            </ul>
 				          </li>					          					          		          
-									<li><a href="contact.html">Contact</a></li>
-									@auth
-										<li class ="menu-has-children">
-											<a href="#">{{ auth()->user()->name }}</a>
-											<ul>
-												<li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Cerrar sesión</a></li>
-												<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-												@csrf
-												</form>
-											</ul>
-										</li>
-									@else
-										<li><a href="/login">Login</a></li>
-									@endauth
+				          <li><a href="contact.html">Contact</a></li>
 				        </ul>
                       </nav><!-- #nav-menu-container -->				      		  
 					</div>
 				</div>
 			</header><!-- #header -->
         </body>
-        <main>
+        <main style="margin-top: 50px">
                 @yield('content')
             </main>	
 	</html>

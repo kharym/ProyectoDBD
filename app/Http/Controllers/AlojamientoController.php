@@ -129,6 +129,10 @@ class AlojamientoController extends Controller
     public function alojamientoPais(){
         //return request()->all();
         $pais = \App\Pais::where('nombre_pais','=',request()->pais)->first();
+        if(empty($pais)){
+            $alojamientos = [];
+            return view('alojamientos.alojamientos', compact('alojamientos'));
+        }
         $ciudades = \App\Ciudad::where('pais_id','=',$pais->id)->get();
         $alojamientos = [];
         foreach($ciudades as $c){
@@ -140,6 +144,6 @@ class AlojamientoController extends Controller
             }
         }
         //$vuelos = App\Vuelo::where([['ciudad_va_id',$ciudadesD->id],['ciudad_viene_id',$ciudadesO->id]])->get();
-        return view('alojamientos',compact('alojamientos'));
+        return view('alojamientos.alojamientos',compact('alojamientos'));
     }
 }

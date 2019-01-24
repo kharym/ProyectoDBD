@@ -1,98 +1,6 @@
-<!DOCTYPE html>
-<html lang="zxx" class="no-js">
-<head>
-    <!-- Mobile Specific Meta -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="img/fav.png">
-    <!-- Author Meta -->
-    <meta name="author" content="colorlib">
-    <!-- Meta Description -->
-    <meta name="description" content="">
-    <!-- Meta Keyword -->
-    <meta name="keywords" content="">
-    <!-- meta character set -->
-    <meta charset="UTF-8">
-    <!-- Site Title -->
-    <title>Autos</title>
+@extends('layouts.app')
+@section('content')
 
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
-        <!--
-        CSS
-        ============================================= -->
-        <link rel="stylesheet" href="css/linearicons.css">
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <link rel="stylesheet" href="css/magnific-popup.css">
-        <link rel="stylesheet" href="css/jquery-ui.css">				
-        <link rel="stylesheet" href="css/nice-select.css">							
-        <link rel="stylesheet" href="css/animate.min.css">
-        <link rel="stylesheet" href="css/owl.carousel.css">				
-        <link rel="stylesheet" href="css/main.css">
-    </head>
-    <body>	
-        <header id="header">
-            <div class="header-top">
-                <div class="container">
-                  <div class="row align-items-center">
-                      <div class="col-lg-6 col-sm-6 col-6 header-top-left">
-                          <ul>
-                              <li><a href="#">Visit Us</a></li>
-                              <li><a href="#">Buy Tickets</a></li>
-                          </ul>			
-                      </div>
-                  </div>			  					
-                </div>
-            </div>
-            <div class="container main-menu">
-                <div class="row align-items-center justify-content-between d-flex">
-                  <div id="logo">
-                    <a href="/"><img src="img/logo.png" alt="" title="" /></a>
-                  </div>
-                  <nav id="nav-menu-container">
-                    <ul class="nav-menu">
-                      <li><a href="/">Home</a></li>
-                      <li><a href="about.html">About</a></li>
-                      <li><a href="packages.html">Packages</a></li>
-                      <li><a href="hotels.html">Hotels</a></li>
-                      <li><a href="insurance.html">Insurence</a></li>
-                      <li class="menu-has-children"><a href="">Blog</a>
-                        <ul>
-                          <li><a href="blog-home.html">Blog Home</a></li>
-                          <li><a href="blog-single.html">Blog Single</a></li>
-                        </ul>
-                      </li>	
-                      <li class="menu-has-children"><a href="">Pages</a>
-                        <ul>
-                              <li><a href="elements.html">Elements</a></li>
-                              <li class="menu-has-children"><a href="">Level 2 </a>
-                                <ul>
-                                  <li><a href="#">Item One</a></li>
-                                  <li><a href="#">Item Two</a></li>
-                                </ul>
-                              </li>					                		
-                        </ul>
-                      </li>					          					          		          
-                      <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                  </nav><!-- #nav-menu-container -->					      		  
-                </div>
-            </div>
-        </header><!-- #header -->
-          
-        <!-- start banner Area -->
-        <section class="about-banner relative">
-            <div class="overlay overlay-bg"></div>
-            <div class="container">				
-                <div class="row d-flex align-items-center justify-content-center">
-                    <div class="about-content col-lg-12">
-                        <h1 class="text-white">
-                            Vehículos				
-                        </h1>	
-                        <p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="hotels.html"> Hotels</a></p>
-                    </div>	
-                </div>
-            </div>
         </section>
         <!-- End banner Area -->	
         <br>
@@ -102,42 +10,46 @@
                     <div class="row d-flex justify-content-center">
                         <div class="menu-content pb-40 col-lg-8">
                             <div class="title text-center">
-                                <h1 class="mb-10">Transporte</h1>
-                                <p>El mejor vehículo adaptado a tus necesidades</p>
+                                <h1 class="mb-10">Vuelos</h1>
+                                <p>Todos tus destinos en un solo lugar</p>
                             </div>
                         </div>
                     </div>						
             <div class="row">
-        @foreach ($autos as $auto)
+        @foreach ($vuelos as $vuelo)
         <div class="col-lg-4">
+                <a href="/">
                 <div class="single-destinations">
                     <div class="details">
-                        <h4 class="d-flex justify-content-between">
-                            <span>{{$auto->marca}}</span>                              		
-                        </h4>
-                        <p>
-                            <?php $empresa = App\Empresa::where('id','=',$auto->empresa_id)->first();?>
-                            Empresa   |   {{$empresa->nombre_empresa}}
-                        </p>
                         <ul class="package-list">
                             <li class="d-flex justify-content-between align-items-center">
-                            <span> Cantidad de puertas </span>
-                            <span>{{$auto->numero_puertas}}</span>
+                            <span> Ciudad origen </span>
+                            <span>{{$vuelo->origen}}</span>
                             </li>
                             <li class="d-flex justify-content-between align-items-center">
-                                <span> Modelo </span>
-                                <span>{{$auto->modelo}}</span>
+                                <span> Ciudad destino </span>
+                                <span>{{$vuelo->destino}}</span>
                             </li>
                             <li class="d-flex justify-content-between align-items-center">
-                                    @if ($auto->transmicion = 0)
-                                        <span> Transmision </span>
-                                        <span> Automático </span>    
-                                    @else
-                                        <span> Transmision </span>
-                                        <span> Mecánico </span>
-                                    @endif
-                                    
-                                </li>								
+                                <span> Precio </span>
+                                <span> {{$vuelo->precio_vuelo}}</span>        
+                            </li>
+                            <li class="d-flex justify-content-between align-items-center">
+                                    <span> Fecha partida </span>
+                                    <span> {{$vuelo->fecha_ida}}</span>        
+                            </li>
+                            <li class="d-flex justify-content-between align-items-center">
+                                    <span> Fecha llegada </span>
+                                    <span> {{$vuelo->fecha_llegada}}</span>        
+                            </li>
+                            <li class="d-flex justify-content-between align-items-center">
+                                    <span> Hora partida </span>
+                                    <span> {{$vuelo->hora_ida}}</span>        
+                            </li>
+                            <li class="d-flex justify-content-between align-items-center">
+                                    <span> Hora llegada </span>
+                                    <span> {{$vuelo->hora_llegada}}</span>        
+                            </li>								
                         </ul>
                     </div>
                 </div>
@@ -253,3 +165,5 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         <script src="js/main.js"></script>	
     </body>
 </html>
+
+@endsection
