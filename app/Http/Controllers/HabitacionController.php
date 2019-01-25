@@ -125,9 +125,13 @@ class HabitacionController extends Controller
         return "";
     }
 
-    public function habitacionReserva($id){
+    public function habitaciones($id){
         $habitaciones = Habitacion::where("alojamiento_id",$id)->get();
 
         return view('alojamientos.habitacion',compact('habitaciones'));
+    }
+
+    public function habitacionReserva($auto){
+        return view('vehiculos.auto-reserva', compact('auto'));
     }
 }
