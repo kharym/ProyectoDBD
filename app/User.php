@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use Illuminate\Support\Facades\Hash;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -56,5 +56,12 @@ class User extends Authenticatable
         return $this->hasMany('App\Usuario_MedioDePago');
     }
 
-     protected $fillable = ['rol_id','auditoria_id','name','apellido','email','tipo_documento','numero_documento','pais','fecha_nacimiento','telefono','password'];
+     public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
+
+
+
+    protected $fillable = ['rol_id','auditoria_id','name','apellido','email','tipo_documento','numero_documento','pais','fecha_nacimiento','telefono','password'];
 }
