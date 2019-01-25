@@ -41,11 +41,37 @@
 							<h4 class="d-flex justify-content-between">
 								<span>{{$alojamiento->nombre_alojamiento}}</span>                              	
 								<div class="star">
-									<span class="fa fa-star checked"></span>
-									<span class="fa fa-star checked"></span>
-									<span class="fa fa-star checked"></span>
-									<span class="fa fa-star checked"></span>
-									<span class="fa fa-star"></span>				
+									@if($alojamiento->numero_estrellas == 1)
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+									@elseif($alojamiento->numero_estrellas == 2)
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+									@elseif($alojamiento->numero_estrellas == 3)
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+									@elseif($alojamiento->numero_estrellas == 4)
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star"></span>
+									@else
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+									@endif				
 								</div>	
 							</h4>
 							<p>
