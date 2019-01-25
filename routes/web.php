@@ -58,7 +58,7 @@ Route::post('/Auto/store', 'AutoController@store');
 Route::put('/Auto/{auto}', 'AutoController@update');
 //Anidado
 Route::get('Auto','AutoController@autosPais');
-Route::get('Auto/see', 'AutoController@vista');
+
 
 Route::get('/Ciudad/all', 'CiudadController@index'); 
 Route::get('/Ciudad/show/{id}', 'CiudadController@show'); 
@@ -193,8 +193,19 @@ Route::get('Vuelo', 'VueloController@vuelosOrigenDestino');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+<<<<<<< HEAD
 Route::get('/habitacion/{id}', 'HabitacionController@habitacionReserva');
+=======
+
+Route::get('/habitacion/{id}', 'HabitacionController@habitacionReserva');
+
+>>>>>>> d48744d43a000bd76bbfe02c5c43286f282b690e
 
 
 //CONTROLADORES QUE ESTAMOS USANDO PARA EL FRONT
 Route::get('/reservaVuelo/{id}', 'ReservaVueloController@reserva');
+<<<<<<< HEAD
+=======
+
+Route::get('Auto/see/{auto}', 'AutoController@vista');
+>>>>>>> d48744d43a000bd76bbfe02c5c43286f282b690e
