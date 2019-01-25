@@ -3,6 +3,8 @@
 <?php $hab = json_decode($habitacion) ?>
             <!-- start banner Area -->
             <section class="banner-area relative">
+                <br>
+                <br>
                 <div class="overlay overlay-bg"></div>              
                 <div class="container">
                     <div class="row fullscreen align-items-center justify-content-between" >
