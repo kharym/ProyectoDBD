@@ -32,10 +32,12 @@
             <div class="row">
         @foreach ($autos as $auto)
         <div class="col-lg-4">
-                <div class="single-destinations">
+                <div class="single-destinations" >
+                    <a href="http://homestead.test/Auto/see/{{$auto}}"> 
                     <div class="details">
+                         
                         <h4 class="d-flex justify-content-between">
-                            <span>{{$auto->marca}}</span>                              		
+                            <span>{{$auto->marca}}</span>                       		
                         </h4>
                         <p>
                             <?php $empresa = App\Empresa::where('id','=',$auto->empresa_id)->first();?>
@@ -43,7 +45,7 @@
                         </p>
                         <ul class="package-list">
                             <li class="d-flex justify-content-between align-items-center">
-                            <span> Cantidad de puertas </span>
+                            <span> Cantidad de puertas</span>
                             <span>{{$auto->numero_puertas}}</span>
                             </li>
                             <li class="d-flex justify-content-between align-items-center">
@@ -62,6 +64,7 @@
                                 </li>								
                         </ul>
                     </div>
+                    </a>
                 </div>
             </div>
         @endforeach
