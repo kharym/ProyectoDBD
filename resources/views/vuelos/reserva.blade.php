@@ -37,6 +37,18 @@
                                         @endforeach
                                         </div>
                                     </select>
+                                    <li class="d-flex justify-content-between align-items-center">
+                                            <span for="selectbasic">Seleccionar Asiento</span>
+                                            </li>
+                                            <select id="selectbasic" name="asiento" class="form-control">
+                                                <div class="col-md-4">
+                                                @foreach ($asientos as $asiento)
+                                                    @if($asiento->disponibilidad)
+                                                      <option>{{$asiento->numero_asiento}}</option>
+                                                    @endif
+                                                @endforeach
+                                                </div>
+                                            </select>
                                 </div>
                                         <input type="text" class="form-control date-picker" name="start" placeholder="Fecha Ida " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Ida '">
                                         <input type="text" class="form-control date-picker" name="return" placeholder="Fecha Vuelta " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Vuelta '">							
