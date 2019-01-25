@@ -66,7 +66,16 @@
                         </div>
                     </div>
 
-
+					@auth
+						 <?php $idU = auth()->user()->id;
+						 		$cuentas = \App\CuentaBancaria::where('user_id',$idU); ?>
+						@if (!empty($cuentas))
+							<div style="position: relative; left:630px;"> 
+								<a href="/compra-realizada/{{$id}}/{{request()->name}}/{{request()->dni}}/{{request()->apellido}}/{{request()->asiento}}/{{request()->menor}}/{{request()->asistencia}}/{{request()->celular}}/{{request()->pais}}/{{$idU}}">
+								<input type="submit" class="primary-btn text-uppercase" value="Comprar" >
+							 </div>
+						@endif	
+					@else
                     <!-- INICIO-->
                     <div class="col-md-6">
                     <form class="form-horizontal" method="get" action="/compra-realizada/{{$id}}/{{request()->name}}/{{request()->dni}}/{{request()->apellido}}/{{request()->asiento}}/{{request()->menor}}/{{request()->asistencia}}/{{request()->celular}}/{{request()->pais}}">
@@ -102,7 +111,8 @@
                     </div>
                     <div style="position: relative; left:630px;"> 
                         <input type="submit" class="primary-btn text-uppercase" value="Comprar" >
-                     </div>
+					 </div>
+					 @endauth
             </section>
             
 

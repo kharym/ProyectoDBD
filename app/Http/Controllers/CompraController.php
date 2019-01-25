@@ -163,6 +163,46 @@ class CompraController extends Controller
         $reservaVuelo = \App\ReservaVuelo::create(['vuelo_id'=>$id,'cantidad_pasajeros'=>1,'pasajero_id'=>$pasajero->id,'asiento_id'=>$asientoSeleccionado->id,
         'tipo_cabina'=>0,'cantidad_paradas'=>1,'fecha_reserva'=>$fecha,'hora_reserva'=>$hora, 'precio_reserva_vuelo'=>$vuelo->precio_vuelo,'ida_vuelta'=>False]);
         $reservaVuelo->save();
+        $compra = \App\Compra::create(['fecha_compra'=>$fecha,'hora_compra'=>$hora,]);
+        $compra->save();
+        return view('compra-realizada',compact('reservaVuelo'));
+    }
+
+    public function realizarCompraAuth($id,  $name, $dni, $apellido, $asiento, $menor, $asistencia, $celular,$pais, $idU){
+        $bol;
+        $bol2;
+        $fecha = date('Y-m-d');
+        $hora = date("H:i:s");
+        if($menor=="No"){
+            $bol=False;
+        }
+        else{
+            $bol=True;
+        }
+        if($asistencia=="No"){
+            $bol2=False;
+        }
+        else{
+            $bol2=True;
+        }
+        $cuenta = \App\CuentaBancaria::where('user_id',$idU)->first();
+        $vuelo = \App\Vuelo::where('id',$id)->first();
+        $medioDePago = \App\MedioDePago::where('id',request()->numero)->first();
+        $montoNuevo = $cuenta->saldo - $vuelo->precio_vuelo;
+        $cuenta->update(['saldo'=>$montoNuevo]);
+        $cuenta->save();
+        $as = \App\Asiento::where('vuelo_id',$id)->get();
+        $asientoSeleccionado = $as->where('numero_asiento',$asiento)->first();
+        $asientoSeleccionado->update(['disponibilidad' => False]);
+        $asientoSeleccionado->save();
+        $pasajero = \App\Pasajero::create(['name'=>$name,'apellido'=>$apellido,'dni_pasaporte'=>$dni,
+        'menor_edad'=>$bol,'asistencia_especial'=>$bol2,'telefono'=>$celular,'pais'=>$pais,'movilidad_reducida'=>False]);
+        $pasajero->save();
+        $reservaVuelo = \App\ReservaVuelo::create(['vuelo_id'=>$id,'cantidad_pasajeros'=>1,'pasajero_id'=>$pasajero->id,'asiento_id'=>$asientoSeleccionado->id,
+        'tipo_cabina'=>0,'cantidad_paradas'=>1,'fecha_reserva'=>$fecha,'hora_reserva'=>$hora, 'precio_reserva_vuelo'=>$vuelo->precio_vuelo,'ida_vuelta'=>False]);
+        $reservaVuelo->save();
+        $compra = \App\Compra::create(['user_id'=>$idU,'fecha_compra'=>$fecha,'hora_compra'=>$hora,]);
+        $compra->save();
         return view('compra-realizada',compact('reservaVuelo'));
     }
 }
