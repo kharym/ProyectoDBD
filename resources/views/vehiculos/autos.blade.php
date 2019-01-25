@@ -53,7 +53,7 @@
                                 <span>{{$auto->modelo}}</span>
                             </li>
                             <li class="d-flex justify-content-between align-items-center">
-                                    @if ($auto->transmicion = 0)
+                                    @if ($auto->transmicion == 0)
                                         <span> Transmision </span>
                                         <span> Automático </span>    
                                     @else
