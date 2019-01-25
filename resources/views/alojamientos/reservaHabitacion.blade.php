@@ -1,57 +1,62 @@
 @extends('layouts.app') 
 @section('content')
+<?php $hab = json_decode($habitacion) ?>
             <!-- start banner Area -->
             <section class="banner-area relative">
                 <div class="overlay overlay-bg"></div>              
                 <div class="container">
-                    <div class="row fullscreen align-items-center justify-content-between" >  
+                    <div class="row fullscreen align-items-center justify-content-between" >
+                        
                         <div class="col-lg-4 col-md-6 banner-right">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                              <li class="nav-item">
+                                <a class="nav-link active" id="flight-tab" data-toggle="tab" href="#flight" role="tab" aria-controls="flight" aria-selected="true">Reserva</a>
+                              </li>
+                            </ul>
                             <div class="tab-content" id="myTabContent">
                               <div class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="flight-tab">
                                   <!-- FORM PARA BUSCAR VUELOS -->
-        
-                        @foreach ($habitaciones as $habitacion)
-                        <div class="col-lg-12">
-                            <a href="http://homestead.test/reservaHabitacion/{{$habitacion}}">
-                                <div class="single-destinations">            
-                                    <div class="thumb">
-                                        <img src="img/hotels/d3.jpg" alt="">
-                                    </div>
+                                <form class="form-wrap" method="get" action="Vuelo">
                                     <div class="details">
-                                        <ul class="package-list">
-                                            <li class="d-flex justify-content-between align-items-center">
-                                            <span> Número de Habitación </span>
-                                            <span>{{$habitacion->numero_habitacion}}</span>
-                                            </li>
-                                            <li class="d-flex justify-content-between align-items-center">
-                                                <span> Tipo de Habitación </span>
-                                                @if($habitacion->tipo_habitación)
+                                    <ul class="package-list">
+                                    <li class="d-flex justify-content-between align-items-center">
+                                        <input type="text" class="form-control date-picker" name="start" placeholder="Fecha Recogida " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Recogida '">
+                                    </li>
+                                    <input type="text" class="form-control date-picker" name="start" placeholder="Fecha Devuelta " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Devuelta '">
+                                    </li>
+                                    <li class="d-flex justify-content-between align-items-center">
+                                        <span> N° de habitación: </span>
+
+                                        <span>{{$hab->numero_habitacion}}</span>
+                                    </li>
+                                    <li class="d-flex justify-content-between align-items-center">
+                                        <span> Tipo de Habitación: </span>
+                                                @if($hab->tipo_habitacion)
                                                         <span>Moderna</span>
                                                     @else
                                                         <span>Vintage</span>
                                                     @endif
-                                            </li>
-                                            <li class="d-flex justify-content-between align-items-center">
-                                                <span> Número de Camas </span>
-                                                <span> {{$habitacion->numero_camas}}</span>        
-                                            </li>
-                                            <li class="d-flex justify-content-between align-items-center">
-                                                    <span> Número de Baños </span>
-                                                    <span> {{$habitacion->numero_banos}}</span>        
-                                            </li>
-                                            <li class="d-flex justify-content-between align-items-center">
-                                                    <span> Disponibilidad </span>
-                                                    @if($habitacion->disponibilidad)
+                                    </li>
+                                    <li class="d-flex justify-content-between align-items-center">
+                                        <span> N° de Camas: </span>
+                                        <span>{{$hab->numero_camas}}</span>
+                                    </li>
+                                    <li class="d-flex justify-content-between align-items-center">
+                                        <span> N° de Baños: </span>
+                                        <span>{{$hab->numero_banos}}</span>
+                                    </li>
+                                    <li class="d-flex justify-content-between align-items-center">
+                                                    <span> Disponibilidad: </span>
+                                                    @if($hab->disponibilidad)
                                                         <span> Disponible</span>
                                                     @else
                                                         <span> No disponible</span>span>
                                                     @endif
-                                            </li>                               
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+                                            </li>   
+                                    <br>
+                                   </ul>
+                                    <input type="submit" class="primary-btn text-uppercase" value="Reservar" >                                    
+                                </form>
                                 </div>
                               </div>
                             </div>

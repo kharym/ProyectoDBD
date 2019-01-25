@@ -131,7 +131,8 @@ class HabitacionController extends Controller
         return view('alojamientos.habitacion',compact('habitaciones'));
     }
 
-    public function habitacionReserva($auto){
-        return view('vehiculos.auto-reserva', compact('auto'));
+    public function habitacionReserva($habitacion){
+        
+        return view('alojamientos.reservaHabitacion', compact('habitacion'));
     }
 }
