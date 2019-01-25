@@ -38,7 +38,7 @@
                     <div class="details" style="background-color: #f6fd8c ; color: black;>
                          
                         <h4 class="d-flex justify-content-between">
-                            <span>{{$auto->marca}}</span>                       		
+                           <strong> <span style="text-transform: uppercase;">{{$auto->marca}}</span>  </strong>                     		
                         </h4>
                         <p>
                             <?php $empresa = App\Empresa::where('id','=',$auto->empresa_id)->first();?>
@@ -50,7 +50,7 @@
                             <span>{{$auto->numero_puertas}}</span>
                             </li>
                             <li class="d-flex justify-content-between align-items-center">
-                                <span> Modelo </span>
+                                 <span> Modelo </span> 
                                 <span>{{$auto->modelo}}</span>
                             </li>
                             <li class="d-flex justify-content-between align-items-center">
