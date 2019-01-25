@@ -147,6 +147,7 @@ class CompraController extends Controller
         else{
             $bol2=True;
         }
+        $vuelo = \App\Vuelo::where('id',$id)->first();
         $as = \App\Asiento::where('vuelo_id',$id)->get();
         $asientoSeleccionado = $as->where('numero_asiento',$asiento)->first();
         $asientoSeleccionado->update(['disponibilidad' => False]);
@@ -154,9 +155,9 @@ class CompraController extends Controller
         $pasajero = \App\Pasajero::create(['name'=>$name,'apellido'=>$apellido,'dni_pasaporte'=>$dni,
         'menor_edad'=>$bol,'asistencia_especial'=>$bol2,'telefono'=>$celular,'pais'=>$pais,'movilidad_reducida'=>False]);
         $pasajero->save();
-        $reservaVuelo = \App\ReservaVuelo::create(['vuelo_id'=>$id,'cantidad_pasajeros'=>1,'pasajero_id'=>$pasajero->id,
-        'tipo_cabina'=>0,'cantidad_paradas'=>1,'fecha_reserva'=>$fecha,'hora_reserva'=>$hora]);
+        $reservaVuelo = \App\ReservaVuelo::create(['vuelo_id'=>$id,'cantidad_pasajeros'=>1,'pasajero_id'=>$pasajero->id,'asiento_id'=>$asientoSeleccionado->id,
+        'tipo_cabina'=>0,'cantidad_paradas'=>1,'fecha_reserva'=>$fecha,'hora_reserva'=>$hora, 'precio_reserva_vuelo'=>$vuelo->precio_vuelo,'ida_vuelta'=>False]);
         $reservaVuelo->save();
-        return view('compra-realizada');
+        return view('compra-realizada',compact('reservaVuelo'));
     }
 }
