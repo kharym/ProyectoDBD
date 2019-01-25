@@ -125,4 +125,8 @@ class CompraController extends Controller
         $compra->delete();
         return "";
     }
+
+    public function comprarVuelo($id, Request $request){
+        return view('compra',compact('id'));
+    }
 }
