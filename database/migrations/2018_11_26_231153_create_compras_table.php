@@ -15,12 +15,12 @@ class CreateComprasTable extends Migration
     {
         Schema::create('compras', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('actividad_id')->unsigned();
-            $table->integer('seguro_id')->unsigned();
-            $table->integer('paquete_id')->unsigned();
-            $table->integer('reserva_auto_id')->unsigned();
-            $table->integer('reserva_habitacion_id')->unsigned();
+            $table->integer('user_id')->nullable()->unsigned();
+            $table->integer('actividad_id')->nullable()->unsigned();
+            $table->integer('seguro_id')->nullable()->unsigned();
+            $table->integer('paquete_id')->nullable()->unsigned();
+            $table->integer('reserva_auto_id')->nullable()->unsigned();
+            $table->integer('reserva_habitacion_id')->nullable()->unsigned();
             $table->date('fecha_compra');
             $table->time('hora_compra');
             $table->timestamps();
