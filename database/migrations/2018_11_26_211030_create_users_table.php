@@ -15,19 +15,19 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('rol_id')->unsigned();
-            $table->integer('auditoria_id')->unsigned();
+            $table->integer('rol_id')->nullable()->unsigned();
+            $table->integer('auditoria_id')->nullable()->unsigned();
             $table->string('name',50);
-            $table->string('apellido',40);
+            $table->string('apellido',40)->nullable();
             $table->string('email',450)->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->smallInteger('tipo_documento');
-            $table->string('numero_documento',15);
-            $table->string('pais');
-            $table->date('fecha_nacimiento');
-            $table->string('telefono',18);
+            $table->smallInteger('tipo_documento')->nullable();
+            $table->string('numero_documento',15)->nullable();
+            $table->string('pais')->nullable();
+            $table->date('fecha_nacimiento')->nullable();
+            $table->string('telefono',18)->nullable();
             $table->string('password',60);
-            $table->rememberToken();
+            $table->rememberToken()->nullable();
             $table->timestamps();
 
             //llaves foraneas

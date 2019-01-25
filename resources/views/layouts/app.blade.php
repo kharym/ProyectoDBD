@@ -60,11 +60,11 @@
 				      <nav id="nav-menu-container">
 				        <ul class="nav-menu">
 				          <li><a href="/">Home</a></li>
-				          <li><a href="/Vuelo/all">Flights</a></li>
-				          <li><a href="/Alojamiento/all">Hotels</a></li>
-				          <li><a href="/Auto/all">Cars</a></li>
-				          <li><a href="#">Activity</a></li>
-				          <li class="menu-has-children"><a href="">Packages</a>
+				          <li><a href="/Vuelo/all">Vuelos</a></li>
+				          <li><a href="/Alojamiento/all">Alojamientos</a></li>
+				          <li><a href="/Auto/all">Vehículos</a></li>
+				          <li><a href="#">Actividades</a></li>
+				          <li class="menu-has-children"><a href="">Paquetes</a>
 				            <ul>
 				              <li><a href="blog-home.html">Vuelo + Alojamiento</a></li>
 				              <li><a href="blog-single.html">Vuelo + Car</a></li>
@@ -84,6 +84,7 @@
 										</li>
 									@else
 										<li><a href="/login">Login</a></li>
+										<li><a href="/register">Registrarse</a></li>
 									@endauth
 				        </ul>
                       </nav><!-- #nav-menu-container -->				      		  
