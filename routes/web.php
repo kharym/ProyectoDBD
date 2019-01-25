@@ -213,3 +213,4 @@ Route::get('compra-realizada/{id}/{name}/{dni}/{apellido}/{asiento}/{menor}/{asi
 
 Route::get('compra-realizada/{id}/{name}/{dni}/{apellido}/{asiento}/{menor}/{asistencia}/{celular}/{pais}/{idU}','CompraController@realizarCompraAuth');
 
+Route::get('movimientos/{id}','UserController@movimientos');

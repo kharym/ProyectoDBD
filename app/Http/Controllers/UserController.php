@@ -133,7 +133,7 @@ class UserController extends Controller
     }
 
     public function movimientos($id){
-        $compra = App\Compra::where('user_id',$id)->get();
-        $compra = App\ReservaVuelo::where('user_id',$id)->get();
+        $compras = \App\Compra::where('user_id',$id)->get();
+        return view('user.movimientos',compact('compras'));
     }
 }

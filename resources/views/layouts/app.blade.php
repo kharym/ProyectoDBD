@@ -71,8 +71,8 @@
 				              <li><a href="blog-single.html">Hotel + Car</a></li>
 				            </ul>
 				          </li>					          					          		          
-									<li><a href="contact.html">Contact</a></li>
 									@auth
+						<li><a href="movimientos/{{auth()->user()->id}}">Movimientos</a></li>
 										<li class ="menu-has-children">
 											<a href="#">{{ auth()->user()->name }}</a>
 											<ul>
