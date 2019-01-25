@@ -11,7 +11,6 @@
                         <h1 class="text-white">
                             Habitación               
                         </h1>   
-                        <p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="hotels.html"> Hotels</a></p>
                     </div>  
                 </div>
             </div>
@@ -25,7 +24,7 @@
                         <div class="menu-content pb-40 col-lg-8">
                             <div class="title text-center">
                                 <h1 class="mb-10">Escoja su habitación</h1>
-                                <p>El mejor vehículo adaptado a tus necesidades</p>
+                                <p>La mejor habitación para descansar</p>
                             </div>
                         </div>
                     </div>                      

@@ -3,6 +3,7 @@
 <?php $a = json_decode($auto) ?>
             <!-- start banner Area -->
             <section class="banner-area relative">
+                <br>
                 <div class="overlay overlay-bg"></div>              
                 <div class="container">
                     <div class="row fullscreen align-items-center justify-content-between" >
@@ -20,9 +21,9 @@
                                     <div class="details">
                                     <ul class="package-list">
                                     <li class="d-flex justify-content-between align-items-center">
-                                        <input type="text" class="form-control date-picker" name="start" placeholder="Fecha Recogida " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Recogida '">
+                                        <input type="text" class="form-control date-picker" name="start" placeholder="Fecha Arriendo " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Arriendo '">
                                     </li>
-                                    <input type="text" class="form-control date-picker" name="start" placeholder="Fecha Devuelta " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Devuelta '">
+                                    <input type="text" class="form-control date-picker" name="start" placeholder="Fecha Devolución} " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Devolución '">
                                     </li>
                                     <li class="d-flex justify-content-between align-items-center">
                                         <span> Marca: </span>

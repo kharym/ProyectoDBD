@@ -3,6 +3,10 @@
 <?php $asientos = App\Asiento::where('vuelo_id',$id)->get();?>
 			<!-- start banner Area -->
 			<section class="banner-area relative">
+				<br>
+				<br>
+				<br>
+				<br>
 				<div class="overlay overlay-bg"></div>				
 				<div class="container">
 					<div class="row fullscreen align-items-center justify-content-between">
