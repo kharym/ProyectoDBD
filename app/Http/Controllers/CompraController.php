@@ -147,7 +147,12 @@ class CompraController extends Controller
         else{
             $bol2=True;
         }
+
         $vuelo = \App\Vuelo::where('id',$id)->first();
+        $medioDePago = \App\MedioDePago::where('id',request()->numero);
+        $montoNuevo = $medioDePago->monto - $vuelo->precio_vuelo;
+        $medioDePago->update(['monto'=>$montoNuevo]);
+        $medioDePago->save();
         $as = \App\Asiento::where('vuelo_id',$id)->get();
         $asientoSeleccionado = $as->where('numero_asiento',$asiento)->first();
         $asientoSeleccionado->update(['disponibilidad' => False]);

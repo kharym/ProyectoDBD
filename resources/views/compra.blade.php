@@ -23,12 +23,13 @@
 						<div class="row d-flex justify-content-center">
 							<div class="menu-content pb-40 col-lg-8">
 								<div class="title text-center">
-									<h1 class="mb-10">Compra</h1>
+									<h1 class="mb-10">Detalle Compra</h1>
 								</div>
 							</div>
 						</div>						
 				<div class="row" style="width: 5000px">
-                    <div class="col-lg-1" style="position: relative; left:374px;">
+                    <!--<div class="col-lg-1" style="position: relative; left:374px;">-->
+                    <div class="col-lg-1">
                         <div class="single-destinations">
                             <div class="details">
                                 <ul class="package-list">
@@ -67,16 +68,40 @@
 
 
                     <!-- INICIO-->
-		
+                    <div class="col-md-6">
+                    <form class="form-horizontal" method="get" action="/compra-realizada/{{$id}}/{{request()->name}}/{{request()->dni}}/{{request()->apellido}}/{{request()->asiento}}/{{request()->menor}}/{{request()->asistencia}}/{{request()->celular}}/{{request()->pais}}">
+                    <div class="form-group">
+                            <label class="col-md-4 control-label" for="selectbasic">Tipo de tarjeta</label>
+                            <div class="col-md-4">
+                              <select id="selectbasic" name="tipo" class="form-control">
+                                <option value="1">Crédito</option>
+                                <option value="2">Débito</option>
+                              </select>
+                            </div>
+                          </div>
+                          
+                          <!-- Text input-->
+                          <div class="form-group">
+                            <label class="col-md-4 control-label" for="textinput">Número de tarjeta</label>  
+                            <div class="col-md-4">
+                            <input id="textinput" name="numero" type="text" placeholder="N°" class="form-control input-md">
+                              
+                            </div>
+                          </div>
+                          
+                          </fieldset>
+                          </form>
+                        </div>
+                    </div>
+                </div>
+                          
 
                     <!-- FIN -->
 
 				</div>
                     </div>
                     <div style="position: relative; left:630px;"> 
-                    <a href="/compra-realizada/{{$id}}/{{request()->name}}/{{request()->dni}}/{{request()->apellido}}/{{request()->asiento}}/{{request()->menor}}/{{request()->asistencia}}/{{request()->celular}}/{{request()->pais}}">
                         <input type="submit" class="primary-btn text-uppercase" value="Comprar" >
-                        
                      </div>
             </section>
             
