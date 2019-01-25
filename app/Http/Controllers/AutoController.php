@@ -39,8 +39,9 @@ class AutoController extends Controller
      */
     public function index()
     {
-        $auto = Auto::all();
-        return $auto;
+        $autos = Auto::all();
+        
+        return view('vehiculos.autosAll',compact('autos'));
     }
 
     /**

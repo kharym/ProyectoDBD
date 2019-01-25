@@ -35,8 +35,9 @@ class AlojamientoController extends Controller
      */
     public function index() 
     {
-        $alojamiento = Alojamiento::all();
-        return $alojamiento;
+        $alojamientos = Alojamiento::all();
+
+        return view('alojamientos.alojamientoAll',compact('alojamientos'));
     }
 
     /**
