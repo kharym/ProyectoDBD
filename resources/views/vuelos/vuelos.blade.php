@@ -30,11 +30,7 @@
     <div class="row">
         @foreach ($vuelos as $vuelo)
         <div class="col-lg-4">
-<<<<<<< HEAD
-            <a href="/">
-=======
                 <a href="/reservaVuelo/{{$vuelo->id}}">
->>>>>>> 0600051d5e06a352e4dec86f44eb8f43ef1b3e78
                 <div class="single-destinations">
                     <div class="details">
                         <ul class="package-list">
