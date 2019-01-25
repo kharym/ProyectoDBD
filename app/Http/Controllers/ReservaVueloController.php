@@ -132,4 +132,8 @@ class ReservaVueloController extends Controller
         return "";
     }
 
+    public function reserva($id){
+        return view('vuelos.reserva',compact('id'));
+    }
+
 }
