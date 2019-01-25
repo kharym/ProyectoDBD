@@ -199,17 +199,11 @@ Route::get('/habitacion/{id}', 'HabitacionController@habitacionReserva');
 
 Route::get('/habitacion/{id}', 'HabitacionController@habitacionReserva');
 
->>>>>>> d48744d43a000bd76bbfe02c5c43286f282b690e
 
 
 //CONTROLADORES QUE ESTAMOS USANDO PARA EL FRONT
 Route::get('/reservaVuelo/{id}', 'ReservaVueloController@reserva');
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-=======
 
 Route::get('Auto/see/{auto}', 'AutoController@vista');
->>>>>>> d48744d43a000bd76bbfe02c5c43286f282b690e
->>>>>>> 1c34c5a60d76f378d5937635d459fefa649b7fe7
+
