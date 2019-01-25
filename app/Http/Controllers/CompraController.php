@@ -130,31 +130,31 @@ class CompraController extends Controller
         return view('compra',compact('id'));
     }
 
-    public function realizarCompra($id,  $data){
+    public function realizarCompra($id,  $name, $dni, $apellido, $asiento, $menor, $asistencia, $celular,$pais){
         $bol;
         $bol2;
         $fecha = date('Y-m-d');
         $hora = date("H:i:s");
-        if($data->menor=="No"){
-            $bol=false;
+        if($menor=="No"){
+            $bol=False;
         }
         else{
-            $bol=true;
+            $bol=True;
         }
-        if($data->asistencia_especial=="No"){
-            $bol=false;
+        if($asistencia=="No"){
+            $bol2=False;
         }
         else{
-            $bol=true;
+            $bol2=True;
         }
-        $asiento = \App\Asiento::where('vuelo_id',$id)->get();
-        $asientoSeleccionado = $asiento->where('numero_asiento','$data()->asiento')->first();
-        $asientoSeleccionado->update(['disponibilidad' => false]);
+        $as = \App\Asiento::where('vuelo_id',$id)->get();
+        $asientoSeleccionado = $as->where('numero_asiento',$asiento)->first();
+        $asientoSeleccionado->update(['disponibilidad' => False]);
         $asientoSeleccionado->save();
-        $pasajero = \App\Pasajero::create(['name'=>$data->name,'apellido'=>$data->apellido,'dni_pasaporte'=>$data->dni,
-        'menor_edad'=>$bol,'asistencia_especial'=>$bol2,'telefono'=>$data->celular,'pais'=>$data->pais]);
+        $pasajero = \App\Pasajero::create(['name'=>$name,'apellido'=>$apellido,'dni_pasaporte'=>$dni,
+        'menor_edad'=>$bol,'asistencia_especial'=>$bol2,'telefono'=>$celular,'pais'=>$pais,'movilidad_reducida'=>False]);
         $pasajero->save();
-        $reservaVuelo = App\ReservaVuelo::create(['vuelo_id'=>$id,'cantidad_pasajeros'=>1,'pasajero_id'=>$pasajero->id,
+        $reservaVuelo = \App\ReservaVuelo::create(['vuelo_id'=>$id,'cantidad_pasajeros'=>1,'pasajero_id'=>$pasajero->id,
         'tipo_cabina'=>0,'cantidad_paradas'=>1,'fecha_reserva'=>$fecha,'hora_reserva'=>$hora]);
         $reservaVuelo->save();
         return view('compra-realizada');

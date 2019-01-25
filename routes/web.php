@@ -209,7 +209,8 @@ Route::get('Auto/see/{auto}', 'AutoController@vista');
 
 Route::get('compra/{id}/', 'CompraController@comprarVuelo');
 
-Route::get('compra-realizada/{id}/{data}','CompraController@realizarCompra');
+Route::get('compra-realizada/{id}/{name}/{dni}/{apellido}/{asiento}/{menor}/{asistencia}/{celular}/{pais}','CompraController@realizarCompra');
+
 
 // route to show the login form
 Route::get('login', array('uses' , 'HomeController@showLogin'));

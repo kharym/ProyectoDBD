@@ -74,7 +74,7 @@
 				</div>
                     </div>
                     <div style="position: relative; left:630px;"> 
-                            <a href="/compra-realizada/{{$id}}">
+                    <a href="/compra-realizada/{{$id}}/{{request()->name}}/{{request()->dni}}/{{request()->apellido}}/{{request()->asiento}}/{{request()->menor}}/{{request()->asistencia}}/{{request()->celular}}/{{request()->pais}}">
                         <input type="submit" class="primary-btn text-uppercase" value="Comprar" >
                         
                      </div>
