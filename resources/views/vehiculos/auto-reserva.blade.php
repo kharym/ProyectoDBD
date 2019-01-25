@@ -1,5 +1,6 @@
 @extends('layouts.app') 
 @section('content')
+<?php $a = json_decode($auto) ?>
             <!-- start banner Area -->
             <section class="banner-area relative">
                 <div class="overlay overlay-bg"></div>              
@@ -19,23 +20,26 @@
                                     <div class="details">
                                     <ul class="package-list">
                                     <li class="d-flex justify-content-between align-items-center">
-                                        <span> Fecha Recogido: </span>
-                                        <span> La hora del pico </span>
+                                        <input type="text" class="form-control date-picker" name="start" placeholder="Fecha Recogida " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Recogida '">
                                     </li>
-                                    <li class="d-flex justify-content-between align-items-center">
-                                        <span> Fecha Devuelta: </span>
+                                    <input type="text" class="form-control date-picker" name="start" placeholder="Fecha Devuelta " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Devuelta '">
                                     </li>
                                     <li class="d-flex justify-content-between align-items-center">
                                         <span> Marca: </span>
+
+                                        <span>{{$a->marca}}</span>
                                     </li>
                                     <li class="d-flex justify-content-between align-items-center">
                                         <span> Modelo: </span>
+                                        <span>{{$a->modelo}}</span>
                                     </li>
                                     <li class="d-flex justify-content-between align-items-center">
                                         <span> Numero puertas: </span>
+                                        <span>{{$a->numero_puertas}}</span>
                                     </li>
                                     <li class="d-flex justify-content-between align-items-center">
                                         <span> Transmisión: </span>
+                                        <span>{{$a->tipo_transmision}}</span>
                                     </li>
                                     <br>
                                    </ul>
