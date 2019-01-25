@@ -6,7 +6,7 @@
 				<div class="overlay overlay-bg"></div>				
 				<div class="container">
 					<div class="row fullscreen align-items-center justify-content-between">
-						<div class="col-lg-4 col-md-6 banner-right">
+						<div class="col-lg-6 col-md-6 banner-right">
 							<ul class="nav nav-tabs" id="myTab" role="tablist">
 							  <li class="nav-item">
 							    <a class="nav-link active" id="flight-tab" data-toggle="tab" href="#flight" role="tab" aria-controls="flight" aria-selected="true">Reserva</a>
@@ -32,27 +32,39 @@
                                         <div class="col-md-4">
                                         @foreach ($asientos as $asiento)
                                             @if($asiento->disponibilidad)
-                                              <option>{{$asiento->numero_asiento}}</option>
+                                        <option value="{{$asiento->numero_asiento}}">{{$asiento->numero_asiento}}</option>
                                             @endif
                                         @endforeach
                                         </div>
                                     </select>
-                                    <li class="d-flex justify-content-between align-items-center">
-                                            <span for="selectbasic">Seleccionar Asiento</span>
-                                            </li>
-                                            <select id="selectbasic" name="asiento" class="form-control">
+                                    <div class = "row">
+                                        <div class = "col-md-6">
+                                        <li class="d-flex justify-content-between align-items-center">
+                                            <span for="selectbasic">Menor Edad</span>
+                                        </li>
+                                            <select id="selectbasic" name="menor" class="form-control">
                                                 <div class="col-md-4">
-                                                @foreach ($asientos as $asiento)
-                                                    @if($asiento->disponibilidad)
-                                                      <option>{{$asiento->numero_asiento}}</option>
-                                                    @endif
-                                                @endforeach
+                                                    <option value="Si"> Si </option>
+                                                    <option value="No"> No </option>
                                                 </div>
                                             </select>
+                                        </div>
+                                        <div class = "col-md-6">
+                                        <li class="d-flex justify-content-between align-items-center">
+                                            <span for="selectbasic">Asistencia Especial</span>
+                                        </li>
+                                        <select id="selectbasic" name="asistencia" class="form-control">
+                                            <div class="col-md-4">
+                                                <option value="Si"> Si </option>
+                                                <option value="No"> No </option>
+                                            </div>
+                                        </select>
+                                    </div>
+                                    </div>
                                 </div>
-                                        <input type="text" class="form-control date-picker" name="start" placeholder="Fecha Ida " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Ida '">
-                                        <input type="text" class="form-control date-picker" name="return" placeholder="Fecha Vuelta " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Vuelta '">							
-                                        <input type="submit" class="primary-btn text-uppercase" value="Buscar" >									
+                                    <input type="text" class="form-control" name="dni" placeholder="DNI " onfocus="this.placeholder = ''" onblur="this.placeholder = 'DNI '">
+                                    <input type="text" class="form-control" name="celular" placeholder="Celular " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Celular '">							
+                                    <input type="submit" class="primary-btn text-uppercase" value="Comprar" >									
 								</form>
 							  </div>
 		
