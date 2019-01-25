@@ -1,20 +1,17 @@
-
 @extends('layouts.app')
 @section('content')
-    
-          
-        <!-- start banner Area -->
-        <section class="about-banner relative">
-            <div class="overlay overlay-bg"></div>
-            <div class="container">				
-                <div class="row d-flex align-items-center justify-content-center">
-                    <div class="about-content col-lg-12">
-                        <h1 class="text-white">
-                            Vehículos				
-                        </h1>	
-                    </div>	
-                </div>
+
+<section class="about-banner relative">
+        <div class="overlay overlay-bg"></div>
+        <div class="container">				
+            <div class="row d-flex align-items-center justify-content-center">
+                <div class="about-content col-lg-12">
+                    <h1 class="text-white">
+                        Vuelos				
+                    </h1>	
+                </div>	
             </div>
+        </div>
         </section>
         <!-- End banner Area -->	
         <br>
@@ -24,52 +21,53 @@
                     <div class="row d-flex justify-content-center">
                         <div class="menu-content pb-40 col-lg-8">
                             <div class="title text-center">
-                                <h1 class="mb-10">Transporte</h1>
-                                <p>El mejor vehículo adaptado a tus necesidades</p>
+                                <h1 class="mb-10">Vuelos</h1>
+                                <p>Todos tus destinos en un solo lugar</p>
                             </div>
                         </div>
                     </div>						
-            <div class="row">
-        @foreach ($autos as $auto)
+    <div class="row">
+        @foreach ($vuelos as $vuelo)
         <div class="col-lg-4">
-                <div class="single-destinations" >
-                    <a href="http://homestead.test/Auto/see/{{$auto}}"> 
+                <a href="/reservaVuelo/{{$vuelo->id}}">
+                <div class="single-destinations">
                     <div class="details" style="background-color: #f6fd8c ; color: black;>
-                         
-                        <h4 class="d-flex justify-content-between">
-                           <strong> <span style="text-transform: uppercase;">{{$auto->marca}}</span>  </strong>                     		
-                        </h4>
-                        <p>
-                            <?php $empresa = App\Empresa::where('id','=',$auto->empresa_id)->first();?>
-                            Empresa   |   {{$empresa->nombre_empresa}}
-                        </p>
                         <ul class="package-list">
                             <li class="d-flex justify-content-between align-items-center">
-                            <span> Cantidad de puertas</span>
-                            <span>{{$auto->numero_puertas}}</span>
+                            <span> Ciudad origen </span>
+                            <span>{{$vuelo->origen}}</span>
                             </li>
                             <li class="d-flex justify-content-between align-items-center">
-                                 <span> Modelo </span> 
-                                <span>{{$auto->modelo}}</span>
+                                <span> Ciudad destino </span>
+                                <span>{{$vuelo->destino}}</span>
                             </li>
                             <li class="d-flex justify-content-between align-items-center">
-                                    @if ($auto->transmicion == 0)
-                                        <span> Transmision </span>
-                                        <span> Automático </span>    
-                                    @else
-                                        <span> Transmision </span>
-                                        <span> Mecánico </span>
-                                    @endif
-                                    
-                                </li>								
+                                <span> Precio </span>
+                                <span> {{$vuelo->precio_vuelo}}</span>        
+                            </li>
+                            <li class="d-flex justify-content-between align-items-center">
+                                    <span> Fecha partida </span>
+                                    <span> {{$vuelo->fecha_ida}}</span>        
+                            </li>
+                            <li class="d-flex justify-content-between align-items-center">
+                                    <span> Fecha llegada </span>
+                                    <span> {{$vuelo->fecha_llegada}}</span>        
+                            </li>
+                            <li class="d-flex justify-content-between align-items-center">
+                                    <span> Hora partida </span>
+                                    <span> {{$vuelo->hora_ida}}</span>        
+                            </li>
+                            <li class="d-flex justify-content-between align-items-center">
+                                    <span> Hora llegada </span>
+                                    <span> {{$vuelo->hora_llegada}}</span>        
+                            </li>								
                         </ul>
                     </div>
-                    </a>
                 </div>
             </div>
         @endforeach
-            </div>
-                </div>
+        </div>
+    </div>
         </section>
 
         <!-- End destinations Area -->
@@ -178,4 +176,5 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         <script src="js/main.js"></script>	
     </body>
 </html>
+
 @endsection

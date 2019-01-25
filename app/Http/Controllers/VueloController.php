@@ -47,8 +47,9 @@ class VueloController extends Controller
      */
     public function index()
     {
-        $vuelo = Vuelo::all();
-        return view('vuelos',content('vuelo'));
+        $vuelos = Vuelo::all();
+
+         return view('vuelos.vuelosAll',compact('vuelos'));
     }
 
     /**
