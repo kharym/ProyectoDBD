@@ -12,7 +12,7 @@
         
                         @foreach ($habitaciones as $habitacion)
                         <div class="col-lg-12">
-                            <a href="/">
+                            <a href="http://homestead.test/reservaHabitacion/{{$habitacion}}">
                                 <div class="single-destinations">            
                                     <div class="thumb">
                                         <img src="img/hotels/d3.jpg" alt="">
