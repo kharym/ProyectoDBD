@@ -192,3 +192,7 @@ Route::get('Vuelo', 'VueloController@vuelosOrigenDestino');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+//CONTROLADORES QUE ESTAMOS USANDO PARA EL FRONT
+Route::get('/reservaVuelo/{id}', 'ReservaVueloController@reserva');
