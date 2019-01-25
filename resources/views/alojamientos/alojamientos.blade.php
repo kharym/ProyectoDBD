@@ -34,7 +34,7 @@
 				<div class="col-lg-4">
 					<a href="/habitacion/{{$alojamiento->id}}">
 					<div class="single-destinations">
-						<div class="details">
+						<div class="details" style="background-color: #f6fd8c ; color: black;">
 							<h4 class="d-flex justify-content-between">
 								<span>{{$alojamiento->nombre_alojamiento}}</span>                              	
 								<div class="star">
@@ -71,9 +71,7 @@
 									@endif				
 								</div>	
 							</h4>
-							<p>
-								View on map   |   49 Reviews
-							</p>
+							
 							<ul class="package-list">
 								<li class="d-flex justify-content-between align-items-center">
 									@if($alojamiento->disponibilidad)
@@ -83,10 +81,6 @@
 										<span>Disponibilidad</span>
 										<span>No disponible</span>
 									@endif
-								</li>
-								<li class="d-flex justify-content-between align-items-center">
-									<span>Gymnesium</span>
-									<span>No</span>
 								</li>													
 							</ul>
 						</div>

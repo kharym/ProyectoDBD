@@ -19,7 +19,7 @@
         <!-- End banner Area -->    
         <br>
         <br>
-        <section class="destinations-area section-gap">
+        <section class="destinations-area section-gap")>
                 <div class="container">
                     <div class="row d-flex justify-content-center">
                         <div class="menu-content pb-40 col-lg-8">
@@ -33,17 +33,19 @@
             
         @foreach ($habitaciones as $habitacion)
                         <div class="col-lg-4">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                              <li class="nav-item">
+                                <a class="nav-link active" id="flight-tab" data-toggle="tab" href="#flight" role="tab" aria-controls="flight" aria-selected="true">Habitación</a>
+                              </li>
+                            </ul>
                             <a href="http://homestead.test/habitacion/reserva/{{$habitacion}}">
                                 <div class="single-destinations">            
-                                    <div class="thumb">
-                                        <img src="img/hotels/d3.jpg" alt="">
-                                    </div>
-                                    <div class="details" style="background-color: grey ; color: black;" >
+                                    <div class="details" style="background-color: #f6fd8c ; color: black;">
                                         <ul class="package-list">
-                                            <li class="d-flex justify-content-between align-items-center">
-                                            <span> Número de Habitación </span>
-                                            <span>{{$habitacion->numero_habitacion}}</span>
-                                            </li>
+                                            <h4 class="d-flex justify-content-between align-items-center">
+                                                <span> Número de Habitación </span>
+                                                <span>{{$habitacion->numero_habitacion}}</span>
+                                            </h4>
                                             <li class="d-flex justify-content-between align-items-center">
                                                 <span> Tipo de Habitación </span>
                                                 @if($habitacion->tipo_habitación)
