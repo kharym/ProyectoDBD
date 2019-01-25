@@ -148,4 +148,8 @@ class AutoController extends Controller
         }
         return view('vehiculos.autos',compact('autos'));
     }
+
+    public function vista(){
+        return view('vehiculos.auto-reserva');
+    }
 }

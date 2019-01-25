@@ -58,6 +58,7 @@ Route::post('/Auto/store', 'AutoController@store');
 Route::put('/Auto/{auto}', 'AutoController@update');
 //Anidado
 Route::get('Auto','AutoController@autosPais');
+Route::get('Auto/see', 'AutoController@vista');
 
 Route::get('/Ciudad/all', 'CiudadController@index'); 
 Route::get('/Ciudad/show/{id}', 'CiudadController@show'); 
