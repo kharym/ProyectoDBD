@@ -207,3 +207,7 @@ Route::get('/reservaVuelo/{id}', 'ReservaVueloController@reserva');
 
 Route::get('Auto/see/{auto}', 'AutoController@vista');
 
+Route::get('compra/{id}/', 'CompraController@comprarVuelo');
+
+Route::get('compra-realizada/{id}/{data}','CompraController@realizarCompra');
+

@@ -15,11 +15,11 @@
 							<div class="tab-content" id="myTabContent">
 							  <div class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="flight-tab">
 								  <!-- FORM PARA RESERVAR VUELOS -->
-								<form class="form-wrap" method="get" action="Vuelo">
+								<form class="form-wrap" method="get" action="/compra/{{$id}}">
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-6">    
-                                            <input type="text" class="form-control" name="nombre" placeholder="Nombre " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nombre '">									
+                                            <input type="text" class="form-control" name="name" placeholder="Nombre " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nombre '">									
                                         </div>
                                         <div class="col-md-6">
                                             <input type="text" class="form-control" name="apellido" placeholder="Apellido " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Apellido '">
@@ -64,6 +64,7 @@
                                 </div>
                                     <input type="text" class="form-control" name="dni" placeholder="DNI " onfocus="this.placeholder = ''" onblur="this.placeholder = 'DNI '">
                                     <input type="text" class="form-control" name="celular" placeholder="Celular " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Celular '">							
+                                    <input type="text" class="form-control" name="pais" placeholder="Pais " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Pais '">	
                                     <input type="submit" class="primary-btn text-uppercase" value="Comprar" >									
 								</form>
 							  </div>
