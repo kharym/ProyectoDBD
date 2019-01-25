@@ -165,6 +165,8 @@ class CompraController extends Controller
         $reservaVuelo->save();
         $compra = \App\Compra::create(['fecha_compra'=>$fecha,'hora_compra'=>$hora,]);
         $compra->save();
+        $crv = \App\Compra_ReservaVuelo::create(['compra_id'=>$compra->id,'reserva_vuelo_id'=>$reservaVuelo->id]);
+        $crv->save();
         return view('compra-realizada',compact('reservaVuelo'));
     }
 
@@ -203,6 +205,8 @@ class CompraController extends Controller
         $reservaVuelo->save();
         $compra = \App\Compra::create(['user_id'=>$idU,'fecha_compra'=>$fecha,'hora_compra'=>$hora,]);
         $compra->save();
+        $crv = \App\Compra_ReservaVuelo::create(['compra_id'=>$compra->id,'reserva_vuelo_id'=>$reservaVuelo->id]);
+        $crv->save();
         return view('compra-realizada',compact('reservaVuelo'));
     }
 }

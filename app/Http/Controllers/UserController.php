@@ -131,4 +131,9 @@ class UserController extends Controller
         $usuaio->delete();
         return "";
     }
+
+    public function movimientos($id){
+        $compra = App\Compra::where('user_id',$id)->get();
+        $compra = App\ReservaVuelo::where('user_id',$id)->get();
+    }
 }
