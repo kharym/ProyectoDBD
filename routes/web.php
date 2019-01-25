@@ -211,3 +211,9 @@ Route::get('compra/{id}/', 'CompraController@comprarVuelo');
 
 Route::get('compra-realizada/{id}/{data}','CompraController@realizarCompra');
 
+// route to show the login form
+Route::get('login', array('uses' , 'HomeController@showLogin'));
+
+// route to process the form
+Route::post('login', array('uses' , 'HomeController@doLogin'));
+
