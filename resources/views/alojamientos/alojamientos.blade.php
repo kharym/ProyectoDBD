@@ -34,9 +34,6 @@
 				<div class="col-lg-4">
 					<a href="/habitacion/{{$alojamiento->id}}">
 					<div class="single-destinations">
-						<div class="thumb">
-							<img src="img/hotels/d3.jpg" alt="">
-						</div>
 						<div class="details">
 							<h4 class="d-flex justify-content-between">
 								<span>{{$alojamiento->nombre_alojamiento}}</span>                              	
