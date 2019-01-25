@@ -2,7 +2,7 @@
 @section('content')
 
         </section>
-        <!-- End banner Area -->	
+        <!-- End banner Area -->    
         <br>
         <br>
         <section class="destinations-area section-gap">
@@ -10,51 +10,54 @@
                     <div class="row d-flex justify-content-center">
                         <div class="menu-content pb-40 col-lg-8">
                             <div class="title text-center">
-                                <h1 class="mb-10">Vuelos</h1>
-                                <p>Todos tus destinos en un solo lugar</p>
+                                <h1 class="mb-10">Habitaciones del Hotel</h1>
+                                <p>Elige la mejor habitación en donde descansar</p>
                             </div>
                         </div>
-                    </div>						
+                    </div>                      
     <div class="row">
-        @foreach ($vuelos as $vuelo)
-        <div class="col-lg-4">
-            <a href="/">
-                <div class="single-destinations">
-                    <div class="details">
-                        <ul class="package-list">
-                            <li class="d-flex justify-content-between align-items-center">
-                            <span> Ciudad origen </span>
-                            <span>{{$vuelo->origen}}</span>
-                            </li>
-                            <li class="d-flex justify-content-between align-items-center">
-                                <span> Ciudad destino </span>
-                                <span>{{$vuelo->destino}}</span>
-                            </li>
-                            <li class="d-flex justify-content-between align-items-center">
-                                <span> Precio </span>
-                                <span> {{$vuelo->precio_vuelo}}</span>        
-                            </li>
-                            <li class="d-flex justify-content-between align-items-center">
-                                    <span> Fecha partida </span>
-                                    <span> {{$vuelo->fecha_ida}}</span>        
-                            </li>
-                            <li class="d-flex justify-content-between align-items-center">
-                                    <span> Fecha llegada </span>
-                                    <span> {{$vuelo->fecha_llegada}}</span>        
-                            </li>
-                            <li class="d-flex justify-content-between align-items-center">
-                                    <span> Hora partida </span>
-                                    <span> {{$vuelo->hora_ida}}</span>        
-                            </li>
-                            <li class="d-flex justify-content-between align-items-center">
-                                    <span> Hora llegada </span>
-                                    <span> {{$vuelo->hora_llegada}}</span>        
-                            </li>								
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        @endforeach
+                                        @foreach ($habitaciones as $habitacion)
+
+                                        <div class="col-lg-4">
+                                            <a href="/">
+                                                <div class="single-destinations">
+                                                    <div class="details">
+                                                        <ul class="package-list">
+                                                            <li class="d-flex justify-content-between align-items-center">
+                                                            <span> Número de Habitación </span>
+                                                            <span>{{$habitacion->numero_habitacion}}</span>
+                                                            </li>
+                                                            <li class="d-flex justify-content-between align-items-center">
+                                                                <span> Tipo de Habitación </span>
+                                                                @if($habitacion->tipo_habitación)
+                                                                        <span></span>
+                                                                    @else
+                                                                        <span> No disponible</span>span>
+                                                                    @endif
+                                                                <span>{{$habitacion->tipo_habitacion}}</span>
+
+                                                            </li>
+                                                            <li class="d-flex justify-content-between align-items-center">
+                                                                <span> Número de Camas </span>
+                                                                <span> {{$habitacion->numero_camas}}</span>        
+                                                            </li>
+                                                            <li class="d-flex justify-content-between align-items-center">
+                                                                    <span> Número de Baños </span>
+                                                                    <span> {{$habitacion->numero_banos}}</span>        
+                                                            </li>
+                                                            <li class="d-flex justify-content-between align-items-center">
+                                                                    <span> Disponibilidad </span>
+                                                                    @if($habitacion->disponibilidad)
+                                                                        <span> Disponible</span>
+                                                                    @else
+                                                                        <span> No disponible</span>span>
+                                                                    @endif
+                                                            </li>                               
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
         </div>
     </div>
         </section>
@@ -63,7 +66,7 @@
     
 
 
-        <!-- start footer Area -->		
+        <!-- start footer Area -->      
         <footer class="footer-area section-gap">
             <div class="container">
 
@@ -95,22 +98,22 @@
                                         <li><a href="#">Blog</a></li>
                                         <li><a href="#">Contact</a></li>
                                     </ul>
-                                </div>										
-                            </div>							
+                                </div>                                      
+                            </div>                          
                         </div>
-                    </div>							
+                    </div>                          
                     <div class="col-lg-3  col-md-6 col-sm-6">
                         <div class="single-footer-widget">
                             <h6>Newsletter</h6>
                             <p>
-                                For business professionals caught between high OEM price and mediocre print and graphic output.									
-                            </p>								
+                                For business professionals caught between high OEM price and mediocre print and graphic output.                                 
+                            </p>                                
                             <div id="mc_embed_signup">
                                 <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscription relative">
                                     <div class="input-group d-flex flex-row">
                                         <input name="EMAIL" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address '" required="" type="email">
-                                        <button class="btn bb-btn"><span class="lnr lnr-location"></span></button>		
-                                    </div>									
+                                        <button class="btn bb-btn"><span class="lnr lnr-location"></span></button>      
+                                    </div>                                  
                                     <div class="mt-10 info"></div>
                                 </form>
                             </div>
@@ -130,7 +133,7 @@
                                 <li><img src="img/i8.jpg" alt=""></li>
                             </ul>
                         </div>
-                    </div>						
+                    </div>                      
                 </div>
 
                 <div class="row footer-bottom d-flex justify-content-between align-items-center">
@@ -147,22 +150,22 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 </div>
             </div>
         </footer>-->
-        <!-- End footer Area -->	
+        <!-- End footer Area -->    
 
         <script src="js/vendor/jquery-2.2.4.min.js"></script>
         <script src="js/popper.min.js"></script>
-        <script src="js/vendor/bootstrap.min.js"></script>			
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>		
-         <script src="js/jquery-ui.js"></script>					
-          <script src="js/easing.min.js"></script>			
+        <script src="js/vendor/bootstrap.min.js"></script>          
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>     
+         <script src="js/jquery-ui.js"></script>                    
+          <script src="js/easing.min.js"></script>          
         <script src="js/hoverIntent.js"></script>
-        <script src="js/superfish.min.js"></script>	
+        <script src="js/superfish.min.js"></script> 
         <script src="js/jquery.ajaxchimp.min.js"></script>
-        <script src="js/jquery.magnific-popup.min.js"></script>						
-        <script src="js/jquery.nice-select.min.js"></script>					
-        <script src="js/owl.carousel.min.js"></script>							
-        <script src="js/mail-script.js"></script>	
-        <script src="js/main.js"></script>	
+        <script src="js/jquery.magnific-popup.min.js"></script>                     
+        <script src="js/jquery.nice-select.min.js"></script>                    
+        <script src="js/owl.carousel.min.js"></script>                          
+        <script src="js/mail-script.js"></script>   
+        <script src="js/main.js"></script>  
     </body>
 </html>
 

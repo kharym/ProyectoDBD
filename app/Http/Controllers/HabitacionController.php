@@ -80,7 +80,7 @@ class HabitacionController extends Controller
     public function show($id)
     {
         $habitacion = Habitacion::find($id);
-        return $habitacion;
+        return view('alojamientos.habitacion',compact('habitacion'));
     }
 
     /**
@@ -123,5 +123,11 @@ class HabitacionController extends Controller
         $habitacion = Habitacion::find($id);
         $habitacion->delete();
         return "";
+    }
+
+    public function habitacionReserva($id){
+        $habitaciones = Habitacion::where("alojamiento_id",$id)->get();
+
+        return view('alojamientos.habitacion',compact('habitaciones'));
     }
 }

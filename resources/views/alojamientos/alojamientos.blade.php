@@ -31,7 +31,8 @@
 						</div>						
 				<div class="row">
 			@foreach ($alojamientos as $alojamiento)
-			<div class="col-lg-4">
+				<div class="col-lg-4">
+					<a href="/habitacion/{{$alojamiento->id}}">
 					<div class="single-destinations">
 						<div class="thumb">
 							<img src="img/hotels/d3.jpg" alt="">

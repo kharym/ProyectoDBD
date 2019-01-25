@@ -193,3 +193,4 @@ Route::get('Vuelo', 'VueloController@vuelosOrigenDestino');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/habitacion/{id}', 'HabitacionController@habitacionReserva');
