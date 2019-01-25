@@ -149,7 +149,7 @@ class CompraController extends Controller
         }
 
         $vuelo = \App\Vuelo::where('id',$id)->first();
-        $medioDePago = \App\MedioDePago::where('id',request()->numero);
+        $medioDePago = \App\MedioDePago::where('id',request()->numero)->first();
         $montoNuevo = $medioDePago->monto - $vuelo->precio_vuelo;
         $medioDePago->update(['monto'=>$montoNuevo]);
         $medioDePago->save();

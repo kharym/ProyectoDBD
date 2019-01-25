@@ -77,7 +77,7 @@
                                 <option value="1">Crédito</option>
                                 <option value="2">Débito</option>
                               </select>
-                            </div>
+                            </div> 
                           </div>
                           
                           <!-- Text input-->
