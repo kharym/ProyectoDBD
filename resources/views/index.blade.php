@@ -13,7 +13,7 @@
 							</p>
 							<a href="#" class="primary-btn text-uppercase">Get Started</a>
 						</div>
-						<div class="col-lg-4 col-md-6 banner-right">
+						<div class="col-lg-5 col-md-6 banner-right">
 							<ul class="nav nav-tabs" id="myTab" role="tablist">
 							  <li class="nav-item">
 							    <a class="nav-link active" id="flight-tab" data-toggle="tab" href="#flight" role="tab" aria-controls="flight" aria-selected="true">Vuelos</a>
@@ -23,6 +23,9 @@
 							  </li>
 							  <li class="nav-item">
 							    <a class="nav-link" id="holiday-tab" data-toggle="tab" href="#holiday" role="tab" aria-controls="holiday" aria-selected="false">Vehículos</a>
+							  </li>
+							  <li class="nav-item">
+							    <a class="nav-link" id="holiday-tab" data-toggle="tab" href="#actividad" role="tab" aria-controls="actividad" aria-selected="false">Actividades</a>
 							  </li>
 							</ul>
 							<div class="tab-content" id="myTabContent">
@@ -49,6 +52,15 @@
 										<input type="text" class="form-control" name="pais" placeholder="Pais " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Pais '">		
 									<input type="text" class="form-control" name="marca" placeholder="Marca " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Marca '">														
 									<input type="submit" class="primary-btn text-uppercase" value="Buscar">									
+								</form>							  	
+							  </div>
+							  <!-- FORM PARA BUSCAR ACTIVIDAD -->
+							  <div class="tab-pane fade" id="actividad" role="tabpanel" aria-labelledby="actividad-tab">
+								<form class="form-wrap" method="get" action="Actividad">
+										<input type="text" class="form-control" name="destino" placeholder="País de destino " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Destino '">		
+									<input type="text" class="form-control date-picker" name="start" placeholder="Fecha Ida " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Ida '">
+									<input type="text" class="form-control date-picker" name="return" placeholder="Fecha Vuelta " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Vuelta '">							
+									<input type="submit" class="primary-btn text-uppercase" value="Buscar" >								
 								</form>							  	
 							  </div>
 							</div>

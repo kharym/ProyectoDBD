@@ -63,7 +63,7 @@
 				          <li><a href="/Vuelo/all">Vuelos</a></li>
 				          <li><a href="/Alojamiento/all">Alojamientos</a></li>
 				          <li><a href="/Auto/all">Vehículos</a></li>
-				          <li><a href="#">Actividades</a></li>
+				          <li><a href="/Actividad/all">Actividades</a></li>
 				          <li class="menu-has-children"><a href="">Paquetes</a>
 				            <ul>
 				              <li><a href="blog-home.html">Vuelo + Alojamiento</a></li>

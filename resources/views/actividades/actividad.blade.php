@@ -9,7 +9,7 @@
                 <div class="row d-flex align-items-center justify-content-center">
                     <div class="about-content col-lg-12">
                         <h1 class="text-white">
-                            Habitación               
+                            Actividades             
                         </h1>   
                     </div>  
                 </div>
@@ -18,69 +18,62 @@
         <!-- End banner Area -->    
         <br>
         <br>
-        <section class="destinations-area section-gap")>
+        <section class="destinations-area section-gap">
                 <div class="container">
                     <div class="row d-flex justify-content-center">
                         <div class="menu-content pb-40 col-lg-8">
                             <div class="title text-center">
-                                <h1 class="mb-10">Escoja su habitación</h1>
-                                <p>La mejor habitación para descansar</p>
+                                <h1 class="mb-10">Actividades</h1>
+                                <p>Escoge la mejor actividad para entretener tu día</p>
                             </div>
                         </div>
                     </div>                      
             <div class="row">
-            
-        @foreach ($habitaciones as $habitacion)
-                        <div class="col-lg-4">
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                              <li class="nav-item">
-                                <a class="nav-link active" id="flight-tab" data-toggle="tab" href="#flight" role="tab" aria-controls="flight" aria-selected="true">Habitación</a>
-                              </li>
-                            </ul>
-                            <a href="/habitacion/reserva/{{$habitacion}}">
-                                <div class="single-destinations">            
-                                    <div class="details" style="background-color: #f6fd8c ; color: black;">
-                                        <ul class="package-list">
-                                            <h4 class="d-flex justify-content-between align-items-center">
-                                                <span> Número de Habitación </span>
-                                                <span>{{$habitacion->numero_habitacion}}</span>
-                                            </h4>
-                                            <li class="d-flex justify-content-between align-items-center">
-                                                <span> Tipo de Habitación </span>
-                                                @if($habitacion->tipo_habitación)
-                                                        <span>Moderna</span>
-                                                    @else
-                                                        <span>Vintage</span>
-                                                    @endif
-                                            </li>
-                                            <li class="d-flex justify-content-between align-items-center">
-                                                <span> Número de Camas </span>
-                                                <span> {{$habitacion->numero_camas}}</span>        
-                                            </li>
-                                            <li class="d-flex justify-content-between align-items-center">
-                                                    <span> Número de Baños </span>
-                                                    <span> {{$habitacion->numero_banos}}</span>        
-                                            </li>
-                                            <li class="d-flex justify-content-between align-items-center">
-                                                    <span> Disponibilidad </span>
-                                                    @if($habitacion->disponibilidad)
-                                                        <span> Disponible</span>
-                                                    @else
-                                                        <span> No disponible</span>span>
-                                                    @endif
-                                            </li>                               
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+        @foreach ($actividades as $actividad)
+        <div class="col-lg-4">
+                <div class="single-destinations" >
+                    <a href="#"> 
+                    <div class="details" style="background-color: #f6fd8c ; color: black;>             
+                        <h4 class="d-flex justify-content-between">
+                           <strong> <span style="text-transform: uppercase;">{{$actividad->nombre_actividad}}</span>  </strong>                             
+                        </h4>
+                        <ul class="package-list">
+                            <li class="d-flex justify-content-between align-items-center">
+                                <span> Destino: </span>
+                                <span>{{$actividad->destino}}</span>
+                            </li>
+                            <li class="d-flex justify-content-between align-items-center">
+                                 <span> Cantidad de adultos:  </span> 
+                                <span>{{$actividad->cantidad_adulto}}</span>
+                            </li>
+                            <li class="d-flex justify-content-between align-items-center">
+                                 <span> Cantidad de niños:  </span> 
+                                <span>{{$actividad->cantidad_ninos}}</span>
+                            </li>
+                            <li class="d-flex justify-content-between align-items-center">
+                                 <span> Fecha de ida:  </span> 
+                                <span>{{$actividad->fecha_ida}}</span>
+                            </li>
+                            <li class="d-flex justify-content-between align-items-center">
+                                 <span> Fecha de regreso:  </span> 
+                                <span>{{$actividad->fecha_vuelta}}</span>
+                            </li>
+                            <h4 class="d-flex justify-content-between">
+
+                                <strong> <span style="text-transform: uppercase;">${{$actividad->precio}}</span></strong>                           
+                            </h4>                           
+                        </ul>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        @endforeach
             </div>
                 </div>
         </section>
 
         <!-- End destinations Area -->
     
-
 
         <!-- start footer Area -->      
         <footer class="footer-area section-gap">
