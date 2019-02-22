@@ -9,6 +9,7 @@
         "fideloper/proxy": "^4.0",
         "froiden/sql-generator": "dev-master",
         "laravel/framework": "5.7.*",
+        "laravel/socialite": "^4.1",
         "laravel/tinker": "^1.0",
         "pelmered/fake-car": "^1.2"
     },
