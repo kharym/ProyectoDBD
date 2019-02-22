@@ -213,3 +213,7 @@ Route::get('compra-realizada/{id}/{name}/{dni}/{apellido}/{asiento}/{menor}/{asi
 Route::get('compra-realizada/{id}/{name}/{dni}/{apellido}/{asiento}/{menor}/{asistencia}/{celular}/{pais}/{idU}','CompraController@realizarCompraVueloAuth');
 
 Route::get('movimientos/{id}','UserController@movimientos');
+
+
+Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
