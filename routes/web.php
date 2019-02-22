@@ -210,6 +210,6 @@ Route::get('compra/{id}/', 'CompraController@comprarVuelo');
 
 Route::get('compra-realizada/{id}/{name}/{dni}/{apellido}/{asiento}/{menor}/{asistencia}/{celular}/{pais}','CompraController@realizarCompra');
 
-Route::get('compra-realizada/{id}/{name}/{dni}/{apellido}/{asiento}/{menor}/{asistencia}/{celular}/{pais}/{idU}','CompraController@realizarCompraAuth');
+Route::get('compra-realizada/{id}/{name}/{dni}/{apellido}/{asiento}/{menor}/{asistencia}/{celular}/{pais}/{idU}','CompraController@realizarCompraVueloAuth');
 
 Route::get('movimientos/{id}','UserController@movimientos');

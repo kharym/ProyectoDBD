@@ -69,7 +69,8 @@
                                     <input type="text" class="form-control" name="dni" placeholder="DNI " onfocus="this.placeholder = ''" onblur="this.placeholder = 'DNI '">
                                     <input type="text" class="form-control" name="celular" placeholder="Celular " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Celular '">							
                                     <input type="text" class="form-control" name="pais" placeholder="Pais " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Pais '">	
-                                    <input type="submit" class="primary-btn text-uppercase" value="Comprar" >									
+									<input type="submit" class="primary-btn text-uppercase" value="Comprar" >
+									<input type="submit" class="primary-btn text-uppercase" value="Agregar A Carrito" >										
 								</form>
 							  </div>
 		

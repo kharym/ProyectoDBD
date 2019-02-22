@@ -170,7 +170,7 @@ class CompraController extends Controller
         return view('compra-realizada',compact('reservaVuelo'));
     }
 
-    public function realizarCompraAuth($id,  $name, $dni, $apellido, $asiento, $menor, $asistencia, $celular,$pais, $idU){
+    public function realizarCompraVueloAuth($id,  $name, $dni, $apellido, $asiento, $menor, $asistencia, $celular,$pais, $idU){
         $bol;
         $bol2;
         $fecha = date('Y-m-d');
