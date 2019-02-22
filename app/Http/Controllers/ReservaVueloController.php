@@ -141,13 +141,13 @@ class ReservaVueloController extends Controller
         $bol2;
         $fecha = date('Y-m-d');
         $hora = date("H:i:s");
-        if($menor=="No"){
+        if(request()->menor=='No'){
             $bol=False;
         }
         else{
             $bol=True;
         }
-        if($asistencia=="No"){
+        if(request()->asistencia == 'No'){
             $bol2=False;
         }
         else{
@@ -155,16 +155,16 @@ class ReservaVueloController extends Controller
         }
         $vuelo = \App\Vuelo::where('id',$id)->first();
         $as = \App\Asiento::where('vuelo_id',$id)->get();
-        $asientoSeleccionado = $as->where('numero_asiento',$asiento)->first();
+        $asientoSeleccionado = $as->where('numero_asiento',request()->asiento)->first();
 
         $pasajero = new \App\Pasajero();
-        $pasajero->name = $request()->name;
-        $pasajero->apellido=$request()->apellido;
-        $pasajero->dni_pasaporte=$request()->dni;
+        $pasajero->name = request()->name;
+        $pasajero->apellido=request()->apellido;
+        $pasajero->dni_pasaporte=request()->dni;
         $pasajero->menor_edad=$bol;
         $pasajero->asistencia_especial=$bol2;
-        $pasajero->telefono=$request()->celular;
-        $pasajero->pais=$request()->pais;
+        $pasajero->telefono=request()->celular;
+        $pasajero->pais=request()->pais;
         $pasajero->movilidad_reducida=False;
 
         $reservaVuelo = new \App\ReservaVuelo();
