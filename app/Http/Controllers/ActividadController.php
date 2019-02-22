@@ -39,8 +39,9 @@ class ActividadController extends Controller
      */
     public function index()
     {
-        $actividad = Actividad::all();
-        return $actividad;
+        $actividades = Actividad::all();
+        
+        return view('actividades.actividadAll',compact('actividades'));
     }
 
     /**
@@ -123,5 +124,9 @@ class ActividadController extends Controller
         $actividad = Actividad::find($id);
         $actividad->delete();
         return "";
+    }
+
+    public function vistaReserva($actividad){
+        return view('actividades.actividad-reserva', compact('actividad'));
     }
 }
