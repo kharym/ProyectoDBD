@@ -33,7 +33,7 @@
         @foreach ($autos as $auto)
         <div class="col-lg-4">
                 <div class="single-destinations" >
-                    <a href="http://homestead.test/Auto/see/{{$auto}}"> 
+                    <a href="Auto/see/{{$auto}}"> 
                     <div class="details" style="background-color: #f6fd8c ; color: black;>
                          
                         <h4 class="d-flex justify-content-between">

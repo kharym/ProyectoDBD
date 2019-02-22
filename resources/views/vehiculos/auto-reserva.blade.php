@@ -11,7 +11,7 @@
                         <div class="col-lg-4 col-md-6 banner-right">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                               <li class="nav-item">
-                                <a class="nav-link active" id="flight-tab" data-toggle="tab" href="#flight" role="tab" aria-controls="flight" aria-selected="true">Reserva</a>
+                                <a class="nav-link active" id="flight-tab" data-toggle="tab" href="#" role="tab" aria-controls="flight" aria-selected="true">Reserva</a>
                               </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">

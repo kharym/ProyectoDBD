@@ -37,7 +37,7 @@
                                 <a class="nav-link active" id="flight-tab" data-toggle="tab" href="#flight" role="tab" aria-controls="flight" aria-selected="true">Habitación</a>
                               </li>
                             </ul>
-                            <a href="http://homestead.test/habitacion/reserva/{{$habitacion}}">
+                            <a href="habitacion/reserva/{{$habitacion}}">
                                 <div class="single-destinations">            
                                     <div class="details" style="background-color: #f6fd8c ; color: black;">
                                         <ul class="package-list">

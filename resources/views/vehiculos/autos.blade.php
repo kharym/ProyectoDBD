@@ -11,7 +11,7 @@
                         <h1 class="text-white">
                             Vehículos				
                         </h1>	
-                        <p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="hotels.html"> Hotels</a></p>
+                        <p class="text-white link-nav"><a href="#">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="hotels.html"> Hotels</a></p>
                     </div>	
                 </div>
             </div>
@@ -33,7 +33,7 @@
         @foreach ($autos as $auto)
         <div class="col-lg-4">
                 <div class="single-destinations" >
-                    <a href="http://homestead.test/Auto/see/{{$auto}}"> 
+                    <a href="Auto/see/{{$auto}}"> 
                     <div class="details">
                          
                         <h4 class="d-flex justify-content-between">
