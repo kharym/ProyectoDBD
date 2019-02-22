@@ -209,4 +209,5 @@ class CompraController extends Controller
         $crv->save();
         return view('compra-realizada',compact('reservaVuelo'));
     }
+
 }

@@ -136,4 +136,52 @@ class ReservaVueloController extends Controller
         return view('vuelos.reserva',compact('id'));
     }
 
+    public function carritoCompraVuelo(Request $request,$id,  $name, $dni, $apellido, $asiento, $menor, $asistencia, $celular,$pais, $idU){
+        $bol;
+        $bol2;
+        $fecha = date('Y-m-d');
+        $hora = date("H:i:s");
+        if($menor=="No"){
+            $bol=False;
+        }
+        else{
+            $bol=True;
+        }
+        if($asistencia=="No"){
+            $bol2=False;
+        }
+        else{
+            $bol2=True;
+        }
+        $vuelo = \App\Vuelo::where('id',$id)->first();
+        $as = \App\Asiento::where('vuelo_id',$id)->get();
+        $asientoSeleccionado = $as->where('numero_asiento',$asiento)->first();
+
+        $pasajero = new \App\Pasajero();
+        $pasajero->name = $name;
+        $pasajero->apellido=$apellido;
+        $pasajero->dni_pasaporte=$dni;
+        $pasajero->menor_edad=$bol;
+        $pasajero->asistencia_especial=$bol2;
+        $pasajero->telefono=$celular;
+        $pasajero->pais=$pais;
+        $pasajero->movilidad_reducida=False;
+
+        $reservaVuelo = new \App\ReservaVuelo();
+        $reservaVuelo->cantidad_pasajeros=1;
+        $reservaVuelo->pasajero_id=$pasajero->id;
+        $reservaVuelo->asiento_id=$asientoSeleccionado->id;
+        $reservaVuelo->vuelo_id=$id;
+        $reservaVuelo->tipo_cabina=0;
+        $reservaVuelo->cantidad_paradas=1;
+        $reservaVuelo->fecha_reserva=$fecha;
+        $reservaVuelo->hora_reserva=$hora;
+        $reservaVuelo->precio_reserva_vuelo=$vuelo->precio_vuelo;
+        $reservaVuelo->ida_vuelta=False;
+        
+        $request->session()->push('reservaVuelo',$pasajero);        
+        $request->session()->push('pasajero',$pasajero);        
+        return view('index');
+    }
+
 }
