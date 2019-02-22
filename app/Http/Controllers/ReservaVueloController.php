@@ -136,7 +136,7 @@ class ReservaVueloController extends Controller
         return view('vuelos.reserva',compact('id'));
     }
 
-    public function carritoCompraVuelo(Request $request,$id,  $name, $dni, $apellido, $asiento, $menor, $asistencia, $celular,$pais, $idU){
+    public function carritoCompraVuelo(Request $request,$id){
         $bol;
         $bol2;
         $fecha = date('Y-m-d');
@@ -158,13 +158,13 @@ class ReservaVueloController extends Controller
         $asientoSeleccionado = $as->where('numero_asiento',$asiento)->first();
 
         $pasajero = new \App\Pasajero();
-        $pasajero->name = $name;
-        $pasajero->apellido=$apellido;
-        $pasajero->dni_pasaporte=$dni;
+        $pasajero->name = $request()->name;
+        $pasajero->apellido=$request()->apellido;
+        $pasajero->dni_pasaporte=$request()->dni;
         $pasajero->menor_edad=$bol;
         $pasajero->asistencia_especial=$bol2;
-        $pasajero->telefono=$celular;
-        $pasajero->pais=$pais;
+        $pasajero->telefono=$request()->celular;
+        $pasajero->pais=$request()->pais;
         $pasajero->movilidad_reducida=False;
 
         $reservaVuelo = new \App\ReservaVuelo();
@@ -179,9 +179,9 @@ class ReservaVueloController extends Controller
         $reservaVuelo->precio_reserva_vuelo=$vuelo->precio_vuelo;
         $reservaVuelo->ida_vuelta=False;
         
-        $request->session()->push('reservaVuelo',$pasajero);        
+        $request->session()->push('reservaVuelo',$reservaVuelo);        
         $request->session()->push('pasajero',$pasajero);        
-        return view('index');
+        return view('vuelos.prueba');
     }
 
 }
