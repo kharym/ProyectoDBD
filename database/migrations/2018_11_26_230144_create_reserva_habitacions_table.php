@@ -15,12 +15,15 @@ class CreateReservaHabitacionsTable extends Migration
     {
         Schema::create('reserva_habitacions', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('habitacion_id');
             $table->float('precio_res_hab');
             $table->date('fecha_llegada');   
             $table->date('fecha_ida');  
             $table->smallInteger('numero_ninos');
             $table->smallInteger('numero_adulto');
             $table->timestamps();
+
+            $table->foreign('habitacion_id')->references('id')->on('habitacions')->onDelete('cascade');
         });
     }
 

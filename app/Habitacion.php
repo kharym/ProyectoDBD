@@ -15,8 +15,8 @@ class Habitacion extends Model
     //Relacion 1-N con alojamiento
     public function alojamiento()
     {
-        return $this->belongsTo('App\Alojamiento');
+        return $this->hasMany('App\Alojamiento');
     }
 
-    protected $fillable = ['reserva_habitacion_id','alojamiento_id','numero_habitacion','tipo_habitacion','numero_camas','numero_banos','disponibilidad','capacidad_ninos','capacidad_adultos','precio'];
+    protected $fillable = ['alojamiento_id','numero_habitacion','tipo_habitacion','numero_camas','numero_banos','disponibilidad','capacidad_ninos','capacidad_adultos','precio'];
 }

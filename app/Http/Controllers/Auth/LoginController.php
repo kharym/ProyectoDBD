@@ -52,6 +52,11 @@ class LoginController extends Controller
 
         $authUser = $this->findOrCreateUser($user, $provider);
         Auth::login($authUser, true);
+        if(!request()->session()->has('pasajero') && !request()->session()->has('reservaVuelo')){
+            request()->session()->push('reservaVuelo',NULL);
+            request()->session()->push('pasajero',NULL);
+            request()->session()->push('reservaHabitacion',NULL);
+        }
         return redirect($this->redirectTo);
     }
 

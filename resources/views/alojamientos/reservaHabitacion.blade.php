@@ -40,7 +40,8 @@
                                         @endfor
                                     </select>
                                     <input type="submit" class="primary-btn text-uppercase" value="Comprar" >
-                                    <input type="submit" class="primary-btn text-uppercase" value="Agregar A Carrito" >
+									<input type="submit" class="primary-btn text-uppercase" value="Agregar A Carrito"
+									formaction="/carrito-habitacion/{{request()->id}}">
 								</form>
 							  </div>
 		

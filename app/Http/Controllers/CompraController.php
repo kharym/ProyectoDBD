@@ -216,12 +216,43 @@ class CompraController extends Controller
         $inicio = new DateTime(request()->start);
         $fin = new DateTime(request()->return);
         $dias = $fin->diff($inicio)->format("%a");
+        
+        $hab = \App\Habitacion::find($id);
+
+        $reserva = new \App\ReservaHabitacion();
+        $reserva->habitacion_id = $id;
+        $reserva->precio_res_hab = $hab->precio*$dias;
+        $reserva->fecha_llegada = request()->start;
+        $reserva->fecha_ida = request()->return;
+        $reserva->numero_ninos = request()->cantidad_ninos;
+        $reserva->numero_adulto = request()->cantidad_adultos;
+        if(!request()->session()->has('reservaHab') ){
+            request()->session()->push('reservaHab',$reserva);
+        }
         return view('alojamientos.compra',compact('id','dias'));
     }
 
     public function realizarCompraHabitacion($id){
-        $inicio = request()->start;
-        return view('alojamientos.compra-hecha',compact('inicio'));
+        $mensaje;
+        $fecha = date('Y-m-d');
+        $hora = date("H:i:s");
+        $reserva = request()->session()->get('reservaHab')[0];
+        if(request()->medioPago == "1"){
+            if(\App\MedioDePago::where('id',request()->numeroCuenta)->exists()){
+               $mp = \App\MedioDePago::where('id',request()->numeroCuenta)->first();
+               $mp->monto = $mp->monto - $reserva->precio_res_hab;
+               $mp->save();
+            }
+            else{
+                $mensaje = "No existe el medio de pago";
+                return view('alojamiento.compra-hecha', compact('mensaje'));
+            }
+        }
+        $reserva->save();
+        request()->session()->forget('reservaHab');
+        $compra = Compra::create(['user_id'=>$id,'fecha_compra'=>$fecha, 'hora_compra'=>$hora, 'reserva_habitacion_id'=>$reserva->id]);
+        $mensaje = "Reserva comprada con éxito";
+        return view('alojamientos.compra-hecha', compact('mensaje'));
     }
 
 

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Validator;
 use App\ReservaHabitacion;
 use Illuminate\Http\Request;
-
+use DateTime;
 class ReservaHabitacionController extends Controller
 {
 
@@ -119,5 +119,32 @@ class ReservaHabitacionController extends Controller
         $reservaHabitacion = ReservaHabitacion::find($id);
         $reservaHabitacion->delete();
         return "";
+    }
+
+    public function carritoCompraHabitacion($id){
+        $inicio = new DateTime(request()->start);
+        $fin = new DateTime(request()->return);
+        $dias = $fin->diff($inicio)->format("%a");
+        
+        $hab = \App\Habitacion::find($id);
+
+        $reserva = new \App\ReservaHabitacion();
+        $reserva->habitacion_id = $id;
+        $reserva->precio_res_hab = $hab->precio*$dias;
+        $reserva->fecha_llegada = request()->start;
+        $reserva->fecha_ida = request()->return;
+        $reserva->numero_ninos = request()->cantidad_ninos;
+        $reserva->numero_adulto = request()->cantidad_adultos;
+
+
+        foreach(request()->session()->get('reservaHabitacion') as $rv){
+            if(!is_null($rv)){
+                if($reserva->habitacion_id == $rv->habitacion_id){
+                    return view('carrito.carrito');
+                }
+            }
+        }
+        request()->session()->push('reservaHabitacion',$reserva);     
+        return view('carrito.carrito');
     }
 }

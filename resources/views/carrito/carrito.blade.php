@@ -39,6 +39,9 @@
                         <div class="single-destinations" >
                             <div class="details">
                                 <ul class="package-list">
+                                    <h4 class="d-flex justify-content-between align-items-center">
+                                            <span> Vuelo </span>
+                                    </h4>
                                     <li class="d-flex justify-content-between align-items-center">
                                         <span> Origen</span>
                                         <span>{{$vuelo->origen}}</span>
@@ -70,6 +73,62 @@
                 </div>
             @endfor
         @endif
+        @if(!empty(request()->session()->get('reservaHabitacion')))
+        @for($i = 1; $i<count(request()->session()->get('reservaHabitacion')); $i++)
+            <?php  
+                    $aux = request()->session()->get('reservaHabitacion')[$i];
+                    $habitacion = \App\Habitacion::where('id',$aux->habitacion_id)->first();
+                    $inicio = new DateTime($aux->fecha_llegada);
+                    $fin = new DateTime($aux->fecha_ida);
+                    $dias = $fin->diff($inicio)->format("%a");
+                    ?>
+            <div class="col-lg-4">
+                    <div class="single-destinations" >
+                        <div class="details">
+                            <ul class="package-list">
+                                <h4 class="d-flex justify-content-between align-items-center">
+                                    <span> Número de Habitación </span>
+                                    <span>{{$habitacion->numero_habitacion}}</span>
+                                </h4>
+                                <li class="d-flex justify-content-between align-items-center">
+                                    <span> Tipo de Habitación </span>
+                                    @if($habitacion->tipo_habitación)
+                                            <span>Moderna</span>
+                                        @else
+                                            <span>Vintage</span>
+                                        @endif
+                                </li>
+                                <li class="d-flex justify-content-between align-items-center">
+                                    <span> Número de Camas </span>
+                                    <span> {{$habitacion->numero_camas}}</span>        
+                                </li>
+                                <li class="d-flex justify-content-between align-items-center">
+                                        <span> Número de Baños </span>
+                                        <span> {{$habitacion->numero_banos}}</span>        
+                                </li>
+                                <li class="d-flex justify-content-between align-items-center">
+                                    <span> Dias </span>
+                                    <span> {{$dias}}</span>        
+                                </li>
+                                <li class="d-flex justify-content-between align-items-center">
+                                    <span> Fecha de llegada </span>
+                                    <span> {{$aux->fecha_llegada}}</span>        
+                                </li>
+                                <li class="d-flex justify-content-between align-items-center">
+                                    <span> Fecha de término </span>
+                                    <span> {{$aux->fecha_ida}}</span>        
+                                </li>
+                                <li class="d-flex justify-content-between align-items-center">
+                                    <span> Precio </span>
+                                    <span> {{$habitacion->precio_res_hab}}</span>        
+                                </li>                                         
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        @endfor
+    @endif
             </div>
                 </div>
             <form action="/compra-carro/{{auth()->user()->id}}" >

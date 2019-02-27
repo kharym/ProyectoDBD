@@ -21,8 +21,8 @@ class ReservaHabitacion extends Model
 	//relacion 1-N con  habitacion
     public function habitacion()
     {
-      return $this->hasMany('App\Habitacion');
+      return $this->belongsTo('App\Habitacion');
     }
 
-    protected $fillable = ['precio_res_hab','fecha_llegada','fecha_ida','numero_ninos','numero_adulto'];
+    protected $fillable = ['habitacion_id','precio_res_hab','fecha_llegada','fecha_ida','numero_ninos','numero_adulto'];
 }

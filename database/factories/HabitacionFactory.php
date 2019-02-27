@@ -4,8 +4,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Habitacion::class, function (Faker $faker) {
     
-    $ids_reservaHabitacion= \DB::table('reserva_habitacions')->select('id')->get();
-	$id_reservaHabitacion= $ids_reservaHabitacion->random()->id;
+
 	$ids_alojamiento = \DB::table('alojamientos')->select('id')->get();
 	$id_alojamiento = $ids_alojamiento->random()->id;
 
@@ -17,7 +16,6 @@ $factory->define(App\Habitacion::class, function (Faker $faker) {
         'capacidad_ninos'=>$faker->numberBetween(1,5),
         'capacidad_adultos'=>$faker->numberBetween(1,5),
         'disponibilidad'=>$faker->boolean,
-        'reserva_habitacion_id'=>$id_reservaHabitacion,
         'alojamiento_id'=>$id_alojamiento,
         'precio'=>$faker->randomFloat,
 
