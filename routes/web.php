@@ -232,3 +232,5 @@ Route::get('/comprar-habitacion/{id}', 'CompraController@comprarHabitacion');
 Route::get('/compra-habitacion-realizada/{id}/{precio}', 'CompraController@realizarCompraHabitacion');
 
 Route::get('/carrito-habitacion/{id}', 'ReservaHabitacionController@carritoCompraHabitacion');
+
+Route::get('/agregar-vuelo', 'VueloController@agregarVuelo');

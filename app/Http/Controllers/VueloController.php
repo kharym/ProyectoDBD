@@ -178,4 +178,8 @@ class VueloController extends Controller
         return view('vuelos.vuelos',compact('vuelos'));
     }
 
+    public function agrearVuelo(){
+        return view('vuelos.vuelosAll');
+    }
+
 }
