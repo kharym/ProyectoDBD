@@ -211,6 +211,16 @@ class CompraController extends Controller
     }
 
 
+    public function comprarHabitacion($id){
+        return view('alojamientos.compra',compact('id'));
+    }
+
+
+
+
+
+
+
     public function realizarCompraCarro(){
         $precio = 0;
         for($i = 1; $i<count(request()->session()->get('reservaVuelo')); $i++){

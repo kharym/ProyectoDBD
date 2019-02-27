@@ -1,6 +1,7 @@
 @extends('layouts.app')	
 @section('content')
-<?php $hab = \App\Habitacion::where('id',$id)?>
+<?php $hab = \App\Habitacion::where('id',request()->id)->first();?>
+{{$hab->capacidad_ninos}}
 			<!-- start banner Area -->
 			<section class="banner-area relative">
 				<br>
@@ -10,7 +11,7 @@
 				<div class="overlay overlay-bg"></div>				
 				<div class="container">
 					<div class="row fullscreen align-items-center justify-content-between">
-						<div class="col-lg-6 col-md-6 banner-right">
+						<div class=" col text-center col-lg-6 col-md-6 banner-right" >
 							<ul class="nav nav-tabs" id="myTab" role="tablist">
 							  <li class="nav-item">
 							    <a class="nav-link active" id="flight-tab" data-toggle="tab" href="#flight" role="tab" aria-controls="flight" aria-selected="true">Reserva</a>
@@ -26,10 +27,21 @@
                                         <input type="text" class="form-control date-picker" name="return" placeholder="Fecha Vuelta " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Vuelta '">
                                     </div>
                                 </div>
-                                    <select class="form-control">
-                                        @
+                                    <label for="cantidad_ninos">Cantidad niños </label>
+                                    <select class="form-control" id="cantidad_ninos" name="cantidad_ninos">
+                                        @for($i = 1; $i<=$hab->capacidad_ninos;$i++)
+                                            <option value="{{$i}}"> {{$i}} </option>
+                                        @endfor
                                     </select>
-									<input type="submit" class="primary-btn text-uppercase" value="Comprar" >
+
+                                    <label for="cantidad_adultos">Cantidad adultos </label>
+                                    <select class="form-control" id="cantidad_adultos" name="cantidad_adultos">
+                                        @for($i = 1; $i<=$hab->capacidad_adultos;$i++)
+                                            <option value="{{$i}}"> {{$i}} </option>
+                                        @endfor
+                                    </select>
+                                    <input type="submit" class="primary-btn text-uppercase" value="Comprar" >
+                                    <input type="submit" class="primary-btn text-uppercase" value="Agregar A Carrito" >
 								</form>
 							  </div>
 		
