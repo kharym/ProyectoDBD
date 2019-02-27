@@ -1,5 +1,6 @@
 @extends('layouts.app')	
 @section('content')
+<?php $hab = \App\Habitacion::where('id',$id)?>
 			<!-- start banner Area -->
 			<section class="banner-area relative">
 				<br>
@@ -26,11 +27,7 @@
                                     </div>
                                 </div>
                                     <select class="form-control">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                        @
                                     </select>
 									<input type="submit" class="primary-btn text-uppercase" value="Comprar" >
 								</form>
