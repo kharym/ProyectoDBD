@@ -217,4 +217,9 @@ Route::get('movimientos/{id}','UserController@movimientos');
 Route::get('carrito-vuelo/{id}','ReservaVueloController@carritoCompraVuelo');
 
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
+
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
+
+Route::get('/compra-carro/{id}', 'CompraController@realizarCompraCarro');
+
+Route::get('/compra-carro-realizada/{id}/{precio}', 'CompraController@compraCarro');

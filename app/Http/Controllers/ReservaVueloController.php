@@ -178,10 +178,24 @@ class ReservaVueloController extends Controller
         $reservaVuelo->hora_reserva=$hora;
         $reservaVuelo->precio_reserva_vuelo=$vuelo->precio_vuelo;
         $reservaVuelo->ida_vuelta=False;
-        
+
+        /*if($request->session()->get('reservaVuelo')[0] === NULL){
+            $request->session()->get('reservaVuelo')[0] = $reservaVuelo;
+            $request->session()->get('pasajero')[0] = $pasajero;
+            return view('vuelos.prueba');
+        }*/
+        //else{
+            foreach($request->session()->get('reservaVuelo') as $rv){
+                if(!is_null($rv)){
+                    if($reservaVuelo->asiento_id == $rv->asiento_id){
+                        return view('carrito.carrito');
+                    }
+                }
+            }
+        //}
         $request->session()->push('reservaVuelo',$reservaVuelo);        
         $request->session()->push('pasajero',$pasajero);        
-        return view('vuelos.prueba');
+        return view('carrito.carrito');
     }
 
 }

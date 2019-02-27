@@ -9,9 +9,9 @@
                 <div class="row d-flex align-items-center justify-content-center">
                     <div class="about-content col-lg-12">
                         <h1 class="text-white">
-                            Movimientos				
+                            Carro de compra				
                         </h1>	
-                        <p class="text-white link-nav"><a href="/#">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href=""> Carro de compras</a></p>
+                        <p class="text-white link-nav"><a href="#">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href=""> Carro de compras</a> <span class="lnr lnr-arrow-right"></span>  <a href=""> Comprar</a></p>
                     </div>	
                 </div>
             </div>
@@ -19,42 +19,39 @@
         <!-- End banner Area -->	
         <br>
         <br>
-        <section class="destinations-area section-gap">
-                <div class="container">
-                    <div class="row d-flex justify-content-center">
-                        <div class="menu-content pb-40 col-lg-8">
-                            <div class="title text-center">
-                                <h1 class="mb-10">Compras</h1>
-                                <p>Tus últimas acciones</p>
-                            </div>
-                        </div>
-                    </div>						
-            <div class="row">
-        @if(!empty($compras))
-        @foreach ($compras as $compra)
-        <div class="col-lg-4">
-                <div class="single-destinations" >
-                    <div class="details">
-                        <ul class="package-list">
-                            <li class="d-flex justify-content-between align-items-center">
-                            <span> Fecha de compra</span>
-                            <span>{{$compra->fecha_compra}}</span>
-                            </li>
-                            <li class="d-flex justify-content-between align-items-center">
-                                <span> Hora de compra </span>
-                                <span>{{$compra->hora_compra}}</span>
-                            </li>					
-                        </ul>
-                    </div>
-                    </a>
-                </div>
-            </div>
-        @endforeach
-        @endif
-            </div>
-                </div>
-        </section>
 
+
+
+    <div class="row justify-content-center">
+        <div class="card">
+            <div class="card-header">
+                Compra
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Total</h5>
+                <p class="card-text">{{$precio}}</p>
+
+            <form method="GET" action="/compra-carro-realizada/{{auth()->user()->id}}/{{$precio}}">
+                    <div class="form-group">    
+                        <label for="medioPago" > Medio de pago</label>
+                        <select class="form-control" id="medioPago" name="medioPago">
+                            <option value="1">Crédito</option>
+                            <option value="2">Débito</option>
+                        </select>
+                    </div>
+                    <div class="form-group">    
+                        <label for="numeroCuenta" > Numero de cuenta</label>
+                        <input class="form-control" input="text" name="numeroCuenta">  
+                    </div>
+                    <div class="col text-center">
+                        <button type="submit" class="btn btn-primary">Comprar</button>
+                    </div>        
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <br>
         <!-- End destinations Area -->
     
 

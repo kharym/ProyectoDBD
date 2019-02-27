@@ -203,11 +203,52 @@ class CompraController extends Controller
         $reservaVuelo = \App\ReservaVuelo::create(['vuelo_id'=>$id,'cantidad_pasajeros'=>1,'pasajero_id'=>$pasajero->id,'asiento_id'=>$asientoSeleccionado->id,
         'tipo_cabina'=>0,'cantidad_paradas'=>1,'fecha_reserva'=>$fecha,'hora_reserva'=>$hora, 'precio_reserva_vuelo'=>$vuelo->precio_vuelo,'ida_vuelta'=>False]);
         $reservaVuelo->save();
-        $compra = \App\Compra::create(['user_id'=>$idU,'fecha_compra'=>$fecha,'hora_compra'=>$hora,]);
+        $compra = \App\Compra::create(['user_id'=>$idU,'fecha_compra'=>$fecha,'hora_compra'=>$hora]);
         $compra->save();
         $crv = \App\Compra_ReservaVuelo::create(['compra_id'=>$compra->id,'reserva_vuelo_id'=>$reservaVuelo->id]);
         $crv->save();
         return view('compra-realizada',compact('reservaVuelo'));
+    }
+
+
+    public function realizarCompraCarro(){
+        $precio = 0;
+        for($i = 1; $i<count(request()->session()->get('reservaVuelo')); $i++){
+            $aux = request()->session()->get('reservaVuelo')[$i];
+            $asiento = \App\Asiento::where('id',$aux->asiento_id)->first();
+            $vuelo = \App\Vuelo::where('id',$aux->vuelo_id)->first();
+            $precio = $precio + $vuelo->precio_vuelo;
+        }
+        return view('carrito.compra',compact('precio'));
+    }
+
+    public function compraCarro($id, $precio){
+        $mensaje;
+        if(request()->medioPago == "1"){
+            if(\App\MedioDePago::where('id',request()->numeroCuenta)->exists()){
+               $mp = \App\MedioDePago::where('id',request()->numeroCuenta)->first();
+               $mp->monto = $mp->monto - $precio;
+               $mp->save();
+            }
+            else{
+                $mensaje = "No existe el medio de pago";
+                return view('carrito.compra-hecha', compact('mensaje'));
+            }
+        }
+        $fecha = date('Y-m-d');
+        $hora = date("H:i:s");
+        for($i = 1; $i<count(request()->session()->get('reservaVuelo')); $i++){
+            $compra = Compra::create(['user_id'=>$id,'fecha_compra'=>$fecha, 'hora_compra'=>$hora]);
+            $auxRV = request()->session()->get('reservaVuelo')[$i];
+            $auxP = request()->session()->get('pasajero')[$i];
+            $auxP->save();
+            $auxRV->pasajero_id = $auxP->id;
+            $auxRV->save();
+            $crv = \App\Compra_ReservaVuelo::create(['compra_id'=>$compra->id,'reserva_vuelo_id'=>$auxRV->id]);
+            $crv->save();
+        }
+        $mensaje = "Compra realizada con éxito";
+        return view('carrito.compra-hecha',compact('mensaje'));
     }
 
 }

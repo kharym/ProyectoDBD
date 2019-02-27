@@ -1,6 +1,13 @@
 @extends('layouts.app')	
 @section('content')
 			<!-- start banner Area -->
+			<!-- comprobacion para session-->
+			<?php 
+				if(!request()->session()->has('pasajero') && !request()->session()->has('reservaVuelo')){
+					request()->session()->push('reservaVuelo',NULL);
+        	request()->session()->push('pasajero',NULL);
+				}
+				print_r(request()->session()->get('reservaVuelo'));?>
 			<section class="banner-area relative">
 				<div class="overlay overlay-bg"></div>				
 				<div class="container">
