@@ -32,12 +32,7 @@
             
         @foreach ($habitaciones as $habitacion)
                         <div class="col-lg-4">
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                              <li class="nav-item">
-                                <a class="nav-link active" id="flight-tab" data-toggle="tab" href="#flight" role="tab" aria-controls="flight" aria-selected="true">Habitación</a>
-                              </li>
-                            </ul>
-                            <a href="habitacion/reserva/{{$habitacion}}">
+                            <a href="/reserva-habitacion/{{$habitacion->id}}">
                                 <div class="single-destinations">            
                                     <div class="details" style="background-color: #f6fd8c ; color: black;">
                                         <ul class="package-list">

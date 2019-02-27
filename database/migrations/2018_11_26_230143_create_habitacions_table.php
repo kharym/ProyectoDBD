@@ -21,6 +21,8 @@ class CreateHabitacionsTable extends Migration
             $table->smallInteger('tipo_habitacion');
             $table->smallInteger('numero_camas');
             $table->smallInteger('numero_banos');
+            $table->smallInteger('capacidad_ninos');
+            $table->smallInteger('capacidad_adultos');
             $table->boolean('disponibilidad');
             $table->timestamps();
 

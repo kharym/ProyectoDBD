@@ -223,3 +223,5 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
 Route::get('/compra-carro/{id}', 'CompraController@realizarCompraCarro');
 
 Route::get('/compra-carro-realizada/{id}/{precio}', 'CompraController@compraCarro');
+
+Route::get('/reserva-habitacion/{id}', 'HabitacionController@reservarHabitacion');

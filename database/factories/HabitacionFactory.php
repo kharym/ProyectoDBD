@@ -14,6 +14,8 @@ $factory->define(App\Habitacion::class, function (Faker $faker) {
         'tipo_habitacion'=>$faker->numberBetween(0,2),
         'numero_camas'=>$faker->numberBetween(1,4),
         'numero_banos'=>$faker->numberBetween(1,2),
+        'capacidad_ninos'=>$faker->numberBetween(1,5),
+        'capacidad_adultos'=>$faker->numberBetween(1,5),
         'disponibilidad'=>$faker->boolean,
         'reserva_habitacion_id'=>$id_reservaHabitacion,
         'alojamiento_id'=>$id_alojamiento,

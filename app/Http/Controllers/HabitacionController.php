@@ -135,4 +135,8 @@ class HabitacionController extends Controller
         
         return view('alojamientos.reservaHabitacion', compact('habitacion'));
     }
+
+    public function reservarHabitacion($id){
+        return view('alojamientos.reservaHabitacion');
+    }
 }
