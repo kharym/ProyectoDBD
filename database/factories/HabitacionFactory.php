@@ -19,6 +19,7 @@ $factory->define(App\Habitacion::class, function (Faker $faker) {
         'disponibilidad'=>$faker->boolean,
         'reserva_habitacion_id'=>$id_reservaHabitacion,
         'alojamiento_id'=>$id_alojamiento,
+        'precio'=>$faker->randomFloat,
 
     ];
 });

@@ -18,5 +18,5 @@ class Habitacion extends Model
         return $this->belongsTo('App\Alojamiento');
     }
 
-    protected $fillable = ['reserva_habitacion_id','alojamiento_id','numero_habitacion','tipo_habitacion','numero_camas','numero_banos','disponibilidad','capacidad_ninos','capacidad_adultos'];
+    protected $fillable = ['reserva_habitacion_id','alojamiento_id','numero_habitacion','tipo_habitacion','numero_camas','numero_banos','disponibilidad','capacidad_ninos','capacidad_adultos','precio'];
 }

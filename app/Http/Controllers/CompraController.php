@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Validator;
 use App\Compra;
 use Illuminate\Http\Request;
+use DateTime;
 
 class CompraController extends Controller
 {
@@ -212,7 +213,15 @@ class CompraController extends Controller
 
 
     public function comprarHabitacion($id){
-        return view('alojamientos.compra',compact('id'));
+        $inicio = new DateTime(request()->start);
+        $fin = new DateTime(request()->return);
+        $dias = $fin->diff($inicio)->format("%a");
+        return view('alojamientos.compra',compact('id','dias'));
+    }
+
+    public function realizarCompraHabitacion($id){
+        $inicio = request()->start;
+        return view('alojamientos.compra-hecha',compact('inicio'));
     }
 
 

@@ -23,6 +23,7 @@ class CreateHabitacionsTable extends Migration
             $table->smallInteger('numero_banos');
             $table->smallInteger('capacidad_ninos');
             $table->smallInteger('capacidad_adultos');
+            $table->float('precio');
             $table->boolean('disponibilidad');
             $table->timestamps();
 

@@ -1,7 +1,6 @@
 @extends('layouts.app')	
 @section('content')
 <?php $hab = \App\Habitacion::where('id',request()->id)->first();?>
-{{$hab->capacidad_ninos}}
 			<!-- start banner Area -->
 			<section class="banner-area relative">
 				<br>
@@ -20,11 +19,11 @@
 							<div class="tab-content" id="myTabContent">
 							  <div class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="flight-tab">
 								  <!-- FORM PARA RESERVAR HABITACIÓN -->
-								<form class="form-wrap" >
+                              <form class="form-wrap" method="GET" action="/comprar-habitacion/{{request()->id}}">
                                 <div class="container">
                                     <div class="row">    															
-                                        <input type="text" class="form-control date-picker" name="start" placeholder="Fecha Ida " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Ida '">
-                                        <input type="text" class="form-control date-picker" name="return" placeholder="Fecha Vuelta " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Vuelta '">
+                                        <input type="text" class="form-control date-picker" name="start" data-date-format="YYYY-MM-DD" placeholder="Fecha Ida " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Ida '">
+                                        <input type="text" class="form-control date-picker" name="return" data-date-format="YYYY-MM-DD" placeholder="Fecha Vuelta " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Vuelta '">
                                     </div>
                                 </div>
                                     <label for="cantidad_ninos">Cantidad niños </label>

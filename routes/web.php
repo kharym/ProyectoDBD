@@ -226,3 +226,7 @@ Route::get('/compra-carro/{id}', 'CompraController@realizarCompraCarro');
 Route::get('/compra-carro-realizada/{id}/{precio}', 'CompraController@compraCarro');
 
 Route::get('/reserva-habitacion/{id}', 'HabitacionController@reservarHabitacion');
+
+Route::get('/comprar-habitacion/{id}', 'CompraController@comprarHabitacion');
+
+Route::get('/compra-habitacion-realizada/{id}/{precio}', 'CompraController@realizarCompraHabitacion');

@@ -137,6 +137,7 @@ class HabitacionController extends Controller
     }
 
     public function reservarHabitacion($id){
+        
         return view('alojamientos.reservaHabitacion');
     }
 }
