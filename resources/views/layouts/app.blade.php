@@ -59,13 +59,26 @@
 				      </div>
 				      <nav id="nav-menu-container">
 				        <ul class="nav-menu">
-				          <li><a href="/">Home</a></li>
-				          <li><a href="/Vuelo/all">Vuelos</a></li>
-				          <li><a href="/Alojamiento/all">Alojamientos</a></li>
-				          <li><a href="/Auto/all">Vehículos</a></li>
-				          <li><a href="/Actividad/all">Actividades</a></li>
-				          <li class="menu-has-children"><a href="">Paquetes</a>
-				            <ul>
+				        	@auth
+				        	@if(auth()->user()->rol_id == 2)
+				        	<li class="menu-has-children"><a href="">Administrador</a>
+				        		<ul>
+				        			<li><a href="/Vuelo/agregarVuelo">Agregar Vuelo</a></li>
+				              		<li><a href="">Agregar Alojamiento</a></li>
+				              		<li><a href="">Agregar Vehículo</a></li>
+				              		<li><a href="">Agregar Actividad</a></li>
+				              		<li><a href="">Agregar Paquete</a></li>
+				            	</ul>
+				         	</li>	
+				        	@endif
+				        	@endauth
+				          	<li><a href="/">Home</a></li>
+				          	<li><a href="/Vuelo/all">Vuelos</a></li>
+				          	<li><a href="/Alojamiento/all">Alojamientos</a></li>
+				          	<li><a href="/Auto/all">Vehículos</a></li>
+				          	<li><a href="/Actividad/all">Actividades</a></li>
+				          	<li class="menu-has-children"><a href="">Paquetes</a>
+				        <ul>
 				              <li><a href="blog-home.html">Vuelo + Alojamiento</a></li>
 				              <li><a href="blog-single.html">Vuelo + Car</a></li>
 				              <li><a href="blog-single.html">Hotel + Car</a></li>

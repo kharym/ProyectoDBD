@@ -59,7 +59,7 @@ class VueloController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.agregar-vuelo');
     }
 
     /**

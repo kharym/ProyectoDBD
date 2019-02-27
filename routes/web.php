@@ -184,6 +184,7 @@ Route::get('/Vuelo/show/{id}', 'VueloController@show');
 Route::post('/Vuelo/destroy/{id}', 'VueloController@destroy');
 Route::post('/Vuelo/store', 'VueloController@store');
 Route::put('/Vuelo/{vuelo}', 'VueloController@update');
+Route::get('/Vuelo/agregarVuelo', 'VueloController@create');
 //Anidados
 Route::get('/Vuelo/{id}/all/Asiento', 'VueloController@asientos'); 
 Route::get('/Vuelo/{id}/all/Asiento/disponibilidad', 'VueloController@asientosDisponibles'); 
