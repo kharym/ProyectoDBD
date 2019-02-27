@@ -247,6 +247,10 @@ class CompraController extends Controller
             $crv = \App\Compra_ReservaVuelo::create(['compra_id'=>$compra->id,'reserva_vuelo_id'=>$auxRV->id]);
             $crv->save();
         }
+        request()->session()->forget('reservaVuelo');
+        request()->session()->forget('pasajero');
+        request()->session()->push('reservaVuelo',NULL);
+        request()->session()->push('pasajero',NULL);
         $mensaje = "Compra realizada con éxito";
         return view('carrito.compra-hecha',compact('mensaje'));
     }
