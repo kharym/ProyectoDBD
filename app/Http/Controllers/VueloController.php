@@ -178,8 +178,28 @@ class VueloController extends Controller
         return view('vuelos.vuelos',compact('vuelos'));
     }
 
-    public function agrearVuelo(){
-        return view('vuelos.vuelosAll');
+    public function agregarVuelo(){
+        $vuelo = new Vuelo();
+
+        $vuelo->ciudad_viene_id = request()->ciudadOrigen;
+        $vuelo->ciudad_va_id = request()->ciudadDestino;
+        $vuelo->precio_vuelo = request()->precio;
+        $vuelo->cantidad_asientos = request()->cantidadAsientos;
+        $vuelo->fecha_ida = request()->fechaIda;
+        $vuelo->fecha_llegada = request()->fechaVuelta;
+        $vuelo->hora_ida = request()->horaIda;
+        $vuelo->hora_llegada = request()->horaVuelta;
+        $vuelo->duracion_viaje = request()->duracionViaje;
+
+        $nombreCiudadOrigen = \App\Ciudad::find(request()->ciudadOrigen);
+        $nombreCiudadDestino = \App\Ciudad::find(request()->ciudadDestino);
+
+        $vuelo->origen = $nombreCiudadOrigen->nombre_ciudad;
+        $vuelo->destino = $nombreCiudadDestino->nombre_ciudad;
+        $vuelo->save();
+        $vuelos = Vuelo::all();
+
+        return view('vuelos.vuelosAll', compact('vuelos'));
     }
 
 }

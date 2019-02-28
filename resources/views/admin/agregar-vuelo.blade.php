@@ -26,7 +26,7 @@
                                                 <label for="ciudadOrigen"> Ciudad Origen </label>
                                                 <select class="form-control" id="ciudadOrigen" name="ciudadOrigen">
                                                 @foreach($ciudades as $ciudad)
-                                                <option value="{{$ciudad->nombre_ciudad}}">{{$ciudad->nombre_ciudad}}</option>
+                                                <option value="{{$ciudad->id}}">{{$ciudad->nombre_ciudad}}</option>
                                                 @endforeach
                                                 </select>
                                             </div>
@@ -34,7 +34,7 @@
                                                 <label for="ciudadDestino" > Ciudad Destino</label>
                                                 <select class="form-control" id="ciudadDestino" name="ciudadDestino">
                                                 @foreach($ciudades as $ciudad)
-                                                <option value="{{$ciudad->nombre_ciudad}}">{{$ciudad->nombre_ciudad}}</option>
+                                                <option value="{{$ciudad->id}}">{{$ciudad->nombre_ciudad}}</option>
                                                 @endforeach
                                                 </select>
                                             </div>
@@ -52,26 +52,26 @@
                                         <div class="row">
                                             <div class="form-group col-md-6">    
                                                 <label for="fechaIda" > Fecha Ida</label>
-                                                <input type="text" class="form-control date-picker" name="start" data-date-format="YYYY-MM-DD" placeholder="" onfocus="this.placeholder = ''" onblur="this.placeholder = ''">
+                                                <input type="text" class="form-control date-picker" name="fechaIda" data-date-format="YYYY-MM-DD" placeholder="" onfocus="this.placeholder = ''" onblur="this.placeholder = ''">
                                             </div>
                                             <div class="form-group col-md-6">    
                                                 <label for="fechaVuelta" > Fecha Vuelta</label>
-                                                <input type="text" class="form-control date-picker" name="return" data-date-format="YYYY-MM-DD" placeholder="" onfocus="this.placeholder = ''" onblur="this.placeholder = ' '">
+                                                <input type="text" class="form-control date-picker" name="fechaVuelta" data-date-format="YYYY-MM-DD" placeholder="" onfocus="this.placeholder = ''" onblur="this.placeholder = ' '">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-md-6">    
                                                 <label for="horaIda" > Hora Ida</label>
-                                                <input type="text" class="form-control time-picker" name="start" data-time-format="HH:MM:SS" placeholder="" onfocus="this.placeholder = ''" onblur="this.placeholder = ' '">
+                                                <input type="text" class="form-control time-picker" name="horaIda" data-time-format="HH:MM:SS" placeholder="" onfocus="this.placeholder = ''" onblur="this.placeholder = ' '">
                                             </div>
                                             <div class="form-group col-md-6">    
                                                 <label for="Hora Vuelta" > Hora Vuelta</label>
-                                                <input type="text" class="form-control time-picker" name="return" data-time-format="HH:MM:SS" placeholder=" " onfocus="this.placeholder = ''" onblur="this.placeholder = ''">
+                                                <input type="text" class="form-control time-picker" name="horaVuelta" data-time-format="HH:MM:SS" placeholder=" " onfocus="this.placeholder = ''" onblur="this.placeholder = ''">
                                             </div>
                                         </div>
                                         <div class="form-group">    
                                             <label for="duracionViaje" > Duracion Viaje</label>
-                                            <input type="text" class="form-control time-picker" name="start" data-time-format="HH:MM:SS" placeholder="" onfocus="this.placeholder = ''" onblur="this.placeholder = ' '">
+                                            <input type="text" class="form-control time-picker" name="duracionViaje" data-time-format="HH:MM:SS" placeholder="" onfocus="this.placeholder = ''" onblur="this.placeholder = ' '">
                                         </div>
                                         <div class="col text-center">
                                             <button type="submit" class="btn btn-primary">Agregar</button>
