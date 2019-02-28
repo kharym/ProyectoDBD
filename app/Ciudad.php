@@ -18,11 +18,6 @@ class Ciudad extends Model
       return $this->hasMany('App\Aeropuerto');
     }
 
-    //relacion 1-N con  empresa
-    public function empresa()
-    {
-      return $this->hasMany('App\Empresa');
-    }
 
     //relacion 1-N con  vueloVa
     public function vueloVa()

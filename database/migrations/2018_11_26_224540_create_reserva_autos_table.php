@@ -16,6 +16,7 @@ class CreateReservaAutosTable extends Migration
         Schema::create('reserva_autos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('auto_id')->unsigned();
+            $table->integer('ubicacion_id')->unsigned()->nullable();
             $table->float('precio_auto');
             $table->date('fecha_recogido');   
             $table->date('fecha_devolucion');
@@ -26,6 +27,7 @@ class CreateReservaAutosTable extends Migration
 
             //llaves foraneas
             $table->foreign('auto_id')->references('id')->on('autos')->onDelete('cascade');
+            $table->foreign('ubicacion_id')->references('id')->on('ubicacions')->onDelete('cascade');
         });
     }
 

@@ -269,6 +269,10 @@ class CompraController extends Controller
             $vuelo = \App\Vuelo::where('id',$aux->vuelo_id)->first();
             $precio = $precio + $vuelo->precio_vuelo;
         }
+        for($i = 1; $i<count(request()->session()->get('reservaHabitacion')); $i++){
+            $aux = request()->session()->get('reservaHabitacion')[$i];
+            $precio = $precio + $aux->precio_res_hab;
+        }
         return view('carrito.compra',compact('precio'));
     }
 
@@ -297,10 +301,20 @@ class CompraController extends Controller
             $crv = \App\Compra_ReservaVuelo::create(['compra_id'=>$compra->id,'reserva_vuelo_id'=>$auxRV->id]);
             $crv->save();
         }
+
+        for($i = 1; $i<count(request()->session()->get('reservaHabitacion')); $i++){
+            $auxRH = request()->session()->get('reservaHabitacion')[$i];
+            $auxRH->save();
+            $compra = Compra::create(['user_id'=>$id,'fecha_compra'=>$fecha, 'hora_compra'=>$hora, 'reserva_habitacion_id'=>$auxRH->id]);
+            $compra->save();
+        }
+
         request()->session()->forget('reservaVuelo');
         request()->session()->forget('pasajero');
+        request()->session()->forget('reservaHabitacion');
         request()->session()->push('reservaVuelo',NULL);
         request()->session()->push('pasajero',NULL);
+        request()->session()->push('reservaHabitacion',NULL);
         $mensaje = "Compra realizada con éxito";
         return view('carrito.compra-hecha',compact('mensaje'));
     }

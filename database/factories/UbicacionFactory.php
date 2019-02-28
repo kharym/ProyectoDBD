@@ -13,7 +13,9 @@ $factory->define(App\Ubicacion::class, function (Faker $faker) {
     	'latitud'=> $faker->latitude,
     	'longitud'=>$faker->longitude,
     	'codigo_postal' => $faker->randomNumber,
-    	'ciudad_id' => $id_ciudad,
+		'ciudad_id' => $id_ciudad,
+		'calle' => $faker->name,
+		'numero' => $faker->buildingNumber,
         
     ];
 });

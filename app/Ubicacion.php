@@ -12,5 +12,11 @@ class Ubicacion extends Model
         return $this->belongsTo('App\Ciudad');
     }
 
-    protected $fillable = ['ciudad_id','latitud','longitud','codigo_postal'];
+    //relacion 1-N con  empresa
+    public function empresa()
+    {
+      return $this->hasMany('App\Empresa');
+    }
+
+    protected $fillable = ['ciudad_id','latitud','longitud','codigo_postal','calle','numero'];
 }

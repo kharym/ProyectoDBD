@@ -19,6 +19,8 @@ class CreateUbicacionsTable extends Migration
             $table->float('latitud');
             $table->float('longitud');
             $table->integer('codigo_postal');
+            $table->string('calle');
+            $table->integer('numero');
             $table->timestamps();
 
             //llaves foraneas

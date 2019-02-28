@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PaisesTableSeeder::class);
         $this->call(CiudadesTableSeeder::class);
         $this->call(CuentasBancariasTableSeeder::class);
+        $this->call(UbicacionesTableSeeder::class);
         $this->call(EmpresasTableSeeder::class);
         $this->call(AutosTableSeeder::class);
         $this->call(MediosDePagoTableSeeder::class);
@@ -33,7 +34,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ReservasVueloTableSeeder::class);
         $this->call(PaquetesTableSeeder::class);
         $this->call(ComprasTableSeeder::class);
-        $this->call(UbicacionesTableSeeder::class);
         $this->call(Paquete_ReservaVueloSeeder::class);
         $this->call(UsuarioMedioPagoSeeder::class);
         $this->call(Compra_ReservaVueloSeeder::class);
