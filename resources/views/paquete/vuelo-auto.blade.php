@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 	
-			  
+			  <?php print_r($paquetes[0]->auto_id);     ?>
 			<!-- start banner Area -->
 			<section class="about-banner relative">
 				<div class="overlay overlay-bg"></div>
@@ -30,68 +30,57 @@
 							</div>
 						</div>						
 				<div class="row">
-                    <!--
-			@foreach ($alojamientos as $alojamiento)
+                    
+            @foreach($paquetes as $paquete)
+                <?php $vuelo = \App\Vuelo::find($paquete->vuelo_id);
+                        $auto = \App\Auto::find($paquete->auto_id);?>
 				<div class="col-lg-4">
-					<a href="/habitacion/{{$alojamiento->id}}">
+                    <a href="/reserva-paquete-vuelo+auto/{{$paquete->id}}/{{$paquete->pasajeros}}">
 					<div class="single-destinations">
 						<div class="details" style="background-color: #f6fd8c ; color: black;">
 							<h4 class="d-flex justify-content-between">
-								<span>{{$alojamiento->nombre_alojamiento}}</span>                              	
-								<div class="star">
-									@if($alojamiento->numero_estrellas == 1)
-										<span class="fa fa-star checked"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-									@elseif($alojamiento->numero_estrellas == 2)
-										<span class="fa fa-star checked"></span>
-										<span class="fa fa-star checked"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-									@elseif($alojamiento->numero_estrellas == 3)
-										<span class="fa fa-star checked"></span>
-										<span class="fa fa-star checked"></span>
-										<span class="fa fa-star checked"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-									@elseif($alojamiento->numero_estrellas == 4)
-										<span class="fa fa-star checked"></span>
-										<span class="fa fa-star checked"></span>
-										<span class="fa fa-star checked"></span>
-										<span class="fa fa-star checked"></span>
-										<span class="fa fa-star"></span>
-									@else
-										<span class="fa fa-star checked"></span>
-										<span class="fa fa-star checked"></span>
-										<span class="fa fa-star checked"></span>
-										<span class="fa fa-star checked"></span>
-										<span class="fa fa-star checked"></span>
-									@endif				
-								</div>	
+                            <span>Personas: {{$paquete->pasajeros}}</span>                              	
 							</h4>
 							
 							<ul class="package-list">
+                                    <li class="d-flex justify-content-between align-items-center">
+                                            <span>Origen vuelo</span>  
+                                            <span>{{$vuelo->origen}}</span>  
+                                    </li>
+                                    <li class="d-flex justify-content-between align-items-center">
+                                            <span>Destino vuelo</span>  
+                                            <span>{{$vuelo->destino}}</span>  
+                                    </li>
+                                    <li class="d-flex justify-content-between align-items-center">
+                                            <span>Fecaha de salida</span>  
+                                            <span>{{$vuelo->fecha_ida}}</span>  
+                                    </li>
+                                    <li class="d-flex justify-content-between align-items-center">
+                                            <span>Fecha de llegada</span>  
+                                            <span>{{$vuelo->fecha_llegada}}</span>  
+                                    </li>
 								<li class="d-flex justify-content-between align-items-center">
-									@if($alojamiento->disponibilidad)
-										<span>Disponibilidad</span>
-										<span>Disponible</span>
-									@else
-										<span>Disponibilidad</span>
-										<span>No disponible</span>
-									@endif
-								</li>													
+                                        <span>Marca automóvil</span>  
+                                        <span>{{$auto->marca}}</span>  
+                                </li>
+                                <li class="d-flex justify-content-between align-items-center">
+                                        <span>Modelo automóvil</span>  
+                                        <span>{{$auto->modelo}}</span>  
+                                </li>
+                                <li class="d-flex justify-content-between align-items-center">
+                                        <span>Precio</span>  
+                                        <span>{{$paquete->precio}}</span>  
+                                </li>													
 							</ul>
 						</div>
 					</div>
 				</div>
-			@endforeach
+
 				</div>
-					</div>
+                    </div>
+            @endforeach
 			</section>
-        -->
+    
 			<!-- End destinations Area -->
 		
 

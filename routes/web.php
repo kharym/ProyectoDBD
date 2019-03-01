@@ -242,3 +242,7 @@ Route::get('/compra-vehiculo-realizada/{id}','CompraController@realizarCompraVeh
 Route::get('/carrito-auto/{id}', 'ReservaAutoController@carritoCompraAuto');
 
 Route::get('/paquete-vuelo+auto','PaqueteController@paquetesVueloAuto');
+
+Route::get('/reserva-paquete-vuelo+auto/{id}/{numero}','PaqueteController@reservaPaqueteVueloAuto');
+
+Route::get('/compra-auto+vuelo/{id}', 'PaqueteController@comprarVueloAuto');
