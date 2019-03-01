@@ -18,5 +18,5 @@ class Auto extends Model
         return $this->belongsTo('App\Empresa');
     }
 
-    protected $fillable = ['empresa_id','numero_puertas','tipo_transmision','numero_asientos','modelo','marca','disponibilidad'];
+    protected $fillable = ['empresa_id','numero_puertas','tipo_transmision','numero_asientos','modelo','marca','disponibilidad','precio'];
 }

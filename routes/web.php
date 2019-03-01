@@ -203,7 +203,7 @@ Route::get('/habitacion/reserva/{habitacion}', 'HabitacionController@habitacionR
 
 Route::get('/reservaVuelo/{id}', 'ReservaVueloController@reserva');
 
-Route::get('Auto/see/{auto}', 'AutoController@vista');
+Route::get('Auto/see/{id}', 'AutoController@vista');
 
 Route::get('Actividad/reserva/{actividad}', 'ActividadController@vistaReserva');
 
@@ -234,3 +234,9 @@ Route::get('/compra-habitacion-realizada/{id}/{precio}', 'CompraController@reali
 Route::get('/carrito-habitacion/{id}', 'ReservaHabitacionController@carritoCompraHabitacion');
 
 Route::get('/agregar-vuelo', 'VueloController@agregarVuelo');
+
+Route::get('/comprar-vehiculo/{id}', 'CompraController@comprarVehiculo');
+
+Route::get('/compra-vehiculo-realizada/{id}','CompraController@realizarCompraVehiculo');
+
+Route::get('/carrito-auto/{id}', 'ReservaAutoController@carritoCompraAuto');

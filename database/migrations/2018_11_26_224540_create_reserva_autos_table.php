@@ -20,8 +20,8 @@ class CreateReservaAutosTable extends Migration
             $table->float('precio_auto');
             $table->date('fecha_recogido');   
             $table->date('fecha_devolucion');
-            $table->time('hora_recogido');   
-            $table->time('hora_devolucion');
+            $table->time('hora_recogido')->nullable();   
+            $table->time('hora_devolucion')->nullable();
             $table->smallInteger('tipo_auto');
             $table->timestamps();
 

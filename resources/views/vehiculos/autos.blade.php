@@ -33,7 +33,7 @@
         @foreach ($autos as $auto)
         <div class="col-lg-4">
                 <div class="single-destinations" >
-                    <a href="/Auto/see/{{$auto}}"> 
+                    <a href="/Auto/see/{{$auto->id}}"> 
                     <div class="details">
                          
                         <h4 class="d-flex justify-content-between">

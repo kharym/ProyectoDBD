@@ -23,6 +23,7 @@ class CreateAutosTable extends Migration
             $table->string('marca',30);
             $table->boolean('disponibilidad');
             $table->timestamps();
+            $table->float('precio');
 
             //llaves foraneas
             $table->foreign('empresa_id')->references('id')->on('empresas')->onDelete('cascade');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Validator;
 use App\ReservaAuto;
 use Illuminate\Http\Request;
+use DateTime;
 
 class ReservaAutoController extends Controller
 {
@@ -122,5 +123,31 @@ class ReservaAutoController extends Controller
         $reservaAuto = ReservaAuto::find($id);
         $reservaAuto->delete();
         return "";
+    }
+
+    public function carritoCompraAuto($id){
+        $inicio = new DateTime(request()->start);
+        $fin = new DateTime(request()->return);
+        $dias = $fin->diff($inicio)->format("%a");
+        
+        $auto = \App\Auto::find($id);
+
+        $reserva = new \App\ReservaAuto();
+        $reserva->auto_id = $id;
+        $reserva->precio_auto = $auto->precio*$dias;
+        $reserva->fecha_recogido = request()->start;
+        $reserva->fecha_devolucion = request()->end;
+        $reserva->ubicacion_id = request()->retiro;
+        $reserva->tipo_auto = 0;
+
+        foreach(request()->session()->get('reservaAuto') as $rv){
+            if(!is_null($rv)){
+                if($reserva->auto_id == $rv->auto_id){
+                    return view('carrito.carrito');
+                }
+            }
+        }
+        request()->session()->push('reservaAuto',$reserva);     
+        return view('carrito.carrito');
     }
 }

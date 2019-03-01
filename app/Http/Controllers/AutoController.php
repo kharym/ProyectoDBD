@@ -150,7 +150,7 @@ class AutoController extends Controller
         return view('vehiculos.autos',compact('autos'));
     }
 
-    public function vista($auto){
-        return view('vehiculos.auto-reserva', compact('auto'));
+    public function vista($id){
+        return view('vehiculos.auto-reserva', compact('id'));
     }
 }

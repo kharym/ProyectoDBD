@@ -1,6 +1,13 @@
 @extends('layouts.app') 
 @section('content')
-<?php $a = json_decode($auto) ?>
+<?php 
+        $auto = \App\Auto::find($id);
+        $empresa = \App\Empresa::find($auto->empresa_id);
+        $ubicacion = \App\Ubicacion::find($empresa->ubicacion_id);
+        $ciudad = \App\Ciudad::find($ubicacion->ciudad_id);
+        $ubicaciones = \App\Ubicacion::where('ciudad_id',$ciudad->id)->get();
+          ?>
+
             <!-- start banner Area -->
             <section class="banner-area relative">
                 <br>
@@ -16,35 +23,29 @@
                             </ul>
                             <div class="tab-content" id="myTabContent">
                               <div class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="flight-tab">
-                                  <!-- FORM PARA BUSCAR VUELOS -->
-                                <form class="form-wrap" method="get" action="Vuelo">
+                                  <!-- FORM PARA RESERVAR AUTO -->
+                                <form class="form-wrap" method="get" action="/comprar-vehiculo/{{$id}}">
                                     <div class="details">
                                     <ul class="package-list">
                                     <li class="d-flex justify-content-between align-items-center">
                                         <input type="text" class="form-control date-picker" name="start" placeholder="Fecha Arriendo " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Arriendo '">
                                     </li>
-                                    <input type="text" class="form-control date-picker" name="start" placeholder="Fecha Devolución} " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Devolución '">
                                     </li>
-                                    <li class="d-flex justify-content-between align-items-center">
-                                        <span> Marca: </span>
-
-                                        <span>{{$a->marca}}</span>
+                                        <input type="text" class="form-control date-picker" name="end" placeholder="Fecha Devolución " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Devolución '">
                                     </li>
-                                    <li class="d-flex justify-content-between align-items-center">
-                                        <span> Modelo: </span>
-                                        <span>{{$a->modelo}}</span>
-                                    </li>
-                                    <li class="d-flex justify-content-between align-items-center">
-                                        <span> Numero puertas: </span>
-                                        <span>{{$a->numero_puertas}}</span>
-                                    </li>
-                                    <li class="d-flex justify-content-between align-items-center">
-                                        <span> Transmisión: </span>
-                                        <span>{{$a->tipo_transmision}}</span>
-                                    </li>
+                                    <label for="retiro"> Lugar de retiro </label>
+                                    <select class="form-control" id="retiro" name="retiro" >
+                                        @for($i = 0; $i < count($ubicaciones); $i++)
+                                            <option value="{{$ubicaciones[$i]->id}}"> {{$ubicaciones[$i]->calle}} , {{$ubicaciones[$i]->numero}}</option>
+                                        @endfor 
+                                        
+                                      </select>
                                     <br>
                                    </ul>
-                                    <input type="submit" class="primary-btn text-uppercase" value="Reservar" >                                    
+                                   
+                                    <input type="submit" class="primary-btn text-uppercase" value="Reservar" >
+                                    <input type="submit" class="primary-btn text-uppercase" value="Agregar A Carrito"
+									formaction="/carrito-auto/{{request()->id}}">                                    
                                 </form>
                                 </div>
                               </div>

@@ -56,6 +56,7 @@ class LoginController extends Controller
             request()->session()->push('reservaVuelo',NULL);
             request()->session()->push('pasajero',NULL);
             request()->session()->push('reservaHabitacion',NULL);
+            request()->session()->push('reservaAuto',NULL);
         }
         return redirect($this->redirectTo);
     }

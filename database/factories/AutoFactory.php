@@ -17,5 +17,6 @@ $factory->define(App\Auto::class, function (Faker $faker) {
         'marca' =>$faker->vehicleBrand,
         'disponibilidad' =>$faker->boolean,
         'empresa_id' =>$id_empresa,
+        'precio' =>$faker->randomFloat,
     ];
 });

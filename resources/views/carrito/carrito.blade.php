@@ -129,6 +129,51 @@
             </div>
         @endfor
     @endif
+
+    @if(!empty(request()->session()->get('reservaAuto')))
+        @for($i = 1; $i<count(request()->session()->get('reservaAuto')); $i++)
+            <?php  
+                    $aux = request()->session()->get('reservaAuto')[$i];
+                    $auto = \App\Auto::find($aux->auto_id);
+                    $empresa = \App\Empresa::find($auto->empresa_id);
+                    $ubicacion = \App\Ubicacion::find($empresa->ubicacion_id);
+                    ?>
+            <div class="col-lg-4">
+                    <div class="single-destinations" >
+                        <div class="details">
+                            <ul class="package-list">
+                                <h4 class="d-flex justify-content-between align-items-center">
+                                    <span> Marca </span>
+                                    <span>{{$auto->marca}}</span>
+                                    
+                                </h4>
+                                <li class="d-flex justify-content-between align-items-center">
+                                    <span> Modelo </span>
+                                    <span> {{$auto->modelo}} </span>
+                                </li>
+                                <li class="d-flex justify-content-between align-items-center">
+                                    <span> Fecha de recogida </span>
+                                    <span> {{$aux->fecha_recogido}}</span>        
+                                </li>
+                                <li class="d-flex justify-content-between align-items-center">
+                                        <span> Fecha de entrega </span>
+                                        <span> {{$aux->fecha_devolucion}}</span>        
+                                </li>
+                                <li class="d-flex justify-content-between align-items-center">
+                                    <span> Lugar de entrega </span>
+                                    <span> {{$ubicacion->calle}} #{{$ubicacion->numero}}</span>        
+                                </li>
+                                <li class="d-flex justify-content-between align-items-center">
+                                    <span> Precio </span>
+                                    <span> {{$aux->precio_auto}}</span>        
+                                </li>                                         
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        @endfor
+    @endif
             </div>
                 </div>
             <form action="/compra-carro/{{auth()->user()->id}}" >

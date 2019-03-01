@@ -255,6 +255,49 @@ class CompraController extends Controller
         return view('alojamientos.compra-hecha', compact('mensaje'));
     }
 
+    public function comprarVehiculo($id){
+        $inicio = new DateTime(request()->start);
+        $fin = new DateTime(request()->return);
+        $dias = $fin->diff($inicio)->format("%a");
+        
+        $auto = \App\Auto::find($id);
+
+        $reserva = new \App\ReservaAuto();
+        $reserva->auto_id = $id;
+        $reserva->precio_auto = $auto->precio*$dias;
+        $reserva->fecha_recogido = request()->start;
+        $reserva->fecha_devolucion = request()->end;
+        $reserva->ubicacion_id = request()->retiro;
+        $reserva->tipo_auto = 0;
+        if(!request()->session()->has('reservaAut') ){
+            request()->session()->push('reservaAut',$reserva);
+        }
+        return view('vehiculos.compra',compact('id','dias'));
+    }
+
+    public function realizarCompraVehiculo($id){
+        $mensaje;
+        $fecha = date('Y-m-d');
+        $hora = date("H:i:s");
+        $reserva = request()->session()->get('reservaAut')[0];
+        if(request()->medioPago == "1"){
+            if(\App\MedioDePago::where('id',request()->numeroCuenta)->exists()){
+               $mp = \App\MedioDePago::where('id',request()->numeroCuenta)->first();
+               $mp->monto = $mp->monto - $reserva->precio_auto;
+               $mp->save();
+            }
+            else{
+                $mensaje = "No existe el medio de pago";
+                return view('vehiculos.compra-hecha', compact('mensaje'));
+            }
+        }
+        $reserva->save();
+        request()->session()->forget('reservaAut');
+        $compra = Compra::create(['user_id'=>$id,'fecha_compra'=>$fecha, 'hora_compra'=>$hora, 'reserva_auto_id'=>$reserva->id]);
+        $mensaje = "Reserva comprada con éxito";
+        return view('vehiculos.compra-hecha', compact('mensaje'));
+    }
+
 
 
 
@@ -273,6 +316,12 @@ class CompraController extends Controller
             $aux = request()->session()->get('reservaHabitacion')[$i];
             $precio = $precio + $aux->precio_res_hab;
         }
+        
+        for($i = 1; $i<count(request()->session()->get('reservaAuto')); $i++){
+            $aux = request()->session()->get('reservaAuto')[$i];
+            $precio = $precio + $aux->precio_auto;
+        }
+
         return view('carrito.compra',compact('precio'));
     }
 
@@ -309,12 +358,21 @@ class CompraController extends Controller
             $compra->save();
         }
 
+        for($i = 1; $i<count(request()->session()->get('reservaAuto')); $i++){
+            $auxRA = request()->session()->get('reservaAuto')[$i];
+            $auxRA->save();
+            $compra = Compra::create(['user_id'=>$id,'fecha_compra'=>$fecha, 'hora_compra'=>$hora, 'reserva_auto_id'=>$auxRA->id]);
+            $compra->save();
+        }
+
         request()->session()->forget('reservaVuelo');
         request()->session()->forget('pasajero');
         request()->session()->forget('reservaHabitacion');
+        request()->session()->forget('reservaAuto');
         request()->session()->push('reservaVuelo',NULL);
         request()->session()->push('pasajero',NULL);
         request()->session()->push('reservaHabitacion',NULL);
+        request()->session()->push('reservaAuto',NULL);
         $mensaje = "Compra realizada con éxito";
         return view('carrito.compra-hecha',compact('mensaje'));
     }
