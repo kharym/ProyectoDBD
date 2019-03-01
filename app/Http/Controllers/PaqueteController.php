@@ -121,4 +121,8 @@ class PaqueteController extends Controller
         $paquete->delete();
         return "";
     }
+
+    public function paquetesVueloAuto(){
+        return view('paquete.vuelo-auto');
+    }
 }

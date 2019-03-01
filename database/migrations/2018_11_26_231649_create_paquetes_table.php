@@ -15,8 +15,10 @@ class CreatePaquetesTable extends Migration
     {
         Schema::create('paquetes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('reserva_auto_id')->unsigned();
-            $table->integer('reserva_habitacion_id')->unsigned();
+            $table->integer('auto_id')->unsigned()->nullable();
+            $table->integer('habitacion_id')->unsigned()->nullable();
+            $table->integer('vuelo_id')->unsigned()->nullable();
+            $table->integer('pasajeros')->nullable();
             $table->float('precio');
             $table->float('descuento');
             $table->smallInteger('tipo_paquete');
@@ -24,9 +26,9 @@ class CreatePaquetesTable extends Migration
             $table->timestamps();
 
             //llaves foraneas
-            $table->foreign('reserva_auto_id')->references('id')->on('reserva_autos')->onDelete('cascade');
-            $table->foreign('reserva_habitacion_id')->references('id')->on('reserva_habitacions')->onDelete('cascade');
-            
+            $table->foreign('auto_id')->references('id')->on('autos')->onDelete('cascade');
+            $table->foreign('habitacion_id')->references('id')->on('habitacions')->onDelete('cascade');
+            $table->foreign('vuelo_id')->references('id')->on('vuelos')->onDelete('cascade');
         });
     }
 

@@ -240,3 +240,5 @@ Route::get('/comprar-vehiculo/{id}', 'CompraController@comprarVehiculo');
 Route::get('/compra-vehiculo-realizada/{id}','CompraController@realizarCompraVehiculo');
 
 Route::get('/carrito-auto/{id}', 'ReservaAutoController@carritoCompraAuto');
+
+Route::get('/paquete-vuelo+auto','PaqueteController@paquetesVueloAuto');

@@ -80,7 +80,7 @@
 				          	<li class="menu-has-children"><a href="">Paquetes</a>
 				        <ul>
 				              <li><a href="blog-home.html">Vuelo + Alojamiento</a></li>
-				              <li><a href="blog-single.html">Vuelo + Car</a></li>
+				              <li><a href="/paquete-vuelo+auto">Vuelo + Automovil</a></li>
 				              <li><a href="blog-single.html">Hotel + Car</a></li>
 				            </ul>
 				          </li>					          					          		          
