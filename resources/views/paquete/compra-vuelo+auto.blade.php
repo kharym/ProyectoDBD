@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('content')
-			  
+              <?php $paquete = App\Paquete::find($id);
+                    $auto = App\Auto::find($paquete->auto_id);
+                    $vuelo = App\Vuelo::find($paquete->vuelo_id);?>
 			<!-- start banner Area -->
 			<section class="about-banner relative">
 				<div class="overlay overlay-bg"></div>
@@ -31,36 +33,29 @@
                                     <div class="details" style="background-color: #f6fd8c ; color: black;">
                                         <ul class="package-list">
                                             <h4 class="d-flex justify-content-between align-items-center">
-                                                <span> Marca </span>
-                                                <span>  </span>
+                                                <span> Origen Vuelo </span>
+                                                <span>  {{$Vuelo->origen}}</span>
                                             </h4>
                                             <li class="d-flex justify-content-between align-items-center">
-                                                <span> Modelo </span>
-                                                <span>  </span>
+                                                <span> Destino Vuelo </span>
+                                                <span> {{$Vuelo->destino}} </span>
                                             </li>
                                             <li class="d-flex justify-content-between align-items-center">
-                                                <span> Número de puertas </span>
-                                                <span>  </span>
+                                                <span> Fecha ida </span>
+                                                <span> {{$Vuelo->fecha_ida}} </span>
                                             </li>
                                             <li class="d-flex justify-content-between align-items-center">
-                                                            
+                                                    <span> Fecha llegada </span>
+                                                    <span> {{$Vuelo->fecha_llegada}} </span>         
                                             </li>
                                             <li class="d-flex justify-content-between align-items-center">
-                                                <span> Empresa </span>
-                                                <span>  </span>      
+                                                <span> Marca Auto </span>
+                                                <span> {{$auto->marca}} </span>      
                                             </li>
                                             <li class="d-flex justify-content-between align-items-center">
-                                                <span> Fecha de inicio arriendo</span>
-                                                <span>  </span>
-                                            </li>
-                                            <li class="d-flex justify-content-between align-items-center">
-                                                <span> Fecha de término arriendo</span>
-                                                <span>  </span>
-                                            </li>
-                                            <li class="d-flex justify-content-between align-items-center">
-                                                <span> Precio </span>
-                                                <span>  </span>      
-                                            </li>                                         
+                                                <span> Modelo auto</span>
+                                                <span> {{$auto->modelo}} </span>
+                                            </li>                                     
                                         </ul>
                                     </div>
                                 </div>

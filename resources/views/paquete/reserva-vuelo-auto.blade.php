@@ -82,36 +82,36 @@
                                         <input type="text" class="form-control" name="pais" placeholder="Pais " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Pais '">	
                                         <input type="submit" class="primary-btn text-uppercase" value="Siguiente pasajero" >										
                                     </form>
-                                @endif
+                                
 
 
-                                @if($pasajeros == 0)
+                                @else
                                 <?php         $auto = \App\Auto::find($paquete->auto_id);
                                 $empresa = \App\Empresa::find($auto->empresa_id);
                                 $ubicacion = \App\Ubicacion::find($empresa->ubicacion_id);
                                 $ciudad = \App\Ciudad::find($ubicacion->ciudad_id);
                                 $ubicaciones = \App\Ubicacion::where('ciudad_id',$ciudad->id)->get();?>
-                                <form class="form-wrap" method="get" action="reserva-paquete-vuelo+auto/{{$id}}/{{$pasajeros}}">
-                                    <div class="details">
-                                    <ul class="package-list">
-                                    <li class="d-flex justify-content-between align-items-center">
-                                        <input type="text" class="form-control date-picker" name="start" placeholder="Fecha Arriendo " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Arriendo '">
-                                    </li>
-                                    </li>
-                                        <input type="text" class="form-control date-picker" name="end" placeholder="Fecha Devolución " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Devolución '">
-                                    </li>
-                                    <label for="retiro"> Lugar de retiro </label>
-                                    <select class="form-control" id="retiro" name="retiro" >
-                                        @for($i = 0; $i < count($ubicaciones); $i++)
-                                            <option value="{{$ubicaciones[$i]->id}}"> {{$ubicaciones[$i]->calle}} , {{$ubicaciones[$i]->numero}}</option>
-                                        @endfor 
-                                        
-                                      </select>
-                                    <br>
-                                   </ul>
-                                   
-                                    <input type="submit" class="primary-btn text-uppercase" value="Reservar" >                                 
-                                </form>
+                                    <form class="form-wrap" method="get" action="/reserva-paquete-vuelo+auto/{{$id}}/{{$pasajeros}}">
+                                        <div class="details">
+                                        <ul class="package-list">
+                                        <li class="d-flex justify-content-between align-items-center">
+                                            <input type="text" class="form-control date-picker" name="start" placeholder="Fecha Arriendo " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Arriendo '">
+                                        </li>
+                                        </li>
+                                            <input type="text" class="form-control date-picker" name="end" placeholder="Fecha Devolución " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Devolución '">
+                                        </li>
+                                        <label for="retiro"> Lugar de retiro </label>
+                                        <select class="form-control" id="retiro" name="retiro" >
+                                            @for($i = 0; $i < count($ubicaciones); $i++)
+                                                <option value="{{$ubicaciones[$i]->id}}"> {{$ubicaciones[$i]->calle}} , {{$ubicaciones[$i]->numero}}</option>
+                                            @endfor 
+                                            
+                                        </select>
+                                        <br>
+                                    </ul>
+                                    
+                                        <input type="submit" class="primary-btn text-uppercase" value="Reservar" >                                 
+                                    </form>
                                 @endif
 
 

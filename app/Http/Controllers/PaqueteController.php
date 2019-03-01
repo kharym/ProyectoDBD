@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Validator;
 use App\Paquete;
 use Illuminate\Http\Request;
+use DateTime;
 
 class PaqueteController extends Controller
 {
@@ -139,7 +140,7 @@ class PaqueteController extends Controller
             $pasajeros = $numero;
             return view('paquete.reserva-vuelo-auto',compact('id','pasajeros'));
         }
-        else if($numero!=-1){
+        else if($numero!=0){
             $pasajeros = $numero;
             $bol;
             $bol2;
@@ -213,7 +214,7 @@ class PaqueteController extends Controller
             $reserva->tipo_auto = 0;
 
             if(request()->session()->has('rA')){
-                foreach(request()->session()->get('rA') as $rv){
+                foreach(request()->session()->get('rA') as $ra){
                     if($reserva->auto_id == $ra->auto_id){
                         $pasajeros = $numero+1;
                         return view('paquete.reserva-vuelo-auto',compact('id','pasajeros'));
