@@ -249,9 +249,48 @@ class PaqueteController extends Controller
         }
         return view('paquete.reserva-vuelo-auto',compact('id','pasajeros'));
     }
-
+    //########################COMPRA VUELO+AUTO###############################
     public function comprarVueloAuto($id,$user){
-        return view('paquete.compra-hecha');
+        $paquete = \App\Paquete::find($id);
+        $mensaje;
+        
+        if(request()->medioPago == "1"){
+            if(\App\MedioDePago::where('id',request()->numeroCuenta)->exists()){
+               $mp = \App\MedioDePago::where('id',request()->numeroCuenta)->first();
+               $mp->monto = $mp->monto - $paquete->precio;
+               $mp->save();
+            }
+            else{
+                $mensaje = "No existe el medio de pago";
+                return view('carrito.compra-hecha', compact('mensaje'));
+            }
+        }
+        $fecha = date('Y-m-d');
+        $hora = date("H:i:s");
+        $compra = \App\Compra::create(['paquete_id'=>$id,'user_id'=>$user,'fecha_compra'=>$fecha, 'hora_compra'=>$hora]);
+        for($i = 0; $i<count(request()->session()->get('rV')); $i++){
+            $auxRV = request()->session()->get('rV')[$i];
+            $auxP = request()->session()->get('psj')[$i];
+            $auxP->save();
+            $auxRV->pasajero_id = $auxP->id;
+            $auxRV->save();
+            $crv = \App\Paquete_ReservaVuelo::create(['paquete_id'=>$id,'reserva_vuelo_id'=>$auxRV->id]);
+            $crv->save();
+        }
+
+        for($i = 0; $i<count(request()->session()->get('rA')); $i++){
+            $auxRA = request()->session()->get('rA')[$i];
+            $auxRA->save();
+            $paquete->auto_id = $auxRA->id;
+        }
+
+
+
+        request()->session()->forget('rV');
+        request()->session()->forget('rA');
+        request()->session()->forget('psj');
+        $mensaje = "Compra realizada con éxito";
+        return view('paquete.compra-hecha',compact('mensaje'));
     }
 
 
@@ -383,6 +422,48 @@ class PaqueteController extends Controller
 
         }
         return view('paquete.reserva-vuelo-alojamiento',compact('id','pasajeros'));
+    }
+
+    public function comprarVueloAlojamiento($id,$user){
+        $paquete = \App\Paquete::find($id);
+        $mensaje;
+        if(request()->medioPago == "1"){
+            if(\App\MedioDePago::where('id',request()->numeroCuenta)->exists()){
+               $mp = \App\MedioDePago::where('id',request()->numeroCuenta)->first();
+               $mp->monto = $mp->monto - $paquete->precio;
+               $mp->save();
+            }
+            else{
+                $mensaje = "No existe el medio de pago";
+                return view('carrito.compra-hecha', compact('mensaje'));
+            }
+        }
+        $fecha = date('Y-m-d');
+        $hora = date("H:i:s");
+        $compra = \App\Compra::create(['paquete_id'=>$id,'user_id'=>$user,'fecha_compra'=>$fecha, 'hora_compra'=>$hora]);
+        for($i = 0; $i<count(request()->session()->get('rV')); $i++){
+            $auxRV = request()->session()->get('rV')[$i];
+            $auxP = request()->session()->get('psj')[$i];
+            $auxP->save();
+            $auxRV->pasajero_id = $auxP->id;
+            $auxRV->save();
+            $crv = \App\Paquete_ReservaVuelo::create(['paquete_id'=>$id,'reserva_vuelo_id'=>$auxRV->id]);
+            $crv->save();
+        }
+
+        for($i = 0; $i<count(request()->session()->get('rH')); $i++){
+            $auxRA = request()->session()->get('rH')[$i];
+            $auxRA->save();
+            $paquete->habitacion_id = $auxRA->id;
+        }
+
+
+
+        request()->session()->forget('rV');
+        request()->session()->forget('rH');
+        request()->session()->forget('psj');
+        $mensaje = "Compra realizada con éxito";
+        return view('paquete.compra-hecha',compact('mensaje'));
     }
 
 

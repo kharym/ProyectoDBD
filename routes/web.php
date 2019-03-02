@@ -263,4 +263,4 @@ Route::get('/paquete-vuelo+alojamiento','PaqueteController@paquetesVueloAlojamie
 
 Route::get('/reserva-paquete-vuelo+alojamiento/{id}/{numero}','PaqueteController@reservaPaqueteVueloAlojamiento');
 
-Route::get('/compra-vuelo+alojamiento/{id}', 'PaqueteController@comprarVueloAlojamiento');
+Route::get('/compra-vuelo+alojamiento/{id}/{user}', 'PaqueteController@comprarVueloAlojamiento');
