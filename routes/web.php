@@ -99,6 +99,7 @@ Route::get('/Habitacion/show/{id}', 'HabitacionController@show');
 Route::post('/Habitacion/destroy/{id}', 'HabitacionController@destroy');
 Route::post('/Habitacion/store', 'HabitacionController@store'); 
 Route::put('/Habitacion/{habitacion}', 'HabitacionController@update');
+Route::get('/Habitacion/agregarHabitacion', 'HabitacionController@create');
 
 Route::get('/MedioDePago/all', 'MedioDePagoController@index'); 
 Route::get('/MedioDePago/show/{id}', 'MedioDePagoController@show'); 
@@ -111,6 +112,7 @@ Route::get('/Pais/show/{id}', 'PaisController@show');
 Route::post('/Pais/destroy/{id}', 'PaisController@destroy');
 Route::post('/Pais/store', 'PaisController@store');
 Route::put('/Pais/{pais}', 'PaisController@update');
+Route::get('/Pais/agregarPais', 'PaisController@create');
 
 Route::get('/Paquete/all', 'PaqueteController@index'); 
 Route::get('/Paquete/show/{id}', 'PaqueteController@show'); 
@@ -240,6 +242,10 @@ Route::get('/agregar-vuelo', 'VueloController@agregarVuelo');
 Route::get('/agregar-alojamiento', 'AlojamientoController@agregarAlojamiento');
 
 Route::get('/agregar-auto', 'AutoController@agregarAuto');
+
+Route::get('/agregar-pais', 'PaisController@agregarPais');
+
+Route::get('/agregar-habitacion', 'HabitacionController@agregarHabitacion');
 
 Route::get('/comprar-vehiculo/{id}', 'CompraController@comprarVehiculo');
 

@@ -51,7 +51,7 @@ class HabitacionController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.agregar-habitacion');
     }
 
     /**
@@ -140,4 +140,30 @@ class HabitacionController extends Controller
         
         return view('alojamientos.reservaHabitacion');
     }
+
+    public function agregarHabitacion(){
+        $habitacion = new Habitacion();
+        $disponibilidad = request()->disponibilidad;
+
+        $habitacion->alojamiento_id = request()->alojamiento;
+        $habitacion->numero_habitacion = request()->numeroHabitacion;
+        $habitacion->tipo_habitacion = request()->tipoHabitacion;
+        $habitacion->numero_camas = request()->numeroCamas;
+        $habitacion->numero_banos = request()->numeroBanos;
+        $habitacion->capacidad_ninos = request()->capacidadNinos;
+        $habitacion->capacidad_adultos = request()->capacidadAdultos;
+        $habitacion->precio = request()->precio;
+        if ($disponibilidad == '1'){
+            $habitacion->disponibilidad = true;
+        }
+        else{
+
+            $habitacion->disponibilidad = false;
+        }
+        $habitacion->save();
+        $alojamientos = \App\Alojamiento::all(); 
+
+        return view('alojamientos.alojamientoAll', compact('alojamientos'));
+    }
+
 }

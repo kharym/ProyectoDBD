@@ -32,7 +32,7 @@ class PaisController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.agregar-pais');
     }
 
     /**
@@ -98,5 +98,14 @@ class PaisController extends Controller
         $pais = Pais::find($id);
         $pais->delete();
         return "";
+    }
+
+    public function agregarPais(){
+        $pais = new Pais();
+
+        $pais->nombre_pais = request()->nombrePais;
+        $pais->save();
+
+        return view('index');
     }
 }

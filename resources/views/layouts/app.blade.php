@@ -65,9 +65,12 @@
 				        		<ul>
 				        			<li><a href="/Vuelo/agregarVuelo">Agregar Vuelo</a></li>
 				              		<li><a href="/Alojamiento/agregarAlojamiento">Agregar Alojamiento</a></li>
+				              		<li><a href="/Habitacion/agregarHabitacion">Agregar Habitación</a></li>
 				              		<li><a href="/Auto/agregarAuto">Agregar Vehículo</a></li>
 				              		<li><a href="">Agregar Actividad</a></li>
 				              		<li><a href="">Agregar Paquete</a></li>
+				              		<li><a href="/Pais/agregarPais">Agregar País</a></li>
+				              		<li><a href="">Agregar Empresa</a></li>
 				            	</ul>
 				         	</li>	
 				        	@endif
