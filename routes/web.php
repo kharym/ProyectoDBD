@@ -31,10 +31,11 @@ Route::put('/Aeropuerto/{aeropuerto}', 'AeropuertoController@update');
 
 
 Route::get('/Alojamiento/all', 'AlojamientoController@index'); 
-Route::get('/Alojamiento/show/{id}', 'AlojamtienoController@show'); 
+Route::get('/Alojamiento/show/{id}', 'AlojamientoController@show'); 
 Route::post('/Alojamiento/destroy/{id}', 'AlojamientoController@destroy');
 Route::post('/Alojamiento/store', 'AlojamientoController@store');
 Route::put('/Alojamiento/{alojamiento}', 'AlojamientoController@update');
+Route::get('/Alojamiento/agregarAlojamiento', 'AlojamientoController@create');
 //Anidados de alojamiento
 Route::get('/Alojamiento/{id}/all/Habitacion', 'AlojamientoController@habitaciones'); 
 Route::get('Alojamiento', 'AlojamientoController@alojamientoPais');
