@@ -67,6 +67,7 @@ Route::get('/Ciudad/show/{id}', 'CiudadController@show');
 Route::post('/Ciudad/destroy/{id}', 'CiudadController@destroy');
 Route::post('/Ciudad/store', 'CiudadController@store');
 Route::put('/Ciudad/{ciudad}', 'CiudadController@update');
+Route::get('/Ciudad/agregarCiudad', 'CiudadController@create');
 //Anidados de Ciudad
 Route::get('/Ciudad/{id}/all/Aeropuerto', 'CiudadController@aeropuertos'); 
 
@@ -93,6 +94,7 @@ Route::get('/Empresa/show/{id}', 'EmpresaController@show');
 Route::post('/Empresa/destroy/{id}', 'EmpresaController@destroy');
 Route::post('/Empresa/store', 'EmpresaController@store');
 Route::put('/Empresa/{empresa}', 'EmpresaController@update');
+Route::get('/Empresa/agregarEmpresa', 'EmpresaController@create');
 
 Route::get('/Habitacion/all', 'HabitacionController@index'); 
 Route::get('/Habitacion/show/{id}', 'HabitacionController@show'); 
@@ -241,9 +243,13 @@ Route::get('/agregar-vuelo', 'VueloController@agregarVuelo');
 
 Route::get('/agregar-alojamiento', 'AlojamientoController@agregarAlojamiento');
 
+Route::get('/agregar-empresa', 'EmpresaController@agregarEmpresa');
+
 Route::get('/agregar-auto', 'AutoController@agregarAuto');
 
 Route::get('/agregar-pais', 'PaisController@agregarPais');
+
+Route::get('/agregar-ciudad', 'CiudadController@agregarCiudad');
 
 Route::get('/agregar-habitacion', 'HabitacionController@agregarHabitacion');
 

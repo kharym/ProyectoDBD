@@ -45,7 +45,7 @@ class EmpresaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.agregar-empresa');
     }
 
     /**
@@ -117,5 +117,19 @@ class EmpresaController extends Controller
         $empresa = Empresa::find($id);
         $empresa->delete();
         return "";
+    }
+
+    public function agregarEmpresa(){
+
+        $empresa = new Empresa();
+
+        $empresa->ubicacion_id = request()->ubicacion;
+        $empresa->nombre_empresa = request()->nombreEmpresa;
+        $empresa->telefono_empresa = request()->telefonoEmpresa;
+        $empresa->correo_empresa = request()->correoEmpresa;
+        $empresa->save();
+
+        return view('index');
+
     }
 }

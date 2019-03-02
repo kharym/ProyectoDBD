@@ -40,7 +40,7 @@ class CiudadController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.agregar-ciudad');
     }
 
     /**
@@ -120,5 +120,13 @@ class CiudadController extends Controller
         return $aeropuertos;
     }
 
-   
+    public function agregarCiudad(){
+
+        $ciudad = new Ciudad();
+
+        $ciudad->pais_id = request()->pais;
+        $ciudad->nombre_ciudad = request()->nombreCiudad;
+        $ciudad->save();
+        return view('index');
+    }
 }
