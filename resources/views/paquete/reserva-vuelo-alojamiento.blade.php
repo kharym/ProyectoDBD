@@ -1,7 +1,17 @@
+
+
 @extends('layouts.app')	
 @section('content')
-{{$pasajeros}}
 
+<?php $paquete = \App\Paquete::find($id); ?>
+<?php //print_r(request()->session()->get('rV'));
+//$a = request()->session()->get('rV');
+//unset($a[0]);
+//Session::set('rV', $a);
+//Session::forget('rV.' . 0);
+//print_r(request()->session()->get('rV'));
+print_r(request()->session()->get('rV'));
+?>
 			<!-- start banner Area -->
 			<section class="banner-area relative">
 				<br>
@@ -19,9 +29,16 @@
 							</ul>
 							<div class="tab-content" id="myTabContent">
 							  <div class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="flight-tab">
-								  <!-- FORM PARA RESERVAR VUELOS -->
-								  <?php $pasajeros = $pasajeros-1;?>
-                                    <form class="form-wrap" method="get" action="/reservaVuelo/{{$id}}/{{$pasajeros}}">
+                                  <!-- FORM PARA RESERVAR VUELOS -->
+                            @if($pasajeros!=0)
+								<?php $vuelo = \App\Vuelo::find($paquete->vuelo_id);
+								if(request()->session()->has('rV')){
+									echo count(request()->session()->get('rV'));
+									echo $pasajeros;
+								}
+                                
+                                $pasajeros = $pasajeros - 1;?>
+                                    <form class="form-wrap" method="get" action="/reserva-paquete-vuelo+alojamiento/{{$id}}/{{$pasajeros}}">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-md-6">    
@@ -36,7 +53,7 @@
                                         </li>
                                         <select id="selectbasic" name="asiento" class="form-control">
                                             <div class="col-md-4">
-                                                <?php $asientos = \App\Asiento::where('vuelo_id',$id)->get();?>
+                                                <?php $asientos = \App\Asiento::where('vuelo_id',$vuelo->id)->get();?>
                                             
                                                         @foreach ($asientos as $asiento)
                                                             @if($asiento->disponibilidad)
@@ -76,6 +93,37 @@
                                         <input type="text" class="form-control" name="pais" placeholder="Pais " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Pais '">	
                                         <input type="submit" class="primary-btn text-uppercase" value="Siguiente pasajero" >										
                                     </form>
+                                
+
+
+                                @else
+                                <?php         $hab = App\Habitacion::find($paquete->habitacion_id);
+                                $pasajeros = $pasajeros-1;?>
+                                    <form class="form-wrap" method="GET" action="/reserva-paquete-vuelo+alojamiento/{{$id}}/{{$pasajeros}}">
+                                        <div class="container">
+                                            <div class="row">    															
+                                                <input type="text" class="form-control date-picker" name="start" data-date-format="YYYY-MM-DD" placeholder="Fecha Ida " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Ida '">
+                                                <input type="text" class="form-control date-picker" name="return" data-date-format="YYYY-MM-DD" placeholder="Fecha Vuelta " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Vuelta '">
+                                            </div>
+                                        </div>
+                                            <label for="cantidad_ninos">Cantidad niños </label>
+                                            <select class="form-control" id="cantidad_ninos" name="cantidad_ninos">
+                                                @for($i = 1; $i<=$hab->capacidad_ninos;$i++)
+                                                    <option value="{{$i}}"> {{$i}} </option>
+                                                @endfor
+                                            </select>
+        
+                                            <label for="cantidad_adultos">Cantidad adultos </label>
+                                            <select class="form-control" id="cantidad_adultos" name="cantidad_adultos">
+                                                @for($i = 1; $i<=$hab->capacidad_adultos;$i++)
+                                                    <option value="{{$i}}"> {{$i}} </option>
+                                                @endfor
+                                            </select>
+                                            <input type="submit" class="primary-btn text-uppercase" value="Comprar" >
+                                        </form>
+                                @endif
+
+
 							  </div>
 		
 							</div>

@@ -29,9 +29,10 @@
     <div class="row">
         @foreach ($vuelos as $vuelo)
         <div class="col-lg-4">
-                <a href="/reservaVuelo/{{$vuelo->id}}">
+               <?php $asientos = \App\Asiento::where('vuelo_id',$vuelo->id)->get();
+                    $max = count($asientos);?>
                 <div class="single-destinations">
-                    <div class="details" style="background-color: #f6fd8c ; color: black;>
+                    <div class="details" style="background-color: #f6fd8c ; color: black;">
                         <ul class="package-list">
                             <li class="d-flex justify-content-between align-items-center">
                             <span> Ciudad origen </span>
@@ -60,7 +61,16 @@
                             <li class="d-flex justify-content-between align-items-center">
                                     <span> Hora llegada </span>
                                     <span> {{$vuelo->hora_llegada}}</span>        
-                            </li>								
+                            </li>	
+                            <form method="GET" action="/reservaVuelo/{{$vuelo->id}}/{{-4}}">
+                                <div class="form-group row">
+                                        <label for="example-number-input" class="col-2 col-form-label">Numero pasajeros</label>
+                                        <div class="col-10">
+                                        <input class="form-control" name="cantidad" type="number" value="1" min="1" max={{$max}} id="example-number-input" style="width: 26%;margin:auto !important">
+                                        </div>
+                                </div>
+                                <input class="btn btn-primary" type="submit" value="Reservar">
+                              </form>							
                         </ul>
                     </div>
                 </div>

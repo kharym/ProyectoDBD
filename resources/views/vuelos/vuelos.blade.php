@@ -61,7 +61,11 @@
                             <li class="d-flex justify-content-between align-items-center">
                                     <span> Hora llegada </span>
                                     <span> {{$vuelo->hora_llegada}}</span>        
-                            </li>								
+                            </li>
+                            <form action="/action_page.php">
+                                Quantity (between 1 and 5): <input type="number" name="quantity" min="1" max="5">
+                                <input type="submit">
+                              </form>								
                         </ul>
                     </div>
                 </div>

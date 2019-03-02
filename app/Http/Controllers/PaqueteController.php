@@ -6,7 +6,7 @@ use Validator;
 use App\Paquete;
 use Illuminate\Http\Request;
 use DateTime;
-
+use Session;
 class PaqueteController extends Controller
 {
 
@@ -137,10 +137,31 @@ class PaqueteController extends Controller
         $vuelo_id = $paquete->vuelo_id; 
         $pasajeros = $paquete->pasajeros;
         if($numero == $pasajeros){
+            if(request()->session()->has('rV')){
+                    $i = $pasajeros - $numero;
+                    $aux = request()->session()->get('rV')[0]->asiento_id;
+                    $asiento = \App\Asiento::find($aux);
+                    $asiento->disponibilidad = true;
+                    $asiento->save();
+                    Session::forget('rV');
+                    Session::forget('psj');
+                
+            }
             $pasajeros = $numero;
             return view('paquete.reserva-vuelo-auto',compact('id','pasajeros'));
         }
-        else if($numero!=0){
+        else if($numero>-1){
+            if(request()->session()->has('rV')){
+                if(count(request()->session()->get('rV'))>$pasajeros-$numero){
+                    $i = $pasajeros - $numero;
+                    $aux = request()->session()->get('rV')[$i]->asiento_id;
+                    $asiento = \App\Asiento::find($aux);
+                    $asiento->disponibilidad = true;
+                    $asiento->save();
+                    Session::forget('rV.' . $i);
+                    Session::forget('psj.' . $i);
+                }
+            }
             $pasajeros = $numero;
             $bol;
             $bol2;
@@ -187,7 +208,7 @@ class PaqueteController extends Controller
             if(request()->session()->has('rV')){
                 foreach(request()->session()->get('rV') as $rv){
                     if($reservaVuelo->asiento_id == $rv->asiento_id){
-                        $pasajeros = $numero+1;
+
                         return view('paquete.reserva-vuelo-auto',compact('id','pasajeros'));
                     }
                     
@@ -216,7 +237,7 @@ class PaqueteController extends Controller
             if(request()->session()->has('rA')){
                 foreach(request()->session()->get('rA') as $ra){
                     if($reserva->auto_id == $ra->auto_id){
-                        $pasajeros = $numero+1;
+
                         return view('paquete.reserva-vuelo-auto',compact('id','pasajeros'));
                     }
                     
@@ -232,4 +253,131 @@ class PaqueteController extends Controller
     public function comprarVueloAuto($id){
         return view('paquete.compra-hecha');
     }
+
+
+
+    public function paquetesVueloAlojamiento(){
+        $paquetes = \App\Paquete::where('auto_id',null)->get();
+        return view('paquete.vuelo-alojamiento',compact('paquetes'));
+    }
+
+    public function reservaPaqueteVueloAlojamiento($id,$numero){
+        $paquete = \App\Paquete::find($id);
+        $vuelo_id = $paquete->vuelo_id; 
+        $pasajeros = $paquete->pasajeros;
+        if($numero == $pasajeros){
+            if(request()->session()->has('rV')){
+                    $i = $pasajeros - $numero;
+                    $aux = request()->session()->get('rV')[0]->asiento_id;
+                    $asiento = \App\Asiento::find($aux);
+                    $asiento->disponibilidad = true;
+                    $asiento->save();
+                    Session::forget('rV');
+                    Session::forget('psj');
+                
+            }
+            $pasajeros = $numero;
+            return view('paquete.reserva-vuelo-alojamiento',compact('id','pasajeros'));
+        }
+        else if($numero>-1){
+            if(request()->session()->has('rV')){
+                if(count(request()->session()->get('rV'))>$pasajeros-$numero){
+                    $i = $pasajeros - $numero;
+                    $aux = request()->session()->get('rV')[$i]->asiento_id;
+                    $asiento = \App\Asiento::find($aux);
+                    $asiento->disponibilidad = true;
+                    $asiento->save();
+                    Session::forget('rV.' . $i);
+                    Session::forget('psj.' . $i);
+                }
+            }
+            $pasajeros = $numero;
+            $bol;
+            $bol2;
+            $fecha = date('Y-m-d');
+            $hora = date("H:i:s");
+            if(request()->menor=='No'){
+                $bol=False;
+            }
+            else{
+                $bol=True;
+            }
+            if(request()->asistencia == 'No'){
+                $bol2=False;
+            }
+            else{
+                $bol2=True;
+            }
+            $vuelo = \App\Vuelo::where('id',$paquete->vuelo_id)->first();
+            $as = \App\Asiento::where('vuelo_id',$vuelo->id)->get();
+            $asientoSeleccionado = $as->where('numero_asiento',request()->asiento)->first();
+            $asientoSeleccionado->disponibilidad = false;
+            $asientoSeleccionado->save(); 
+            $pasajero = new \App\Pasajero();
+            $pasajero->name = request()->name;
+            $pasajero->apellido=request()->apellido;
+            $pasajero->dni_pasaporte=request()->dni;
+            $pasajero->menor_edad=$bol;
+            $pasajero->asistencia_especial=$bol2;
+            $pasajero->telefono=request()->celular;
+            $pasajero->pais=request()->pais;
+            $pasajero->movilidad_reducida=False;
+    
+            $reservaVuelo = new \App\ReservaVuelo();
+            $reservaVuelo->cantidad_pasajeros=1;
+            $reservaVuelo->pasajero_id=$pasajero->id;
+            $reservaVuelo->asiento_id=$asientoSeleccionado->id;
+            $reservaVuelo->vuelo_id=$vuelo->id;
+            $reservaVuelo->tipo_cabina=0;
+            $reservaVuelo->cantidad_paradas=1;
+            $reservaVuelo->fecha_reserva=$fecha;
+            $reservaVuelo->hora_reserva=$hora;
+            $reservaVuelo->precio_reserva_vuelo=$vuelo->precio_vuelo;
+            $reservaVuelo->ida_vuelta=False;
+            if(request()->session()->has('rV')){
+                foreach(request()->session()->get('rV') as $rv){
+                    if($reservaVuelo->asiento_id == $rv->asiento_id){
+
+                        return view('paquete.reserva-vuelo-alojamiento',compact('id','pasajeros'));
+                    }
+                    
+                }
+            }
+            request()->session()->push('rV',$reservaVuelo);
+            request()->session()->push('psj',$pasajero);
+
+            return view('paquete.reserva-vuelo-alojamiento',compact('id','pasajeros'));
+        }
+        else{
+            $inicio = new DateTime(request()->start);
+            $fin = new DateTime(request()->return);
+            $dias = $fin->diff($inicio)->format("%a");
+            
+            $hab = \App\Habitacion::find($paquete->habitacion_id);
+
+            $reserva = new \App\ReservaHabitacion();
+            $reserva->habitacion_id = $hab->id;
+            $reserva->precio_res_hab = $hab->precio*$dias;
+            $reserva->fecha_llegada = request()->start;
+            $reserva->fecha_ida = request()->return;
+            $reserva->numero_ninos = request()->cantidad_ninos;
+            $reserva->numero_adulto = request()->cantidad_adultos;
+
+            if(request()->session()->has('rH')){
+                foreach(request()->session()->get('rH') as $ra){
+                    if($reserva->habitacion_id == $ra->habitacion_id){
+                        return view('paquete.reserva-vuelo-alojamiento',compact('id','pasajeros'));
+                    }
+                    
+                }
+            }
+            request()->session()->push('rH',$reserva);     
+            return view('paquete.compra-vuelo+alojamiento',compact('id'));
+
+        }
+        return view('paquete.reserva-vuelo-alojamiento',compact('id','pasajeros'));
+    }
+
+
+    
 }

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Session;
 use Validator;
 use App\ReservaVuelo;
 use Illuminate\Http\Request;
@@ -132,7 +132,98 @@ class ReservaVueloController extends Controller
         return "";
     }
 
-    public function reserva($id){
+    public function reserva($id, $numero){
+        if($numero == -4){
+            request()->session()->push('cantidad',request()->cantidad);
+            if(request()->session()->has('rV')){
+                    $i = request()->cantidad - $numero;
+                    $aux = request()->session()->get('rV')[0]->asiento_id;
+                    $asiento = \App\Asiento::find($aux);
+                    $asiento->disponibilidad = true;
+                    $asiento->save();
+                    Session::forget('rV');
+                    Session::forget('psj');
+                
+            }
+            $pasajeros = request()->cantidad;
+            return view('vuelos.reserva',compact('id','pasajeros'));
+        }
+        else if($numero>=0){
+            $pasajeros = request()->session()->get('cantidad')[0];
+            if(request()->session()->has('rV')){
+                if(count(request()->session()->get('rV'))>$pasajeros-$numero){
+                    $i = $pasajeros - $numero;
+                    $aux = request()->session()->get('rV')[$i]->asiento_id;
+                    $asiento = \App\Asiento::find($aux);
+                    $asiento->disponibilidad = true;
+                    $asiento->save();
+                    Session::forget('rV.' . $i);
+                    Session::forget('psj.' . $i);
+                }
+            }
+            $pasajeros = $numero;
+            $bol;
+            $bol2;
+            $fecha = date('Y-m-d');
+            $hora = date("H:i:s");
+            if(request()->menor=='No'){
+                $bol=False;
+            }
+            else{
+                $bol=True;
+            }
+            if(request()->asistencia == 'No'){
+                $bol2=False;
+            }
+            else{
+                $bol2=True;
+            }
+            $vuelo = \App\Vuelo::where('id',$id)->first();
+            $as = \App\Asiento::where('vuelo_id',$vuelo->id)->get();
+            $asientoSeleccionado = $as->where('numero_asiento',request()->asiento)->first();
+            $asientoSeleccionado->disponibilidad = false;
+            $asientoSeleccionado->save(); 
+            $pasajero = new \App\Pasajero();
+            $pasajero->name = request()->name;
+            $pasajero->apellido=request()->apellido;
+            $pasajero->dni_pasaporte=request()->dni;
+            $pasajero->menor_edad=$bol;
+            $pasajero->asistencia_especial=$bol2;
+            $pasajero->telefono=request()->celular;
+            $pasajero->pais=request()->pais;
+            $pasajero->movilidad_reducida=False;
+    
+            $reservaVuelo = new \App\ReservaVuelo();
+            $reservaVuelo->cantidad_pasajeros=1;
+            $reservaVuelo->pasajero_id=$pasajero->id;
+            $reservaVuelo->asiento_id=$asientoSeleccionado->id;
+            $reservaVuelo->vuelo_id=$vuelo->id;
+            $reservaVuelo->tipo_cabina=0;
+            $reservaVuelo->cantidad_paradas=1;
+            $reservaVuelo->fecha_reserva=$fecha;
+            $reservaVuelo->hora_reserva=$hora;
+            $reservaVuelo->precio_reserva_vuelo=$vuelo->precio_vuelo;
+            $reservaVuelo->ida_vuelta=False;
+            if(request()->session()->has('rV')){
+                foreach(request()->session()->get('rV') as $rv){
+                    if($reservaVuelo->asiento_id == $rv->asiento_id){
+
+                        return view('vuelos.reserva',compact('id','pasajeros'));
+                    }
+                    
+                }
+            }
+            request()->session()->push('rV',$reservaVuelo);
+            request()->session()->push('psj',$pasajero);
+            if($numero == 0){
+                return view('vuelos.compra',compact('id','pasajeros'));
+            }
+            return view('vuelos.reserva',compact('id','pasajeros'));
+        }
+
+
+
+
         return view('vuelos.reserva',compact('id'));
     }
 

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
-	<?php $vuelo = App\Vuelo::where('id',$id)->first();?>
-			  
+
 			<!-- start banner Area -->
 			<section class="about-banner relative">
 				<div class="overlay overlay-bg"></div>
@@ -9,8 +8,9 @@
 					<div class="row d-flex align-items-center justify-content-center">
 						<div class="about-content col-lg-12">
 							<h1 class="text-white">
-								Compra				
+								Hotels				
 							</h1>	
+							<p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="hotels.html"> Hotels</a></p>
 						</div>	
 					</div>
 				</div>
@@ -23,90 +23,63 @@
 						<div class="row d-flex justify-content-center">
 							<div class="menu-content pb-40 col-lg-8">
 								<div class="title text-center">
-									<h1 class="mb-10">Detalle Compra</h1>
+									<h1 class="mb-10">Popular Destinations</h1>
+									<p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast, day to.</p>
 								</div>
 							</div>
 						</div>						
-				<div class="row" style="width: 5000px">
-                    <!--<div class="col-lg-1" style="position: relative; left:374px;">-->
-                    <div class="col-lg-1">
-                        <div class="single-destinations">
-                            <div class="details">
-                                <ul class="package-list">
+				<div class="row">
+                    
+            @foreach($paquetes as $paquete)
+                <?php $vuelo = \App\Vuelo::find($paquete->vuelo_id);
+                        $hab = \App\Habitacion::find($paquete->habitacion_id);?>
+				<div class="col-lg-4">
+                    <a href="/reserva-paquete-vuelo+alojamiento/{{$paquete->id}}/{{$paquete->pasajeros}}">
+					<div class="single-destinations">
+						<div class="details" style="background-color: #f6fd8c ; color: black;">
+							<h4 class="d-flex justify-content-between">
+                            <span>Personas: {{$paquete->pasajeros}}</span>                              	
+							</h4>
+							
+							<ul class="package-list">
                                     <li class="d-flex justify-content-between align-items-center">
-                                            <span>Precio</span>
-                                            <span>{{$vuelo->precio_vuelo}}</span>
+                                            <span>Origen vuelo</span>  
+                                            <span>{{$vuelo->origen}}</span>  
                                     </li>
                                     <li class="d-flex justify-content-between align-items-center">
-                                        <span>Origen</span>
-                                        <span>{{$vuelo->origen}}</span>
+                                            <span>Destino vuelo</span>  
+                                            <span>{{$vuelo->destino}}</span>  
                                     </li>
                                     <li class="d-flex justify-content-between align-items-center">
-                                        <span>Destino</span>
-                                        <span>{{$vuelo->destino}}</span>
+                                            <span>Fecha de salida</span>  
+                                            <span>{{$vuelo->fecha_ida}}</span>  
                                     </li>
                                     <li class="d-flex justify-content-between align-items-center">
-                                            <span>Fecha Idea</span>
-                                            <span>{{$vuelo->fecha_ida}}</span>
-                                    </li>						
-                                    <li class="d-flex justify-content-between align-items-center">
-                                        <span>Fecha Llegada</span>
-                                        <span>{{$vuelo->fecha_llegada}}</span>
+                                            <span>Fecha de llegada</span>  
+                                            <span>{{$vuelo->fecha_llegada}}</span>  
                                     </li>
-                                    <li class="d-flex justify-content-between align-items-center">
-                                        <span>Hora Partida</span>
-                                        <span>{{$vuelo->hora_ida}}</span>
-                                    </li>
-                                    <li class="d-flex justify-content-between align-items-center">
-                                        <span>Hora Llegada</span>
-                                        <span>{{$vuelo->hora_llegada}}</span>
-                                    </li>							
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <!-- INICIO-->
-                    <div class="col-md-6">
-                    <form class="form-horizontal" method="get" action="/compra-realizada/{{$id}}/{{request()->name}}/{{request()->dni}}/{{request()->apellido}}/{{request()->asiento}}/{{request()->menor}}/{{request()->asistencia}}/{{request()->celular}}/{{request()->pais}}">
-                    <div class="form-group">
-                            <label class="col-md-4 control-label" for="selectbasic">Tipo de tarjeta</label>
-                            <div class="col-md-4">
-                              <select id="selectbasic" name="tipo" class="form-control">
-                                <option value="1">Crédito</option>
-                                <option value="2">Débito</option>
-                              </select>
-                            </div> 
-                          </div>
-                          
-                          <!-- Text input-->
-                          <div class="form-group">
-                            <label class="col-md-4 control-label" for="textinput">Número de tarjeta</label>  
-                            <div class="col-md-4">
-                            <input id="textinput" name="numero" type="text" placeholder="N°" class="form-control input-md">
-                              
-                            </div>
-                          </div>
-                          
-                          </fieldset>
-                          </form>
-                        </div>
-                    </div>
-                </div>
-                          
-
-                    <!-- FIN -->
+								<li class="d-flex justify-content-between align-items-center">
+                                        <span>Numero habitación</span>  
+                                        <span>{{$hab->numero_habitacion}}</span>  
+                                </li>
+                                <li class="d-flex justify-content-between align-items-center">
+                                        <span>Cantidad de baños</span>  
+                                        <span>{{$hab->numero_banos}}</span>  
+                                </li>
+                                <li class="d-flex justify-content-between align-items-center">
+                                        <span>Cantidad de camas</span>  
+                                        <span>{{$hab->numero_camas}}</span>  
+                                </li>													
+							</ul>
+						</div>
+					</div>
+				</div>
 
 				</div>
                     </div>
-                    <div style="position: relative; left:630px;"> 
-                        <input type="submit" class="primary-btn text-uppercase" value="Comprar" >
-					 </div>
-			
-            </section>
-            
-
+            @endforeach
+			</section>
+    
 			<!-- End destinations Area -->
 		
 

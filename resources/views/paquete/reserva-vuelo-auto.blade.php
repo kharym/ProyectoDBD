@@ -4,7 +4,14 @@
 @section('content')
 
 <?php $paquete = \App\Paquete::find($id); ?>
-
+<?php //print_r(request()->session()->get('rV'));
+//$a = request()->session()->get('rV');
+//unset($a[0]);
+//Session::set('rV', $a);
+//Session::forget('rV.' . 0);
+//print_r(request()->session()->get('rV'));
+print_r(request()->session()->get('rV'));
+?>
 			<!-- start banner Area -->
 			<section class="banner-area relative">
 				<br>
@@ -24,8 +31,12 @@
 							  <div class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="flight-tab">
                                   <!-- FORM PARA RESERVAR VUELOS -->
                             @if($pasajeros!=0)
-                                <?php $vuelo = \App\Vuelo::find($paquete->vuelo_id);
-                                echo $pasajeros;
+								<?php $vuelo = \App\Vuelo::find($paquete->vuelo_id);
+								if(request()->session()->has('rV')){
+									echo count(request()->session()->get('rV'));
+									echo $pasajeros;
+								}
+                                
                                 $pasajeros = $pasajeros - 1;?>
                                     <form class="form-wrap" method="get" action="/reserva-paquete-vuelo+auto/{{$id}}/{{$pasajeros}}">
                                     <div class="container">
@@ -90,7 +101,8 @@
                                 $empresa = \App\Empresa::find($auto->empresa_id);
                                 $ubicacion = \App\Ubicacion::find($empresa->ubicacion_id);
                                 $ciudad = \App\Ciudad::find($ubicacion->ciudad_id);
-                                $ubicaciones = \App\Ubicacion::where('ciudad_id',$ciudad->id)->get();?>
+								$ubicaciones = \App\Ubicacion::where('ciudad_id',$ciudad->id)->get();
+								$pasajeros = $pasajeros - 1;?>
                                     <form class="form-wrap" method="get" action="/reserva-paquete-vuelo+auto/{{$id}}/{{$pasajeros}}">
                                         <div class="details">
                                         <ul class="package-list">

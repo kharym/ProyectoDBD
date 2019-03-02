@@ -201,13 +201,13 @@ Route::get('/habitacion/{id}', 'HabitacionController@habitaciones');
 
 Route::get('/habitacion/reserva/{habitacion}', 'HabitacionController@habitacionReserva');
 
-Route::get('/reservaVuelo/{id}', 'ReservaVueloController@reserva');
+Route::get('/reservaVuelo/{id}/{numero}', 'ReservaVueloController@reserva');
 
 Route::get('Auto/see/{id}', 'AutoController@vista');
 
 Route::get('Actividad/reserva/{actividad}', 'ActividadController@vistaReserva');
 
-Route::get('compra/{id}/', 'CompraController@comprarVuelo');
+Route::get('compra-vuelo/{id}/{user}', 'CompraController@comprarVuelo');
 
 Route::get('compra-realizada/{id}/{name}/{dni}/{apellido}/{asiento}/{menor}/{asistencia}/{celular}/{pais}','CompraController@realizarCompra');
 
@@ -246,3 +246,9 @@ Route::get('/paquete-vuelo+auto','PaqueteController@paquetesVueloAuto');
 Route::get('/reserva-paquete-vuelo+auto/{id}/{numero}','PaqueteController@reservaPaqueteVueloAuto');
 
 Route::get('/compra-auto+vuelo/{id}', 'PaqueteController@comprarVueloAuto');
+
+Route::get('/paquete-vuelo+alojamiento','PaqueteController@paquetesVueloAlojamiento');
+
+Route::get('/reserva-paquete-vuelo+alojamiento/{id}/{numero}','PaqueteController@reservaPaqueteVueloAlojamiento');
+
+Route::get('/compra-vuelo+alojamiento/{id}', 'PaqueteController@comprarVueloAlojamiento');
