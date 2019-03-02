@@ -73,7 +73,7 @@
                                         </div>
                                         <div class="card-body">
                                             <h5 class="card-title">Total</h5>     
-                                        <form method="get" action="">
+										<form method="get" action="/compra-auto+vuelo/{{id}}/{{auth()->user->id}}">
                                                 <div class="form-group" >    
                                                     <label for="medioPago" > Medio de pago</label>
                                                     <select class="form-control" id="medioPago" name="medioPago">

@@ -250,9 +250,16 @@ class PaqueteController extends Controller
         return view('paquete.reserva-vuelo-auto',compact('id','pasajeros'));
     }
 
-    public function comprarVueloAuto($id){
+    public function comprarVueloAuto($id,$user){
         return view('paquete.compra-hecha');
     }
+
+
+
+
+
+
+
 
 
 

@@ -257,7 +257,7 @@ Route::get('/paquete-vuelo+auto','PaqueteController@paquetesVueloAuto');
 
 Route::get('/reserva-paquete-vuelo+auto/{id}/{numero}','PaqueteController@reservaPaqueteVueloAuto');
 
-Route::get('/compra-auto+vuelo/{id}', 'PaqueteController@comprarVueloAuto');
+Route::get('/compra-auto+vuelo/{id}/{user}', 'PaqueteController@comprarVueloAuto');
 
 Route::get('/paquete-vuelo+alojamiento','PaqueteController@paquetesVueloAlojamiento');
 
