@@ -6,6 +6,7 @@ use Validator;
 use App\Compra;
 use Illuminate\Http\Request;
 use DateTime;
+use Illuminate\Support\Facades\Mail;
 
 class CompraController extends Controller
 {
@@ -324,6 +325,12 @@ class CompraController extends Controller
         request()->session()->forget('reservaAut');
         $compra = Compra::create(['user_id'=>$id,'fecha_compra'=>$fecha, 'hora_compra'=>$hora, 'reserva_auto_id'=>$reserva->id]);
         $mensaje = "Reserva comprada con éxito";
+        $user = \App\User::find($id);
+        $data = array('email'=>$user->email,);
+        Mail::send('mails.prueba',$data,function($message){
+            $message->from('juaninhanjarry@gmail.com','cursoLaravel');
+            $message->to(auth()->user()->email)->subject('compra realizada');
+        });
         return view('vehiculos.compra-hecha', compact('mensaje'));
     }
 
