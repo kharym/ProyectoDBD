@@ -51,7 +51,7 @@ class AutoController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.agregar-auto');
     }
 
     /**
@@ -152,5 +152,42 @@ class AutoController extends Controller
 
     public function vista($id){
         return view('vehiculos.auto-reserva', compact('id'));
+    }
+
+    public function agregarAuto(){
+        $auto = new Auto();
+        $tipoTransmision = request()->tipoTransmision;
+        $disponibilidad = request()->disponibilidad;
+
+        $auto->empresa_id = request()->empresaVehiculo;
+        $auto->numero_puertas = request()->numeroPuertas;
+        $auto->numero_asientos = request()->numeroAsientos;
+        $auto->modelo = request()->modelo;
+        $auto->marca = request()->marca;
+        $auto->precio = request()->precio;
+
+        if ($tipoTransmision == '1'){
+            $auto->tipo_transmision = 0;
+        }
+        else{
+
+            $auto->tipo_transmision = 1;
+        }
+
+        if ($disponibilidad == '1'){
+            $auto->disponibilidad = true;
+        }
+        else{
+
+            $auto->disponibilidad = false;
+        }
+
+        $auto->save();
+
+        $autos = Auto::all();
+
+        return view('vehiculos.autosAll', compact('autos'));
+
+
     }
 }

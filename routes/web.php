@@ -57,6 +57,7 @@ Route::get('/Auto/show/{id}', 'AutoController@show');
 Route::post('/Auto/destroy/{id}', 'AutoController@destroy');
 Route::post('/Auto/store', 'AutoController@store');
 Route::put('/Auto/{auto}', 'AutoController@update');
+Route::get('/Auto/agregarAuto', 'AutoController@create');
 //Anidado
 Route::get('Auto','AutoController@autosPais');
 
@@ -235,6 +236,10 @@ Route::get('/compra-habitacion-realizada/{id}/{precio}', 'CompraController@reali
 Route::get('/carrito-habitacion/{id}', 'ReservaHabitacionController@carritoCompraHabitacion');
 
 Route::get('/agregar-vuelo', 'VueloController@agregarVuelo');
+
+Route::get('/agregar-alojamiento', 'AlojamientoController@agregarAlojamiento');
+
+Route::get('/agregar-auto', 'AutoController@agregarAuto');
 
 Route::get('/comprar-vehiculo/{id}', 'CompraController@comprarVehiculo');
 

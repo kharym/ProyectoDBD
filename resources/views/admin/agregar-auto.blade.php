@@ -1,6 +1,6 @@
 @extends('layouts.app') 
 @section('content')
-<?php $ciudades = App\Ciudad::All();?>
+<?php $empresas = App\Empresa::All();?>
             <!-- start banner Area -->
             <section class="banner-area relative">
                 <br>
@@ -17,33 +17,44 @@
                         <div class="row justify-content-center">
                             <div class="card">
                                 <div class="card-header">
-                                    Alojamiento
+                                    Vehículo
                                 </div>
                                 <div class="card-body">
-                                    <form class="form-wrap" method="GET" action="/agregar-alojamiento">
+                                    <form class="form-wrap" method="GET" action="/agregar-auto">
                                         <div class="form-group">    
-                                            <label for="ciudadHotel"> Ciudad del Hotel </label>
-                                            <select class="form-control" id="ciudadHotel" name="ciudadHotel">
-                                                @foreach($ciudades as $ciudad)
-                                            <option value="{{$ciudad->id}}">{{$ciudad->nombre_ciudad}}</option>
+                                            <label for="empresaVehiculo"> Empresa del vehículo </label>
+                                            <select class="form-control" id="ciudadHotel" name="empresaVehiculo">
+                                                @foreach($empresas as $empresa)
+                                            <option value="{{$empresa->id}}">{{$empresa->nombre_empresa}}</option>
                                                 @endforeach
                                             </select>
                                             </div>
                                         <div class="form-group"> 
-                                            <label for="nombre" > Nombre</label>
-                                            <input class="form-control" input="text" name="nombre">
+                                            <label for="numeroPuertas" > Numero de puertas</label>
+                                            <input class="form-control" input="text" name="numeroPuertas">
                                         </div>
                                         <div class="form-group">    
-                                            <label for="numeroEstrellas" > Numero de Estrellas</label>
-                                            <input class="form-control" input="text" name="numeroEstrellas">
+                                            <label for="tipoTransimision" > Tipo de Transmisión</label>
+                                            <select id="selectbasic" name="tipoTransimision" class="form-control">
+                                            <option value="1">Manual</option>
+                                            <option value="2">Automático</option>
+                                            </select>
                                         </div>
                                         <div class="form-group">    
-                                            <label for="calle" > Calle</label>
-                                            <input class="form-control" input="text" name="calle">
+                                            <label for="numeroAsientos" > Numero de Asientos</label>
+                                            <input class="form-control" input="text" name="numeroAsientos">
                                         </div>
                                         <div class="form-group">    
-                                            <label for="numeroCalle" > Numero Calle</label>
-                                            <input class="form-control" input="text" name="numeroCalle">
+                                            <label for="modelo" >Modelo</label>
+                                            <input class="form-control" input="text" name="modelo">
+                                        </div>
+                                        <div class="form-group">    
+                                            <label for="marca" > Marca </label>
+                                            <input class="form-control" input="text" name="marca">
+                                        </div>
+                                        <div class="form-group">    
+                                            <label for="precio" > Precio </label>
+                                            <input class="form-control" input="text" name="precio">
                                         </div>
                                         <div class="form-group">
                                             <label for="disponibilidad" > Disponibilidad</label>

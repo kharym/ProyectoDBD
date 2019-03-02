@@ -64,8 +64,8 @@
 				        	<li class="menu-has-children"><a href="">Administrador</a>
 				        		<ul>
 				        			<li><a href="/Vuelo/agregarVuelo">Agregar Vuelo</a></li>
-				              		<li><a href="">Agregar Alojamiento</a></li>
-				              		<li><a href="">Agregar Vehículo</a></li>
+				              		<li><a href="/Alojamiento/agregarAlojamiento">Agregar Alojamiento</a></li>
+				              		<li><a href="/Auto/agregarAuto">Agregar Vehículo</a></li>
 				              		<li><a href="">Agregar Actividad</a></li>
 				              		<li><a href="">Agregar Paquete</a></li>
 				            	</ul>

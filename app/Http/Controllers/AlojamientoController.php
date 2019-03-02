@@ -147,4 +147,26 @@ class AlojamientoController extends Controller
         //$vuelos = App\Vuelo::where([['ciudad_va_id',$ciudadesD->id],['ciudad_viene_id',$ciudadesO->id]])->get();
         return view('alojamientos.alojamientos',compact('alojamientos'));
     }
+
+    public function agregarAlojamiento(){
+        $alojamiento = new Alojamiento();
+        $disponibilidad = request()->disponibilidad;
+
+        $alojamiento->ciudad_id = request()->ciudadHotel;
+        $alojamiento->nombre_alojamiento = request()->nombre;
+        $alojamiento->numero_estrellas = request()->numeroEstrellas;
+        $alojamiento->calle_alojamiento = request()->calle;
+        $alojamiento->numero_alojamiento = request()->numeroCalle;
+        if ($disponibilidad == '1'){
+            $alojamiento->disponibilidad = true;
+        }
+        else{
+
+            $alojamiento->disponibilidad = false;
+        }
+        $alojamiento->save();
+        $alojamientos = Alojamiento::all();
+
+        return view('alojamientos.alojamientoAll', compact('alojamientos'));
+    }
 }
