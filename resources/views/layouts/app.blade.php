@@ -75,8 +75,8 @@
 				            	</ul>
 				         	</li>	
 				        	@endif
-				        	@endauth
-				          	<li><a href="/">Home</a></li>
+							@endauth
+							<li> <a href="/reservar-seguro">Seguro</a> </li>
 				          	<li><a href="/Vuelo/all">Vuelos</a></li>
 				          	<li><a href="/Alojamiento/all">Alojamientos</a></li>
 				          	<li><a href="/Auto/all">Vehículos</a></li>
@@ -89,10 +89,10 @@
 				            </ul>
 				          </li>					          					          		          
 									@auth
-						<li><a href="movimientos/{{auth()->user()->id}}">Movimientos</a></li>
 										<li class ="menu-has-children">
 											<a href="#">{{ auth()->user()->name }}</a>
 											<ul>
+												<li> <a href="/movimientos/{{auth()->user()->id}}">Movimientos</a> </li>
 												<li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Cerrar sesión</a></li>
 												<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 												@csrf

@@ -289,6 +289,12 @@ class PaqueteController extends Controller
         request()->session()->forget('rV');
         request()->session()->forget('rA');
         request()->session()->forget('psj');
+        $data = [];
+        array_push($data,$paquete);
+        Mail::send('mails.paquete',$data,function($message){
+            $message->from('juaninhanjarry@gmail.com','Compra Paquete');
+            $message->to(auth()->user()->email)->subject('compra realizada');
+        });
         $mensaje = "Compra realizada con éxito";
         return view('paquete.compra-hecha',compact('mensaje'));
     }
@@ -462,6 +468,12 @@ class PaqueteController extends Controller
         request()->session()->forget('rV');
         request()->session()->forget('rH');
         request()->session()->forget('psj');
+        $data = [];
+        array_push($data,$paquete);
+        Mail::send('mails.paquete',$data,function($message){
+            $message->from('juaninhanjarry@gmail.com','Compra Paquete');
+            $message->to(auth()->user()->email)->subject('compra realizada');
+        });
         $mensaje = "Compra realizada con éxito";
         return view('paquete.compra-hecha',compact('mensaje'));
     }

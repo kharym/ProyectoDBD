@@ -123,4 +123,70 @@ class SeguroController extends Controller
         $seguro->delete();
         return "";
     }
+
+    public function reservarSeguro(){
+        return view('seguro.seguro');
+    }
+
+    public function comprarSeguro(){
+        $seguro = new \App\Seguro();
+        $seguro->edad_pasajero = request()->edad;
+        $seguro->dni = request()->dni;
+        if(request()->dental){
+            $seguro->seguro_dental = true;
+        }
+        else{
+            $seguro->seguro_dental = false;
+        }
+
+        if(request()->accidente){
+            $seguro->seguro_accidentes = true;
+        }
+        else{
+            $seguro->seguro_accidentes = false;
+        }
+
+        if(request()->equipaje){
+            $seguro->perdida_equipaje = true;
+        }
+        else{
+            $seguro->perdida_equipaje = false;
+        }
+
+        if(request()->asesoria_legal){
+            $seguro->legal = true;
+        }
+        else{
+            $seguro->legal = false;
+        }
+
+        if(request()->siniestro){
+            $seguro->seguro_siniestros = true;
+        }
+        else{
+            $seguro->seguro_siniestros = false;
+        }
+
+        if(request()->vuelo){
+            $seguro->problemas_viaje = true;
+        }
+
+        else{
+            $seguro->problemas_viaje = false;
+        
+        }
+        $seguro->ida_vuelta = false;
+        $seguro->cantidad_personas = 1;
+
+        $seguro->fecha_ida = request()->fechaIda;
+        $seguro->fecha_ida = request()->fechaVuelta;
+        $seguro->costo_pasaje = request()->precio;
+        $seguro->destino = "a";
+        if(request()->session()->has('rS')){
+            request()->session()->forget('rS');
+            return redirect('/reservar-seguro');
+        }
+        request()->session()->push('rS',$seguro);
+        return view('seguro.compra-seguro');
+    }
 }
