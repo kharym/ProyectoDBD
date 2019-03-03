@@ -73,7 +73,8 @@
 				              		<li><a href="/Pais/agregarPais">Agregar País</a></li>
 				              		<li><a href="/Ciudad/agregarCiudad">Agregar Ciudad</a></li>
 				            	</ul>
-				         	</li>	
+				         	</li>
+				         	<li> <a href="/Auditoria/all">Auditorías</a> </li>	
 				        	@endif
 							@endauth
 							<li> <a href="/reservar-seguro">Seguro</a> </li>
