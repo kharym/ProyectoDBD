@@ -22,6 +22,7 @@ Route::get('/Actividad/show/{id}', 'ActividadController@show');
 Route::post('/Actividad/destroy/{id}', 'ActividadController@destroy');
 Route::post('/Actividad/store', 'ActividadController@store');
 Route::put('/Actividad/{actividad}', 'ActividadController@update');
+Route::get('/Actividad/agregarActividad', 'ActividadController@create');
 
 Route::get('/Aeropuerto/all', 'AeropuertoController@index'); 
 Route::get('/Aeropuerto/show/{id}', 'AeropuertoController@show'); 
@@ -250,6 +251,8 @@ Route::get('/agregar-auto', 'AutoController@agregarAuto');
 Route::get('/agregar-pais', 'PaisController@agregarPais');
 
 Route::get('/agregar-ciudad', 'CiudadController@agregarCiudad');
+
+Route::get('/agregar-actividad', 'ActividadController@agregarActividad');
 
 Route::get('/agregar-habitacion', 'HabitacionController@agregarHabitacion');
 

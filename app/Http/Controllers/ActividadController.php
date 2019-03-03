@@ -51,7 +51,7 @@ class ActividadController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.agregar-actividad');
     }
 
     /**
@@ -128,5 +128,23 @@ class ActividadController extends Controller
 
     public function vistaReserva($actividad){
         return view('actividades.actividad-reserva', compact('actividad'));
+    }
+
+    public function agregarActividad(){
+        $actividad = new Actividad();
+
+        $actividad->destino = request()->destino;
+        $actividad->nombre_actividad = request()->nombreActividad;
+        $actividad->precio = request()->precio;
+        $actividad->cantidad_ninos = request()->cantidadNinos;
+        $actividad->cantidad_adulto = request()->cantidadAdultos;
+        $actividad->fecha_ida = request()->fechaIda;
+        $actividad->fecha_vuelta = request()->fechaVuelta;
+
+        $actividad->save();
+
+        $actividades = Actividad::all();
+
+        return view('actividades.actividadAll', compact('actividades'));
     }
 }

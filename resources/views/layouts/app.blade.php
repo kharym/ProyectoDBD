@@ -68,7 +68,7 @@
 				              		<li><a href="/Habitacion/agregarHabitacion">Agregar Habitación</a></li>
 				              		<li><a href="/Empresa/agregarEmpresa">Agregar Empresa</a></li>
 				              		<li><a href="/Auto/agregarAuto">Agregar Vehículo</a></li>
-				              		<li><a href="">Agregar Actividad</a></li>
+				              		<li><a href="/Actividad/agregarActividad">Agregar Actividad</a></li>
 				              		<li><a href="">Agregar Paquete</a></li>
 				              		<li><a href="/Pais/agregarPais">Agregar País</a></li>
 				              		<li><a href="/Ciudad/agregarCiudad">Agregar Ciudad</a></li>
