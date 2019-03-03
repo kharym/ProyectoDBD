@@ -17,8 +17,7 @@ $factory->define(App\User::class, function (Faker $faker) {
 
 	$ids_user = \DB::table('rols')->select('id')->get();
 	$id_user = $ids_user->random()->id;
-	$ids_auditoria = \DB::table('auditorias')->select('id')->get();
-	$id_auditoria = $ids_auditoria->random()->id;
+
 
     return [
         'name' => $faker->firstname,
@@ -31,7 +30,6 @@ $factory->define(App\User::class, function (Faker $faker) {
         'telefono' => $faker->e164phoneNumber,
         'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
         'remember_token' => str_random(10),
-        'auditoria_id' => $id_auditoria,
         'rol_id' => $id_user,
     ];
 });

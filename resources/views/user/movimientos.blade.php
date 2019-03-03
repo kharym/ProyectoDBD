@@ -11,14 +11,13 @@
                         <h1 class="text-white">
                             Movimientos				
                         </h1>	
-                        <p class="text-white link-nav"><a href="/#">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href=""> Carro de compras</a></p>
+                        <p class="text-white link-nav"><a href="/#">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href=""> Compras</a></p>
                     </div>	
                 </div>
             </div>
         </section>
         <!-- End banner Area -->	
-        <br>
-        <br>
+
         <section class="destinations-area section-gap">
                 <div class="container">
                     <div class="row d-flex justify-content-center">
@@ -32,23 +31,311 @@
             <div class="row">
         @if(!empty($compras))
         @foreach ($compras as $compra)
-        <div class="col-lg-4">
-                <div class="single-destinations" >
-                    <div class="details">
-                        <ul class="package-list">
-                            <li class="d-flex justify-content-between align-items-center">
-                            <span> Fecha de compra</span>
-                            <span>{{$compra->fecha_compra}}</span>
-                            </li>
-                            <li class="d-flex justify-content-between align-items-center">
-                                <span> Hora de compra </span>
-                                <span>{{$compra->hora_compra}}</span>
-                            </li>					
-                        </ul>
-                    </div>
-                    </a>
+            @if($compra->seguro_id != null)
+                <?php $seguro = \App\Seguro::find($compra->seguro_id);
+                        ?>
+                <div class="col-lg-4">
+                        <div class="single-destinations" >
+                            <div class="details">
+                                <ul class="package-list">
+                                    <li class="d-flex justify-content-between align-items-center">
+                                    <span> Fecha de compra</span>
+                                    <span>{{$compra->fecha_compra}}</span>
+                                    </li>
+                                    <li class="d-flex justify-content-between align-items-center">
+                                        <span> Hora de compra </span>
+                                        <span>{{$compra->hora_compra}}</span>
+                                    </li>
+                                    <li class="d-flex justify-content-between align-items-center">
+                                            <span> DNI asegurado </span>
+                                            <span>{{$seguro->dni}}</span>
+                                    </li>
+                                    <li class="d-flex justify-content-between align-items-center">
+                                            <span> Edad asegurado </span>
+                                            <span>{{$seguro->edad_pasajero}}</span>
+                                    </li>
+                                    <li class="d-flex justify-content-between align-items-center">
+                                        @if($seguro->seguro_dental)    
+                                            <span> Seguro dental </span>
+                                            <span>Si</span>
+                                        @else
+                                            <span> Seguro dental </span>
+                                            <span>No</span>
+                                        @endif
+                                    </li>
+                                    <li class="d-flex justify-content-between align-items-center">
+                                            @if($seguro->seguro_accidentes)    
+                                                <span> Seguro contra accidentes </span>
+                                                <span>Si</span>
+                                            @else
+                                                <span> Seguro contra accidentes </span>
+                                                <span>No</span>
+                                            @endif
+                                        </li>
+                                    <li class="d-flex justify-content-between align-items-center">
+                                        @if($seguro->perdida_equipaje)    
+                                            <span> Seguro ante pérdida de equipaje </span>
+                                            <span>Si</span>
+                                        @else
+                                            <span> Seguro ante pérdida de equipaje </span>
+                                            <span>No</span>
+                                        @endif
+                                    </li>
+                                    <li class="d-flex justify-content-between align-items-center">
+                                        @if($seguro->asesoria_legal)    
+                                            <span> Asesoría legal </span>
+                                            <span>Si</span>
+                                        @else
+                                            <span> Asesoría legal </span>
+                                            <span>No</span>
+                                        @endif
+                                    </li>	
+                                    <li class="d-flex justify-content-between align-items-center">
+                                        @if($seguro->seguro_siniestros)    
+                                            <span> Seguro ante siniestro </span>
+                                            <span>Si</span>
+                                        @else
+                                            <span> Seguro ante siniestro </span>
+                                            <span>No</span>
+                                        @endif
+                                    </li>
+                                    <li class="d-flex justify-content-between align-items-center">
+                                        @if($seguro->problemas_viaje)    
+                                            <span> Seguro ante retraso/pérdida vuelo </span>
+                                            <span>Si</span>
+                                        @else
+                                            <span> Seguro ante retraso/pérdida vuelo </span>
+                                            <span>No</span>
+                                        @endif
+                                    </li>									
+                                </ul>
+                            </div>
+                            </a>
+                        </div>
                 </div>
-            </div>
+            @elseif($compra->paquete_id != null)
+                    @if($paquete->habitacion_id == null)
+                        <?php $paquete = \App\Paquete::find($compra->paquete_id);
+                        $vuelo = \App\Vuelo::find($paquete->vuelo_id);
+                        $auto = \App\Auto::find($paquete->auto_id); ?>
+                        <div class="col-lg-4">
+                                <div class="single-destinations" >
+                                    <div class="details">
+                                        <ul class="package-list">
+                                            <li class="d-flex justify-content-between align-items-center">
+                                            <span> Fecha de compra</span>
+                                            <span>{{$compra->fecha_compra}}</span>
+                                            </li>
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                <span> Hora de compra </span>
+                                                <span>{{$compra->hora_compra}}</span>
+                                            </li>
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                    <span>Origen vuelo</span>  
+                                                    <span>{{$vuelo->origen}}</span>  
+                                            </li>
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                    <span>Destino vuelo</span>  
+                                                    <span>{{$vuelo->destino}}</span>  
+                                            </li>
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                    <span>Fecaha de salida</span>  
+                                                    <span>{{$vuelo->fecha_ida}}</span>  
+                                            </li>
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                    <span>Fecha de llegada</span>  
+                                                    <span>{{$vuelo->fecha_llegada}}</span>  
+                                            </li>
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                    <span>Marca automóvil</span>  
+                                                    <span>{{$auto->marca}}</span>  
+                                            </li>
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                    <span>Modelo automóvil</span>  
+                                                    <span>{{$auto->modelo}}</span>  
+                                            </li>
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                    <span>Precio</span>  
+                                                    <span>{{$paquete->precio}}</span>  
+                                            </li>						
+                                        </ul>
+                                    </div>
+                                    </a>
+                                </div>
+                        </div>
+                    @else
+                        <?php $paquete = \App\Paquete::find($compra->paquete_id);
+                        $vuelo = \App\Vuelo::find($paquete->vuelo_id);
+                        $habitacion = \App\Habitacion::find($paquete->habitacion_id); ?>
+                        <div class="col-lg-4">
+                                <div class="single-destinations" >
+                                    <div class="details">
+                                        <ul class="package-list">
+                                            <li class="d-flex justify-content-between align-items-center">
+                                            <span> Fecha de compra</span>
+                                            <span>{{$compra->fecha_compra}}</span>
+                                            </li>
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                <span> Hora de compra </span>
+                                                <span>{{$compra->hora_compra}}</span>
+                                            </li>
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                    <span>Origen vuelo</span>  
+                                                    <span>{{$vuelo->origen}}</span>  
+                                            </li>
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                    <span>Destino vuelo</span>  
+                                                    <span>{{$vuelo->destino}}</span>  
+                                            </li>
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                    <span>Fecaha de salida</span>  
+                                                    <span>{{$vuelo->fecha_ida}}</span>  
+                                            </li>
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                    <span>Fecha de llegada</span>  
+                                                    <span>{{$vuelo->fecha_llegada}}</span>  
+                                            </li>
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                    <span>Tipo de habitacion</span>  
+                                                    <span></span>  
+                                            </li>
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                    <span>Cantidad de camas</span>  
+                                                    <span>{{$habitacion->numero_camas}}</span>  
+                                            </li>
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                    <span>Cantidad de baños</span>  
+                                                    <span>{{$habitacion->numero_banos}}</span>  
+                                            </li>						
+                                        </ul>
+                                    </div>
+                                    </a>
+                                </div>
+                        </div>
+                    @endif
+            @elseif($compra->reserva_auto_id != null)
+                <?php $reserva = \App\ReservaAuto::find($compra->reserva_auto_id);
+                        $auto = \App\Auto::find($reserva->auto_id);?>
+                <div class="col-lg-4">
+                        <div class="single-destinations" >
+                            <div class="details">
+                                <ul class="package-list">
+                                    <li class="d-flex justify-content-between align-items-center">
+                                    <span> Fecha de compra</span>
+                                    <span>{{$compra->fecha_compra}}</span>
+                                    </li>
+                                    <li class="d-flex justify-content-between align-items-center">
+                                        <span> Hora de compra </span>
+                                        <span>{{$compra->hora_compra}}</span>
+                                    </li>
+                                    <li class="d-flex justify-content-between align-items-center">
+                                            <span> Marca </span>
+                                            <span> {{$auto->marca}} </span>
+                                    </li>
+                                        <li class="d-flex justify-content-between align-items-center">
+                                            <span> Modelo </span>
+                                            <span> {{$auto->modelo}} </span>
+                                        </li>
+                                        <li class="d-flex justify-content-between align-items-center">
+                                            <span> Número de puertas </span>
+                                            <span> {{$auto->numero_puertas}} </span>
+                                        </li>
+                                        <li class="d-flex justify-content-between align-items-center">
+                                                <span> Tipo de transmision </span>
+                                                @if ($auto->tipo_transmision == 0)
+                                                    <span> Automático </span>
+                                                @else 
+                                                    <span> Mecánico </span>
+                                                @endif           
+                                        </li>
+                                        <li class="d-flex justify-content-between align-items-center">
+                                            <span> Fecha de inicio arriendo</span>
+                                            <span> {{$reserva->fecha_recogido}} </span>
+                                        </li>
+                                        <li class="d-flex justify-content-between align-items-center">
+                                            <span> Fecha de término arriendo</span>
+                                            <span> {{$reserva->fecha_devolucion}} </span>
+                                        </li>
+                                        <li class="d-flex justify-content-between align-items-center">
+                                            <span> Precio </span>
+                                            <span> {{$auto->precio}} </span>      
+                                        </li>  
+                                </ul>
+                            </div>
+                            </a>
+                        </div>
+                </div>
+            @elseif($compra->reserva_habitacion != null)
+                <?php $reserva = \App\ReservaHabitacion::find($compra->reserva_habitacion);
+                      $habitacion = \App\Habitacion::find($reserva->habitacion_id);?>
+                <div class="col-lg-4">
+                        <div class="single-destinations" >
+                            <div class="details">
+                                <ul class="package-list">
+                                    <li class="d-flex justify-content-between align-items-center">
+                                    <span> Fecha de compra</span>
+                                    <span>{{$compra->fecha_compra}}</span>
+                                    </li>
+                                    <li class="d-flex justify-content-between align-items-center">
+                                        <span> Hora de compra </span>
+                                        <span>{{$compra->hora_compra}}</span>
+                                    </li>	
+                                    <li class="d-flex justify-content-between align-items-center">
+                                            <span> Número de Habitación </span>
+                                            <span>{{$habitacion->numero_habitacion}}</span>
+                                    </li>
+                                        <li class="d-flex justify-content-between align-items-center">
+                                            <span> Tipo de Habitación </span>
+                                            @if($habitacion->tipo_habitación)
+                                                    <span>Moderna</span>
+                                                @else
+                                                    <span>Vintage</span>
+                                                @endif
+                                        </li>
+                                        <li class="d-flex justify-content-between align-items-center">
+                                            <span> Número de Camas </span>
+                                            <span> {{$habitacion->numero_camas}}</span>        
+                                        </li>
+                                        <li class="d-flex justify-content-between align-items-center">
+                                                <span> Número de Baños </span>
+                                                <span> {{$habitacion->numero_banos}}</span>        
+                                        </li>
+                                        <li class="d-flex justify-content-between align-items-center">
+                                            <span> Dias </span>
+                                            <span> {{$dias}}</span>        
+                                        </li>
+                                        <li class="d-flex justify-content-between align-items-center">
+                                            <span> Fecha de llegada </span>
+                                            <span> {{$reserva->fecha_llegada}}</span>        
+                                        </li>
+                                        <li class="d-flex justify-content-between align-items-center">
+                                            <span> Fecha de término </span>
+                                            <span> {{$reserva->fecha_ida}}</span>        
+                                        </li>
+                                </ul>
+                            </div>
+                            </a>
+                        </div>
+                </div>
+            @else
+                <div class="col-lg-4">
+                        <div class="single-destinations" >
+                            <div class="details">
+                                <ul class="package-list">
+                                    <li class="d-flex justify-content-between align-items-center">
+                                    <span> Fecha de compra</span>
+                                    <span>{{$compra->fecha_compra}}</span>
+                                    </li>
+                                    <li class="d-flex justify-content-between align-items-center">
+                                        <span> Hora de compra </span>
+                                        <span>{{$compra->hora_compra}}</span>
+                                    </li>					
+                                </ul>
+                            </div>
+                            </a>
+                        </div>
+                </div>
+            @endif
         @endforeach
         @endif
             </div>

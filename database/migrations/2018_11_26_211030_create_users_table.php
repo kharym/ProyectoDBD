@@ -16,7 +16,6 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('rol_id')->nullable()->unsigned();
-            $table->integer('auditoria_id')->nullable()->unsigned();
             $table->string('name',50);
             $table->string('apellido',40)->nullable();
             $table->string('email',450)->nullable();
@@ -34,7 +33,6 @@ class CreateUsersTable extends Migration
 
             //llaves foraneas
             $table->foreign('rol_id')->references('id')->on('rols')->onDelete('cascade');
-            $table->foreign('auditoria_id')->references('id')->on('auditorias')->onDelete('cascade');
         });
     }
 

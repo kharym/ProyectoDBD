@@ -32,10 +32,10 @@
                                 <div class="single-destinations">            
                                     <div class="details" style="background-color: #f6fd8c ; color: black;">
                                         <ul class="package-list">
-                                            <h4 class="d-flex justify-content-between align-items-center">
+                                            <li class="d-flex justify-content-between align-items-center">
                                                 <span> Origen Vuelo </span>
                                                 <span>  {{$vuelo->origen}}</span>
-                                            </h4>
+											</li>
                                             <li class="d-flex justify-content-between align-items-center">
                                                 <span> Destino Vuelo </span>
                                                 <span> {{$vuelo->destino}} </span>

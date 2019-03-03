@@ -277,3 +277,5 @@ Route::get('/compra-vuelo+alojamiento/{id}/{user}', 'PaqueteController@comprarVu
 Route::get('/reservar-seguro', 'SeguroController@reservarSeguro');
 
 Route::get('/comprar-seguro', 'SeguroController@comprarSeguro');
+
+Route::get('/compra-seguro-hecha/{id}','SeguroController@compraSeguroHecha');

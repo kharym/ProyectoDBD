@@ -17,6 +17,11 @@ class CreateAuditoriasTable extends Migration
             $table->smallInteger('tipo_auditoria');
             $table->string('descripcion',250);
             $table->timestamps();
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->date('fecha_auditoria')->nullable();   
+            $table->time('hora_auditoria')->nullable();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
