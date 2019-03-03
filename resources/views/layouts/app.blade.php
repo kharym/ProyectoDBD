@@ -69,7 +69,7 @@
 				              		<li><a href="/Empresa/agregarEmpresa">Agregar Empresa</a></li>
 				              		<li><a href="/Auto/agregarAuto">Agregar Vehículo</a></li>
 				              		<li><a href="/Actividad/agregarActividad">Agregar Actividad</a></li>
-				              		<li><a href="">Agregar Paquete</a></li>
+				              		<li><a href="/Paquete/agregarPaquete">Agregar Paquete</a></li>
 				              		<li><a href="/Pais/agregarPais">Agregar País</a></li>
 				              		<li><a href="/Ciudad/agregarCiudad">Agregar Ciudad</a></li>
 				            	</ul>

@@ -51,7 +51,7 @@ class PaqueteController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.agregar-paquete');
     }
 
     /**
@@ -476,6 +476,40 @@ class PaqueteController extends Controller
         });
         $mensaje = "Compra realizada con éxito";
         return view('paquete.compra-hecha',compact('mensaje'));
+    }
+
+    public function agregarPaquete(){
+
+        $paquete = new Paquete();
+        $id_auto = request()->auto;
+        $id_habitacion = request()->habitacion;
+        $disponibilidad = request()->disponibilidad;
+
+        $paquete->vuelo_id = request()->vuelo;
+        $paquete->pasajeros = request()->pasajero;
+        $paquete->precio = request()->precio;
+        $paquete->descuento = request()->descuento;
+        if ($disponibilidad == '1'){
+            $paquete->disponibilidad = true;
+        }
+        else{
+
+            $paquete->disponibilidad = false;
+        }
+
+        if ($id_auto != 'noAuto'){
+            $paquete->auto_id = $id_auto;
+        }
+
+        if ($id_habitacion != 'noHabitacion'){
+            $paquete->habitacion_id = $id_habitacion;
+        }
+        $paquete->tipo_paquete = 1;
+
+        $paquete->save();
+
+        return view('index');
+
     }
 
 
