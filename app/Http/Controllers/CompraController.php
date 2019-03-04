@@ -145,8 +145,8 @@ class CompraController extends Controller
         }
         $fecha = date('Y-m-d');
         $hora = date("H:i:s");
-        $data = [];
         for($i = 0; $i<count(request()->session()->get('rV')); $i++){
+            $data = [];
             $compra = Compra::create(['user_id'=>auth()->user()->id,'fecha_compra'=>$fecha, 'hora_compra'=>$hora]);
             $auxRV = request()->session()->get('rV')[$i];
             $auxP = request()->session()->get('psj')[$i];
@@ -156,14 +156,14 @@ class CompraController extends Controller
             $crv = \App\Compra_ReservaVuelo::create(['compra_id'=>$compra->id,'reserva_vuelo_id'=>$auxRV->id]);
             $crv->save();
             array_push($data,$auxRV);
+            Mail::send('mails.vuelo',['data'=>$data],function($message){
+                $message->from('juaninhanjarry@gmail.com','Reserva Vuelo');
+                $message->to(auth()->user()->email)->subject('compra realizada');
+            });
         }
         $mensaje = "Compra realizada con éxito";
         request()->session()->forget('rV');
         request()->session()->forget('psj');
-        Mail::send('mails.vuelo',$data,function($message){
-            $message->from('juaninhanjarry@gmail.com','Reserva Vuelo');
-            $message->to(auth()->user()->email)->subject('compra realizada');
-        });
         return view('vuelos.compra-hecha',compact('id','mensaje'));
     }
 
@@ -290,7 +290,7 @@ class CompraController extends Controller
         $mensaje = "Reserva comprada con éxito";
         $data = [];
         array_push($data,$reserva);
-        Mail::send('mails.habitacion',$data,function($message){
+        Mail::send('mails.habitacion',['data'=>$data],function($message){
             $message->from('juaninhanjarry@gmail.com','Reserva Habitación');
             $message->to(auth()->user()->email)->subject('compra realizada');
         });
@@ -339,7 +339,7 @@ class CompraController extends Controller
         $mensaje = "Reserva comprada con éxito";
         $data = [];
         array_push($data,$reserva);
-        Mail::send('mails.auto',$data,function($message){
+        Mail::send('mails.auto',['data'=>$data],function($message){
             $message->from('juaninhanjarry@gmail.com','Reserva Vehículo');
             $message->to(auth()->user()->email)->subject('compra realizada');
         });
@@ -388,11 +388,8 @@ class CompraController extends Controller
         }
         $fecha = date('Y-m-d');
         $hora = date("H:i:s");
-        $data = [];
-        $vuelos = [];
-        $habitaciones = [];
-        $autos = [];
         for($i = 1; $i<count(request()->session()->get('reservaVuelo')); $i++){
+            $data = [];
             $compra = Compra::create(['user_id'=>$id,'fecha_compra'=>$fecha, 'hora_compra'=>$hora]);
             $auxRV = request()->session()->get('reservaVuelo')[$i];
             $auxP = request()->session()->get('pasajero')[$i];
@@ -401,24 +398,38 @@ class CompraController extends Controller
             $auxRV->save();
             $crv = \App\Compra_ReservaVuelo::create(['compra_id'=>$compra->id,'reserva_vuelo_id'=>$auxRV->id]);
             $crv->save();
-            array_push($vuelos,$auxRV);
+            array_push($data,$auxRV);
+            Mail::send('mails.vuelo',['data'=>$data],function($message){
+                $message->from('juaninhanjarry@gmail.com','Reserva Vuelo');
+                $message->to(auth()->user()->email)->subject('compra realizada');
+            });
 
         }
 
         for($i = 1; $i<count(request()->session()->get('reservaHabitacion')); $i++){
+            $data = [];
             $auxRH = request()->session()->get('reservaHabitacion')[$i];
             $auxRH->save();
             $compra = Compra::create(['user_id'=>$id,'fecha_compra'=>$fecha, 'hora_compra'=>$hora, 'reserva_habitacion_id'=>$auxRH->id]);
             $compra->save();
-            array_push($habitaciones,$auxRH);
+            array_push($data,$auxRH);
+            Mail::send('mails.habitacion',['data'=>$data],function($message){
+                $message->from('juaninhanjarry@gmail.com','Reserva Habitacion');
+                $message->to(auth()->user()->email)->subject('compra realizada');
+            });
         }
 
         for($i = 1; $i<count(request()->session()->get('reservaAuto')); $i++){
+            $data = [];
             $auxRA = request()->session()->get('reservaAuto')[$i];
             $auxRA->save();
             $compra = Compra::create(['user_id'=>$id,'fecha_compra'=>$fecha, 'hora_compra'=>$hora, 'reserva_auto_id'=>$auxRA->id]);
             $compra->save();
-            array_push($autos,$auxRA);
+            array_push($data,$auxRA);
+            Mail::send('mails.auto',['data'=>$data],function($message){
+                $message->from('juaninhanjarry@gmail.com','Reserva Auto');
+                $message->to(auth()->user()->email)->subject('compra realizada');
+            });
         }
 
         request()->session()->forget('reservaVuelo');
@@ -429,13 +440,6 @@ class CompraController extends Controller
         request()->session()->push('pasajero',NULL);
         request()->session()->push('reservaHabitacion',NULL);
         request()->session()->push('reservaAuto',NULL);
-        array_push($data,$vuelos);
-        array_push($data,$autos);
-        array_push($data,$habitaciones);
-        Mail::send('mails.carro',$data,function($message){
-            $message->from('juaninhanjarry@gmail.com','Reserva Vehículo');
-            $message->to(auth()->user()->email)->subject('compra realizada');
-        });
         $mensaje = "Compra realizada con éxito";
         return view('carrito.compra-hecha',compact('mensaje'));
     }

@@ -269,6 +269,7 @@ class PaqueteController extends Controller
         $hora = date("H:i:s");
         $compra = \App\Compra::create(['paquete_id'=>$id,'user_id'=>$user,'fecha_compra'=>$fecha, 'hora_compra'=>$hora]);
         for($i = 0; $i<count(request()->session()->get('rV')); $i++){
+            $data = [];
             $auxRV = request()->session()->get('rV')[$i];
             $auxP = request()->session()->get('psj')[$i];
             $auxP->save();
@@ -276,12 +277,23 @@ class PaqueteController extends Controller
             $auxRV->save();
             $crv = \App\Paquete_ReservaVuelo::create(['paquete_id'=>$id,'reserva_vuelo_id'=>$auxRV->id]);
             $crv->save();
+            array_push($data,$auxRV);
+            Mail::send('mails.vuelo',['data'=>$data],function($message){
+                $message->from('juaninhanjarry@gmail.com','Reserva Vuelo');
+                $message->to(auth()->user()->email)->subject('compra realizada');
+            });
         }
 
         for($i = 0; $i<count(request()->session()->get('rA')); $i++){
+            $data = [];
             $auxRA = request()->session()->get('rA')[$i];
             $auxRA->save();
             $paquete->auto_id = $auxRA->id;
+            array_push($data,$auxRA);
+            Mail::send('mails.auto',['data'=>$data],function($message){
+                $message->from('juaninhanjarry@gmail.com','Reserva Auto');
+                $message->to(auth()->user()->email)->subject('compra realizada');
+            });
         }
 
 
@@ -291,7 +303,7 @@ class PaqueteController extends Controller
         request()->session()->forget('psj');
         $data = [];
         array_push($data,$paquete);
-        Mail::send('mails.paquete',$data,function($message){
+        Mail::send('mails.paquete',['data'=>$data],function($message){
             $message->from('juaninhanjarry@gmail.com','Compra Paquete');
             $message->to(auth()->user()->email)->subject('compra realizada');
         });
@@ -448,6 +460,7 @@ class PaqueteController extends Controller
         $hora = date("H:i:s");
         $compra = \App\Compra::create(['paquete_id'=>$id,'user_id'=>$user,'fecha_compra'=>$fecha, 'hora_compra'=>$hora]);
         for($i = 0; $i<count(request()->session()->get('rV')); $i++){
+            $data = [];
             $auxRV = request()->session()->get('rV')[$i];
             $auxP = request()->session()->get('psj')[$i];
             $auxP->save();
@@ -455,12 +468,23 @@ class PaqueteController extends Controller
             $auxRV->save();
             $crv = \App\Paquete_ReservaVuelo::create(['paquete_id'=>$id,'reserva_vuelo_id'=>$auxRV->id]);
             $crv->save();
+            array_push($data,$auxRV);
+            Mail::send('mails.vuelo',['data'=>$data],function($message){
+                $message->from('juaninhanjarry@gmail.com','Reserva Vuelo');
+                $message->to(auth()->user()->email)->subject('compra realizada');
+            });
         }
 
         for($i = 0; $i<count(request()->session()->get('rH')); $i++){
+            $data = [];
             $auxRA = request()->session()->get('rH')[$i];
             $auxRA->save();
             $paquete->habitacion_id = $auxRA->id;
+            array_push($data,$auxRA);
+            Mail::send('mails.habitacion',['data'=>$data],function($message){
+                $message->from('juaninhanjarry@gmail.com','Reserva Habitacion');
+                $message->to(auth()->user()->email)->subject('compra realizada');
+            });
         }
 
 
