@@ -56,8 +56,8 @@
 													@endforeach
 												</select>
 											</div>														
-									<input type="text" class="form-control date-picker" name="start" placeholder="Fecha Ida " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Ida '">
-									<input type="text" class="form-control date-picker" name="return" placeholder="Fecha Vuelta " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Vuelta '">
+									<input type="text" class="form-control date-picker" name="start" placeholder="Fecha Ida " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Ida '" required>
+									<input type="text" class="form-control date-picker" name="return" placeholder="Fecha Vuelta " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Vuelta '"required>
 									<input type="submit" class="primary-btn text-uppercase" value="Buscar" >									
 								</form>							  	
 							  </div>
@@ -88,8 +88,8 @@
 											@endforeach
 										</select>
 									</div>
-										<input type="text" class="form-control date-picker" name="start" placeholder="Fecha Retiro " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Ida '">
-										<input type="text" class="form-control date-picker" name="return" placeholder="Fecha Entrega " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Vuelta '">												
+										<input type="text" class="form-control date-picker" name="start" placeholder="Fecha Retiro " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Ida '" required>
+										<input type="text" class="form-control date-picker" name="return" placeholder="Fecha Entrega " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Vuelta '" required>												
 									<input type="submit" class="primary-btn text-uppercase" value="Buscar">									
 								</form>							  	
 							  </div>

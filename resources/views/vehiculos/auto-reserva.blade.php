@@ -28,10 +28,10 @@
                                     <div class="details">
                                     <ul class="package-list">
                                     <li class="d-flex justify-content-between align-items-center">
-                                        <input type="text" class="form-control date-picker" name="start" placeholder="Fecha Arriendo " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Arriendo '">
+                                        <input type="text" class="form-control date-picker" name="start" placeholder="Fecha Arriendo " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Arriendo '" required>
                                     </li>
                                     </li>
-                                        <input type="text" class="form-control date-picker" name="end" placeholder="Fecha Devolución " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Devolución '">
+                                        <input type="text" class="form-control date-picker" name="end" placeholder="Fecha Devolución " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Devolución '" required>
                                     </li>
                                     <label for="retiro"> Lugar de retiro </label>
                                     <select class="form-control" id="retiro" name="retiro" >

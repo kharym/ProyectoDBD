@@ -42,10 +42,10 @@ print_r(request()->session()->get('rV'));
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-md-6">    
-                                                <input type="text" class="form-control" name="name" placeholder="Nombre " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nombre '">									
+                                                <input type="text" class="form-control" name="name" placeholder="Nombre " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nombre '" required>									
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" name="apellido" placeholder="Apellido " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Apellido '">
+                                                <input type="text" class="form-control" name="apellido" placeholder="Apellido " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Apellido '" required>
                                             </div>
                                         </div>
                                         <li class="d-flex justify-content-between align-items-center">
@@ -88,9 +88,9 @@ print_r(request()->session()->get('rV'));
                                         </div>
                                         </div>
                                     </div>
-                                        <input type="text" class="form-control" name="dni" placeholder="DNI " onfocus="this.placeholder = ''" onblur="this.placeholder = 'DNI '">
-                                        <input type="text" class="form-control" name="celular" placeholder="Celular " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Celular '">							
-                                        <input type="text" class="form-control" name="pais" placeholder="Pais " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Pais '">	
+                                        <input type="text" class="form-control" name="dni" placeholder="DNI " onfocus="this.placeholder = ''" onblur="this.placeholder = 'DNI '" required>
+                                        <input type="text" class="form-control" name="celular" placeholder="Celular " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Celular '" required>							
+                                        <input type="text" class="form-control" name="pais" placeholder="Pais " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Pais '" required>	
                                         <input type="submit" class="primary-btn text-uppercase" value="Siguiente pasajero" >										
                                     </form>
                                 
@@ -102,8 +102,8 @@ print_r(request()->session()->get('rV'));
                                     <form class="form-wrap" method="GET" action="/reserva-paquete-vuelo+alojamiento/{{$id}}/{{$pasajeros}}">
                                         <div class="container">
                                             <div class="row">    															
-                                                <input type="text" class="form-control date-picker" name="start" data-date-format="YYYY-MM-DD" placeholder="Fecha Ida " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Ida '">
-                                                <input type="text" class="form-control date-picker" name="return" data-date-format="YYYY-MM-DD" placeholder="Fecha Vuelta " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Vuelta '">
+                                                <input type="text" class="form-control date-picker" name="start" data-date-format="YYYY-MM-DD" placeholder="Fecha Ida " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Ida '" required>
+                                                <input type="text" class="form-control date-picker" name="return" data-date-format="YYYY-MM-DD" placeholder="Fecha Vuelta " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Vuelta '" required>
                                             </div>
                                         </div>
                                             <label for="cantidad_ninos">Cantidad niños </label>

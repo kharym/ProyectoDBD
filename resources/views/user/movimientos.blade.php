@@ -265,8 +265,8 @@
                             </a>
                         </div>
                 </div>
-            @elseif($compra->reserva_habitacion != null)
-                <?php $reserva = \App\ReservaHabitacion::find($compra->reserva_habitacion);
+            @elseif($compra->reserva_habitacion_id != null)
+                <?php $reserva = \App\ReservaHabitacion::find($compra->reserva_habitacion_id);
                       $habitacion = \App\Habitacion::find($reserva->habitacion_id);?>
                 <div class="col-lg-4">
                         <div class="single-destinations" >
@@ -301,10 +301,6 @@
                                                 <span> {{$habitacion->numero_banos}}</span>        
                                         </li>
                                         <li class="d-flex justify-content-between align-items-center">
-                                            <span> Dias </span>
-                                            <span> {{$dias}}</span>        
-                                        </li>
-                                        <li class="d-flex justify-content-between align-items-center">
                                             <span> Fecha de llegada </span>
                                             <span> {{$reserva->fecha_llegada}}</span>        
                                         </li>
@@ -318,23 +314,45 @@
                         </div>
                 </div>
             @else
-                <div class="col-lg-4">
-                        <div class="single-destinations" >
-                            <div class="details">
-                                <ul class="package-list">
-                                    <li class="d-flex justify-content-between align-items-center">
-                                    <span> Fecha de compra</span>
-                                    <span>{{$compra->fecha_compra}}</span>
-                                    </li>
-                                    <li class="d-flex justify-content-between align-items-center">
-                                        <span> Hora de compra </span>
-                                        <span>{{$compra->hora_compra}}</span>
-                                    </li>					
-                                </ul>
+                <?php $rv = \App\Compra_ReservaVuelo::where('compra_id',$compra->id)->get();?>
+                    @foreach($rv as $rvuelo)
+                        <?php $reservaVuelo = \App\ReservaVuelo::find($rvuelo->reserva_vuelo_id);
+                        $vuelo = \App\Vuelo::find($reservaVuelo->vuelo_id);?>            
+                            <div class="col-lg-4">
+                                    <div class="single-destinations" >
+                                        <div class="details">
+                                            <ul class="package-list">
+                                                <li class="d-flex justify-content-between align-items-center">
+                                                <span> Fecha de compra</span>
+                                                <span>{{$compra->fecha_compra}}</span>
+                                                </li>
+                                                <li class="d-flex justify-content-between align-items-center">
+                                                    <span> Hora de compra </span>
+                                                    <span>{{$compra->hora_compra}}</span>
+                                                </li>
+                                                <li class="d-flex justify-content-between align-items-center">
+                                                <span> Destino</span>
+                                                <span>{{$vuelo->destino}}</span>
+                                                </li>
+                                                <li class="d-flex justify-content-between align-items-center">
+                                                    <span> Fecha de salida </span>
+                                                    <span>{{$vuelo->fecha_ida}}</span>
+                                                </li>
+                                                <li class="d-flex justify-content-between align-items-center">
+                                                <span> Fecha de llegada</span>
+                                                <span>{{$vuelo->fecha_llegada}}</span>
+                                                </li>
+                                                <li class="d-flex justify-content-between align-items-center">
+                                                    <span> Precio </span>
+                                                    <span>{{$reservaVuelo->precio_reserva_vuelo}}</span>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                        </a>
+                                    </div>
                             </div>
-                            </a>
-                        </div>
-                </div>
+                    @endforeach
             @endif
         @endforeach
         @endif

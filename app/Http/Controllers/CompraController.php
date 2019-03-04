@@ -147,7 +147,7 @@ class CompraController extends Controller
         $hora = date("H:i:s");
         $data = [];
         for($i = 0; $i<count(request()->session()->get('rV')); $i++){
-            $compra = Compra::create(['user_id'=>$id,'fecha_compra'=>$fecha, 'hora_compra'=>$hora]);
+            $compra = Compra::create(['user_id'=>auth()->user()->id,'fecha_compra'=>$fecha, 'hora_compra'=>$hora]);
             $auxRV = request()->session()->get('rV')[$i];
             $auxP = request()->session()->get('psj')[$i];
             $auxP->save();
@@ -286,7 +286,7 @@ class CompraController extends Controller
         }
         $reserva->save();
         request()->session()->forget('reservaHab');
-        $compra = Compra::create(['user_id'=>$id,'fecha_compra'=>$fecha, 'hora_compra'=>$hora, 'reserva_habitacion_id'=>$reserva->id]);
+        $compra = Compra::create(['user_id'=>auth()->user()->id,'fecha_compra'=>$fecha, 'hora_compra'=>$hora, 'reserva_habitacion_id'=>$reserva->id]);
         $mensaje = "Reserva comprada con éxito";
         $data = [];
         array_push($data,$reserva);

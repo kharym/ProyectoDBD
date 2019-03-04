@@ -22,8 +22,8 @@
                               <form class="form-wrap" method="GET" action="/comprar-habitacion/{{request()->id}}">
                                 <div class="container">
                                     <div class="row">    															
-                                        <input type="text" class="form-control date-picker" name="start" data-date-format="YYYY-MM-DD" placeholder="Fecha Ida " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Ida '">
-                                        <input type="text" class="form-control date-picker" name="return" data-date-format="YYYY-MM-DD" placeholder="Fecha Vuelta " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Vuelta '">
+                                        <input type="text" class="form-control date-picker" name="start" data-date-format="YYYY-MM-DD" placeholder="Fecha Ida " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Ida '" required>
+                                        <input type="text" class="form-control date-picker" name="return" data-date-format="YYYY-MM-DD" placeholder="Fecha Vuelta " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Vuelta '" required>
                                     </div>
                                 </div>
                                     <label for="cantidad_ninos">Cantidad niños </label>

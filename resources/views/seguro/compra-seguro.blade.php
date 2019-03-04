@@ -89,7 +89,7 @@
                                                 </div>
                                                 <div class="form-group">    
                                                     <label for="numeroCuenta" > Numero de cuenta</label>
-                                                    <input class="form-control" input="text" name="numeroCuenta">  
+                                                    <input class="form-control" input="text" name="numeroCuenta" required>  
                                                 </div>
 
                                             

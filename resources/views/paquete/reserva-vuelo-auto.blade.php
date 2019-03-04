@@ -42,10 +42,10 @@ print_r(request()->session()->get('rV'));
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-md-6">    
-                                                <input type="text" class="form-control" name="name" placeholder="Nombre " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nombre '">									
+                                                <input type="text" class="form-control" name="name" placeholder="Nombre " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nombre '" required>									
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" name="apellido" placeholder="Apellido " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Apellido '">
+                                                <input type="text" class="form-control" name="apellido" placeholder="Apellido " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Apellido '" required>
                                             </div>
                                         </div>
                                         <li class="d-flex justify-content-between align-items-center">
@@ -88,9 +88,9 @@ print_r(request()->session()->get('rV'));
                                         </div>
                                         </div>
                                     </div>
-                                        <input type="text" class="form-control" name="dni" placeholder="DNI " onfocus="this.placeholder = ''" onblur="this.placeholder = 'DNI '">
-                                        <input type="text" class="form-control" name="celular" placeholder="Celular " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Celular '">							
-                                        <input type="text" class="form-control" name="pais" placeholder="Pais " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Pais '">	
+                                        <input type="text" class="form-control" name="dni" placeholder="DNI " onfocus="this.placeholder = ''" onblur="this.placeholder = 'DNI '" required>
+                                        <input type="text" class="form-control" name="celular" placeholder="Celular " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Celular '" required>							
+                                        <input type="text" class="form-control" name="pais" placeholder="Pais " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Pais '" required>	
                                         <input type="submit" class="primary-btn text-uppercase" value="Siguiente pasajero" >										
                                     </form>
                                 
@@ -107,10 +107,10 @@ print_r(request()->session()->get('rV'));
                                         <div class="details">
                                         <ul class="package-list">
                                         <li class="d-flex justify-content-between align-items-center">
-                                            <input type="text" class="form-control date-picker" name="start" placeholder="Fecha Arriendo " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Arriendo '">
+                                            <input type="text" class="form-control date-picker" name="start" placeholder="Fecha Arriendo " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Arriendo '" required>
                                         </li>
                                         </li>
-                                            <input type="text" class="form-control date-picker" name="end" placeholder="Fecha Devolución " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Devolución '">
+                                            <input type="text" class="form-control date-picker" name="end" placeholder="Fecha Devolución " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Devolución '" required>
                                         </li>
                                         <label for="retiro"> Lugar de retiro </label>
                                         <select class="form-control" id="retiro" name="retiro" >

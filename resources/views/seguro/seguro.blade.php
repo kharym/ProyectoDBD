@@ -87,11 +87,11 @@
                                          <br>
                                                 <div class="form-group col-md-6">    
                                                     <label for="fechaIda" > Fecha Ida</label>
-                                                    <input type="text" class="form-control date-picker" name="fechaIda" data-date-format="YYYY-MM-DD" placeholder="" onfocus="this.placeholder = ''" onblur="this.placeholder = ''">
+                                                    <input type="text" class="form-control date-picker" name="fechaIda" data-date-format="YYYY-MM-DD" placeholder="" onfocus="this.placeholder = ''" onblur="this.placeholder = ''" required>
                                                 </div>
                                                 <div class="form-group col-md-6">    
                                                     <label for="fechaVuelta" > Fecha Vuelta</label>
-                                                    <input type="text" class="form-control date-picker" name="fechaVuelta" data-date-format="YYYY-MM-DD" placeholder="" onfocus="this.placeholder = ''" onblur="this.placeholder = ' '">
+                                                    <input type="text" class="form-control date-picker" name="fechaVuelta" data-date-format="YYYY-MM-DD" placeholder="" onfocus="this.placeholder = ''" onblur="this.placeholder = ' '" required>
                                                 </div>
                                                 <div class="container">    
                                                         <p> Precio boleto</p>
