@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-	
 			<!-- start banner Area -->
 			<section class="about-banner relative">
 				<div class="overlay overlay-bg"></div>

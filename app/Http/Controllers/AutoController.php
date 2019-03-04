@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Validator;
 use App\Auto;
 use Illuminate\Http\Request;
+use DateTime;
+use Date;
 
 class AutoController extends Controller
 {
@@ -125,26 +127,55 @@ class AutoController extends Controller
         return "";
     }
 
-    public function autosPais()
+    public function autosFecha()
     {
-        $pais = \App\Pais::where('nombre_pais','=',request()->pais)->first();
-        if(empty($pais)){
-            $autos = [];
-            return view('autos', compact('autos'));
+        if(request()->session()->has('start')){
+            request()->session()->forget('start');
         }
-        $ciudades = \App\Ciudad::where('pais_id','=',$pais->id)->get();
-        $empresas = [];
-        foreach($ciudades as $ciudad){
-            $empresa = \App\Empresa::where('ciudad_id','=',$ciudad->id)->get();
-            foreach($empresa as $e){
-                array_push($empresas,$e);
+        if(request()->session()->has('return')){
+            request()->session()->forget('return');
+        }
+        request()->session()->push('start',request()->start);
+
+        request()->session()->push('return',request()->return);
+
+        $start = new DateTime(request()->session()->get('start')[0]);
+        $return = new DateTime(request()->session()->get('return')[0]);
+        $start = Date($start->format('Y-m-d'));
+        $return = Date($return->format('Y-m-d'));
+        $aut = \App\Auto::all();
+        $autosAux = [];
+        foreach($aut as $auto){
+            $empresa = \App\Empresa::find($auto->empresa_id);
+            $ub = \App\Ubicacion::find($empresa->ubicacion_id);
+            $ciudad = \App\Ciudad::find($ub->ciudad_id);
+            if($ciudad->id == request()->ciudad){
+                array_push($autosAux,$auto);
             }
         }
+        $reservas = \App\ReservaAuto::all();
+        $re = [];
+        foreach($reservas as $reserva){
+            $s = Date($reserva->fecha_recogido);
+            $r = Date($reserva->fecha_devolucion);
+            if( !( ($s>$return && $r>$return)   || ($s<$start && $r<$start) )){
+                array_push($re,$reserva);
+            }
+        }
+        $ha = [];
+        foreach($re as $r){
+           $hab = Auto::find($r->auto_id);
+           array_push($ha,$hab); 
+        }
         $autos = [];
-        foreach($empresas as $e){
-            $auto = Auto::where([['empresa_id','=',$e->id],['marca','=',request()->marca]])->get();
-            foreach($auto as $a){
-                array_push($autos,$a);
+        $ha = array_unique($ha);
+        if(empty($ha)){
+            $autos = $autosAux;
+            return view('vehiculos.autos',compact('autos'));
+        }
+        foreach($autosAux as $auto){
+            if(!in_array($auto,$ha)){
+                array_push($autos,$auto);
             }
         }
         return view('vehiculos.autos',compact('autos'));

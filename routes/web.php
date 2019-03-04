@@ -60,7 +60,6 @@ Route::post('/Auto/store', 'AutoController@store');
 Route::put('/Auto/{auto}', 'AutoController@update');
 Route::get('/Auto/agregarAuto', 'AutoController@create');
 //Anidado
-Route::get('Auto','AutoController@autosPais');
 
 
 Route::get('/Ciudad/all', 'CiudadController@index'); 
@@ -284,3 +283,5 @@ Route::get('/comprar-seguro', 'SeguroController@comprarSeguro');
 Route::get('/compra-seguro-hecha/{id}','SeguroController@compraSeguroHecha');
 
 Route::get('/habitaciones/{id}', 'HabitacionController@habitacionesFecha');
+
+Route::get('/autos', 'AutoController@autosFecha');

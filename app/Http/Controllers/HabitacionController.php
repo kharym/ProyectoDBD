@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Validator;
 use App\Habitacion;
 use Illuminate\Http\Request;
+use DateTime;
 
 class HabitacionController extends Controller
 {
@@ -133,9 +134,32 @@ class HabitacionController extends Controller
 
 
     public function habitacionesFecha($id){
-
-        $habitaciones = Habitacion::where("alojamiento_id",$id)->get();
-
+        $start = new DateTime(request()->session()->get('start')[0]);
+        $return = new DateTime(request()->session()->get('return')[0]);
+        $start = Date($start->format('Y-m-d'));
+        $return = Date($return->format('Y-m-d'));
+        $habita = Habitacion::where("alojamiento_id",$id)->get();
+        $reservas = \App\ReservaHabitacion::all();
+        $re = [];
+        foreach($reservas as $reserva){
+            $s = Date($reserva->fecha_llegada);
+            $r = Date($reserva->fecha_ida);
+            if( !( ($s>$return && $r>$return)   || ($s<$start && $r<$start) )){
+                array_push($re,$reserva);
+            }
+        }
+        $ha = [];
+        foreach($re as $r){
+           $hab = Habitacion::find($r->habitacion_id);
+           array_push($ha,$hab); 
+        }
+        $habitaciones = [];
+        $ha = array_unique($ha);
+        foreach($habita as $habitacion){
+            if(!in_array($habitacion,$ha)){
+                array_push($habitaciones,$habitacion);
+            }
+        }
         return view('alojamientos.habitacion',compact('habitaciones'));
     }
 

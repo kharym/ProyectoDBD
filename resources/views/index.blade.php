@@ -63,9 +63,33 @@
 							  </div>
 							  <!-- FORM PARA BUSCAR AUTO -->
 							  <div class="tab-pane fade" id="holiday" role="tabpanel" aria-labelledby="autos-tab">
-								<form class="form-wrap" method="get" action="Auto">
-										<input type="text" class="form-control" name="pais" placeholder="Pais " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Pais '">		
-									<input type="text" class="form-control" name="marca" placeholder="Marca " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Marca '">														
+								<form class="form-wrap" method="get" action="/autos">
+										<div class="form-group">
+												<?php $empresas = \App\Auto::select('empresa_id')->distinct()->get();
+												$ubicaciones = [];
+												foreach($empresas as $empresa){
+													 $e = \App\Empresa::find($empresa->empresa_id);
+														array_push($ubicaciones,$e->ubicacion_id);	
+												}
+												$ubicaciones = array_unique($ubicaciones);
+												$ciudades = [];
+												foreach($ubicaciones as $ubicacion){
+													$ub = \App\Ubicacion::find($ubicacion);
+													$c = $ub->ciudad_id;
+													array_push($ciudades,$c);
+												}
+												$ciudades = array_unique($ciudades);?>
+													<label for="sel1">Ciudad donde desea alojar:</label>
+										<select class="form-control" id="ciudad" name="ciudad">
+											@foreach($ciudades as $ciudad)
+												<?php $c = \App\Ciudad::find($ciudad);
+															$pais = \App\Pais::find($c->pais_id)?>
+												<option value="{{$ciudad}}"> {{$c->nombre_ciudad}}, {{$pais->nombre_pais}}</option>
+											@endforeach
+										</select>
+									</div>
+										<input type="text" class="form-control date-picker" name="start" placeholder="Fecha Retiro " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Ida '">
+										<input type="text" class="form-control date-picker" name="return" placeholder="Fecha Entrega " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Vuelta '">												
 									<input type="submit" class="primary-btn text-uppercase" value="Buscar">									
 								</form>							  	
 							  </div>

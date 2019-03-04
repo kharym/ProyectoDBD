@@ -288,6 +288,7 @@ class CompraController extends Controller
         request()->session()->forget('reservaHab');
         $compra = Compra::create(['user_id'=>$id,'fecha_compra'=>$fecha, 'hora_compra'=>$hora, 'reserva_habitacion_id'=>$reserva->id]);
         $mensaje = "Reserva comprada con éxito";
+        $data = [];
         array_push($data,$reserva);
         Mail::send('mails.habitacion',$data,function($message){
             $message->from('juaninhanjarry@gmail.com','Reserva Habitación');

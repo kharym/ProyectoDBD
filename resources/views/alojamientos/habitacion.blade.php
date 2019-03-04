@@ -1,6 +1,19 @@
 @extends('layouts.app')
 @section('content')
     
+<?php 
+        $aux = \App\ReservaHabitacion::find(4);
+        
+        
+        $a = request()->session()->get('start')[0];
+        
+        $b = new DateTime($a);
+        $c = Date($b->format('Y-m-d'));
+        $d = Date($aux->fecha_llegada);
+      print_r($b->format('Y-m-d')); 
+      if($c<$d){
+          echo 'chao';
+      }  ?>
           
         <!-- start banner Area -->
         <section class="about-banner relative">

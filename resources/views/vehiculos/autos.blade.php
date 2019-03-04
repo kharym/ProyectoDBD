@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     
-          
+          <?php echo request()->ciudad?>
         <!-- start banner Area -->
         <section class="about-banner relative">
             <div class="overlay overlay-bg"></div>
