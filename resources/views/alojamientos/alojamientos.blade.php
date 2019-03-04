@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
 	
-			  
 			<!-- start banner Area -->
 			<section class="about-banner relative">
 				<div class="overlay overlay-bg"></div>
@@ -32,7 +31,7 @@
 				<div class="row">
 			@foreach ($alojamientos as $alojamiento)
 				<div class="col-lg-4">
-					<a href="/habitacion/{{$alojamiento->id}}">
+					<a href="/habitaciones/{{$alojamiento->id}}">
 					<div class="single-destinations">
 						<div class="details" style="background-color: #f6fd8c ; color: black;">
 							<h4 class="d-flex justify-content-between">

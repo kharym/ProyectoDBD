@@ -131,6 +131,14 @@ class HabitacionController extends Controller
         return view('alojamientos.habitacion',compact('habitaciones'));
     }
 
+
+    public function habitacionesFecha($id){
+
+        $habitaciones = Habitacion::where("alojamiento_id",$id)->get();
+
+        return view('alojamientos.habitacion',compact('habitaciones'));
+    }
+
     public function habitacionReserva($habitacion){
         
         return view('alojamientos.reservaHabitacion', compact('habitacion'));

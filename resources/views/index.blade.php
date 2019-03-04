@@ -45,7 +45,17 @@
 							  <div class="tab-pane fade" id="hotel" role="tabpanel" aria-labelledby="hotel-tab">
 								  <!-- FORM PARA BUSCAR HOTEL -->
 								<form class="form-wrap" method="get" action="Alojamiento">
-									<input type="text" class="form-control" name="pais" placeholder="From " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Destino '">															
+										<?php $ciudades = \App\Alojamiento::select('ciudad_id')->distinct()->get();?>
+										<div class="form-group">
+												<label for="sel1">Ciudad donde desea alojar:</label>
+												<select class="form-control" id="ciudad" name="ciudad">
+													@foreach($ciudades as $ciudad)
+														<?php $c = \App\Ciudad::find($ciudad->ciudad_id);
+																	$pais = \App\Pais::find($c->pais_id)?>
+														<option value="{{$ciudad->ciudad_id}}"> {{$c->nombre_ciudad}}, {{$pais->nombre_pais}}</option>
+													@endforeach
+												</select>
+											</div>														
 									<input type="text" class="form-control date-picker" name="start" placeholder="Fecha Ida " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Ida '">
 									<input type="text" class="form-control date-picker" name="return" placeholder="Fecha Vuelta " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Vuelta '">
 									<input type="submit" class="primary-btn text-uppercase" value="Buscar" >									

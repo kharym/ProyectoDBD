@@ -282,3 +282,5 @@ Route::get('/reservar-seguro', 'SeguroController@reservarSeguro');
 Route::get('/comprar-seguro', 'SeguroController@comprarSeguro');
 
 Route::get('/compra-seguro-hecha/{id}','SeguroController@compraSeguroHecha');
+
+Route::get('/habitaciones/{id}', 'HabitacionController@habitacionesFecha');

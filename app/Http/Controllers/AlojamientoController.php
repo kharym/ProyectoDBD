@@ -129,22 +129,13 @@ class AlojamientoController extends Controller
 
     public function alojamientoPais(){
         //return request()->all();
-        $pais = \App\Pais::where('nombre_pais','=',request()->pais)->first();
-        if(empty($pais)){
-            $alojamientos = [];
-            return view('alojamientos.alojamientos', compact('alojamientos'));
+        $alojamientos = Alojamiento::where('ciudad_id',request()->ciudad)->get();
+        if(request()->session()->has('start')){
+            request()->session()->forget('start');
+            request()->session()->forget('return');
         }
-        $ciudades = \App\Ciudad::where('pais_id','=',$pais->id)->get();
-        $alojamientos = [];
-        foreach($ciudades as $c){
-            $aux =  Alojamiento::where('ciudad_id',$c->id)->get();
-                if(!empty($aux)){
-                    foreach($aux as $a){
-                        array_push($alojamientos,$a);
-                }
-            }
-        }
-        //$vuelos = App\Vuelo::where([['ciudad_va_id',$ciudadesD->id],['ciudad_viene_id',$ciudadesO->id]])->get();
+        request()->session()->push('start',request()->start);
+        request()->session()->push('return',request()->return);
         return view('alojamientos.alojamientos',compact('alojamientos'));
     }
 
