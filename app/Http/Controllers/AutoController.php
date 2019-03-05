@@ -188,8 +188,9 @@ class AutoController extends Controller
     public function agregarAuto(){
         $auto = new Auto();
         $usuario = auth()->user();
-        $auditoria = \App\Auditoria::find($usuario->auditoria_id);
-        $fecha = date('Y-m-d H:i:s');
+        $auditoria = new \App\Auditoria();
+        $fecha = date('Y-m-d');
+        $hora = date( 'H:i:s');
 
         $tipoTransmision = request()->tipoTransmision;
         $disponibilidad = request()->disponibilidad;
@@ -216,8 +217,11 @@ class AutoController extends Controller
 
             $auto->disponibilidad = false;
         }
-
-        $auditoria->descripcion = $auditoria->descripcion . "Se agregó el auto " .$auto->marca." ".$auto->modelo ." " . $fecha . "\r\n";
+        $auditoria->user_id = $usuario->id;
+        $auditoria->tipo_auditoria = 1;
+        $auditoria->fecha_auditoria = $fecha;
+        $auditoria->hora_auditoria = $hora;
+        $auditoria->descripcion = "Se agregó el auto " .$auto->marca." ".$auto->modelo ." " . $fecha . "\r\n";
 
         $auto->save();
         $auditoria->save();
@@ -227,5 +231,16 @@ class AutoController extends Controller
         return view('vehiculos.autosAll', compact('autos'));
 
 
+    }
+
+    public function eliminarCarro($index){
+        $aux = request()->session()->get('reservaAuto');
+        unset($aux[$index]);
+        array_values($aux);
+        request()->session()->forget('reservaAuto');
+        foreach($aux as $a){
+            request()->session()->push('reservaAuto',$a);
+        }
+        return redirect('/carro');
     }
 }

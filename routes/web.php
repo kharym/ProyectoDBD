@@ -291,3 +291,21 @@ Route::get('/autos', 'AutoController@autosFecha');
 Route::get('/check-in', 'VueloController@check_in');
 
 Route::get('/check-in/done', 'VueloController@check_inDone');
+
+Route::get('/actividades', 'ActividadController@actividades');
+
+Route::get('/actividad/{id}', 'ActividadController@seleccionar');
+
+Route::get('/compra-hecha/{id}/{personas}','CompraController@comprarActividad');
+
+Route::get('/actividad-carro/{id}/{personas}','ReservaActividadController@carritoCompraActividad');
+
+Route::get('/carro', 'CompraController@carro');
+
+Route::get('/eliminar-reserva-actividad/{index}', 'ActividadController@eliminarCarro');
+
+Route::get('/eliminar-reserva-vuelo/{index}', 'VueloController@eliminarCarro');
+
+Route::get('/eliminar-reserva-auto/{index}', 'AutoController@eliminarCarro');
+
+Route::get('/eliminar-reserva-alojamiento/{index}', 'AlojamientoController@eliminarCarro');

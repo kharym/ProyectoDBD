@@ -25,37 +25,18 @@
                                                 <label for="destino" > Destino </label>
                                                 <select class="form-control" id="ciudadOrigen" name="destino">
                                                 @foreach($ciudades as $ciudad)
-                                                <option value="{{$ciudad->nombre_ciudad}}">{{$ciudad->nombre_ciudad}}</option>
+                                                <?php $pais = \App\Pais::find($ciudad->pais_id);?>
+                                                <option value="{{$ciudad->id}}">{{$ciudad->nombre_ciudad}},{{$pais->nombre_pais}}</option>
                                                 @endforeach
                                                 </select>  
                                         </div>
                                         <div class="form-group" >    
-                                                <label for="nombreActividad" > Nombre Actividad </label>
+                                                <label for="nombreActividad" > Descripción actividad</label>
                                                 <input class="form-control" input="text" name="nombreActividad">  
                                         </div>
                                         <div class="form-group" >    
                                                 <label for="precio" > Precio </label>
                                                 <input class="form-control" input="text" name="precio">  
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group  col-md-6">    
-                                                <label for="cantidadNinos" > Cantidad de Niños</label>
-                                                <input class="form-control" input="text" name="cantidadNinos">
-                                            </div>
-                                            <div class="form-group col-md-6" >    
-                                                <label for="cantidadAdultos" > Cantidad de Adultos</label>
-                                                <input class="form-control" input="text" name="cantidadAdultos">  
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-md-6">    
-                                                <label for="fechaIda" > Fecha Ida</label>
-                                                <input type="text" class="form-control date-picker" name="fechaIda" data-date-format="YYYY-MM-DD" placeholder="" onfocus="this.placeholder = ''" onblur="this.placeholder = ''">
-                                            </div>
-                                            <div class="form-group col-md-6">    
-                                                <label for="fechaVuelta" > Fecha Vuelta</label>
-                                                <input type="text" class="form-control date-picker" name="fechaVuelta" data-date-format="YYYY-MM-DD" placeholder="" onfocus="this.placeholder = ''" onblur="this.placeholder = ' '">
-                                            </div>
                                         </div>
                                         <div class="col text-center">
                                             <button type="submit" class="btn btn-primary">Agregar</button>

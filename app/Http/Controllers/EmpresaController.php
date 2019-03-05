@@ -123,15 +123,22 @@ class EmpresaController extends Controller
 
         $empresa = new Empresa();
         $usuario = auth()->user();
-        $auditoria = \App\Auditoria::find($usuario->auditoria_id);
-        $fecha = date('Y-m-d H:i:s');
+        $auditoria = new \App\Auditoria();
+        $fecha = date('Y-m-d');
+        $hora = date('H:i:s');
 
         $empresa->ubicacion_id = request()->ubicacion;
         $empresa->nombre_empresa = request()->nombreEmpresa;
         $empresa->telefono_empresa = request()->telefonoEmpresa;
         $empresa->correo_empresa = request()->correoEmpresa;
         $empresa->save();
-        $auditoria->descripcion = $auditoria->descripcion."Se agregó la empresa ".$empresa->nombre_empresa." " . $fecha . "\r\n";
+        $auditoria->descripcion = "Se agregó la empresa ".$empresa->nombre_empresa." " . $fecha . "\r\n";
+        
+        $auditoria->user_id = $usuario->id;
+        $auditoria->tipo_auditoria = 1;
+        $auditoria->fecha_auditoria = $fecha;
+        $auditoria->hora_auditoria = $hora;
+
         $auditoria->save();
 
         return view('index');

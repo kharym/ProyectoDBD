@@ -67,6 +67,13 @@
                                         <span>{{$vuelo->precio_vuelo}}</span>
                                     </li>							
                                 </ul>
+                                <div class="col text-center">
+                                    <form method="get" action="/eliminar-reserva-vuelo/{{$i}}">
+                                        
+                                            <button type="submit" class="btn btn-outline-danger">Eliminar</button>
+                                        </form>   
+                                    </div>
+                        </div>
                             </div>
                         </a>
                     </div>
@@ -123,6 +130,12 @@
                                     <span> {{$habitacion->precio_res_hab}}</span>        
                                 </li>                                         
                             </ul>
+                            <div class="col text-center">
+                            <form method="get" action="/eliminar-reserva-actividad/{{$i}}">
+                                
+                                    <button type="submit" class="btn btn-outline-danger">Eliminar</button>
+                                </form>   
+                            </div>
                         </div>
                     </a>
                 </div>
@@ -168,14 +181,65 @@
                                     <span> {{$aux->precio_auto}}</span>        
                                 </li>                                         
                             </ul>
+                            <div class="col text-center">
+                            <form method="get" action="/eliminar-reserva-auto/{{$i}}">
+                                
+                                    <button type="submit" class="btn btn-outline-danger">Eliminar</button>
+                                </form>   
+                            </div>
                         </div>
                     </a>
                 </div>
             </div>
         @endfor
     @endif
+
+    @if(!empty(request()->session()->get('reservaActividad')))
+        @for($i = 1; $i<count(request()->session()->get('reservaActividad')); $i++)
+            <?php  
+                    $aux = request()->session()->get('reservaActividad')[$i];
+                    $actividad = \App\Actividad::find($aux->actividad_id);
+                    $ciudad = \App\Ciudad::find($actividad->ciudad_id);
+                    $pais = \App\Pais::find($ciudad->pais_id);
+                    ?>
+            <div class="col-lg-4">
+                    <div class="single-destinations" >
+                        <div class="details">
+                            <ul class="package-list">
+                                <h4> Actividad </h4>
+                                <li class="d-flex justify-content-between align-items-center">
+                                    <span>{{$actividad->nombre_actividad}}</span>
+                                </li>
+                                <li class="d-flex justify-content-between align-items-center">
+                                    <span> Personas: </span>
+                                    <span> {{$aux->cantidad_personas}} </span>
+                                </li>
+                                <li class="d-flex justify-content-between align-items-center">
+                                    <span> Ciudad: </span>
+                                <span> {{$ciudad->nombre_ciudad}},{{$pais->nombre_pais}}</span>        
+                                </li>
+                                <li class="d-flex justify-content-between align-items-center">
+                                        <span> Precio: </span>
+                                        <span> {{$aux->precio}}</span>        
+                                </li>                                    
+                            </ul>
+                            <div class="col text-center">
+                            <form method="get" action="/eliminar-reserva-actividad/{{$i}}">
+                                
+                                    <button type="submit" class="btn btn-outline-danger">Eliminar</button>
+                                </form>   
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        @endfor
+    @endif
+    
             </div>
                 </div>
+                <br>
+    <br>
             <form action="/compra-carro/{{auth()->user()->id}}" >
                     <div class="col text-center">
                         <button href="/compra-carro/{{auth()->user()->id}}" type="submit" class="btn btn-outline-primary">Comprar</button>

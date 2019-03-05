@@ -177,8 +177,9 @@ class HabitacionController extends Controller
         $habitacion = new Habitacion();
         $disponibilidad = request()->disponibilidad;
         $usuario = auth()->user();
-        $auditoria = \App\Auditoria::find($usuario->auditoria_id);
-        $fecha = date('Y-m-d H:i:s');
+        $auditoria = new \App\Auditoria();
+        $fecha = date('Y-m-d');
+        $hora = date('H:i:s');
 
 
         $habitacion->alojamiento_id = request()->alojamiento;
@@ -197,7 +198,11 @@ class HabitacionController extends Controller
 
             $habitacion->disponibilidad = false;
         }
-        $auditoria->descripcion = $auditoria->descripcion . "Se agregó la habitación " .$habitacion->numero_habitacion." en el alojamiento ".$alojamiento->nombre_alojamiento ." " . $fecha . "\r\n";
+        $auditoria->user_id = $usuario->id;
+        $auditoria->tipo_auditoria = 1;
+        $auditoria->fecha_auditoria = $fecha;
+        $auditoria->hora_auditoria = $hora;
+        $auditoria->descripcion =  "Se agregó la habitación " .$habitacion->numero_habitacion." en el alojamiento ".$alojamiento->nombre_alojamiento ." " . $fecha . "\r\n";
         $habitacion->save();
         $auditoria->save();
         $alojamientos = \App\Alojamiento::all(); 

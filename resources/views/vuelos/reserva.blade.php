@@ -74,8 +74,16 @@
                                         <input type="text" class="form-control" name="dni" placeholder="DNI " onfocus="this.placeholder = ''" onblur="this.placeholder = 'DNI '" required>
                                         <input type="text" class="form-control" name="celular" placeholder="Celular " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Celular '" required>							
                                         <input type="text" class="form-control" name="pais" placeholder="Pais " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Pais '" required>	
-                                        <input type="submit" class="primary-btn text-uppercase" value="Siguiente pasajero" >										
-                                    </form>
+									   
+										@if(request()->has('cantidad'))
+											@if(request()->cantidad==1)
+											<input type="submit" class="primary-btn text-uppercase" value="Agregar A Carrito"
+									formaction="/carrito-vuelo/{{$id}}">                                    
+											@endif
+										@endif
+										<input type="submit" class="primary-btn text-uppercase" value="Siguiente pasajero" >										
+									
+									</form>
 							  </div>
 		
 							</div>

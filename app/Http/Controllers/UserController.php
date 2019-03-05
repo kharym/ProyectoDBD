@@ -139,13 +139,10 @@ class UserController extends Controller
 
     public function mostrarAuditoria($id){
         $user = User::find($id);
-        $id_auditoria = $user->auditoria_id;
 
-        $auditoria = \App\Auditoria::find($id_auditoria);
-
+        $auditorias = \App\Auditoria::where('user_id',$id)->get();
 
 
-
-        return view ('admin.auditoria', compact('auditoria'));
+        return view ('admin.auditoria', compact('auditorias'));
     }
 }

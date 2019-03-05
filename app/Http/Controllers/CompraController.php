@@ -369,6 +369,10 @@ class CompraController extends Controller
             $aux = request()->session()->get('reservaAuto')[$i];
             $precio = $precio + $aux->precio_auto;
         }
+        for($i = 1; $i<count(request()->session()->get('reservaActividad')); $i++){
+            $aux = request()->session()->get('reservaActividad')[$i];
+            $precio = $precio + $aux->precio;
+        }
 
         return view('carrito.compra',compact('precio'));
     }
@@ -432,16 +436,71 @@ class CompraController extends Controller
             });
         }
 
+        for($i = 1; $i<count(request()->session()->get('reservaActividad')); $i++){
+            $data = [];
+            $auxRA = request()->session()->get('reservaActividad')[$i];
+            $auxRA->save();
+            $compra = Compra::create(['user_id'=>$id,'fecha_compra'=>$fecha, 'hora_compra'=>$hora, 'reserva_actividad_id'=>$auxRA->id]);
+            $compra->save();
+            array_push($data,$auxRA);
+            Mail::send('mails.actividad',['data'=>$data],function($message){
+                $message->from('juaninhanjarry@gmail.com','Reserva Actividad');
+                $message->to(auth()->user()->email)->subject('compra realizada');
+            });
+        }
+
         request()->session()->forget('reservaVuelo');
         request()->session()->forget('pasajero');
         request()->session()->forget('reservaHabitacion');
         request()->session()->forget('reservaAuto');
+        request()->session()->forget('reservaActividad');
         request()->session()->push('reservaVuelo',NULL);
         request()->session()->push('pasajero',NULL);
         request()->session()->push('reservaHabitacion',NULL);
         request()->session()->push('reservaAuto',NULL);
+        request()->session()->push('reservaActividad',NULL);
         $mensaje = "Compra realizada con éxito";
         return view('carrito.compra-hecha',compact('mensaje'));
+    }
+
+
+    public function comprarActividad($id,$personas){
+        $mensaje;
+        $fecha = date('Y-m-d');
+        $hora = date("H:i:s");
+        $actividad = \App\Actividad::find($id);
+        if(request()->medioPago == "1"){
+            if(\App\MedioDePago::where('id',request()->numeroCuenta)->exists()){
+               $mp = \App\MedioDePago::where('id',request()->numeroCuenta)->first();
+               $mp->monto = $mp->monto - $actividad->precio*$personas;
+               $mp->save();
+            }
+            else{
+                $mensaje = "No existe el medio de pago";
+                return view('carrito.compra-hecha', compact('mensaje'));
+            }
+        }
+        $data = [];
+        $reserva = new \App\reservaActividad();
+        $reserva->cantidad_personas = $personas;
+        $reserva->precio =  $actividad->precio*$personas;
+        $reserva->actividad_id = $actividad->id;
+        $reserva->fecha_reserva = $fecha;
+        $reserva->save();
+        $compra = Compra::create(['user_id'=>$id,'fecha_compra'=>$fecha, 'hora_compra'=>$hora, 'reserva_actividad_id'=>$reserva->id]);
+        $compra->save();
+        array_push($data,$reserva);
+        Mail::send('mails.actividad',['data'=>$data],function($message){
+            $message->from('juaninhanjarry@gmail.com','Compra actividad');
+            $message->to(auth()->user()->email)->subject('compra realizada');
+        });
+        $mensaje = "Compra realizada con éxito";
+        return view('seguro.compra-hecha',compact('mensaje'));
+    }
+
+
+    public function carro(){
+        return view('carrito.carrito');
     }
 
 }

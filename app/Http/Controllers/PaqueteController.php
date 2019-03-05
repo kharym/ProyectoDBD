@@ -506,8 +506,9 @@ class PaqueteController extends Controller
 
         $paquete = new Paquete();
         $usuario = auth()->user();
-        $auditoria = \App\Auditoria::find($usuario->auditoria_id);
-        $fecha = date('Y-m-d H:i:s');
+        $auditoria = new \App\Auditoria();
+        $fecha = date('Y-m-d');
+        $hora = date('H:i:s');
         $id_auto = request()->auto;
         $id_habitacion = request()->habitacion;
         $disponibilidad = request()->disponibilidad;
@@ -539,20 +540,23 @@ class PaqueteController extends Controller
 
         if($paquete->auto_id != null and $paquete->habitacion_id != null){
 
-            $auditoria->descripcion = $auditoria->descripcion."Se agregó el paquete con el vuelo de origen ".$vuelo->origen." y destino ".$vuelo->destino.", el auto ".$auto->marca." ".$auto->modelo. " y la habitación ".$habitacion->numero_habitacion." del alojamiento ".$alojamiento->nombre_alojamiento." " . $fecha . "\r\n";
+            $auditoria->descripcion = "Se agregó el paquete con el vuelo de origen ".$vuelo->origen." y destino ".$vuelo->destino.", el auto ".$auto->marca." ".$auto->modelo. " y la habitación ".$habitacion->numero_habitacion." del alojamiento ".$alojamiento->nombre_alojamiento." " . $fecha . "\r\n";
         }
         else if($paquete->auto_id != null and $paquete->habitacion_id == null){
-            $auditoria->descripcion = $auditoria->descripcion."Se agregó el paquete con el vuelo de origen ".$vuelo->origen." y destino ".$vuelo->destino." y el auto ".$auto->marca." ".$auto->modelo." " .$fecha . "\r\n";
+            $auditoria->descripcion = "Se agregó el paquete con el vuelo de origen ".$vuelo->origen." y destino ".$vuelo->destino." y el auto ".$auto->marca." ".$auto->modelo." " .$fecha . "\r\n";
 
         }
 
         else if($paquete->auto_id == null and $paquete->habitacion_id != null){
-            $auditoria->descripcion = $auditoria->descripcion."Se agregó el paquete con el vuelo de origen ".$vuelo->origen." y destino ".$vuelo->destino. " y la habitación ".$habitacion->numero_habitacion." del alojamiento ".$alojamiento->nombre_alojamiento." " . $fecha . "\r\n";
+            $auditoria->descripcion = "Se agregó el paquete con el vuelo de origen ".$vuelo->origen." y destino ".$vuelo->destino. " y la habitación ".$habitacion->numero_habitacion." del alojamiento ".$alojamiento->nombre_alojamiento." " . $fecha . "\r\n";
         }
         else{
-            $auditoria->descripcion = $auditoria->descripcion."Se agregó el paquete con el vuelo de origen ".$vuelo->origen." y destino ".$vuelo->destino. " " . $fecha . "\r\n";
+            $auditoria->descripcion = "Se agregó el paquete con el vuelo de origen ".$vuelo->origen." y destino ".$vuelo->destino. " " . $fecha . "\r\n";
         }
-
+        $auditoria->user_id = $usuario->id;
+        $auditoria->tipo_auditoria = 1;
+        $auditoria->fecha_auditoria = $fecha;
+        $auditoria->hora_auditoria = $hora;
         $paquete->save();
         $auditoria->save();
 

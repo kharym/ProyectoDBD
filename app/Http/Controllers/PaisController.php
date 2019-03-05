@@ -103,10 +103,14 @@ class PaisController extends Controller
     public function agregarPais(){
         $pais = new Pais();
         $usuario = auth()->user();
-        $auditoria = \App\Auditoria::find($usuario->auditoria_id);
-        $fecha = date('Y-m-d H:i:s');
-
+        $auditoria =  new \App\Auditoria();
+        $fecha = date('Y-m-d');
+        $hora = date('H:i:s');
         $pais->nombre_pais = request()->nombrePais;
+        $auditoria->user_id = $usuario->id;
+        $auditoria->tipo_auditoria = 1;
+        $auditoria->fecha_auditoria = $fecha;
+        $auditoria->hora_auditoria = $hora;
         $auditoria->descripcion = $auditoria->descripcion . "Se agregó el país " .$pais->nombre_pais." " . $fecha . "\r\n";
 
 

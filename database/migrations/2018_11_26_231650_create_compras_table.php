@@ -21,6 +21,7 @@ class CreateComprasTable extends Migration
             $table->integer('paquete_id')->nullable()->unsigned();
             $table->integer('reserva_auto_id')->nullable()->unsigned();
             $table->integer('reserva_habitacion_id')->nullable()->unsigned();
+            $table->integer('reserva_actividad_id')->nullable()->unsigned();
             $table->date('fecha_compra');
             $table->time('hora_compra');
             $table->timestamps();

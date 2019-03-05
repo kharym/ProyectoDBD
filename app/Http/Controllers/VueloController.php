@@ -255,4 +255,15 @@ class VueloController extends Controller
         return view('vuelos.compra-hecha',compact('mensaje'));
     }
 
+    public function eliminarCarro($index){
+        $aux = request()->session()->get('reservaVuelo');
+        unset($aux[$index]);
+        array_values($aux);
+        request()->session()->forget('reservaVuelo');
+        foreach($aux as $a){
+            request()->session()->push('reservaVuelo',$a);
+        }
+        return redirect('/carro');
+    }
+
 }

@@ -81,7 +81,7 @@
 				          	<li><a href="/Vuelo/all">Vuelos</a></li>
 				          	<li><a href="/Alojamiento/all">Alojamientos</a></li>
 				          	<li><a href="/Auto/all">Vehículos</a></li>
-				          	<li><a href="/Actividad/all">Actividades</a></li>
+				          	<li><a href="/actividades">Actividades</a></li>
 				          	<li class="menu-has-children"><a href="">Paquetes</a>
 				        <ul>
 				              <li><a href="/paquete-vuelo+alojamiento">Vuelo + Alojamiento</a></li>
@@ -95,6 +95,7 @@
 											<ul>
 												<li> <a href="/movimientos/{{auth()->user()->id}}">Movimientos</a> </li>
 												<li> <a href="/check-in">Check-in</a> </li>
+												<li> <a href="/carro"> Carro de compras </a> </li>
 												<li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Cerrar sesión</a></li>
 												<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 												@csrf

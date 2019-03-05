@@ -143,8 +143,9 @@ class AlojamientoController extends Controller
         $alojamiento = new Alojamiento();
         $disponibilidad = request()->disponibilidad;
         $usuario = auth()->user();
-        $auditoria = \App\Auditoria::find($usuario->auditoria_id);
-        $fecha = date('Y-m-d H:i:s');
+        $auditoria = new \App\Auditoria();
+        $fecha = date('Y-m-d');
+        $hora = date("H:i:s");
 
         $alojamiento->ciudad_id = request()->ciudadHotel;
         $alojamiento->nombre_alojamiento = request()->nombre;
@@ -158,12 +159,26 @@ class AlojamientoController extends Controller
 
             $alojamiento->disponibilidad = false;
         }
-        $auditoria->descripcion = $auditoria->descripcion . "Se agregó el alojamiento  " .$alojamiento->nombre_alojamiento." " . $fecha . "\r\n";
-
+        $auditoria->descripcion = "Se agregó el alojamiento  " .$alojamiento->nombre_alojamiento." " . $fecha . "\r\n";
+        $auditoria->user_id = $usuario->id;
+        $auditoria->tipo_auditoria = 1;
+        $auditoria->fecha_auditoria = $fecha;
+        $auditoria->hora_auditoria = $hora;
         $alojamiento->save();
         $auditoria->save();
         $alojamientos = Alojamiento::all();
 
         return view('alojamientos.alojamientoAll', compact('alojamientos'));
+    }
+
+    public function eliminarCarro($index){
+        $aux = request()->session()->get('reservaHabitacion');
+        unset($aux[$index]);
+        array_values($aux);
+        request()->session()->forget('reservaHabitacion');
+        foreach($aux as $a){
+            request()->session()->push('reservaHabitacion',$a);
+        }
+        return redirect('/carro');
     }
 }

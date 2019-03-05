@@ -133,18 +133,15 @@ class ActividadController extends Controller
     public function agregarActividad(){
         $actividad = new Actividad();
         $usuario = auth()->user();
-        $auditoria = \App\Auditoria::find($usuario->auditoria_id);
+        $auditoria = new \App\Auditoria();
         $fecha = date('Y-m-d H:i:s');
-
-        $actividad->destino = request()->destino;
+        $actividad->ciudad_id = request()->destino;
+        $auditoria->user_id = $usuario->id;
         $actividad->nombre_actividad = request()->nombreActividad;
         $actividad->precio = request()->precio;
-        $actividad->cantidad_ninos = request()->cantidadNinos;
-        $actividad->cantidad_adulto = request()->cantidadAdultos;
-        $actividad->fecha_ida = request()->fechaIda;
-        $actividad->fecha_vuelta = request()->fechaVuelta;
+        $auditoria->tipo_auditoria = 1;
 
-        $auditoria->descripcion = $auditoria->descripcion . "Se agregó la actividad " .$actividad->nombre_actividad." " . $fecha . "\r\n";
+        $auditoria->descripcion = "Se agregó la actividad con descripción:" .$actividad->nombre_actividad."\r\n Fecha:" . $fecha . "\r\n";
 
         $actividad->save();
         $auditoria->save();
@@ -152,5 +149,25 @@ class ActividadController extends Controller
         $actividades = Actividad::all();
 
         return view('actividades.actividadAll', compact('actividades'));
+    }
+
+    public function actividades(){
+        $actividades = Actividad::all();
+        return view('actividades.actividadAll',compact('actividades'));
+    }
+
+    public function seleccionar($id){
+        return view('actividades.reserva',compact('id'));
+    }
+
+    public function eliminarCarro($index){
+        $aux = request()->session()->get('reservaActividad');
+        unset($aux[$index]);
+        array_values($aux);
+        request()->session()->forget('reservaActividad');
+        foreach($aux as $a){
+            request()->session()->push('reservaActividad',$a);
+        }
+        return redirect('/carro');
     }
 }

@@ -2,8 +2,6 @@
 @section('content')
 			<!-- start banner Area -->
 			<!-- comprobacion para session-->
-			<?php 
-				print_r(request()->session()->get('reservaVuelo'));?>
 			<section class="banner-area relative">
 				<div class="overlay overlay-bg"></div>				
 				<div class="container">

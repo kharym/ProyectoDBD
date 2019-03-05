@@ -31,36 +31,39 @@
             <div class="row">
         @foreach ($actividades as $actividad)
         <div class="col-lg-4">
+            <?php $ciudad = \App\Ciudad::find($actividad->ciudad_id);
+                  $pais = \App\Pais::find($ciudad->pais_id);?>
                 <div class="single-destinations" >
-                    <a href="/Actividad/reserva/{{$actividad}}"> 
-                    <div class="details" style="background-color: #f6fd8c ; color: black;>             
+                    <div class="details" style="background-color: #f6fd8c ; color: black;">             
                         <h4 class="d-flex justify-content-between">
                            <strong> <span style="text-transform: uppercase;">{{$actividad->nombre_actividad}}</span>  </strong>                     		
                         </h4>
                         <ul class="package-list">
                             <li class="d-flex justify-content-between align-items-center">
-                                <span> Destino: </span>
-                                <span>{{$actividad->destino}}</span>
+                                <span> Ciudad: </span>
+                            <span>{{$ciudad->nombre_ciudad}}, {{$pais->nombre_pais}}</span>
                             </li>
                             <li class="d-flex justify-content-between align-items-center">
-                                 <span> Cantidad de adultos:  </span> 
-                                <span>{{$actividad->cantidad_adulto}}</span>
+                                 <span> Precio por persona:  </span> 
+                                <span>{{$actividad->precio}}</span>
                             </li>
-                            <li class="d-flex justify-content-between align-items-center">
-                                 <span> Cantidad de niños:  </span> 
-                                <span>{{$actividad->cantidad_ninos}}</span>
-                            </li>
-                            <li class="d-flex justify-content-between align-items-center">
-                                 <span> Fecha de ida:  </span> 
-                                <span>{{$actividad->fecha_ida}}</span>
-                            </li>
-                            <li class="d-flex justify-content-between align-items-center">
-                                 <span> Fecha de regreso:  </span> 
-                                <span>{{$actividad->fecha_vuelta}}</span>
-                            </li>
-                            <h4 class="d-flex justify-content-between">
-                                <strong> <span style="text-transform: uppercase;">${{$actividad->precio}}</span></strong>                           
-                            </h4>							
+                        <form method="get" action="/actividad/{{$actividad->id}}">
+                                <div class="form-group">
+                                        <label for="sel1">Cantidad de personas:</label>
+                                        <select class="form-control" id="sel1" name="personas">
+                                        <option value="{{1}}">1</option>
+                                          <option value="{{2}}">2</option>
+                                          <option value="{{3}}">3</option>
+                                          <option value="{{4}}">4</option>
+                                          <option value="{{5}}">5</option>
+                                          <option value="{{6}}">6</option>
+                                          <option value="{{7}}">7</option>
+                                        </select>
+                                      </div>
+                                      <div class="col text-center">
+                                      <button type="submit" class="btn btn-outline-dark">Comprar</button>
+                                      </div>
+                            </form>		
                         </ul>
                     </div>
                     </a>
