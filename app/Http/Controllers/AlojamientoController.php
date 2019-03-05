@@ -142,6 +142,9 @@ class AlojamientoController extends Controller
     public function agregarAlojamiento(){
         $alojamiento = new Alojamiento();
         $disponibilidad = request()->disponibilidad;
+        $usuario = auth()->user();
+        $auditoria = \App\Auditoria::find($usuario->auditoria_id);
+        $fecha = date('Y-m-d H:i:s');
 
         $alojamiento->ciudad_id = request()->ciudadHotel;
         $alojamiento->nombre_alojamiento = request()->nombre;
@@ -155,7 +158,10 @@ class AlojamientoController extends Controller
 
             $alojamiento->disponibilidad = false;
         }
+        $auditoria->descripcion = $auditoria->descripcion . "Se agregó el alojamiento  " .$alojamiento->nombre_alojamiento." " . $fecha . "\r\n";
+
         $alojamiento->save();
+        $auditoria->save();
         $alojamientos = Alojamiento::all();
 
         return view('alojamientos.alojamientoAll', compact('alojamientos'));

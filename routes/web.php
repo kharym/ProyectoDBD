@@ -206,6 +206,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/habitacion/{id}', 'HabitacionController@habitaciones');
 
+Route::get('/user/{id}/auditoria', 'UserController@mostrarAuditoria');
+
 Route::get('/habitacion/reserva/{habitacion}', 'HabitacionController@habitacionReserva');
 
 Route::get('/reservaVuelo/{id}/{numero}', 'ReservaVueloController@reserva');

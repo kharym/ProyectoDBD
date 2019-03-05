@@ -123,10 +123,16 @@ class CiudadController extends Controller
     public function agregarCiudad(){
 
         $ciudad = new Ciudad();
+        $usuario = auth()->user();
+        $auditoria = \App\Auditoria::find($usuario->auditoria_id);
+        $fecha = date('Y-m-d H:i:s');
 
         $ciudad->pais_id = request()->pais;
         $ciudad->nombre_ciudad = request()->nombreCiudad;
+        $pais = \App\Pais::find($ciudad->pais_id);
+        $auditoria->descripcion = $auditoria->descripcion."Se agregó la ciudad ".$ciudad->nombre_ciudad." del país ".$pais->nombre_pais ." " . $fecha . "\r\n";
         $ciudad->save();
+        $auditoria->save();
         return view('index');
     }
 }

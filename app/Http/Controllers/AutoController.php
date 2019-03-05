@@ -187,6 +187,10 @@ class AutoController extends Controller
 
     public function agregarAuto(){
         $auto = new Auto();
+        $usuario = auth()->user();
+        $auditoria = \App\Auditoria::find($usuario->auditoria_id);
+        $fecha = date('Y-m-d H:i:s');
+
         $tipoTransmision = request()->tipoTransmision;
         $disponibilidad = request()->disponibilidad;
 
@@ -213,7 +217,10 @@ class AutoController extends Controller
             $auto->disponibilidad = false;
         }
 
+        $auditoria->descripcion = $auditoria->descripcion . "Se agregó el auto " .$auto->marca." ".$auto->modelo ." " . $fecha . "\r\n";
+
         $auto->save();
+        $auditoria->save();
 
         $autos = Auto::all();
 

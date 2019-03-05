@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<?php $users = App\User::where('rol_id',2) ?>			  
+<?php $users = App\User::where('rol_id','2')->get(); ?>			  
 			<!-- start banner Area -->
 			<section class="about-banner relative">
 				<div class="overlay overlay-bg"></div>
@@ -31,7 +31,7 @@
 				<div class="row">
 			@foreach ($users as $user)
 				<div class="col-lg-4">
-					<a href="">
+					<a href="/user/{{$user->id}}/auditoria">
 					<div class="single-destinations">
 						<div class="details" style="background-color: #f6fd8c ; color: black;">
 							<h4 class="d-flex justify-content-between">

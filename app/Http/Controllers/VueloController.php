@@ -180,6 +180,9 @@ class VueloController extends Controller
 
     public function agregarVuelo(){
         $vuelo = new Vuelo();
+        $usuario = auth()->user();
+        $auditoria = \App\Auditoria::find($usuario->auditoria_id);
+        $fecha = date('Y-m-d H:i:s');
 
         $vuelo->ciudad_viene_id = request()->ciudadOrigen;
         $vuelo->ciudad_va_id = request()->ciudadDestino;
@@ -197,6 +200,8 @@ class VueloController extends Controller
         $vuelo->origen = $nombreCiudadOrigen->nombre_ciudad;
         $vuelo->destino = $nombreCiudadDestino->nombre_ciudad;
         $vuelo->save();
+        $auditoria->descripcion = $auditoria->descripcion."Se agregó el vuelo con origen ".$vuelo->origen." y destino ".$vuelo->destino." " . $fecha . "\r\n";
+        $auditoria->save();
         $vuelos = Vuelo::all();
 
         return view('vuelos.vuelosAll', compact('vuelos'));

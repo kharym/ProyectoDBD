@@ -132,6 +132,9 @@ class ActividadController extends Controller
 
     public function agregarActividad(){
         $actividad = new Actividad();
+        $usuario = auth()->user();
+        $auditoria = \App\Auditoria::find($usuario->auditoria_id);
+        $fecha = date('Y-m-d H:i:s');
 
         $actividad->destino = request()->destino;
         $actividad->nombre_actividad = request()->nombreActividad;
@@ -141,7 +144,10 @@ class ActividadController extends Controller
         $actividad->fecha_ida = request()->fechaIda;
         $actividad->fecha_vuelta = request()->fechaVuelta;
 
+        $auditoria->descripcion = $auditoria->descripcion . "Se agregó la actividad " .$actividad->nombre_actividad." " . $fecha . "\r\n";
+
         $actividad->save();
+        $auditoria->save();
 
         $actividades = Actividad::all();
 

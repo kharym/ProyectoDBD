@@ -136,4 +136,16 @@ class UserController extends Controller
         $compras = \App\Compra::where('user_id',$id)->get();
         return view('user.movimientos',compact('compras'));
     }
+
+    public function mostrarAuditoria($id){
+        $user = User::find($id);
+        $id_auditoria = $user->auditoria_id;
+
+        $auditoria = \App\Auditoria::find($id_auditoria);
+
+
+
+
+        return view ('admin.auditoria', compact('auditoria'));
+    }
 }
