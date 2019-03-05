@@ -16,7 +16,7 @@
             </li>
             <li>
                 <span> DNI pasajero:   </span>
-                <span> {{$pasajero->dni}}    </span>
+                <span> {{$pasajero->dni_pasaporte}}    </span>
             </li>
             <li>
                 <span> Asiento:   </span>
@@ -28,19 +28,19 @@
             </li>
             <li>
                 <span> Fecha partida:    </span>
-                <span> {{$data[0]->fecha_ida}}    </span>
+                <span> {{$vuelo->fecha_ida}}    </span>
             </li>
             <li>
                 <span> Hora partida:   </span>
-                <span> {{$data[0]->hora_ida}}    </span>
+                <span> {{$vuelo->hora_ida}}    </span>
             </li>
             <li>
                 <span> Fecha llegada: </span>
-                <span> {{$data[0]->fecha_llegada}} </span>
+                <span> {{$vuelo->fecha_llegada}} </span>
             </li>
             <li>
                 <span> Hora llegada: </span>
-                <span> {{$data[0]->hora_llegada}}</span>
+                <span> {{$vuelo->hora_llegada}}</span>
             </li>
         </ul>
     </div>

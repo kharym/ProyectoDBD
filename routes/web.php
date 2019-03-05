@@ -287,3 +287,7 @@ Route::get('/compra-seguro-hecha/{id}','SeguroController@compraSeguroHecha');
 Route::get('/habitaciones/{id}', 'HabitacionController@habitacionesFecha');
 
 Route::get('/autos', 'AutoController@autosFecha');
+
+Route::get('/check-in', 'VueloController@check_in');
+
+Route::get('/check-in/done', 'VueloController@check_inDone');

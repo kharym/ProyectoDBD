@@ -17,93 +17,42 @@
                         <div class="row justify-content-center">
                             <div class="card">
                                 <div class="card-header">
-                                    Seguro
+                                    Check-In
                                 </div>
                                 <div class="card-body">
-                                    <form class="form-wrap" method="GET" action="/comprar-seguro">
-                                        <div class="container">
-                                                <p>Plan dental:</p>
-                                                  <label class="radio-inline">
-                                                  <input value="{{true}}" type="radio" name="dental" checked>Si&nbsp;&nbsp;
-                                                  </label>
-                                                  <label class="radio-inline">
-                                                    <input value="{{false}}"type="radio" name="dental">No&nbsp;&nbsp;
-                                                  </label>
-                                         </div>
-                                         <div class="container">
-                                                <p>Seguro contra accidentes:</p>
-                                                  <label class="radio-inline">
-                                                    <input value="{{true}}" type="radio" name="accidente" checked>Si&nbsp;&nbsp;
-                                                  </label>
-                                                  <label class="radio-inline">
-                                                    <input value="{{false}}"type="radio" name="accidente">No&nbsp;&nbsp;
-                                                  </label>
-                                         </div>
-                                         <div class="container">
-                                                <p>Seguro en caso de pérdida de equipaje:</p>
-                                                  <label class="radio-inline">
-                                                    <input value="{{true}}" type="radio" name="equipaje" checked>Si&nbsp;&nbsp;    
-                                                  </label>
-                                                  <label class="radio-inline">
-                                                    <input value="{{false}}"type="radio" name="equipaje">No  &nbsp;&nbsp; 
-                                                  </label>
-                                         </div>
-                                         <div class="container">
-                                                <p>Asesoría legal :</p>
-                                                  <label class="radio-inline">
-                                                    <input value="{{true}}"type="radio" name="legal" checked>Si&nbsp;&nbsp;    
-                                                  </label>
-                                                  <label class="radio-inline">
-                                                    <input value="{{false}}" type="radio" name="legal">No  &nbsp;&nbsp; 
-                                                  </label>
-                                         </div>
-                                         <div class="container">
-                                                <p>Seguro en caso de siniestro:</p>
-                                                  <label class="radio-inline">
-                                                    <input value="{{true}}"type="radio" name="siniestro" checked>Si&nbsp;&nbsp;    
-                                                  </label>
-                                                  <label class="radio-inline">
-                                                    <input value="{{false}}"type="radio" name="siniestro">No  &nbsp;&nbsp; 
-                                                  </label>
-                                         </div>
-                                         <div class="container">
-                                                <p>Seguro en caso de retraso/pérdida vuelo:</p>
-                                                  <label class="radio-inline">
-                                                    <input value="{{true}}"type="radio" name="vuelo" checked>Si&nbsp;&nbsp;    
-                                                  </label>
-                                                  <label class="radio-inline">
-                                                    <input value="{{false}}"type="radio" name="vuelo">No  &nbsp;&nbsp; 
-                                                  </label>
-                                         </div>
-                                         <div class="container">
-                                                <p>Edad del asegurado:</p>
-                                                <input type="number"  name="edad" id="edad" required />
-                                         </div>
-                                         <br>
-                                         <div class="container">
-                                                <p>DNI asegurado:</p>
-                                                <input type="text"  name="dni" id="dni" required />
-                                         </div>
-                                         <br>
-                                                <div class="form-group col-md-6">    
-                                                    <label for="fechaIda" > Fecha Ida</label>
-                                                    <input type="text" class="form-control date-picker" name="fechaIda" data-date-format="YYYY-MM-DD" placeholder="" onfocus="this.placeholder = ''" onblur="this.placeholder = ''" required>
-                                                </div>
-                                                <div class="form-group col-md-6">    
-                                                    <label for="fechaVuelta" > Fecha Vuelta</label>
-                                                    <input type="text" class="form-control date-picker" name="fechaVuelta" data-date-format="YYYY-MM-DD" placeholder="" onfocus="this.placeholder = ''" onblur="this.placeholder = ' '" required>
-                                                </div>
-                                                <div class="container">    
-                                                        <p> Precio boleto</p>
-                                                        <input type="number" name="precio" id="precio" required>  
-                                                </div>
-                                                <br>
-                                            
-                                         <div class="col text-center">
-                                            <input class="btn btn-primary" type="submit" value="Comprar">
-                                         </div>
-                                    </form>
+                                    El check-in es el proceso en el cual se confirma la asistencia al vuelo
+                                    que ha reservado
+                                <br>
+                                <br>
+                                <form method="GET" action="/check-in/done">
+                                    <ul>
+                                    <li>
+                                        <span> ID de reserva: </span>
+                                    <select class="custom-select" name="id">
+                                        <?php $compras = \App\Compra::where('user_id',auth()->user()->id)->get();
+                                        $reservaVuelos = [];
+                                        foreach($compras as $compra){
+                                            $reservaVuelo = \App\Compra_ReservaVuelo::where('compra_id',$compra->id)->get();
+                                            foreach($reservaVuelo as $rV){
+                                                $reserva = \App\ReservaVuelo::find($rV->reserva_vuelo_id);
+                                                if($reserva->checkin == null){
+                                                    array_push($reservaVuelos, $reserva);
+                                                }
+                                            }
+                                        }
+                                        ?>
+                                        
+                                        @foreach($reservaVuelos as $rV)
+                                            <option value="{{$rV->id}}">Número de reserva: {{$rV->id}}</option>
+                                        @endforeach
+                                    </li>
+                                    </select>
+                                    </ul>
                                     <br>
+                                    <div class="col text-center">
+                                        <button type="submit" class="btn btn-primary">Realizar Check-in</button>
+                                    </div>
+                                </form>
                                 </div>
                             </div>
                             <br>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Validator;
 use App\Vuelo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use DateTime;
 
 class VueloController extends Controller
 {
@@ -157,25 +159,52 @@ class VueloController extends Controller
 
     public function vuelosOrigenDestino(){
         //return request()->all();
-        $paisO = \App\Pais::where('nombre_pais','=',request()->paisOrigen)->first();
-        $paisD = \App\Pais::where('nombre_pais','=',request()->paisDestino)->first();
-        $ciudadesO = \App\Ciudad::where('pais_id','=',$paisO->id)->get();
-        $ciudadesD = \App\Ciudad::where('pais_id','=',$paisD->id)->get();
-        $vuelos = [];
-        foreach($ciudadesO as $co){
-            foreach($ciudadesD as $cd){
-                //$aux =  \App\Vuelo::where([['ciudad_va_id',$cd->id],['ciudad_viene_id',$co->id],
-                //['fecha_ida',request()->ida]])->get();
-                $aux =  \App\Vuelo::where([['ciudad_va_id',$cd->id],['ciudad_viene_id',$co->id]])->get();
-                if(!empty($aux)){
-                    foreach($aux as $a){
-                        array_push($vuelos,$a);
-                    }
+        if(request()->ciudadO == null && request()->ciudadD == null && request()->return==null){
+            $vuelos = [];
+            $start = new DateTime(request()->start);
+            $start = Date($start->format('Y-m-d'));
+            $v = \App\Vuelo::where('fecha_ida',$start)->get();
+            foreach($v as $vu){
+                $asientos = \App\Asiento::where([['vuelo_id',$vu->id],['disponibilidad',true]])->get();
+                if(count($asientos)>=request()->pasajeros){
+                    array_push($vuelos,$vu);
                 }
             }
+            return view('vuelos.vuelos', compact('vuelos'));
         }
-       //$vuelos = App\Vuelo::where([['ciudad_va_id',$ciudadesD->id],['ciudad_viene_id',$ciudadesO->id]])->get();
-        return view('vuelos.vuelos',compact('vuelos'));
+        else if(request()->ciudadO == null && request()->ciudadD == null){
+            $vuelos = [];
+            $start = new DateTime(request()->start);
+            $start = Date($start->format('Y-m-d'));
+            $end = new DateTime(request()->return);
+            $end = Date($end->format('Y-m-d'));
+            $v = \App\Vuelo::where([['fecha_ida',$start],['fecha_llegada',$end]])->get();
+            foreach($v as $vu){
+                $asientos = \App\Asiento::where([['vuelo_id',$vu->id],['disponibilidad',true]])->get();
+                if(count($asientos)>=request()->pasajeros){
+                    array_push($vuelos,$vu);
+                }
+            }
+            return view('vuelos.vuelos', compact('vuelos'));
+        }
+        else if( (request()->ciudadO == null && request()->ciudadD != null) || (request()->ciudadO != null && request()->ciudadD == null)){
+            return redirect("/");
+        }
+        else{
+            $vuelos = [];
+            $start = new DateTime(request()->start);
+            $start = Date($start->format('Y-m-d'));
+            $end = new DateTime(request()->return);
+            $end = Date($end->format('Y-m-d'));
+            $v = \App\Vuelo::where([['fecha_ida',$start],['fecha_llegada',$end],['ciudad_va_id',request()->ciudadO],['ciudad_viene_id',request()->ciudadD]])->get();
+            foreach($v as $vu){
+                $asientos = \App\Asiento::where([['vuelo_id',$vu->id],['disponibilidad',true]])->get();
+                if(count($asientos)>=request()->pasajeros){
+                    array_push($vuelos,$vu);
+                }
+            }
+            return view('vuelos.vuelos', compact('vuelos'));
+        }
     }
 
     public function agregarVuelo(){
@@ -205,6 +234,25 @@ class VueloController extends Controller
         $vuelos = Vuelo::all();
 
         return view('vuelos.vuelosAll', compact('vuelos'));
+    }
+
+    public function check_in(){
+        return view('vuelos.check-in');
+    }
+
+    public function check_inDone() {
+        $reserva = \App\ReservaVuelo::find(request()->id);
+        $reserva->checkin = true;
+        $reserva->save();
+        $mensaje = "Check-in realizado satisfactoriamente";
+        $data = [];
+        $id = request()->id;
+        array_push($data,$id);
+        Mail::send('mails.checkin',['data'=>$data],function($message){
+            $message->from('juaninhanjarry@gmail.com','Check-in');
+            $message->to(auth()->user()->email)->subject('Check-in realizado');
+        });
+        return view('vuelos.compra-hecha',compact('mensaje'));
     }
 
 }

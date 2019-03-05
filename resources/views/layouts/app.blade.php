@@ -94,6 +94,7 @@
 											<a href="#">{{ auth()->user()->name }}</a>
 											<ul>
 												<li> <a href="/movimientos/{{auth()->user()->id}}">Movimientos</a> </li>
+												<li> <a href="/check-in">Check-in</a> </li>
 												<li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Cerrar sesión</a></li>
 												<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 												@csrf

@@ -34,11 +34,48 @@
 							<div class="tab-content" id="myTabContent">
 							  <div class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="flight-tab">
 								  <!-- FORM PARA BUSCAR VUELOS -->
+								  <?php $vuelos = \App\Vuelo::all();
+								  $ciudadesO = [];
+								  $ciudadesD = [];
+								  foreach($vuelos as $vuelo){
+									$ciudadO = \App\Ciudad::find($vuelo->ciudad_va_id);
+									$ciudadD = \App\Ciudad::find($vuelo->ciudad_viene_id);
+									array_push($ciudadesO,$ciudadO);
+									array_push($ciudadesD,$ciudadD);
+									}
+									$ciudadesO = array_unique($ciudadesO);
+									$ciudadesD = array_unique($ciudadesD);
+								  ?>
 								<form class="form-wrap" method="get" action="Vuelo">
-									<input type="text" class="form-control" name="paisOrigen" placeholder="Desde " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Desde '">									
-									<input type="text" class="form-control" name="paisDestino" placeholder="Hacia " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Hacia '">
-									<input type="text" class="form-control date-picker" name="start" placeholder="Fecha Ida " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Ida '">
+									<div class="form-group">
+										<select class="form-control" id="ciudadO" name="ciudadO">
+											<option selected="selected" value={{null}}> Origen </option>
+											@foreach($ciudadesO as $origenes)
+												<?php $pais = \App\Pais::find($origenes->pais_id);?>
+										<option value="{{$origenes->id}}">  {{$origenes->nombre_ciudad}}, {{$pais->nombre_pais}}</option>
+											@endforeach
+										</select>
+									</div>
+									<div class="form-group">
+										<select class="form-control" id="ciudadD" name="ciudadD">
+											<option selected="selected" value={{null}}> Destino </option>
+											@foreach($ciudadesD as $destinos)
+												<?php $pais = \App\Pais::find($destinos->pais_id);?>
+										<option value="{{$destinos->id}}">  {{$destinos->nombre_ciudad}}, {{$pais->nombre_pais}}</option>
+											@endforeach
+										</select>
+									</div>
+									
+									<input type="text" class="form-control date-picker" name="start" placeholder="Fecha Ida " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Ida '" required>
 									<input type="text" class="form-control date-picker" name="return" placeholder="Fecha Vuelta " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Vuelta '">							
+									<div class="form-group">
+										<select class="form-control" id="pasajeros" name="pasajeros" required>
+											<option selected="selected" value="{{1}}"> Cantidad pasajeros</option>
+											@for($i = 1; $i<6; $i++)
+												<option value="{{$i}}">{{$i}}</option>
+											@endfor
+										</select>
+									</div>
 									<input type="submit" class="primary-btn text-uppercase" value="Buscar" >									
 								</form>
 							  </div>

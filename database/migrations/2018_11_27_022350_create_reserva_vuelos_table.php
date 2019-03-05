@@ -25,6 +25,7 @@ class CreateReservaVuelosTable extends Migration
             $table->time('hora_reserva');   
             $table->float('precio_reserva_vuelo');
             $table->smallInteger('cantidad_paradas');
+            $table->boolean('checkin')->nullable();
             $table->timestamps();
 
             //llaves foraneas
