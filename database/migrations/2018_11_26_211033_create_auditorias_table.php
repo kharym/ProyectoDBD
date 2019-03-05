@@ -15,7 +15,7 @@ class CreateAuditoriasTable extends Migration
         Schema::create('auditorias', function (Blueprint $table) {
             $table->increments('id');
             $table->smallInteger('tipo_auditoria');
-            $table->string('descripcion',250);
+            $table->string('descripcion');
             $table->timestamps();
             $table->integer('user_id')->unsigned()->nullable();
             $table->date('fecha_auditoria')->nullable();   
