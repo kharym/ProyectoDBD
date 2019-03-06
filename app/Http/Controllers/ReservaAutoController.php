@@ -132,6 +132,10 @@ class ReservaAutoController extends Controller
         
         $auto = \App\Auto::find($id);
 
+        if($inicio>$fin){
+            return redirect('/');
+        }
+        
         $reserva = new \App\ReservaAuto();
         $reserva->auto_id = $id;
         $reserva->precio_auto = $auto->precio*$dias;

@@ -130,6 +130,11 @@ class SeguroController extends Controller
     }
 
     public function comprarSeguro(){
+        $inicio = new DateTime(request()->fechaIda);
+        $fin = new DateTime(request()->fechaVuelta);
+        if($inicio>$fin){
+            return redirect('/');
+        }
         $seguro = new \App\Seguro();
         $seguro->edad_pasajero = request()->edad;
         $seguro->dni = request()->dni;

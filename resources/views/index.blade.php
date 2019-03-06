@@ -12,7 +12,7 @@
 							<p class="text-white">
 								Viajar sin miedo y con confianza. Redescubriendo nuestro mundo. Encontrándonos a nosotros mismos							
 							</p>
-							<a href="#" class="primary-btn text-uppercase">Get Started</a>
+							
 						</div>
 						<div class="col-lg-5 col-md-6 banner-right">
 							<ul class="nav nav-tabs" id="myTab" role="tablist">

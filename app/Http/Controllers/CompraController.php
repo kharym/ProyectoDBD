@@ -251,6 +251,25 @@ class CompraController extends Controller
     public function comprarHabitacion($id){
         $inicio = new DateTime(request()->start);
         $fin = new DateTime(request()->return);
+        if($inicio>$fin){
+            return redirect('/');
+        }
+
+        $inicio = Date($inicio->format('Y-m-d'));
+        $fin = Date($fin->format('Y-m-d'));
+        $reservas = \App\ReservaHabitacion::where('habitacion_id',$id)->get();
+        foreach($reservas as $r){
+            $i = Date($r->fecha_llegada);
+            $f = Date($r->fecha_ida);
+            if( !( ($i<$inicio && $f<$inicio) || ($i>$fin && $f>$fin )) ){
+                $mensaje = "No se puede reservar en la fecha indicada";
+                return view('alojamientos.compra-hecha' ,compact('mensaje'));
+            }
+        }
+        //######################################Validacion#################################
+        
+        $inicio = new DateTime(request()->start);
+        $fin = new DateTime(request()->return);
         $dias = $fin->diff($inicio)->format("%a");
         
         $hab = \App\Habitacion::find($id);
@@ -299,11 +318,31 @@ class CompraController extends Controller
 
     public function comprarVehiculo($id){
         $inicio = new DateTime(request()->start);
-        $fin = new DateTime(request()->return);
+        $fin = new DateTime(request()->end);
+        $inicio = Date($inicio->format('Y-m-d'));
+        $fin = Date($fin->format('Y-m-d'));
+        if($inicio>$fin){
+            
+            return redirect('/');
+        }
+        $inicio = new DateTime(request()->start);
+        $fin = new DateTime(request()->end);
         $dias = $fin->diff($inicio)->format("%a");
-        
+        $inicio = Date($inicio->format('Y-m-d'));
+        $fin = Date($fin->format('Y-m-d'));
         $auto = \App\Auto::find($id);
 
+        $reservas = \App\ReservaAuto::where('auto_id',$id)->get();
+        foreach($reservas as $r){
+            $i = Date($r->fecha_recogido);
+            $f = Date($r->fecha_devolucion);
+            if(!( ($i<$inicio && $f<$inicio) || ($i>$fin && $f>$fin )) ) {
+                $mensaje = "No se puede reservar el auto en el periodo indicado";
+                return view('vehiculos.compra-hecha',compact('mensaje'));
+            }
+        }
+
+        //################################Despues de la comprobacion####################################
         $reserva = new \App\ReservaAuto();
         $reserva->auto_id = $id;
         $reserva->precio_auto = $auto->precio*$dias;

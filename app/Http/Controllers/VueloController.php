@@ -178,6 +178,9 @@ class VueloController extends Controller
             $start = Date($start->format('Y-m-d'));
             $end = new DateTime(request()->return);
             $end = Date($end->format('Y-m-d'));
+            if($start>$end){
+                return redirect('/');
+            }
             $v = \App\Vuelo::where([['fecha_ida',$start],['fecha_llegada',$end]])->get();
             foreach($v as $vu){
                 $asientos = \App\Asiento::where([['vuelo_id',$vu->id],['disponibilidad',true]])->get();
@@ -196,6 +199,9 @@ class VueloController extends Controller
             $start = Date($start->format('Y-m-d'));
             $end = new DateTime(request()->return);
             $end = Date($end->format('Y-m-d'));
+            if($start>$end){
+                return redirect('/');
+            }
             $v = \App\Vuelo::where([['fecha_ida',$start],['fecha_llegada',$end],['ciudad_va_id',request()->ciudadO],['ciudad_viene_id',request()->ciudadD]])->get();
             foreach($v as $vu){
                 $asientos = \App\Asiento::where([['vuelo_id',$vu->id],['disponibilidad',true]])->get();

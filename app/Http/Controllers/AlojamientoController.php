@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Validator;
 use App\Alojamiento;
 use Illuminate\Http\Request;
+use DateTime;
 
 class AlojamientoController extends Controller
 {
@@ -129,6 +130,13 @@ class AlojamientoController extends Controller
 
     public function alojamientoPais(){
         //return request()->all();
+        $start = new DateTime(request()->start);
+        $start = Date($start->format('Y-m-d'));
+        $end = new DateTime(request()->return);
+        $end = Date($end->format('Y-m-d'));
+        if($start>$end){
+            return redirect('/');
+        }
         $alojamientos = Alojamiento::where('ciudad_id',request()->ciudad)->get();
         if(request()->session()->has('start')){
             request()->session()->forget('start');

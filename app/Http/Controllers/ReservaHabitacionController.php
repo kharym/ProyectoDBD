@@ -125,7 +125,9 @@ class ReservaHabitacionController extends Controller
         $inicio = new DateTime(request()->start);
         $fin = new DateTime(request()->return);
         $dias = $fin->diff($inicio)->format("%a");
-        
+        if($inicio>$fin){
+            return redirect('/');
+        }
         $hab = \App\Habitacion::find($id);
 
         $reserva = new \App\ReservaHabitacion();

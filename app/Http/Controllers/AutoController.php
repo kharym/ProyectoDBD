@@ -143,6 +143,9 @@ class AutoController extends Controller
         $return = new DateTime(request()->session()->get('return')[0]);
         $start = Date($start->format('Y-m-d'));
         $return = Date($return->format('Y-m-d'));
+        if($start>$return){
+            return redirect('/');
+        }
         $aut = \App\Auto::all();
         $autosAux = [];
         foreach($aut as $auto){
