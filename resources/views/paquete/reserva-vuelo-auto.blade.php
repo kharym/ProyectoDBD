@@ -4,14 +4,6 @@
 @section('content')
 
 <?php $paquete = \App\Paquete::find($id); ?>
-<?php //print_r(request()->session()->get('rV'));
-//$a = request()->session()->get('rV');
-//unset($a[0]);
-//Session::set('rV', $a);
-//Session::forget('rV.' . 0);
-//print_r(request()->session()->get('rV'));
-print_r(request()->session()->get('rV'));
-?>
 			<!-- start banner Area -->
 			<section class="banner-area relative">
 				<br>
@@ -32,11 +24,6 @@ print_r(request()->session()->get('rV'));
                                   <!-- FORM PARA RESERVAR VUELOS -->
                             @if($pasajeros!=0)
 								<?php $vuelo = \App\Vuelo::find($paquete->vuelo_id);
-								if(request()->session()->has('rV')){
-									echo count(request()->session()->get('rV'));
-									echo $pasajeros;
-								}
-                                
                                 $pasajeros = $pasajeros - 1;?>
                                     <form class="form-wrap" method="get" action="/reserva-paquete-vuelo+auto/{{$id}}/{{$pasajeros}}">
                                     <div class="container">

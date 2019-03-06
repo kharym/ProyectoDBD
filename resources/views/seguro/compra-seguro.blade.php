@@ -31,36 +31,61 @@
                                     <div class="details" style="background-color: #f6fd8c ; color: black;">
                                         <ul class="package-list">
                                             <h4 class="d-flex justify-content-between align-items-center">
-                                                <span> Seguro </span>
+												<span> Seguro </span>
+
                                                 <span>  </span>
                                             </h4>
                                             <li class="d-flex justify-content-between align-items-center">
                                                 <span> Seguro dental </span>
-                                                <span>  </span>
+												@if(request()->dental)
+													<span> Si </span>
+												@else
+													<span> No </span>
+												@endif
                                             </li>
                                             <li class="d-flex justify-content-between align-items-center">
                                                 <span> Seguro contra accidentes </span>
-                                                <span> </span>
+                                                @if(request()->accidente)
+													<span> Si </span>
+												@else
+													<span> No </span>
+												@endif
                                             </li>
                                             <li class="d-flex justify-content-between align-items-center">
                                                     <span> Seguro contra pérdida de equipaje </span>
-                                                            
+                                                    @if(request()->equipaje)
+													<span> Si </span>
+												@else
+													<span> No </span>
+												@endif
                                             </li>
                                             <li class="d-flex justify-content-between align-items-center">
                                                 <span> Asesoría legal </span>
-                                                <span> </span>      
+                                                @if(request()->legal)
+													<span> Si </span>
+												@else
+													<span> No </span>
+												@endif 
                                             </li>
                                             <li class="d-flex justify-content-between align-items-center">
                                                 <span> Seguro contra siniestros</span>
-                                                <span>  </span>
+                                                @if(request()->siniestro)
+													<span> Si </span>
+												@else
+													<span> No </span>
+												@endif
                                             </li>
                                             <li class="d-flex justify-content-between align-items-center">
                                                 <span> Seguro ante problemas con viaje</span>
-                                                <span>  </span>
+                                                @if(request()->vuelo)
+													<span> Si </span>
+												@else
+													<span> No </span>
+												@endif
                                             </li>
                                             <li class="d-flex justify-content-between align-items-center">
                                                 <span> Precio </span>
-                                                <span> </span>      
+											<span> {{request()->session()->get('rS')[0]->costo_pasaje}}</span>      
                                             </li>                                         
                                         </ul>
                                     </div>

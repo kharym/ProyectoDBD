@@ -9,7 +9,7 @@
 							<h1 class="text-white">
 								Hotels				
 							</h1>	
-							<p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="hotels.html"> Hotels</a></p>
+							<p class="text-white link-nav"><a href="#">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="#"> Alojamientos</a></p>
 						</div>	
 					</div>
 				</div>

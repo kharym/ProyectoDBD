@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<?php $vuelo = \App\Vuelo::find($data[0]->vuelo_id);
-      $pasajero = \App\Pasajero::find($data[0]->pasajero_id);
-      $asiento = \App\Asiento::find($data[0]->asiento_id);?>
+
 <html lang="es-ES">
     <head>
         <meta charset="utf-8">

@@ -143,6 +143,21 @@ class CompraController extends Controller
                 return view('carrito.compra-hecha', compact('mensaje'));
             }
         }
+        else{
+            if(\App\MedioDePago::where('id',request()->numeroCuenta)->exists()){
+                $mp = \App\MedioDePago::where('id',request()->numeroCuenta)->first();
+                $mp->monto = $mp->monto - $precio;
+                if($mp->monto<0){
+                    $mensaje = "Ha excedido el saldo de su tarjeta";
+                    return view('carrito.compra-hecha',compact('mensaje'));
+                }
+                $mp->save();
+             }
+             else{
+                $mensaje = "No existe el medio de pago";
+                return view('carrito.compra-hecha', compact('mensaje'));
+            }
+        }
         $fecha = date('Y-m-d');
         $hora = date("H:i:s");
         for($i = 0; $i<count(request()->session()->get('rV')); $i++){
@@ -277,8 +292,8 @@ class CompraController extends Controller
         $reserva = new \App\ReservaHabitacion();
         $reserva->habitacion_id = $id;
         $reserva->precio_res_hab = $hab->precio*$dias;
-        $reserva->fecha_llegada = request()->start;
-        $reserva->fecha_ida = request()->return;
+        $reserva->fecha_llegada = $inicio;
+        $reserva->fecha_ida = $fin;
         $reserva->numero_ninos = request()->cantidad_ninos;
         $reserva->numero_adulto = request()->cantidad_adultos;
         if(!request()->session()->has('reservaHab') ){
@@ -303,6 +318,22 @@ class CompraController extends Controller
                 return view('alojamiento.compra-hecha', compact('mensaje'));
             }
         }
+        else{
+            if(\App\MedioDePago::where('id',request()->numeroCuenta)->exists()){
+                $mp = \App\MedioDePago::where('id',request()->numeroCuenta)->first();
+                $mp->monto = $mp->monto -  $reserva->precio_res_hab;
+                if($mp->monto<0){
+                    $mensaje = "Ha excedido el saldo de su tarjeta";
+                    return view('carrito.compra-hecha',compact('mensaje'));
+                }
+                $mp->save();
+             }
+             else{
+                $mensaje = "No existe el medio de pago";
+                return view('carrito.compra-hecha', compact('mensaje'));
+             }
+        }
+          
         $reserva->save();
         request()->session()->forget('reservaHab');
         $compra = Compra::create(['user_id'=>auth()->user()->id,'fecha_compra'=>$fecha, 'hora_compra'=>$hora, 'reserva_habitacion_id'=>$reserva->id]);
@@ -346,8 +377,8 @@ class CompraController extends Controller
         $reserva = new \App\ReservaAuto();
         $reserva->auto_id = $id;
         $reserva->precio_auto = $auto->precio*$dias;
-        $reserva->fecha_recogido = request()->start;
-        $reserva->fecha_devolucion = request()->end;
+        $reserva->fecha_recogido = $inicio;
+        $reserva->fecha_devolucion = $fin;
         $reserva->ubicacion_id = request()->retiro;
         $reserva->tipo_auto = 0;
         if(!request()->session()->has('reservaAut') ){
@@ -370,6 +401,21 @@ class CompraController extends Controller
             else{
                 $mensaje = "No existe el medio de pago";
                 return view('vehiculos.compra-hecha', compact('mensaje'));
+            }
+        }
+        else{
+            if(\App\MedioDePago::where('id',request()->numeroCuenta)->exists()){
+                $mp = \App\MedioDePago::where('id',request()->numeroCuenta)->first();
+                $mp->monto = $mp->monto - $reserva->precio_auto;
+                if($mp->monto<0){
+                    $mensaje = "Ha excedido el saldo de su tarjeta";
+                    return view('carrito.compra-hecha',compact('mensaje'));
+                }
+                $mp->save();
+             }
+             else{
+                $mensaje = "No existe el medio de pago";
+                return view('carrito.compra-hecha', compact('mensaje'));
             }
         }
         $reserva->save();
@@ -425,6 +471,21 @@ class CompraController extends Controller
                $mp->save();
             }
             else{
+                $mensaje = "No existe el medio de pago";
+                return view('carrito.compra-hecha', compact('mensaje'));
+            }
+        }
+        else{
+            if(\App\MedioDePago::where('id',request()->numeroCuenta)->exists()){
+                $mp = \App\MedioDePago::where('id',request()->numeroCuenta)->first();
+                $mp->monto = $mp->monto - $precio;
+                if($mp->monto<0){
+                    $mensaje = "Ha excedido el saldo de su tarjeta";
+                    return view('carrito.compra-hecha',compact('mensaje'));
+                }
+                $mp->save();
+             }
+             else{
                 $mensaje = "No existe el medio de pago";
                 return view('carrito.compra-hecha', compact('mensaje'));
             }
@@ -515,6 +576,21 @@ class CompraController extends Controller
                $mp->save();
             }
             else{
+                $mensaje = "No existe el medio de pago";
+                return view('carrito.compra-hecha', compact('mensaje'));
+            }
+        }
+        else{
+            if(\App\MedioDePago::where('id',request()->numeroCuenta)->exists()){
+                $mp = \App\MedioDePago::where('id',request()->numeroCuenta)->first();
+                $mp->monto = $mp->monto - $precio*$personas;
+                if($mp->monto<0){
+                    $mensaje = "Ha excedido el saldo de su tarjeta";
+                    return view('carrito.compra-hecha',compact('mensaje'));
+                }
+                $mp->save();
+             }
+             else{
                 $mensaje = "No existe el medio de pago";
                 return view('carrito.compra-hecha', compact('mensaje'));
             }

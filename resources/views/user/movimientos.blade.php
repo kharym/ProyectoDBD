@@ -114,6 +114,7 @@
                         </div>
                 </div>
             @elseif($compra->paquete_id != null)
+            <?php $paquete = \App\Paquete::find($compra->paquete_id);?>
                     @if($paquete->habitacion_id == null)
                         <?php $paquete = \App\Paquete::find($compra->paquete_id);
                         $vuelo = \App\Vuelo::find($paquete->vuelo_id);

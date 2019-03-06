@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
 	
-			  <?php print_r($paquetes[0]->auto_id);     ?>
 			<!-- start banner Area -->
 			<section class="about-banner relative">
 				<div class="overlay overlay-bg"></div>
@@ -9,9 +8,9 @@
 					<div class="row d-flex align-items-center justify-content-center">
 						<div class="about-content col-lg-12">
 							<h1 class="text-white">
-								Hotels				
+								Paquetes 			
 							</h1>	
-							<p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="hotels.html"> Hotels</a></p>
+							<p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="hotels.html"> Paquetes</a></p>
 						</div>	
 					</div>
 				</div>
@@ -24,11 +23,12 @@
 						<div class="row d-flex justify-content-center">
 							<div class="menu-content pb-40 col-lg-8">
 								<div class="title text-center">
-									<h1 class="mb-10">Popular Destinations</h1>
-									<p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast, day to.</p>
+									<h1 class="mb-10">Paquetes vuelo+vehículo</h1>
+									<p>El precio más conveniente en un solo lugar</p>
 								</div>
 							</div>
-						</div>						
+						</div>
+											
 				<div class="row">
                     
             @foreach($paquetes as $paquete)
@@ -74,12 +74,12 @@
 							</ul>
 						</div>
 					</div>
-				</div>
-
-				</div>
-                    </div>
-            @endforeach
-			</section>
+				</div>				
+			
+			@endforeach
+		</div>
+	</div>
+		</section>
     
 			<!-- End destinations Area -->
 		

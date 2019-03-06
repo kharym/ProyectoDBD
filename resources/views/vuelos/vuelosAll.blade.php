@@ -28,6 +28,8 @@
                     </div>						
     <div class="row">
         @foreach ($vuelos as $vuelo)
+        <?php $hoy = date('Y-m-d');?>
+        @if($vuelo->fecha_ida>=$hoy)
         <div class="col-lg-4">
                <?php $asientos = \App\Asiento::where('vuelo_id',$vuelo->id)->get();
                     $max = count($asientos);?>
@@ -73,10 +75,12 @@
                               </form>							
                         </ul>
                     </div>
+                </a>
                 </div>
             </div>
+        @endif
         @endforeach
-        </div>
+    </div>
     </div>
         </section>
 

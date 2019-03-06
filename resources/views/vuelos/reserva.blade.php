@@ -1,6 +1,5 @@
 @extends('layouts.app')	
 @section('content')
-{{$pasajeros}}
 
 			<!-- start banner Area -->
 			<section class="banner-area relative">

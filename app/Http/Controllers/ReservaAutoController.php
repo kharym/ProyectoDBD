@@ -127,20 +127,32 @@ class ReservaAutoController extends Controller
 
     public function carritoCompraAuto($id){
         $inicio = new DateTime(request()->start);
-        $fin = new DateTime(request()->return);
+        $fin = new DateTime(request()->end);
         $dias = $fin->diff($inicio)->format("%a");
-        
-        $auto = \App\Auto::find($id);
+
 
         if($inicio>$fin){
             return redirect('/');
+        }
+
+        $inicio = Date($inicio->format('Y-m-d'));
+        $fin = Date($fin->format('Y-m-d'));
+        $auto = \App\Auto::find($id);
+        $reservas = \App\ReservaAuto::where('auto_id',$id)->get();
+        foreach($reservas as $r){
+            $i = Date($r->fecha_recogido);
+            $f = Date($r->fecha_devolucion);
+            if(!( ($i<$inicio && $f<$inicio) || ($i>$fin && $f>$fin )) ) {
+                $mensaje = "No se puede reservar el auto en el periodo indicado";
+                return view('vehiculos.compra-hecha',compact('mensaje'));
+            }
         }
         
         $reserva = new \App\ReservaAuto();
         $reserva->auto_id = $id;
         $reserva->precio_auto = $auto->precio*$dias;
-        $reserva->fecha_recogido = request()->start;
-        $reserva->fecha_devolucion = request()->end;
+        $reserva->fecha_recogido = $inicio;
+        $reserva->fecha_devolucion = $fin;
         $reserva->ubicacion_id = request()->retiro;
         $reserva->tipo_auto = 0;
 

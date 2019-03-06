@@ -1,19 +1,6 @@
 @extends('layouts.app')
 @section('content')
     
-<?php 
-        $aux = \App\ReservaHabitacion::find(4);
-        
-        
-        $a = request()->session()->get('start')[0];
-        
-        $b = new DateTime($a);
-        $c = Date($b->format('Y-m-d'));
-        $d = Date($aux->fecha_llegada);
-      print_r($b->format('Y-m-d')); 
-      if($c<$d){
-          echo 'chao';
-      }  ?>
           
         <!-- start banner Area -->
         <section class="about-banner relative">
@@ -55,10 +42,12 @@
                                             </h4>
                                             <li class="d-flex justify-content-between align-items-center">
                                                 <span> Tipo de Habitación </span>
-                                                @if($habitacion->tipo_habitación)
-                                                        <span>Moderna</span>
+                                                @if($habitacion->tipo_habitacion==0)
+                                                        <span>normal</span>
+                                                    @elseif($habitacion->tipo_habitacion==1)
+                                                        <span>Suite</span>
                                                     @else
-                                                        <span>Vintage</span>
+                                                        <span>Suite nupcial   </span>
                                                     @endif
                                             </li>
                                             <li class="d-flex justify-content-between align-items-center">
@@ -69,14 +58,7 @@
                                                     <span> Número de Baños </span>
                                                     <span> {{$habitacion->numero_banos}}</span>        
                                             </li>
-                                            <li class="d-flex justify-content-between align-items-center">
-                                                    <span> Disponibilidad </span>
-                                                    @if($habitacion->disponibilidad)
-                                                        <span> Disponible</span>
-                                                    @else
-                                                        <span> No disponible</span>span>
-                                                    @endif
-                                            </li>                               
+                                                                        
                                         </ul>
                                     </div>
                                 </div>

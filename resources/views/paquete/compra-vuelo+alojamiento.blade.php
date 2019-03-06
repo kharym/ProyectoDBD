@@ -1,8 +1,9 @@
 @extends('layouts.app')
 @section('content')
-              <?php $paquete = App\Paquete::find($id);
-                    $auto = App\Auto::find($paquete->auto_id);
-                    $vuelo = App\Vuelo::find($paquete->vuelo_id);?>
+			  <?php $paquete = \App\Paquete::find($id);
+			  $vuelo = \App\Vuelo::find($paquete->vuelo_id);
+                    $habitacion = \App\Habitacion::find($paquete->habitacion_id);
+                    $hotel = \App\Alojamiento::find($habitacion->alojamiento_id);?>
 			<!-- start banner Area -->
 			<section class="about-banner relative">
 				<div class="overlay overlay-bg"></div>
@@ -49,12 +50,12 @@
                                                     <span> {{$vuelo->fecha_llegada}} </span>         
                                             </li>
                                             <li class="d-flex justify-content-between align-items-center">
-                                                <span> Marca Auto </span>
-                                                <span>  </span>      
+                                                <span> Numero habitacion </span>
+											<span>  {{$habitacion->numero_habitacion}}</span>      
                                             </li>
                                             <li class="d-flex justify-content-between align-items-center">
-                                                <span> Modelo auto</span>
-                                                <span>  </span>
+                                                <span> Alojamiento</span>
+                                                <span> {{$hotel->nombre_alojamiento}} </span>
                                             </li>                                     
                                         </ul>
                                     </div>

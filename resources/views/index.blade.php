@@ -2,6 +2,38 @@
 @section('content')
 			<!-- start banner Area -->
 			<!-- comprobacion para session-->
+<?php 
+		if(request()->session()->has('rV')){
+			request()->session()->forget('rV');
+		}
+		if(request()->session()->has('rA')){
+			request()->session()->forget('rA');
+		}
+		if(request()->session()->has('rH')){
+			request()->session()->forget('rH');
+		}
+		if(request()->session()->has('psj')){
+			request()->session()->forget('psj');
+		}			
+			
+		request()->session()->push('reservaVuelo',NULL);
+        request()->session()->push('pasajero',NULL);
+        request()->session()->push('reservaHabitacion',NULL);
+        request()->session()->push('reservaAuto',NULL);
+        request()->session()->push('reservaActividad',NULL);
+		
+		request()->session()->forget('reservaVuelo');
+		request()->session()->forget('pasajero');
+		request()->session()->forget('reservaHabitacion');
+		request()->session()->forget('reservaAuto');
+		request()->session()->forget('reservaActividad');
+			
+			
+			request()->session()->push('reservaVuelo',NULL);
+            request()->session()->push('pasajero',NULL);
+            request()->session()->push('reservaHabitacion',NULL);
+            request()->session()->push('reservaAuto',NULL);
+            request()->session()->push('reservaActividad',NULL);?>
 			<section class="banner-area relative">
 				<div class="overlay overlay-bg"></div>				
 				<div class="container">

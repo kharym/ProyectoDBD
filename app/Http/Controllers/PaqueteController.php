@@ -7,6 +7,8 @@ use App\Paquete;
 use Illuminate\Http\Request;
 use DateTime;
 use Session;
+use Illuminate\Support\Facades\Mail;
+
 class PaqueteController extends Controller
 {
 
@@ -221,16 +223,32 @@ class PaqueteController extends Controller
         }
         else{
             $inicio = new DateTime(request()->start);
-            $fin = new DateTime(request()->return);
+            $fin = new DateTime(request()->end);
             $dias = $fin->diff($inicio)->format("%a");
             
+            $inicio = Date($inicio->format('Y-m-d'));
+            $fin = Date($fin->format('Y-m-d'));
+            if($inicio>$fin){
+                return redirect('/');
+            }
+    
+
             $auto = \App\Auto::find($paquete->auto_id);
+            $reservas = \App\ReservaAuto::where('auto_id',$paquete->auto_id)->get();
+            foreach($reservas as $r){
+                $i = Date($r->fecha_recogido);
+                $f = Date($r->fecha_devolucion);
+                if(!( ($i<$inicio && $f<$inicio) || ($i>$fin && $f>$fin )) ) {
+                    $mensaje = "No se puede reservar el auto en el periodo indicado";
+                    return view('vehiculos.compra-hecha',compact('mensaje'));
+                }
+            }
 
             $reserva = new \App\ReservaAuto();
             $reserva->auto_id = $auto->id;
             $reserva->precio_auto = $auto->precio*$dias;
-            $reserva->fecha_recogido = request()->start;
-            $reserva->fecha_devolucion = request()->end;
+            $reserva->fecha_recogido = $inicio;
+            $reserva->fecha_devolucion = $fin;
             $reserva->ubicacion_id = request()->retiro;
             $reserva->tipo_auto = 0;
 
@@ -261,6 +279,21 @@ class PaqueteController extends Controller
                $mp->save();
             }
             else{
+                $mensaje = "No existe el medio de pago";
+                return view('carrito.compra-hecha', compact('mensaje'));
+            }
+        }
+        else{
+            if(\App\MedioDePago::where('id',request()->numeroCuenta)->exists()){
+                $mp = \App\MedioDePago::where('id',request()->numeroCuenta)->first();
+                $mp->monto = $mp->monto - $paquete->precio;
+                if($mp->monto<0){
+                    $mensaje = "Ha excedido el saldo de su tarjeta";
+                    return view('carrito.compra-hecha',compact('mensaje'));
+                }
+                $mp->save();
+             }
+             else{
                 $mensaje = "No existe el medio de pago";
                 return view('carrito.compra-hecha', compact('mensaje'));
             }
@@ -401,8 +434,7 @@ class PaqueteController extends Controller
             if(request()->session()->has('rV')){
                 foreach(request()->session()->get('rV') as $rv){
                     if($reservaVuelo->asiento_id == $rv->asiento_id){
-
-                        return view('paquete.reserva-vuelo-alojamiento',compact('id','pasajeros'));
+                        return redirect('/');
                     }
                     
                 }
@@ -418,19 +450,36 @@ class PaqueteController extends Controller
             $dias = $fin->diff($inicio)->format("%a");
             
             $hab = \App\Habitacion::find($paquete->habitacion_id);
+            if($inicio>$fin){
+                return redirect('/');
+            }
+    
+
+            $inicio = Date($inicio->format('Y-m-d'));
+            $fin = Date($fin->format('Y-m-d'));
+            $reservas = \App\ReservaHabitacion::where('habitacion_id',$paquete->habitacion_id)->get();
+            foreach($reservas as $r){
+                $i = Date($r->fecha_llegada);
+                $f = Date($r->fecha_ida);
+                if( !( ($i<$inicio && $f<$inicio) || ($i>$fin && $f>$fin )) ){
+                    $mensaje = "No se puede reservar en la fecha indicada";
+                    return view('alojamientos.compra-hecha' ,compact('mensaje'));
+                }
+            }
+
 
             $reserva = new \App\ReservaHabitacion();
             $reserva->habitacion_id = $hab->id;
             $reserva->precio_res_hab = $hab->precio*$dias;
-            $reserva->fecha_llegada = request()->start;
-            $reserva->fecha_ida = request()->return;
+            $reserva->fecha_llegada = $inicio;
+            $reserva->fecha_ida = $fin;
             $reserva->numero_ninos = request()->cantidad_ninos;
             $reserva->numero_adulto = request()->cantidad_adultos;
 
             if(request()->session()->has('rH')){
                 foreach(request()->session()->get('rH') as $ra){
                     if($reserva->habitacion_id == $ra->habitacion_id){
-                        return view('paquete.reserva-vuelo-alojamiento',compact('id','pasajeros'));
+                        return redirect('/');
                     }
                     
                 }
@@ -452,6 +501,21 @@ class PaqueteController extends Controller
                $mp->save();
             }
             else{
+                $mensaje = "No existe el medio de pago";
+                return view('carrito.compra-hecha', compact('mensaje'));
+            }
+        }
+        else{
+            if(\App\MedioDePago::where('id',request()->numeroCuenta)->exists()){
+                $mp = \App\MedioDePago::where('id',request()->numeroCuenta)->first();
+                $mp->monto = $mp->monto - $paquete->precio;
+                if($mp->monto<0){
+                    $mensaje = "Ha excedido el saldo de su tarjeta";
+                    return view('carrito.compra-hecha',compact('mensaje'));
+                }
+                $mp->save();
+             }
+             else{
                 $mensaje = "No existe el medio de pago";
                 return view('carrito.compra-hecha', compact('mensaje'));
             }

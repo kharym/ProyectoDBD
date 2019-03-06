@@ -9,9 +9,9 @@
 					<div class="row d-flex align-items-center justify-content-center">
 						<div class="about-content col-lg-12">
 							<h1 class="text-white">
-								Hotels				
+								Alojamientos				
 							</h1>	
-							<p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="hotels.html"> Hotels</a></p>
+							<p class="text-white link-nav"><a href="#">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="#"> Alojamientos</a></p>
 						</div>	
 					</div>
 				</div>
@@ -74,13 +74,13 @@
 							
 							<ul class="package-list">
 								<li class="d-flex justify-content-between align-items-center">
-									@if($alojamiento->disponibilidad)
-										<span>Disponibilidad</span>
-										<span>Disponible</span>
-									@else
-										<span>Disponibilidad</span>
-										<span>No disponible</span>
-									@endif
+									<span> Ciudad </span>
+									<?php $ciudad = \App\Ciudad::find($alojamiento->ciudad_id); ?>
+									<span> {{$ciudad->nombre_ciudad}} </span>
+								</li>
+								<li class="d-flex justify-content-between align-items-center">
+									<span> Ubicación </span>
+									<span> {{$alojamiento->calle_alojamiento}}, #{{$alojamiento->numero_alojamiento}} </span>
 								</li>													
 							</ul>
 						</div>

@@ -128,7 +128,21 @@ class ReservaHabitacionController extends Controller
         if($inicio>$fin){
             return redirect('/');
         }
+
+
         $hab = \App\Habitacion::find($id);
+        $inicio = Date($inicio->format('Y-m-d'));
+        $fin = Date($fin->format('Y-m-d'));
+        $reservas = \App\ReservaHabitacion::where('habitacion_id',$id)->get();
+        foreach($reservas as $r){
+            $i = Date($r->fecha_llegada);
+            $f = Date($r->fecha_ida);
+            if( !( ($i<$inicio && $f<$inicio) || ($i>$fin && $f>$fin )) ){
+                $mensaje = "No se puede reservar en la fecha indicada";
+                return view('alojamientos.compra-hecha' ,compact('mensaje'));
+            }
+        }
+
 
         $reserva = new \App\ReservaHabitacion();
         $reserva->habitacion_id = $id;
