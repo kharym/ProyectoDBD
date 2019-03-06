@@ -216,8 +216,9 @@ class VueloController extends Controller
     public function agregarVuelo(){
         $vuelo = new Vuelo();
         $usuario = auth()->user();
-        $auditoria = \App\Auditoria::find($usuario->auditoria_id);
-        $fecha = date('Y-m-d H:i:s');
+        $auditoria = new \App\Auditoria();
+        $fecha = date('Y-m-d');
+        $hora = date( 'H:i:s');
 
         $vuelo->ciudad_viene_id = request()->ciudadOrigen;
         $vuelo->ciudad_va_id = request()->ciudadDestino;
@@ -235,8 +236,14 @@ class VueloController extends Controller
         $vuelo->origen = $nombreCiudadOrigen->nombre_ciudad;
         $vuelo->destino = $nombreCiudadDestino->nombre_ciudad;
         $vuelo->save();
-        $auditoria->descripcion = $auditoria->descripcion."Se agregó el vuelo con origen ".$vuelo->origen." y destino ".$vuelo->destino." " . $fecha . "\r\n";
+
+        $auditoria->descripcion = "Se agregó el vuelo con origen ".$vuelo->origen." y destino ".$vuelo->destino." " . $fecha . "\r\n";
+        $auditoria->user_id = $usuario->id;
+        $auditoria->tipo_auditoria = 1;
+        $auditoria->fecha_auditoria = $fecha;
+        $auditoria->hora_auditoria = $hora;
         $auditoria->save();
+        
         $vuelos = Vuelo::all();
 
         return view('vuelos.vuelosAll', compact('vuelos'));
@@ -270,6 +277,35 @@ class VueloController extends Controller
             request()->session()->push('reservaVuelo',$a);
         }
         return redirect('/carro');
+    }
+
+    public function vuelosMod(){
+        $vuelos = \App\Vuelo::all();
+        return view('vuelos.vuelosMod',compact('vuelos'));
+    }
+
+    public function modificarFechas($id){
+        return view('vuelos.modificacion',compact('id'));
+    }
+    public function modificarFechasDone($id){
+        $fecha = date('Y-m-d');
+        $hora = date( 'H:i:s');
+        $auditoria = new \App\Auditoria();
+        $vuelo = \App\Vuelo::find($id);
+        $vuelo->fecha_ida = request()->fechaIda;
+        $vuelo->fecha_llegada = request()->fechaVuelta;
+        $vuelo->hora_ida = request()->horaIda;
+        $vuelo->hora_llegada = request()->horaVuelta;
+
+        $auditoria->descripcion = "Se modificó el vuelo con origen ".$vuelo->origen." y destino ".$vuelo->destino." e id:".$vuelo->id." ". $fecha . "\r\n";
+        $auditoria->user_id = auth()->user()->id;
+        $auditoria->tipo_auditoria = 2;
+        $auditoria->fecha_auditoria = $fecha;
+        $auditoria->hora_auditoria = $hora;
+        $vuelo->save();
+        $auditoria->save();
+        $vuelos = \App\Vuelo::all();
+        return view('vuelos.vuelosAll',compact('vuelos'));
     }
 
 }

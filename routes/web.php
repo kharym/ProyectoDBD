@@ -309,3 +309,9 @@ Route::get('/eliminar-reserva-vuelo/{index}', 'VueloController@eliminarCarro');
 Route::get('/eliminar-reserva-auto/{index}', 'AutoController@eliminarCarro');
 
 Route::get('/eliminar-reserva-alojamiento/{index}', 'AlojamientoController@eliminarCarro');
+
+Route::get('/Vuelo/modificar-fechas', 'VueloController@vuelosMod');
+
+Route::get('/Vuelo/modificar-fechas/{id}', 'VueloController@modificarFechas');
+
+Route::get('/Vuelo/modificar-fechas/{id}/realizar', 'VueloController@modificarFechasDone');

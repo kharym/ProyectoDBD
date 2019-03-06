@@ -71,7 +71,8 @@
 				              		<li><a href="/Actividad/agregarActividad">Agregar Actividad</a></li>
 				              		<li><a href="/Paquete/agregarPaquete">Agregar Paquete</a></li>
 				              		<li><a href="/Pais/agregarPais">Agregar País</a></li>
-				              		<li><a href="/Ciudad/agregarCiudad">Agregar Ciudad</a></li>
+									<li><a href="/Ciudad/agregarCiudad">Agregar Ciudad</a></li>
+									<li><a href="/Vuelo/modificar-fechas/">Modificar fechas de vuelo</a></li>  
 				            	</ul>
 				         	</li>
 				         	<li> <a href="/Auditoria/all">Auditorías</a> </li>	
