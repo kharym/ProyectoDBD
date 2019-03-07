@@ -24,8 +24,8 @@
 						<div class="row d-flex justify-content-center">
 							<div class="menu-content pb-40 col-lg-8">
 								<div class="title text-center">
-									<h1 class="mb-10">Popular Destinations</h1>
-									<p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast, day to.</p>
+									<h1 class="mb-10">Alojamientos</h1>
+									<p>El mejor lugar para hospedarte</p>
 								</div>
 							</div>
 						</div>						

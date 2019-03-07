@@ -22,8 +22,8 @@
 						<div class="row d-flex justify-content-center">
 							<div class="menu-content pb-40 col-lg-8">
 								<div class="title text-center">
-									<h1 class="mb-10">Popular Destinations</h1>
-									<p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast, day to.</p>
+									<h1 class="mb-10">Alojamientos</h1>
+									<p>El mejor lugar para hospedarte</p>
 								</div>
 							</div>
 						</div>						
@@ -71,15 +71,15 @@
 							</h4>
 							
 							<ul class="package-list">
-								<li class="d-flex justify-content-between align-items-center">
-									@if($alojamiento->disponibilidad)
-										<span>Disponibilidad</span>
-										<span>Disponible</span>
-									@else
-										<span>Disponibilidad</span>
-										<span>No disponible</span>
-									@endif
-								</li>													
+									<li class="d-flex justify-content-between align-items-center">
+											<span> Ciudad </span>
+											<?php $ciudad = \App\Ciudad::find($alojamiento->ciudad_id); ?>
+											<span> {{$ciudad->nombre_ciudad}} </span>
+										</li>
+										<li class="d-flex justify-content-between align-items-center">
+											<span> Ubicación </span>
+											<span> {{$alojamiento->calle_alojamiento}}, #{{$alojamiento->numero_alojamiento}} </span>
+										</li>													
 							</ul>
 						</div>
 					</div>

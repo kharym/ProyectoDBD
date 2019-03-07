@@ -3,7 +3,8 @@
 @extends('layouts.app')	
 @section('content')
 
-<?php $paquete = \App\Paquete::find($id); ?>
+<?php $paquete = \App\Paquete::find($id);
+$vuelo = \App\Vuelo::find($paquete->vuelo_id); ?>
 			<!-- start banner Area -->
 			<section class="banner-area relative">
 				<br>
@@ -24,7 +25,7 @@
                                   <!-- FORM PARA RESERVAR VUELOS -->
                             @if($pasajeros!=0)
                                 
-                                $pasajeros = $pasajeros - 1;?>
+                              	<?php  $pasajeros = $pasajeros - 1;?>
                                     <form class="form-wrap" method="get" action="/reserva-paquete-vuelo+alojamiento/{{$id}}/{{$pasajeros}}">
                                     <div class="container">
                                         <div class="row">

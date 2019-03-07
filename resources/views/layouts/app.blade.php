@@ -88,7 +88,6 @@
 				        <ul>
 				              <li><a href="/paquete-vuelo+alojamiento">Vuelo + Alojamiento</a></li>
 				              <li><a href="/paquete-vuelo+auto">Vuelo + Automovil</a></li>
-				              <li><a href="blog-single.html">Hotel + Car</a></li>
 							
 						</ul>
 						@else
