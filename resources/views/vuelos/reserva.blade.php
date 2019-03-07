@@ -38,9 +38,13 @@
                                                 <?php $asientos = \App\Asiento::where('vuelo_id',$id)->get();?>
                                             
                                                         @foreach ($asientos as $asiento)
-                                                            @if($asiento->disponibilidad)
-                                                        <option value="{{$asiento->numero_asiento}}">{{$asiento->numero_asiento}}</option>
-                                                            @endif
+															@if($asiento->disponibilidad)
+																@if($asiento->tipo_asiento==1)
+                                                        			<option value="{{$asiento->numero_asiento}}">Cabina normal: {{$asiento->numero_asiento}}</option>
+																@else
+																	<option value="{{$asiento->numero_asiento}}">Cabina premium: {{$asiento->numero_asiento}}</option>
+																@endif		
+															@endif
                                                         @endforeach
                                                         
                                             </div>

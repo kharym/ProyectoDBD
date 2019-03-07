@@ -58,6 +58,10 @@
                                                     <span> Número de Baños </span>
                                                     <span> {{$habitacion->numero_banos}}</span>        
                                             </li>
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                    <span> Precio por día</span>
+                                                    <span> {{$habitacion->precio}}</span>        
+                                            </li>
                                                                         
                                         </ul>
                                     </div>

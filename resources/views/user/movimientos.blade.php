@@ -258,6 +258,13 @@
                                             <span> {{$reserva->fecha_devolucion}} </span>
                                         </li>
                                         <li class="d-flex justify-content-between align-items-center">
+                                                <span> Lugar de retiro</span>
+                                                <?php $ubicacion = \App\Ubicacion::find($reserva->ubicacion_id);
+                                                $ciudad = \App\Ciudad::find($ubicacion->ciudad_id);?>
+                                                <span> {{$ciudad->nombre_ciudad}} ,{{$ubicacion->calle}},#{{$ubicacion->numero}} </span>
+                                            </li>
+                                            
+                                        <li class="d-flex justify-content-between align-items-center">
                                             <span> Precio </span>
                                             <span> {{$auto->precio}} </span>      
                                         </li>  
@@ -332,7 +339,11 @@
                                                     <span>{{$compra->hora_compra}}</span>
                                                 </li>
                                                 <li class="d-flex justify-content-between align-items-center">
-                                                <span> Destino</span>
+                                                    <span> Aeropuerto Origen</span>
+                                                    <span>{{$vuelo->origen}}</span>
+                                                </li>
+                                                <li class="d-flex justify-content-between align-items-center">
+                                                <span> Aeropuerto Destino</span>
                                                 <span>{{$vuelo->destino}}</span>
                                                 </li>
                                                 <li class="d-flex justify-content-between align-items-center">

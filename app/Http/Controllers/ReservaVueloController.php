@@ -149,10 +149,10 @@ class ReservaVueloController extends Controller
             return view('vuelos.reserva',compact('id','pasajeros'));
         }
         else if($numero>=0){
-            $pasajeros = request()->session()->get('cantidad')[0];
+            $p = request()->session()->get('cantidad')[0];
             if(request()->session()->has('rV')){
-                if(count(request()->session()->get('rV'))>$pasajeros-$numero){
-                    $i = $pasajeros - $numero;
+                if(count(request()->session()->get('rV'))>$p-$numero){
+                    $i = $p - $numero;
                     $aux = request()->session()->get('rV')[$i]->asiento_id;
                     $asiento = \App\Asiento::find($aux);
                     $asiento->disponibilidad = true;
@@ -208,7 +208,7 @@ class ReservaVueloController extends Controller
                 foreach(request()->session()->get('rV') as $rv){
                     if($reservaVuelo->asiento_id == $rv->asiento_id){
 
-                        return view('vuelos.reserva',compact('id','pasajeros'));
+                        return redirect('/');
                     }
                     
                 }

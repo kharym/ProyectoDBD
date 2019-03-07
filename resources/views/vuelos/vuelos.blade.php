@@ -30,18 +30,31 @@
     <div class="row">
         @foreach ($vuelos as $vuelo)
         <div class="col-lg-4">
-                <a href="/reservaVuelo/{{$vuelo->id}}">
+                <?php $asientos = \App\Asiento::where('vuelo_id',$vuelo->id)->get();
+                    $max = count($asientos);
+                    $ciudadO = \App\Ciudad::find($vuelo->ciudad_va_id);
+                    $ciudadD = \App\Ciudad::find($vuelo->ciudad_viene_id);
+                    $paisO = \App\Pais::find($ciudadO->pais_id);
+                    $paisD = \App\Pais::find($ciudadD->pais_id);?>
                 <div class="single-destinations">
                     <div class="details">
                         <ul class="package-list">
+                                <li class="d-flex justify-content-between align-items-center">
+                                        <span> Ciudad origen </span>
+                                        <span>{{$ciudadO->nombre_ciudad}}, {{$paisO->nombre_pais}}</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between align-items-center">
+                                            <span> Ciudad destino </span>
+                                        <span>{{$ciudadD->nombre_ciudad}}, {{$paisD->nombre_pais}}</span>
+                                        </li>
                             <li class="d-flex justify-content-between align-items-center">
-                            <span> Ciudad origen </span>
-                            <span>{{$vuelo->origen}}</span>
-                            </li>
-                            <li class="d-flex justify-content-between align-items-center">
-                                <span> Ciudad destino </span>
+                                    <span> Aeropuerto Origen</span>
+                                    <span>{{$vuelo->origen}}</span>
+                                </li>
+                                <li class="d-flex justify-content-between align-items-center">
+                                <span> Aeropuerto Destino</span>
                                 <span>{{$vuelo->destino}}</span>
-                            </li>
+                                </li>
                             <li class="d-flex justify-content-between align-items-center">
                                 <span> Precio </span>
                                 <span> {{$vuelo->precio_vuelo}}</span>        
@@ -62,10 +75,17 @@
                                     <span> Hora llegada </span>
                                     <span> {{$vuelo->hora_llegada}}</span>        
                             </li>
-                            <form action="/action_page.php">
-                                Quantity (between 1 and 5): <input type="number" name="quantity" min="1" max="5">
-                                <input type="submit">
-                              </form>								
+                            <form method="GET" action="/reservaVuelo/{{$vuelo->id}}/{{-4}}">
+                                <div class="form-group row">
+                                        <label for="example-number-input" class="col-2 col-form-label">Numero pasajeros</label>
+                                        <div class="col-10">
+                                        <input class="form-control" name="cantidad" type="number" value="1" min="1" max={{$max}} id="example-number-input" style="width: 26%;margin:auto !important">
+                                        </div>
+                                </div >
+                                <div class="col text-center">
+                                <input class="btn btn-primary" type="submit" value="Reservar">
+                                </div>
+                            </form>								
                         </ul>
                     </div>
                 </div>

@@ -315,3 +315,5 @@ Route::get('/Vuelo/modificar-fechas', 'VueloController@vuelosMod');
 Route::get('/Vuelo/modificar-fechas/{id}', 'VueloController@modificarFechas');
 
 Route::get('/Vuelo/modificar-fechas/{id}/realizar', 'VueloController@modificarFechasDone');
+
+Route::get('/actividad','ActividadController@actividadCiudad');

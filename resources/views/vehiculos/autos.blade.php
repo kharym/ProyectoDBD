@@ -61,7 +61,16 @@
                                         <span> Mecánico </span>
                                     @endif
                                     
-                                </li>								
+                                </li>		
+                                <li class="d-flex justify-content-between align-items-center">
+                                        <span> Cantidad Asientos </span>
+                                        <span> {{$auto->numero_asientos}}</span>
+                                    </li>
+                                    <li class="d-flex justify-content-between align-items-center">
+                                            <span> Precio arriendo por día </span>
+                                            <span> {{$auto->precio}}</span>
+                                        </li>								
+                            						
                         </ul>
                     </div>
                     </a>

@@ -14,26 +14,11 @@
 		}
 		if(request()->session()->has('psj')){
 			request()->session()->forget('psj');
+		}	
+		if(request()->session()->has('cantidad')){
+			request()->session()->forget('cantidad');
 		}			
-			
-		request()->session()->push('reservaVuelo',NULL);
-        request()->session()->push('pasajero',NULL);
-        request()->session()->push('reservaHabitacion',NULL);
-        request()->session()->push('reservaAuto',NULL);
-        request()->session()->push('reservaActividad',NULL);
-		
-		request()->session()->forget('reservaVuelo');
-		request()->session()->forget('pasajero');
-		request()->session()->forget('reservaHabitacion');
-		request()->session()->forget('reservaAuto');
-		request()->session()->forget('reservaActividad');
-			
-			
-			request()->session()->push('reservaVuelo',NULL);
-            request()->session()->push('pasajero',NULL);
-            request()->session()->push('reservaHabitacion',NULL);
-            request()->session()->push('reservaAuto',NULL);
-            request()->session()->push('reservaActividad',NULL);?>
+			?>
 			<section class="banner-area relative">
 				<div class="overlay overlay-bg"></div>				
 				<div class="container">
@@ -46,6 +31,7 @@
 							</p>
 							
 						</div>
+						@auth
 						<div class="col-lg-5 col-md-6 banner-right">
 							<ul class="nav nav-tabs" id="myTab" role="tablist">
 							  <li class="nav-item">
@@ -97,7 +83,7 @@
 									</div>
 									
 									<input type="text" class="form-control date-picker" name="start" placeholder="Fecha Ida " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Ida '" required>
-									<input type="text" class="form-control date-picker" name="return" placeholder="Fecha Vuelta " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Vuelta '">							
+									<input type="text" class="form-control date-picker" name="return" placeholder="Fecha Vuelta " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Llegada '">							
 									<div class="form-group">
 										<select class="form-control" id="pasajeros" name="pasajeros" required>
 											<option selected="selected" value="{{1}}"> Cantidad pasajeros</option>
@@ -162,17 +148,21 @@
 							  </div>
 							  <!-- FORM PARA BUSCAR ACTIVIDAD -->
 							  <div class="tab-pane fade" id="actividad" role="tabpanel" aria-labelledby="actividad-tab">
-								<form class="form-wrap" method="get" action="Actividad">
-										<input type="text" class="form-control" name="destino" placeholder="País de destino " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Destino '">		
-									<input type="text" class="form-control date-picker" name="start" placeholder="Fecha Ida " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Ida '">
-									<input type="text" class="form-control date-picker" name="return" placeholder="Fecha Vuelta " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha Vuelta '">							
+								<form class="form-wrap" method="get" action="/actividad">
+										<select class="form-control" id="ciudad" nombre="ciudad">
+											<?php $ciudades = \App\Ciudad::all();?>
+											@foreach($ciudades as $ciudad)
+											<?php $pais = \App\Pais::find($ciudad->pais_id)?>
+										<option value="{{$ciudad->id}}">{{$ciudad->nombre_ciudad}}, {{$pais->nombre_pais}} </option>
+											@endforeach								
 									<input type="submit" class="primary-btn text-uppercase" value="Buscar" >								
 								</form>							  	
 							  </div>
 							</div>
 						</div>
 					</div>
-				</div>					
+				</div>	
+				@endauth				
 			</section>
 			<!-- End banner Area -->
 			

@@ -170,4 +170,9 @@ class ActividadController extends Controller
         }
         return redirect('/carro');
     }
+    
+    public function actividadCiudad(){
+        $actividades = \App\Actividad::where('ciudad_id',request()->ciudad);
+        return view('actividades.actividadAll',compact('actividades'));
+    }
 }

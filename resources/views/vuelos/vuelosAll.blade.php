@@ -32,18 +32,31 @@
         @if($vuelo->fecha_ida>=$hoy)
         <div class="col-lg-4">
                <?php $asientos = \App\Asiento::where('vuelo_id',$vuelo->id)->get();
-                    $max = count($asientos);?>
+                    $max = count($asientos);
+                    $ciudadO = \App\Ciudad::find($vuelo->ciudad_va_id);
+                    $ciudadD = \App\Ciudad::find($vuelo->ciudad_viene_id);
+                    $paisO = \App\Pais::find($ciudadO->pais_id);
+                    $paisD = \App\Pais::find($ciudadD->pais_id);
+                    ?>
                 <div class="single-destinations">
                     <div class="details" style="background-color: #f6fd8c ; color: black;">
                         <ul class="package-list">
                             <li class="d-flex justify-content-between align-items-center">
                             <span> Ciudad origen </span>
-                            <span>{{$vuelo->origen}}</span>
+                            <span>{{$ciudadO->nombre_ciudad}}, {{$paisO->nombre_pais}}</span>
                             </li>
                             <li class="d-flex justify-content-between align-items-center">
                                 <span> Ciudad destino </span>
-                                <span>{{$vuelo->destino}}</span>
+                            <span>{{$ciudadD->nombre_ciudad}}, {{$paisD->nombre_pais}}</span>
                             </li>
+                            <li class="d-flex justify-content-between align-items-center">
+                                    <span> Aeropuerto Origen</span>
+                                    <span>{{$vuelo->origen}}</span>
+                                </li>
+                                <li class="d-flex justify-content-between align-items-center">
+                                <span> Aeropuerto Destino</span>
+                                <span>{{$vuelo->destino}}</span>
+                                </li>
                             <li class="d-flex justify-content-between align-items-center">
                                 <span> Precio </span>
                                 <span> {{$vuelo->precio_vuelo}}</span>        
@@ -68,11 +81,13 @@
                                 <div class="form-group row">
                                         <label for="example-number-input" class="col-2 col-form-label">Numero pasajeros</label>
                                         <div class="col-10">
-                                        <input class="form-control" name="cantidad" type="number" value="1" min="1" max={{$max}} id="example-number-input" style="width: 26%;margin:auto !important">
+                                        <input class="form-control" name="cantidad" type="number" value="1" min="1" max={{$max}} id="example-number-input" style="width: 26%;margin:auto !important" required>
                                         </div>
                                 </div>
+                                <div class="col text-center">
                                 <input class="btn btn-primary" type="submit" value="Reservar">
-                              </form>							
+                                </div>
+                            </form>							
                         </ul>
                     </div>
                 </a>

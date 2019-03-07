@@ -220,8 +220,8 @@ class VueloController extends Controller
         $fecha = date('Y-m-d');
         $hora = date( 'H:i:s');
 
-        $vuelo->ciudad_viene_id = request()->ciudadOrigen;
-        $vuelo->ciudad_va_id = request()->ciudadDestino;
+        $vuelo->ciudad_va_id = request()->ciudadOrigen;
+        $vuelo->ciudad_viene_id = request()->ciudadDestino;
         $vuelo->precio_vuelo = request()->precio;
         $vuelo->cantidad_asientos = request()->cantidadAsientos;
         $vuelo->fecha_ida = request()->fechaIda;

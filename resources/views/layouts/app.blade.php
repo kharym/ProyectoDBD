@@ -78,6 +78,7 @@
 				         	<li> <a href="/Auditoria/all">Auditorías</a> </li>	
 				        	@endif
 							@endauth
+							@auth
 							<li> <a href="/reservar-seguro">Seguro</a> </li>
 				          	<li><a href="/Vuelo/all">Vuelos</a></li>
 				          	<li><a href="/Alojamiento/all">Alojamientos</a></li>
@@ -88,7 +89,23 @@
 				              <li><a href="/paquete-vuelo+alojamiento">Vuelo + Alojamiento</a></li>
 				              <li><a href="/paquete-vuelo+auto">Vuelo + Automovil</a></li>
 				              <li><a href="blog-single.html">Hotel + Car</a></li>
-				            </ul>
+							
+						</ul>
+						@else
+						<li> <a href="#">Seguro</a> </li>
+						<li><a href="#">Vuelos</a></li>
+						<li><a href="#">Alojamientos</a></li>
+						<li><a href="#">Vehículos</a></li>
+						<li><a href="#">Actividades</a></li>
+						<li class="#"><a href="">Paquetes</a>
+				 		 <ul>
+						<li><a href="#">Vuelo + Alojamiento</a></li>
+						<li><a href="#">Vuelo + Automovil</a></li>
+						<li><a href="#">Hotel + Car</a></li>
+					  
+				  		</ul>
+
+						@endauth
 				          </li>					          					          		          
 									@auth
 										<li class ="menu-has-children">
