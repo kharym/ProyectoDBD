@@ -77,8 +77,10 @@
                             </div>
                         </a>
                     </div>
-                </div>
+                
+                    
             @endfor
+        
         @endif
         @if(!empty(request()->session()->get('reservaHabitacion')))
         @for($i = 1; $i<count(request()->session()->get('reservaHabitacion')); $i++)

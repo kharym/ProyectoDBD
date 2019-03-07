@@ -288,7 +288,8 @@ class CompraController extends Controller
         $dias = $fin->diff($inicio)->format("%a");
         
         $hab = \App\Habitacion::find($id);
-
+        $inicio = Date($inicio->format('Y-m-d'));
+        $fin = Date($fin->format('Y-m-d'));
         $reserva = new \App\ReservaHabitacion();
         $reserva->habitacion_id = $id;
         $reserva->precio_res_hab = $hab->precio*$dias;
